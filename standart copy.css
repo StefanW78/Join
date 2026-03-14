@@ -1,0 +1,17 @@
+*{
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+  color: #FFFFFF;
+  text-decoration: none;
+}
+body{
+  font-family: Arial, Helvetica, sans-serif;
+}
+.test{
+font-family: 'Inter';
+font-style: normal;
+font-weight: 400;
+font-size: 16px;
+line-height: 120%;
+}
