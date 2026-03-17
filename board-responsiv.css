@@ -1,0 +1,14 @@
+    /* ===== RESPONSIVE SIDEBAR ===== */
+    @media (max-width: 990px) {
+      body { flex-direction: column; height: auto; min-height: 100vh; overflow: auto; }
+ 
+      .sidebar { width: 100%; min-width: unset; flex-direction: row; order: 1; position: sticky; bottom: 0; z-index: 10; }
+      .logo-area, .sidebar-footer { display: none; }
+ 
+      .nav { flex-direction: row; flex: 1; justify-content: space-around; }
+      .nav-item { flex-direction: column; gap: 4px; padding: 10px 6px; font-size: 11px; text-align: center; }
+      .nav-item svg { width: 22px; height: 22px; }
+ 
+      .main-wrapper { overflow: visible; }
+      .content { overflow: visible; }
+    }

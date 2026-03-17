@@ -1,12 +1,191 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="de">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="styles.css">
-    <title>Document</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Kanban Project Management Tool</title>
+  <link rel="stylesheet" href="styles.css" />
+  <link rel="stylesheet" href="board-responsiv.css">
+
 </head>
 <body>
-    
+ 
+ 
+  <aside class="sidebar">
+ 
+    <div class="logo-area">
+      
+      <!--
+      LOGO PLATZHALTER    
+      -->
+      <div class="logo-placeholder">
+        <div class="logo-j-wrap">
+
+        </div>
+        <span class="logo-oin">JOIN</span>
+      </div>
+    </div>
+ 
+    <nav class="nav">
+      <a href="#" class="nav-item">
+        <svg viewBox="0 0 24 24"><rect x="3" y="3" width="7" height="7" rx=".5"/><rect x="14" y="3" width="7" height="7" rx=".5"/><rect x="3" y="14" width="7" height="7" rx=".5"/><rect x="14" y="14" width="7" height="7" rx=".5"/></svg>
+        Summary
+      </a>
+      <a href="#" class="nav-item">
+        <svg viewBox="0 0 24 24"><path d="M12 20h9"/><path d="M16.5 3.5a2.121 2.121 0 013 3L7 19l-4 1 1-4L16.5 3.5z"/></svg>
+        Add Task
+      </a>
+      <a href="#" class="nav-item active">
+        <svg viewBox="0 0 24 24"><rect x="2" y="3" width="5" height="18" rx=".5"/><rect x="9.5" y="3" width="5" height="18" rx=".5"/><rect x="17" y="3" width="5" height="18" rx=".5"/></svg>
+        Board
+      </a>
+      <a href="#" class="nav-item">
+        <svg viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87"/><path d="M16 3.13a4 4 0 010 7.75"/></svg>
+        Contacts
+      </a>
+    </nav>
+ 
+    <div class="sidebar-footer">
+      <a href="#">Privacy Policy</a>
+      <a href="#">Legal notice</a>
+    </div>
+ 
+  </aside>
+ 
+  <!-- MAIN -->
+  <div class="main-wrapper">
+ 
+    <header class="header">
+      <span class="header-title">Kanban Project Management Tool</span>
+      <div class="header-actions">
+        <button class="icon-btn" title="Hilfe">?</button>
+        <div class="avatar">SM</div>
+      </div>
+    </header>
+ 
+    <main class="content">
+ 
+      <!-- Board Header -->
+      <div class="board-header">
+        <h1 class="board-title">Board</h1>
+        <div class="search-box">
+          <input type="text" placeholder="Find Task" />
+          <svg viewBox="0 0 24 24" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="M21 21l-4.35-4.35"/></svg>
+        </div>
+        <button class="btn-add-task">Add task &nbsp;+</button>
+      </div>
+ 
+      <!-- Columns -->
+      <div class="board-columns">
+ 
+        <!-- TO DO -->
+        <div class="column">
+          <div class="column-header">
+            <span>To do</span>
+            <button>+</button>
+          </div>
+          <div class="empty-card">No tasks To do</div>
+        </div>
+ 
+        <!-- IN PROGRESS -->
+        <div class="column">
+          <div class="column-header">
+            <span>In progress</span>
+            <button>+</button>
+          </div>
+ 
+          <div class="card">
+            <span class="tag tag-blue">User Story</span>
+            <div class="card-title">Kochwelt Page &amp; Recipe Recommender</div>
+            <div class="card-desc">Build start page with recipe recommendation...</div>
+            <div class="subtasks">
+              <div class="progress-bar"><div class="progress-fill" style="width:50%"></div></div>
+              1/2 Subtasks
+            </div>
+            <div class="card-footer">
+              <div class="avatars">
+                <div class="av av-orange">AN</div>
+                <div class="av av-purple">EM</div>
+                <div class="av av-teal">MB</div>
+              </div>
+              <div class="priority prio-medium">
+                <svg viewBox="0 0 24 24" fill="currentColor"><path d="M4 6h16M4 12h10M4 18h6"/></svg>
+              </div>
+            </div>
+          </div>
+        </div>
+ 
+        <!-- AWAIT FEEDBACK -->
+        <div class="column">
+          <div class="column-header">
+            <span>Await feedback</span>
+            <button>+</button>
+          </div>
+ 
+          <div class="card">
+            <span class="tag tag-teal">Technical Task</span>
+            <div class="card-title">HTML Base Template Creation</div>
+            <div class="card-desc">Create reusable HTML base templates...</div>
+            <div class="card-footer">
+              <div class="avatars">
+                <div class="av av-orange">AN</div>
+                <div class="av av-purple">EM</div>
+                <div class="av av-teal">MB</div>
+              </div>
+              <div class="priority prio-low">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"/></svg>
+              </div>
+            </div>
+          </div>
+ 
+          <div class="card">
+            <span class="tag tag-blue">User Story</span>
+            <div class="card-title">Daily Kochwelt Recipe</div>
+            <div class="card-desc">Implement daily recipe and portion calculator...</div>
+            <div class="card-footer">
+              <div class="avatars">
+                <div class="av av-orange">AN</div>
+                <div class="av av-purple">EM</div>
+                <div class="av av-teal">MB</div>
+              </div>
+              <div class="priority prio-medium">
+                <svg viewBox="0 0 24 24" fill="currentColor"><path d="M4 6h16M4 12h10M4 18h6"/></svg>
+              </div>
+            </div>
+          </div>
+        </div>
+ 
+        <!-- DONE -->
+        <div class="column">
+          <div class="column-header">
+            <span>Done</span>
+          </div>
+ 
+          <div class="card">
+            <span class="tag tag-teal">Technical Task</span>
+            <div class="card-title">CSS Architecture Planning</div>
+            <div class="card-desc">Define CSS naming conventions and structure...</div>
+            <div class="subtasks">
+              <div class="progress-bar"><div class="progress-fill" style="width:100%"></div></div>
+              2/2 Subtasks
+            </div>
+            <div class="card-footer">
+              <div class="avatars">
+                <div class="av av-orange">AN</div>
+                <div class="av av-purple">EM</div>
+                <div class="av av-teal">MB</div>
+              </div>
+              <div class="priority prio-urgent">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 15 12 9 18 15"/><polyline points="6 19 12 13 18 19"/></svg>
+              </div>
+            </div>
+          </div>
+        </div>
+ 
+      </div>
+    </main>
+ 
+  </div>
+ 
 </body>
 </html>
