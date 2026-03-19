@@ -1,0 +1,60 @@
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    height: 100vh;
+    margin: 0 auto;
+
+}
+
+.contentlimiter {
+    max-width: 1440px;
+    height: 100%;
+}
+
+.app {
+    display: flex;
+    flex-direction: column;
+    border: 1px solid blue;
+    height: 100%;
+}
+
+.header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 82px;
+}
+
+.sidebar {
+    border: 1px solid gray;
+    width: 232px;
+    flex-shrink: 0;
+}
+
+.content {
+    flex: 1;
+    overflow-y: auto;
+}
+
+.main {
+   display: flex;
+    border: 1px solid red;
+}
+
+/* Icon Transition for desktop */
+/* 
+.prototype--contentMiddle--Zuxw5 {
+    flex-grow: 1;
+    position: relative;
+    transition: margin .2s;
+    transition-behavior: normal;
+    transition-duration: 0.2s;
+    transition-timing-function: ease;
+    transition-delay: 0s;
+    transition-property: margin;
+} */
+
