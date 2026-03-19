@@ -3,6 +3,10 @@
     display: none !important;
 }
 
+.hidden-on-desktop {
+  display: none !important;
+}
+
 body{
     background-color: #f6f7f8;
 }

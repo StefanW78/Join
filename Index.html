@@ -9,7 +9,7 @@
     <link rel="stylesheet" href="summary-responsiv.css">
     <link rel="shortcut icon" href="#" type="image/x-icon">
 </head>
-<body onload="renderSummary()">
+<body onload="renderSummary() ;renderInitials()">
     <div class="body-div">
         <div class="sidebar-wraper">
             <div class="sidebar">
@@ -45,10 +45,10 @@
                         <div class="user-header">
                             <a class="help" href=""><img src="./assets/img/help.svg" alt="help-logo"></a>
                             <div class="user-icon">
-                                <button onclick="DropDownOnClick()" class="header-button" id="header-button">SM</button>
+                                <button class="header-button" id="header-button">SM</button>
                             </div>
                             <div class="dropdown-menu d_none" id="dropdown-menu">
-                                <a class="help-switch" id="help-switch" href="">Help</a>
+                                <a class="help-switch hidden-on-desktop" id="help-switch" href="">Help</a>
                                 <a href="">Legal notice</a>
                                 <a href="">Privacy Policy</a>
                                 <a href="">Log Out</a>

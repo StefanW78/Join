@@ -7,7 +7,10 @@ let dueDate = document.getElementById(`dueDate`)
 let totalTasksNumbers = document.getElementById(`totalTasksNumbers`)
 let inProgressNumber = document.getElementById(`inProgressNumber`)
 let awaitingFeedbackNumber = document.getElementById(`awaitingFeedbackNumber`)
+let SummaryName = document.getElementById(`userName`)
 let Firebase_URL = "./test-databank.json"
+
+
 
 async function loadTodos() {
     
@@ -40,6 +43,7 @@ async function loadTodos() {
 
 async function renderSummary() {
    
+    renderName();
     const fetchdData = await loadTodos();
 
     const todos = Object.values(fetchdData);
@@ -53,17 +57,6 @@ async function renderSummary() {
   const totalUrgent = todos.filter(t => t.urgent).length;
   const totalWithDate = todos.filter(t => t.date).length;
 
-  // Zahlen in Konsole ausgeben als test
-  console.log("Summary Zahlen:");
-  console.log("Total Todos:", totalTodos);
-  console.log("Done:", totalDone);
-  console.log("Todo:", totalTodo);
-  console.log("In Progress:", totalInProgress);
-  console.log("Awaiting Feedback:", totalFeedback);
-  console.log("Urgent:", totalUrgent);
-  console.log("With Date:", totalWithDate);
-
-
   toDoNumbers.innerText = totalTodo;
   doneNumbers.innerText = totalDone;
   urgentNumbers.innerText = totalUrgent;
@@ -71,6 +64,24 @@ async function renderSummary() {
   inProgressNumber.innerText = totalInProgress;
   awaitingFeedbackNumber.innerText = totalFeedback;
 
+    // // Zahlen in Konsole ausgeben als test
+  // console.log("Summary Zahlen:");
+  // console.log("Total Todos:", totalTodos);
+  // console.log("Done:", totalDone);
+  // console.log("Todo:", totalTodo);
+  // console.log("In Progress:", totalInProgress);
+  // console.log("Awaiting Feedback:", totalFeedback);
+  // console.log("Urgent:", totalUrgent);
+  // console.log("With Date:", totalWithDate);
 
+
+}
+
+function renderName() {
+  let name = localStorage.getItem("username")
+
+  if (!name) return;
+
+  SummaryName.innerText = name
 }
 

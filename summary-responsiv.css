@@ -1,5 +1,10 @@
 @media (max-width: 1032px) {
     /* Sidebar Area */
+
+    .hidden-on-desktop{
+        display: block !important;
+    }
+
 .sidebar-wraper{
     flex-direction: column;
     flex: 1;
