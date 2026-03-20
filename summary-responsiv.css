@@ -1,4 +1,4 @@
-@media (max-width: 1032px) {
+@media (max-width: 1092px) {
     /* Sidebar Area */
 
     .hidden-on-desktop{
@@ -49,7 +49,7 @@
 }
 }
 
-@media (max-width: 800px){
+@media (max-width: 864px){
     .welcome-user{
         display: none !important;
     }

@@ -234,7 +234,7 @@ footer a:hover{
 
 main{
     width: 100%;
-    padding: 80px 50px 50px 80px;
+    padding: 75px 50px 50px 75px;
     display: flex;
     flex-direction: column;
     max-width: 1440px;
@@ -281,7 +281,7 @@ main{
     flex-direction: row;
     justify-content: space-between;
     align-items: center;
-    gap: 100px;
+    gap: 70px;
 }
 
 .summary-overview{
