@@ -2,7 +2,7 @@
     /* Sidebar Area */
 
     .hidden-on-desktop{
-        display: block !important;
+        display: flex !important;
     }
 
 .sidebar-wraper{
@@ -58,7 +58,7 @@ main{
     }
 
     main{
-        padding: 20px 15px 45px 15px;
+        padding: 20px 15px 35px 15px;
     }
 
     .header-div{
@@ -115,8 +115,16 @@ main{
     }
 }
 
-@media (max-width: 460px){
+@media (max-width: 470px){
     .overview-container-items{
         padding: 16px 16px;
+    }
+
+    .main-title{
+        font-size: 45px;
+    }
+    
+    .second-title{
+        font-size: 18px;
     }
 }
