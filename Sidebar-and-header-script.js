@@ -1,7 +1,20 @@
 let DropDowncontain = document.getElementById(`dropdown-menu`)
 let dropdownButton = document.getElementById(`header-button`)
+const mediaQuery = window.matchMedia("(max-width: 1092px)");
 localStorage.setItem("username", "Max Musterman");
 
+
+DropDowncontain.classList.add("d_none");
+
+mediaQuery.addEventListener("change", (e) => {
+  if (e.matches) {
+    // Mobile
+    DropDowncontain.classList.add("d_none");
+  } else {
+    // Desktop
+    DropDowncontain.classList.add("d_none");
+  }
+});
 
 dropdownButton.addEventListener("click", (e) => {
   DropDowncontain.classList.toggle("d_none");
