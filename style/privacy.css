@@ -1,0 +1,79 @@
+/* Grundlegende Einstellungen, um volle Höhe zu garantieren */
+* {
+    box-sizing: border-box;
+}
+
+body, html {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    background-color: #f0f0f0; /* Hintergrundfarbe für Außenbereich */
+}
+
+/* Der Hauptcontainer, der bei 1440px stoppt und zentriert */
+.mainContainer {
+    max-width: 1440px;
+    margin: 0 auto; /* Zentriert den Container */
+    position: relative; /* Wichtig für die Positionierung von .container1 */
+    min-height: 100vh; /* Mindestens volle Bildschirmhöhe */
+    background-color: white; /* Hintergrundfarbe innerhalb des max-width Bereichs */
+    box-shadow: 0 0 20px rgba(0,0,0,0.1); /* Optional: Schatten zur Abgrenzung */
+}
+
+/* Container 1: Transparent, am oberen Bildschirmrand */
+.header {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 82px;
+
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    padding: 0 20px;
+}
+
+/* Linke Seite */
+.left {
+    margin-left: calc(232px + 116px);
+}
+
+/* Rechte Seite */
+.right {
+    margin-right: 20px;
+}
+
+/* Wrapper für Container 2 & 3 */
+.contentWrapper {
+    display: flex;
+    width: 100%;
+    height: 100vh; /* Beide sollen 100vh hoch sein */
+}
+
+.sidebar {
+    width: 232px;
+    height: 100%; /* Nehmen die 100vh vom wrapper */
+    display: flex;
+    flex-shrink: 0;
+    justify-content: center;
+    align-items: center;
+    font-size: 2rem;
+    background: rgba(42, 54, 71, 1);
+}
+
+.brandImg {
+    width: 100px;
+    height: 120px;
+}
+
+.content {
+    background-color: white;
+    flex: 1; /* Beide teilen sich den Platz 50/50 */
+    height: 100%; /* Nehmen die 100vh vom wrapper */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 2rem;
+}
