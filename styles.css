@@ -21,7 +21,11 @@
  
     /* --- Logo --- */
     .logo-area {
+      display: flex;
+      align-items: center;
+      justify-content: center;
       padding: 28px 24px 48px 24px;
+      margin-top: 22px;
     }
  
     /*
@@ -34,6 +38,16 @@
       line-height: 1;
       gap: 0;
     }
+
+    /* .logo-Logo {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 62px;
+      height: 72px;
+    } */
+
+
     .logo-j-wrap {
       position: relative;
       width: 62px;
@@ -76,6 +90,8 @@
     .nav {
       display: flex;
       flex-direction: column;
+      align-items: center;
+      margin-top: 64px;
     }
  
     .nav-item {
@@ -113,11 +129,12 @@
       gap: 8px;
       margin-top: auto;
       padding: 28px 24px;
+      align-items: center;
     }
     .sidebar-footer a {
-      color: #7a8f9e;
+      color: #9ea4a9;
       text-decoration: none;
-      font-size: 12px;
+      font-size: 16px;
     }
     .sidebar-footer a:hover { color: #fff; }
  
@@ -203,6 +220,18 @@
       flex-wrap: wrap;
     }
     .board-title { font-size: 40px; font-weight: 800; color: #1e2c3d; flex: 1; }
+    .board-box {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 120px;
+      height: 60px;
+      background: #29abe2;
+      color: #fff;
+      font-size: 18px;
+      font-weight: 700;
+      flex: 1 0 50%
+      }
  
     .search-box {
       display: flex;
@@ -230,6 +259,35 @@
       cursor: pointer;
     }
     .btn-add-task:hover { background: #29abe2; }
+
+    .icon-btn.board-header {
+      width: 34px;
+      height: 34px;
+      border: 1.5px solid #0868ad;
+      background-color: #0038ff;
+      cursor: pointer;
+      font-size: 16px; 
+      font-weight: 600;
+      color: #fff;
+      line-height: 1;
+    }
+
+
+    .plus-btn {
+      width: 34px;
+      height: 34px;
+      border: 1.5px solid #0868ad;
+      background-color: #0038ff;
+      cursor: pointer;
+      font-size: 16px; 
+      font-weight: 600;
+      color: #fff;
+      line-height: 1;
+    }
+
+    .plus-none {
+      display: none;
+    }
  
     /* Columns */
     .board-columns {
