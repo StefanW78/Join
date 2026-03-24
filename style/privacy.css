@@ -1,79 +1,161 @@
-/* Grundlegende Einstellungen, um volle Höhe zu garantieren */
 * {
-    box-sizing: border-box;
+  box-sizing: border-box;
 }
 
-body, html {
-    margin: 0;
-    padding: 0;
-    height: 100%;
-    background-color: #f0f0f0; /* Hintergrundfarbe für Außenbereich */
+html,
+body {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  font-family: Arial, sans-serif;
+  background-color: #f6f7f8;
 }
 
-/* Der Hauptcontainer, der bei 1440px stoppt und zentriert */
+/* Gesamte App */
 .mainContainer {
-    max-width: 1440px;
-    margin: 0 auto; /* Zentriert den Container */
-    position: relative; /* Wichtig für die Positionierung von .container1 */
-    min-height: 100vh; /* Mindestens volle Bildschirmhöhe */
-    background-color: white; /* Hintergrundfarbe innerhalb des max-width Bereichs */
-    box-shadow: 0 0 20px rgba(0,0,0,0.1); /* Optional: Schatten zur Abgrenzung */
+  max-width: 1440px;
+  margin: 0 auto;
+  min-height: 100vh;
+  display: flex;
+  background-color: #f6f7f8;
 }
 
-/* Container 1: Transparent, am oberen Bildschirmrand */
-.header {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 82px;
-
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-
-    padding: 0 20px;
-}
-
-/* Linke Seite */
-.left {
-    margin-left: calc(232px + 116px);
-}
-
-/* Rechte Seite */
-.right {
-    margin-right: 20px;
-}
-
-/* Wrapper für Container 2 & 3 */
-.contentWrapper {
-    display: flex;
-    width: 100%;
-    height: 100vh; /* Beide sollen 100vh hoch sein */
-}
-
+/* SIDEBAR */
 .sidebar {
-    width: 232px;
-    height: 100%; /* Nehmen die 100vh vom wrapper */
-    display: flex;
-    flex-shrink: 0;
-    justify-content: center;
-    align-items: center;
-    font-size: 2rem;
-    background: rgba(42, 54, 71, 1);
+  width: 232px;
+  background: #2a3647;
+  color: white;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  flex-shrink: 0;
 }
 
-.brandImg {
-    width: 100px;
-    height: 120px;
+.sidebarTop {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding-top: 64px;
 }
 
+.joinLogo {
+  width: 100px;
+  height: auto;
+  margin-bottom: 120px;
+}
+
+.mainNav {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.navLink {
+  display: flex;
+  align-items: center;
+  height: 46px;
+  padding-left: 56px;
+  color: #cdcdcd;
+  text-decoration: none;
+  font-size: 16px;
+  gap: 12px;
+}
+
+.navLink:hover {
+  background-color: #091931;
+}
+
+.sidebarBottom {
+  display: flex;
+  flex-direction: column;
+  padding-bottom: 24px;
+}
+
+.footerLink {
+  display: flex;
+  align-items: center;
+  height: 35px;
+  padding-left: 56px;
+  color: #a8a8a8;
+  text-decoration: none;
+  font-size: 16px;
+}
+
+.footerLink:hover {
+  color: white;
+}
+
+.activeFooterLink {
+  background-color: #091931;
+  color: white;
+}
+
+/* RECHTER BEREICH */
+.mainContentArea {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+}
+
+/* HEADER */
+.header {
+  height: 96px;
+  background-color: white;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 40px 0 116px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.08);
+  flex-shrink: 0;
+}
+
+.headlineText {
+  margin: 0;
+  font-size: 20px;
+  font-weight: 400;
+  color: black;
+}
+
+.userProfileSvg {
+  width: 56px;
+  height: 56px;
+  object-fit: contain;
+}
+
+/* CONTENT */
 .content {
-    background-color: white;
-    flex: 1; /* Beide teilen sich den Platz 50/50 */
-    height: 100%; /* Nehmen die 100vh vom wrapper */
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    font-size: 2rem;
+  flex: 1;
+  overflow-y: auto;
+  background-color: #f6f7f8;
+  padding: 110px 96px 64px 104px;
+}
+
+.privacyContent {
+  max-width: 1000px;
+}
+
+.privacyContent h1 {
+  margin: 0 0 56px 0;
+  font-size: 61px;
+  font-weight: 700;
+  line-height: 1.2;
+  color: black;
+}
+
+.privacyContent h2 {
+  margin: 0 0 16px 0;
+  font-size: 33px;
+  font-weight: 700;
+  line-height: 1.2;
+  color: black;
+}
+
+.privacyContent p {
+  margin: 0 0 40px 0;
+  font-size: 20px;
+  line-height: 1.4;
+  color: #000000;
+  max-width: 1030px;
 }
