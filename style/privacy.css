@@ -23,12 +23,14 @@ body {
 /* SIDEBAR */
 .sidebar {
   width: 232px;
+  position: sticky;
   background: #2a3647;
   color: white;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
   flex-shrink: 0;
+  height: 100vh;
 }
 
 .sidebarTop {
