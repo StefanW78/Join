@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Privacy</title>
     <link rel="stylesheet" href="../style/privacy.css" />
+    <link rel="stylesheet" href="../style/privacyMobile.css" />
     <link rel="icon" href="../assets/img/Capa 2.svg" />
   </head>
   <body>
@@ -18,22 +19,25 @@
           />
 
           <nav class="mainNav">
-            <a href="#" class="navLink"
-              ><img src="../assets/img/summary-icon.svg" alt="summary icon" />
+            <a href="#" class="navLink">
+              <img src="../assets/img/summary-icon.svg" alt="summary icon" />
               <span>Summary</span>
             </a>
-            <a href="#" class="navLink"
-              ><img src="../assets/img/addTask-icon.svg" alt="addTask-icon" />
-              <span>Add Task</span></a
-            >
-            <a href="#" class="navLink"
-              ><img src="../assets/img/board-icon.svg" alt="board-icon" />
-              <span>Board</span></a
-            >
-            <a href="#" class="navLink"
-              ><img src="../assets/img/contacts-icon.svg" alt="contacts-icon" />
-              <span>Contacts</span></a
-            >
+
+            <a href="#" class="navLink">
+              <img src="../assets/img/addTask-icon.svg" alt="add task icon" />
+              <span>Add Task</span>
+            </a>
+
+            <a href="#" class="navLink">
+              <img src="../assets/img/board-icon.svg" alt="board icon" />
+              <span>Board</span>
+            </a>
+
+            <a href="#" class="navLink">
+              <img src="../assets/img/contacts-icon.svg" alt="contacts icon" />
+              <span>Contacts</span>
+            </a>
           </nav>
         </div>
 
@@ -45,7 +49,14 @@
 
       <div class="mainContentArea">
         <header class="header">
+          <img
+            class="mobileJoinLogo"
+            src="../assets/img/Logo-logged-in-mobile.svg"
+            alt="Join Logo"
+          />
+
           <p class="headlineText">Kanban Project Management Tool</p>
+
           <img
             class="userProfileSvg"
             src="../assets/img/user profile default.svg"
@@ -55,7 +66,13 @@
 
         <main class="content">
           <section class="privacyContent">
-            <h1>Privacy Policy</h1>
+            <div class="titleRow">
+              <h1>Privacy Policy</h1>
+
+              <a href="#" class="backArrow" aria-label="Zurück">
+                <img src="../assets/img/arrow-left-line.svg" alt="Back Arrow" />
+              </a>
+            </div>
 
             <h2>Subtitle</h2>
             <p>
@@ -86,5 +103,27 @@
         </main>
       </div>
     </div>
+
+    <nav class="mobileBottomNav">
+      <a href="#" class="mobileNavLink">
+        <img src="../assets/img/summary-icon.svg" alt="Summary" />
+        <span>Summary</span>
+      </a>
+
+      <a href="#" class="mobileNavLink">
+        <img src="../assets/img/addTask-icon.svg" alt="Add Task" />
+        <span>Add Task</span>
+      </a>
+
+      <a href="#" class="mobileNavLink">
+        <img src="../assets/img/board-icon.svg" alt="Board" />
+        <span>Board</span>
+      </a>
+
+      <a href="#" class="mobileNavLink">
+        <img src="../assets/img/contacts-icon.svg" alt="Contacts" />
+        <span>Contacts</span>
+      </a>
+    </nav>
   </body>
 </html>

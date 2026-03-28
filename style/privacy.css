@@ -48,18 +48,18 @@ body {
   width: 100%;
   display: flex;
   flex-direction: column;
-  gap: 8px;
+  gap: 12px;
 }
 
 .navLink {
   display: flex;
   align-items: center;
   height: 46px;
-  padding-left: 56px;
+  padding-left: 53px;
   color: #cdcdcd;
   text-decoration: none;
   font-size: 16px;
-  gap: 12px;
+  gap: 16px;
 }
 
 .navLink:hover {
@@ -76,7 +76,7 @@ body {
   display: flex;
   align-items: center;
   height: 35px;
-  padding-left: 56px;
+  padding-left: 53px;
   color: #a8a8a8;
   text-decoration: none;
   font-size: 16px;
@@ -106,9 +106,13 @@ body {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 0 40px 0 116px;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.08);
+  padding: 0 40px 0 104px;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.08);
   flex-shrink: 0;
+}
+
+.mobileJoinLogo {
+  display: none;
 }
 
 .headlineText {
@@ -129,33 +133,48 @@ body {
   flex: 1;
   overflow-y: auto;
   background-color: #f6f7f8;
-  padding: 110px 96px 64px 104px;
+  padding: 96px 120px 64px 104px;
 }
 
 .privacyContent {
-  max-width: 1000px;
+  max-width: 1030px;
+}
+
+.titleRow {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+}
+
+.backArrow {
+  display: none;
 }
 
 .privacyContent h1 {
-  margin: 0 0 56px 0;
-  font-size: 61px;
+  margin: 0 0 40px 0;
+  font-size: 56px;
   font-weight: 700;
-  line-height: 1.2;
+  line-height: 1.15;
   color: black;
 }
 
 .privacyContent h2 {
-  margin: 0 0 16px 0;
-  font-size: 33px;
+  margin: 0 0 20px 0;
+  font-size: 32px;
   font-weight: 700;
   line-height: 1.2;
   color: black;
 }
 
 .privacyContent p {
-  margin: 0 0 40px 0;
-  font-size: 20px;
-  line-height: 1.4;
+  margin: 0 0 48px 0;
+  font-size: 16px;
+  line-height: 1.5;
   color: #000000;
   max-width: 1030px;
+}
+
+.mobileBottomNav {
+  display: none;
 }
