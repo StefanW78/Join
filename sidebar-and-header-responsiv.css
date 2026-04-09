@@ -46,4 +46,15 @@
 .dropdown-menu{
     top: 277px;
 }
+
+.help{
+    display: none;
+}
+}
+
+@media (max-width: 864px){
+
+    .header-div{
+        padding: 20px 15px;
+    }
 }

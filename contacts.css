@@ -68,20 +68,20 @@ main{
     flex-direction: row;
     justify-content: space-between;
     align-items: center;
-    gap: 30px;
+    gap: 25px;
     margin-bottom: 40px;
 
 }
 
 .header-title-div h1{
     color: rgba(0, 0, 0, 1);
-    font-size: 52px;
+    font-size: 46px;
     font-weight: 700;
 }
 
 .header-title-div h3{
     color: rgba(42, 54, 71, 1);
-    font-size: 24px;
+    font-size: 22px;
     font-weight: 400;
 }
 
@@ -91,9 +91,8 @@ main{
     background-color: rgba(41, 171, 226, 1);
 }
 
-.contacts-infos{
-
-}
+/* .contacts-infos{
+    } */
 
 
 .contact-header{
@@ -705,7 +704,16 @@ main{
     margin-top: 48px;
 }
 
-.edit-contact-form.contact-badge {
+.edit-contact-buttons{
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: center;
+    gap: 18px;
+    margin-top: 10px;
+}
+
+.edit-contact-form .contact-badge {
     margin-bottom: 40px;
     width: 120px;
     height: 120px;
