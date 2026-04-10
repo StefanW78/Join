@@ -191,7 +191,7 @@ footer a:hover{
     justify-content: center;
     align-items: flex-start;
     padding: 8px;
-    /* z-index: 1001; */ /*für später vllt*/
+    z-index: 1001;
 }
 
 .dropdown-menu a{

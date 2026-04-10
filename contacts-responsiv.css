@@ -20,19 +20,77 @@ main{
     padding: 0;
 }
 
+.header-title-div{
+    flex-direction: column;
+        justify-content: flex-start;
+        align-items: flex-start;
+        gap: 16px;
+}
+
+.header-title-div .seperator{
+    order: 1;
+    width: 125px;
+    height: 3px;
+}
 
 .contacts-info-sec{
     display: flex;
     padding: 80px 20px 0 20px;
+    flex: 1;
 }
 
-.contacts-list-sec{
-    display: none;
+.blue-arrow{
+    content: url(./assets/img/blue-arrow-left-contacts.svg);
+    width: 36px;
+    height: 36px;
+    position: fixed;
+    right: 40px;
+    top: 146px;
+    cursor: pointer;
+    z-index: 0;
+}
+
+
+.contacts-list-sec #add-contact{
+    content: url(./assets/img/person_add-mobile.svg);
+    position: fixed;
+    right: 40px;
+    top: calc(100vh - 160px);
+    z-index: 100;
+    width: 56px;
+    height: 56px;
+    border-radius: 50%;
+    margin-bottom: 0;
+    display: flex;
+    justify-content: center;
+    box-shadow: 0 4px 4px 0 rgba(0, 0, 0, 0.25);
+    align-items: center;
+    gap: 0;
+    transition: all 125ms ease-in;
 }
 
 .contacts-list-sec{
     max-width: none;
     margin-right: 0;
+}
+
+.contact-edit-tools{
+    content: url(./assets/img/more-option-contacts.svg);
+    position: absolute;
+    background: #2a3647;
+    right: 40px;
+    top: calc(100vh - 160px);
+    width: 56px;
+    height: 56px;
+    border-radius: 50%;
+    margin-bottom: 0;
+    padding: 12px;
+    box-shadow: 0 4px 4px 0 rgba(0, 0, 0, 0.25);
+    cursor: pointer;
+}
+
+.contact-edit-tools:hover{
+    background-color: #29abe2;
 }
 
 /* Area pop-up Add */
@@ -129,6 +187,11 @@ main{
 
 
 /* Area pop-up edit */
+
+.contacts #add-contact:hover {
+        background-color: #29abe2;
+        border-radius: 50%;
+    }
 }
 
 

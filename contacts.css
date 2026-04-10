@@ -91,8 +91,9 @@ main{
     background-color: rgba(41, 171, 226, 1);
 }
 
-/* .contacts-infos{
-    } */
+.contacts-infos{
+
+}
 
 
 .contact-header{
@@ -751,7 +752,61 @@ main{
     transform: translate(150%, -40%);
     transition: transform 400ms ease-in-out;
     z-index: 1000;
+    width: 326px;
+    height: 74px;
 }
 
+
+.contact-text .edit-menu-dialog{
+    position: fixed;
+    width: 100px;
+    height: 100px;
+    top: calc(100vh - 270px);
+    right: 30px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+    background-color: rgba(255, 255, 255, 1);
+    border-radius: 20px 20px 0 20px;
+    padding: 10px;
+    box-shadow: 0 4px 4px 0 rgba(0, 0, 0, 0.25);
+    gap: 16px;
+    z-index: 100;
+    transition: transform 75ms ease-out;
+}
+
+.contact-edit-mobile{
+    background-color: transparent;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    gap: 8px;
+    color: rgba(42, 54, 71, 1);
+    font-weight: 400;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+#editMobile.edit-delete-component-default img{
+    content: url(./assets/img/edit-contact.svg);
+    width: 24px;
+    height: 24px;
+}
+
+#deleteMobile.edit-delete-component-default img{
+    content: url(./assets/img/delete-contact.svg);
+    width: 24px;
+    height: 24px;    
+}
+
+.popup-message.slide-in{
+    transform: translate(-5%, -65%)
+}
+
+.popup-message.slide-out{
+    transform: translate(150%, -65%);
+}
 
         

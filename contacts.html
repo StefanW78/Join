@@ -59,7 +59,7 @@
                     </div>
                 </div>
                 <main class="main-container">
-                    <section class="contacts-list-sec">
+                    <section class="contacts-list-sec" id="contacts-list-sec">
                         <button class="primary-btn-default-icon" id="add-contact">
                             <h3>Add new contact</h3>
                             <img src="./assets/img/add-person-contact.svg" alt="add-person-icon">
@@ -87,6 +87,7 @@
                             <div class="seperator"></div>
                             <h3>Better with a team</h3>
                         </div>
+                        <a class="blue-arrow" onclick="MobileSwitchToContacts()"></a>
                         <div class="contacts-infos">
                             <div class="contact-header" id="contact-header">
                                 <div class="contact-baged" id="contact-symbol">
@@ -107,6 +108,18 @@
                                             <span>Delete</span>
                                         </div>
                                     </div>
+                                    <!-- als Test -->
+                                    <div id="edit-menu-dialog" class="edit-menu-dialog d_none">
+                                        <div id="editMobile" class="edit-delete-component-default">
+                                            <img src="" alt="">
+                                            <span>Edit</span>
+                                        </div>
+                                        <div id="deleteMobile" class="edit-delete-component-default">
+                                            <img src="" alt="">
+                                            <span>Delete</span>
+                                        </div>
+                                    </div>
+                                    <!-- als test -->
                                 </div>
                             </div>
                             <h3 class="contact-information" id="contact-information">Contact Information</h3>
@@ -219,7 +232,7 @@
                                 </div>
                     </div>          
                     
-                    <div class="popup-message d_none">
+                    <div id="createMessage" class="popup-message d_none">
 
                     </div>
 
