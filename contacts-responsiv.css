@@ -69,6 +69,10 @@ main{
     transition: all 125ms ease-in;
 }
 
+.contacts-list-sec #add-contact:hover{
+    border-radius: 50%;
+}
+
 .contacts-list-sec{
     max-width: none;
     margin-right: 0;

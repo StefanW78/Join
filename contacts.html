@@ -6,12 +6,12 @@
     <title>Join</title>
     <link rel="stylesheet" href="./standart.css">
     <link rel="stylesheet" href="./contacts.css">
+    <link rel="stylesheet" href="./contacts-responsiv.css">
     <link rel="stylesheet" href="./sidebar-and-header-css.css">
     <link rel="stylesheet" href="./sidebar-and-header-responsiv.css">
-    <link rel="stylesheet" href="./contacts-responsiv.css">
     <link rel="shortcut icon" href="#" type="image/x-icon">
 </head>
-<body>
+<body onload="init()">
     <div class="body-div">
         <div class="sidebar-wraper">
             <div class="sidebar">
@@ -60,7 +60,7 @@
                 </div>
                 <main class="main-container">
                     <section class="contacts-list-sec" id="contacts-list-sec">
-                        <button class="primary-btn-default-icon" id="add-contact">
+                        <button class="primary-btn-default-icon" id="add-contact" onclick="OpenAddDialog()">
                             <h3>Add new contact</h3>
                             <img src="./assets/img/add-person-contact.svg" alt="add-person-icon">
                         </button>
@@ -68,7 +68,7 @@
                             <div class="contact-list-items">
                                 <h3 class="contact-alphabet">A</h3>
                                 <div class="contact-seperator"></div>
-                                <div class="contact-container">
+                                <div class="contact-container" onclick="openContactDetails()">
                                     <div class="contact-badge" id="contact-badge">
                                         AM
                                     </div>
@@ -99,7 +99,7 @@
                                     </div>
 
                                     <div class="contact-edit-tools" id="contact-edit-tools">
-                                        <div class="edit-delete-component-default" id="edit">
+                                        <div class="edit-delete-component-default" id="edit" onclick="OpenEditDialog()">
                                             <img src="" alt="edit-logo">
                                             <span>Edit</span>
                                         </div>
@@ -110,7 +110,7 @@
                                     </div>
                                     <!-- als Test -->
                                     <div id="edit-menu-dialog" class="edit-menu-dialog d_none">
-                                        <div id="editMobile" class="edit-delete-component-default">
+                                        <div id="editMobile" class="edit-delete-component-default" onclick="OpenEditDialog()">
                                             <img src="" alt="">
                                             <span>Edit</span>
                                         </div>
@@ -133,7 +133,7 @@
                     </section>
 
                     <div class="add-contact-popup d_none" id="contact-pop-add">
-                        <div class="add-contact-overlay slide-in">
+                        <div class="add-contact-overlay slide-out" id="add-contact-overlay">
                             <div class="add-contact-overview">
                                 <div class="join-logo-contact">
                                     <img src="./assets/img/join-logo-add-contact.svg" alt="join-logo">
@@ -147,7 +147,7 @@
                                 </div>
                             </div>
                             <div class="add-contact-container">
-                                <div class="close-btn" onclick="">
+                                <div class="close-btn" onclick="CloseAddDialog()">
                                     <img src="" alt="">
                                 </div>
                                 <div class="add-contact-form">
@@ -182,8 +182,8 @@
                         </div>
                     </div>
 
-                    <div class="edit-contact-popup d_none">
-                                <div class="edit-contact-overlay slide-out">
+                    <div class="edit-contact-popup d_none" id="edit-contact-popup">
+                                <div class="edit-contact-overlay slide-out" id="edit-contact-overlay">
                                     <div class="edit-contact-overview">
                                         <div class="join-logo-contact">
                                             <img src="./assets/img/join-logo-add-contact.svg" alt="logo-join">
@@ -196,7 +196,7 @@
                                         </div>
                                     </div>
                                     <div class="edit-contact-container">
-                                        <div class="close-btn" onclick="">
+                                        <div class="close-btn" onclick="CloseEditDialog()">
                                             <img src="./assets/img/add-contact-close-button.svg" alt="close-btn">
                                         </div>
                                         <div class="edit-contact-form">

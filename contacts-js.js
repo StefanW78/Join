@@ -10,6 +10,9 @@ let contactSymbol = document.getElementById(`contact-symbol`)
 let contactTextDiv = document.getElementById(`contact-text`)
 let contactNameDiv = document.getElementById(`contact-name`)
 let contactToolsDiv = document.getElementById(`contact-edit-tools`)
+let addContactOverlay = document.getElementById(`add-contact-overlay`)
+let editContactOverlay = document.getElementById(`edit-contact-overlay`)
+let editContactPopup = document.getElementById(`edit-contact-popup`)
 let editTool = document.getElementById(`edit`)
 let DeleteTool = document.getElementById(`delete`)
 let contactDetailsDiv = document.getElementById(`contact-details`)
@@ -24,9 +27,12 @@ const createMessage = document.getElementById(`createMessage`)
 
 let Firebase_URL = "./contacts.json"
 
-mediaQueryForD_none.addEventListener("change", handleResponsiveChange);
+// mediaQueryForD_none.addEventListener("change", handleResponsiveChange);
+mediaQueryForD_none.addEventListener("change", setInitialView);
 
-
+function init() {
+  setInitialView()
+}
 
 
 async function loadingContacs() {
@@ -120,37 +126,19 @@ function popupMessage(message) {
     }, 510);
   }, 2100);
 }
- 
-function MobileSwitchToContacts() {
-  contactInfoSec.classList.toggle("d_none");
-  contactListSec.classList.toggle("d_none");
 
+// function handleResponsiveChange(e) {
+//   if (!e.matches) {
+//     // Desktop → beide sichtbar (oder dein Standardzustand)
+//     contactInfoSec.classList.remove("d_none");
+//     contactListSec.classList.remove("d_none");
+//   } else {
+//     // Mobile → Standardzustand festlegen
+//     contactInfoSec.classList.add("d_none"); // z.B. erstmal verstecken
+//     contactListSec.classList.remove("d_none");
+//   }
+// }
 
-}
-
-function handleResponsiveChange(e) {
-  if (!e.matches) {
-    // Desktop → beide sichtbar (oder dein Standardzustand)
-    contactInfoSec.classList.remove("d_none");
-    contactListSec.classList.remove("d_none");
-  } else {
-    // Mobile → Standardzustand festlegen
-    contactInfoSec.classList.add("d_none"); // z.B. erstmal verstecken
-    contactListSec.classList.remove("d_none");
-  }
-}
-
-// Für später vllt das der code Kontrolierter ist 
-function showContacts() {
-  contactInfoSec.classList.add("d_none");
-  contactListSec.classList.remove("d_none");
-}
-
-function showDetails() {
-  contactInfoSec.classList.remove("d_none");
-  contactListSec.classList.add("d_none");
-}
-// Für später vllt das der code Kontrolierter ist 
 
 
 mediaQuery2.addEventListener("change", (e) => {
@@ -172,3 +160,77 @@ editToolmobileButton.addEventListener("click", (e) => {
 document.addEventListener("click", () => {
   editDialogBox.classList.add("d_none");
 });
+
+
+
+
+
+// Zum testen 
+
+function setInitialView() {
+  if (window.innerWidth <= 864) {
+    // Mobile
+    contactListSec.classList.remove("d_none");
+    contactInfoSec.classList.add("d_none");
+  } else {
+    // Desktop
+    contactListSec.classList.remove("d_none");
+    contactInfoSec.classList.remove("d_none");
+  }
+}
+
+function openContactDetails() {
+  if (window.innerWidth <= 864) {
+    contactListSec.classList.add("d_none");
+    contactInfoSec.classList.remove("d_none");
+  }
+}
+
+
+function MobileSwitchToContacts() {
+  contactInfoSec.classList.add("d_none");
+  contactListSec.classList.remove("d_none");
+}
+
+function OpenAddDialog() {
+  contactPopUpAdd.classList.remove("d_none");
+
+  setTimeout(() =>{
+  addContactOverlay.classList.remove(`slide-out`)
+  addContactOverlay.classList.add(`slide-in`)
+  }, 200)
+ 
+}
+
+function CloseAddDialog() {
+  setTimeout(() =>{
+  addContactOverlay.classList.remove(`slide-in`)
+  addContactOverlay.classList.add(`slide-out`)
+  setTimeout(() => {
+    contactPopUpAdd.classList.add("d_none");
+  }, 460)
+  }, 200)
+ 
+}
+
+function OpenEditDialog() {
+  editContactPopup.classList.remove("d_none");
+
+  setTimeout(() =>{
+  editContactOverlay.classList.remove(`slide-out`)
+  editContactOverlay.classList.add(`slide-in`)
+  }, 200)
+ 
+}
+
+
+function CloseEditDialog() {
+  setTimeout(() =>{
+  editContactOverlay.classList.remove(`slide-in`)
+  editContactOverlay.classList.add(`slide-out`)
+  setTimeout(() => {
+    editContactPopup.classList.add("d_none");
+  }, 460)
+  }, 200)
+ 
+}
