@@ -1,0 +1,83 @@
+{
+  "2" : {
+    "name": "Lars Schönemann",
+    "email": "Lars.Schönemann@hotmail.com",
+    "phone": "49 176 12345678",
+    "checked": false,
+    "color" : "rgba(110, 82, 255, 1)",
+    "initials": "LS"
+  },
+  "3" : {
+    "name": "Dname Schulz",
+    "email": "Dname.Schulz@hotmail.com",
+    "phone": "49 176 12335638",
+    "checked": false,
+    "color" : "rgba(255, 122, 0, 1)",
+    "initials": "DS"
+  },
+
+  "4" : {
+    "name": "David Jalls",
+    "email": "David.Jalls@hotmail.com",
+    "phone": "49 176 12545278",
+    "checked": false,
+    "color" : "rgba(110, 82, 255, 1)",
+    "initials": "DJ"
+  },
+
+  "5" : {
+    "name": "Norman Kollak",
+    "email": "Norman.Kollak@hotmail.com",
+    "phone": "49 176 12355278",
+    "checked": false,
+    "color" : "rgba(110, 82, 255, 1)",
+    "initials": "NK"
+  },
+
+  "6" : {
+    "name": "Alexander Ollem",
+    "email": "Alexander.Ollem@hotmail.com",
+    "phone": "49 176 25375678",
+    "checked": false,
+    "color" : "rgba(255, 122, 0, 1)",
+    "initials": "AO"
+  },
+
+  "7" : {
+    "name": "Arlong Fishhai",
+    "email": "Arlong.fishhai@hotmail.com",
+    "phone": "49 176 25375678",
+    "checked": false,
+    "color" : "rgba(255, 122, 0, 1)",
+    "initials": "AF"
+  },
+
+  "8" : {
+    "name": "Allem Nichtsda",
+    "email": "Allem.Nichtsda@hotmail.com",
+    "phone": "49 176 25375678",
+    "checked": false,
+    "color" : "rgba(255, 122, 0, 1)",
+    "initials": "AN"
+  },
+
+  "9" : {
+    "name": "Dennis Dorf",
+    "email": "Dennis.Dorf@hotmail.com",
+    "phone": "49 176 25375678",
+    "checked": false,
+    "color" : "rgba(255, 122, 0, 1)",
+    "initials": "DD"
+  },
+
+  "10" :{
+    "name": "Kalle Donma",
+    "email": "Kalle.Donma@hotmail.com",
+    "phone": "49 176 25375678",
+    "checked": false,
+    "color" : "rgba(255, 122, 0, 1)",
+    "initials": "KD"
+  }
+
+
+}

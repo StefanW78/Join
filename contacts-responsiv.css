@@ -1,4 +1,9 @@
+
 @media (max-width: 1092px) {
+
+    .contacts-list-sec{
+        height: calc(100vh - 176px);
+    }
     /* Area pop-up Add */
 .add-contact-container{
     padding: 48px 30px 80px 30px;

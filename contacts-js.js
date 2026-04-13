@@ -19,50 +19,25 @@ let contactDetailsDiv = document.getElementById(`contact-details`)
 let spanEmail = document.getElementById(`span-email`)
 let spanPhone = document.getElementById(`span-phone`)
 let contactPopUpAdd = document.getElementById(`contact-pop-add`)
+let contactDetailDiv = document.getElementById(`contacts-infos`)
 const mediaQuery2 = window.matchMedia("(max-width: 1092px)");
 const mediaQueryForD_none = window.matchMedia("(max-width: 864px)")
 const editToolmobileButton = document.getElementById(`contact-edit-tools`)
 const editDialogBox = document.getElementById(`edit-menu-dialog`)
 const createMessage = document.getElementById(`createMessage`)
 
-let Firebase_URL = "./contacts.json"
+
+let Firebase_URL = "./contacts-test.json"
 
 // mediaQueryForD_none.addEventListener("change", handleResponsiveChange);
 mediaQueryForD_none.addEventListener("change", setInitialView);
 
-function init() {
+async function init() {
   setInitialView()
+  await loadDataBase()
+  createContactList()
 }
 
-
-async function loadingContacs() {
-    
-    try{
-        const response = await fetch(Firebase_URL)
-
-        if (!response.ok) {
-            throw new Error(`HTTP error! status: ${response.status}`);
-        }
-        
-        const ResponseToJson = await response.json();
-
-        let fetchdData = {};
-        
-        if (ResponseToJson && typeof ResponseToJson === "object") {
-      for (const [id, todoData] of Object.entries(ResponseToJson)) {
-        fetchdData[id] = { id, ...todoData };
-      }
-    }
-
-        console.log("fetchData:", fetchdData);
-        return fetchdData;
-    }catch (error) {
-    console.error("Error loading todos:", error);
-    return {};
-  }
-
-
-}
 
 
 async function loadDataBase() {
@@ -92,6 +67,36 @@ async function loadDataBase() {
   }
 }
 
+async function createContactList() {
+  const array = getContactArray();
+  if (!array.length) {
+    contactListDiv.innerHTML =
+      NoContacts();
+    return;
+  }
+  let last
+  let html = "";
+  let needsAUpdate = false;
+
+  array.forEach((contact) => {
+    if (!contact.initials) {
+      contact.initials = getInitials(contact.name);
+      needsAUpdate = true;
+    }
+    const first = contact.name ? contact.name.charAt(0).toUpperCase() : "#";
+    const show = first !== last;
+    if (show) last = first;
+    html += CreateContactItemHTML(contact, contact.color, show);
+  });
+
+  contactListDiv.innerHTML = html;
+  if (needsAUpdate) {
+    console.log("Geupdatet");
+    
+    // await pushContactsToAPI();
+  }
+}
+
 
 function getContactArray() {
   if (!fetchedData || !Object.keys(fetchedData).length) {
@@ -111,6 +116,25 @@ function getContactArray() {
   return sortedContacts;
 }
 
+function CreateContactItemHTML(contact, color, showAlphabet) {
+  const contactColor = contact.color;
+  const initials = contact.initials;
+  const firstLetter = contact.name ? contact.name.charAt(0).toUpperCase() : "#";
+  const alphabetHeader = showAlphabet
+    ? `<h3 class="contact-alphabet">${firstLetter}</h3><div class="contact-seperator"></div>`
+    : "";
+  return contactListTemplate(
+    contact.name,
+    contact.email,
+    contactColor,
+    initials,
+    alphabetHeader,
+  );
+}
+
+function renderContactDetails() {
+  
+}
 
 function popupMessage(message) {
   createMessage.textContent = `${message}`;
@@ -126,18 +150,6 @@ function popupMessage(message) {
     }, 510);
   }, 2100);
 }
-
-// function handleResponsiveChange(e) {
-//   if (!e.matches) {
-//     // Desktop → beide sichtbar (oder dein Standardzustand)
-//     contactInfoSec.classList.remove("d_none");
-//     contactListSec.classList.remove("d_none");
-//   } else {
-//     // Mobile → Standardzustand festlegen
-//     contactInfoSec.classList.add("d_none"); // z.B. erstmal verstecken
-//     contactListSec.classList.remove("d_none");
-//   }
-// }
 
 
 
@@ -160,7 +172,6 @@ editToolmobileButton.addEventListener("click", (e) => {
 document.addEventListener("click", () => {
   editDialogBox.classList.add("d_none");
 });
-
 
 
 

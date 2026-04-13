@@ -42,7 +42,7 @@ main{
     justify-content: flex-start;
     align-items: flex-start;
     margin-right: 24px;
-    height: 100%;
+    height: calc(100vh - 96px);
     /* background-color: #ffffff; */
     box-shadow: 4px 0 6px 0 rgba(0, 0, 0, 0.08);
     padding: 24px 26px;
