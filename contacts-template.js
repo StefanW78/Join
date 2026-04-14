@@ -2,7 +2,7 @@ function contactListTemplate( name, email, color, initials, alphabetHeader) {
     return`
           <div class="contact-list-items">
                                 ${alphabetHeader}
-                                <div class="contact-container" onclick="openContactDetails()">
+                                <div class="contact-container" onclick="renderContactDetails(event)">
                                     <div class="contact-badge" id="contact-badge" style="background-color: ${color}">
                                         ${initials}
                                     </div>
@@ -23,7 +23,7 @@ function NoContacts() {
     `
 }
 
-function contactDetailsTemplate(name, initials, color, email, phone) {
+function contactDetailsTemplate(name, email, phone, color, initials) {
     return`
     <div class="contact-header" id="contact-header">
                                 <div class="contact-baged" id="contact-symbol" style="background-color: ${color}">

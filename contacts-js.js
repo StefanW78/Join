@@ -132,8 +132,69 @@ function CreateContactItemHTML(contact, color, showAlphabet) {
   );
 }
 
-function renderContactDetails() {
-  
+function renderContactDetails(event) {
+  const contactData = getContactDataFromDOM(event)
+  if (!contactData) return;
+  const foundContact = findContact(
+    contactData.contactName,
+    contactData.contactEmail,
+  );
+  if (foundContact) {
+    renderFloatingCard(foundContact, contactData.contactColor);
+  } else {
+    console.error(
+      "Contact not found:",
+      contactData.contactName,
+      contactData.contactEmail,
+    );
+    // container.innerHTML = "<h2>Contact not found</h2>";
+    // container.classList.remove("d-none");
+    // // Force reflow to ensure animation triggers
+    // container.offsetHeight;
+    // container.classList.remove("slide-out");
+    // container.classList.add("slide-in");
+  }
+
+}
+
+function getContactDataFromDOM(event) {
+  const clicked = event.target.closest(".contact-container");
+  if (!clicked) {
+    console.warn("No contact-container found");
+    return null;
+  }
+  const badge = clicked.querySelector(".contact-badge");
+  const contactColor = badge ? badge.style.backgroundColor : null;
+  const nameElement = clicked.querySelector(".contactName");
+  const emailElement = clicked.querySelector(".contactEmail");
+  const contactName = nameElement ? nameElement.textContent.trim() : "";
+  const contactEmail = emailElement ? emailElement.textContent.trim() : "";
+  if (!contactName || !contactEmail) {
+    console.error("Contact data missing");
+    return null;
+  }
+  return { contactName, contactEmail, contactColor };
+}
+
+function findContact(contactName, contactEmail) {
+  if (!fetchedData || typeof fetchedData !== "object") return null;
+  for (const [id, data] of Object.entries(fetchedData)) {
+    if (data.name === contactName && data.email === contactEmail) {
+      return data;
+    }
+  }
+  return null;
+}
+
+function renderFloatingCard(foundContact) {
+  contactDetailDiv.innerHTML = contactDetailsTemplate(
+    foundContact.name,
+    foundContact.email,
+    foundContact.phone,
+    foundContact.color,
+    foundContact.initials,
+  );
+    openContactDetails()
 }
 
 function popupMessage(message) {
@@ -173,7 +234,27 @@ document.addEventListener("click", () => {
   editDialogBox.classList.add("d_none");
 });
 
+function OpenMobileDialogForDetails() {
+  editDialogBox.classList.toggle("d_none");
+}
 
+
+function checkQueriesForEditTools() {
+  const editToolEls = document.getElementById("contact-edit-tools");
+  if (!editToolEls) return;
+  editToolEls.removeEventListener("click", handleEditToolClick);
+  editToolEls.addEventListener("click", handleEditToolClick);
+}
+
+function handleEditToolClick(event) {
+  event.stopPropagation();
+  const editToolEls = document.getElementById("contact-edit-tools");
+  if (!editToolEls) return;
+  const checkquery = window.matchMedia("(max-width: 991px)");
+  if (checkquery.matches) {
+    openEditMenuDialog();
+  }
+}
 
 
 // Zum testen 
