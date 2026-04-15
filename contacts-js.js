@@ -9,7 +9,6 @@ let contactHeader = document.getElementById(`contact-header`)
 let contactSymbol = document.getElementById(`contact-symbol`)
 let contactTextDiv = document.getElementById(`contact-text`)
 let contactNameDiv = document.getElementById(`contact-name`)
-let contactToolsDiv = document.getElementById(`contact-edit-tools`)
 let addContactOverlay = document.getElementById(`add-contact-overlay`)
 let editContactOverlay = document.getElementById(`edit-contact-overlay`)
 let editContactPopup = document.getElementById(`edit-contact-popup`)
@@ -23,7 +22,6 @@ let contactDetailDiv = document.getElementById(`contacts-infos`)
 const mediaQuery2 = window.matchMedia("(max-width: 1092px)");
 const mediaQueryForD_none = window.matchMedia("(max-width: 864px)")
 const editToolmobileButton = document.getElementById(`contact-edit-tools`)
-const editDialogBox = document.getElementById(`edit-menu-dialog`)
 const createMessage = document.getElementById(`createMessage`)
 
 
@@ -194,7 +192,9 @@ function renderFloatingCard(foundContact) {
     foundContact.color,
     foundContact.initials,
   );
-    openContactDetails()
+    openContactDetails();
+
+    checkQueriesForEditTools()
 }
 
 function popupMessage(message) {
@@ -214,45 +214,57 @@ function popupMessage(message) {
 
 
 
-mediaQuery2.addEventListener("change", (e) => {
-  if (e.matches) {
-    // Mobile
-    editDialogBox.classList.add("d_none");
-  } else {
-    // Desktop
-    editDialogBox.classList.add("d_none");
-  }
-});
+// mediaQuery2.addEventListener("change", (e) => {
+//   if (e.matches) {
+//     // Mobile
+//     editDialogBox.classList.add("d_none");
+//   } else {
+//     // Desktop
+//     editDialogBox.classList.add("d_none");
+//   }
+// });
 
+// Für Spätere Tests 
 
-editToolmobileButton.addEventListener("click", (e) => {
-  editDialogBox.classList.toggle("d_none");
-  e.stopPropagation(); // verhindert, dass der Klick weiter hoch bubbelt
-});
+// document.addEventListener("click", (event) => {
+//   if (event.target.matches(".edit-button")) {
+//     OpenMobileDialogForDetails();
+//   }
+// });
+
+// Für Spätere Tests 
 
 document.addEventListener("click", () => {
+  const editDialogBox = document.getElementById("edit-menu-dialog");
   editDialogBox.classList.add("d_none");
 });
 
 function OpenMobileDialogForDetails() {
+  const editDialogBox = document.getElementById("edit-menu-dialog");
+
+  if (!editDialogBox) {
+    console.error("Element #edit-menu-dialog nicht gefunden!");
+    return;
+  }
+
   editDialogBox.classList.toggle("d_none");
 }
-
 
 function checkQueriesForEditTools() {
   const editToolEls = document.getElementById("contact-edit-tools");
   if (!editToolEls) return;
   editToolEls.removeEventListener("click", handleEditToolClick);
   editToolEls.addEventListener("click", handleEditToolClick);
+
 }
 
 function handleEditToolClick(event) {
   event.stopPropagation();
   const editToolEls = document.getElementById("contact-edit-tools");
   if (!editToolEls) return;
-  const checkquery = window.matchMedia("(max-width: 991px)");
+  const checkquery = window.matchMedia("(max-width: 860px)");
   if (checkquery.matches) {
-    openEditMenuDialog();
+    OpenMobileDialogForDetails();
   }
 }
 
