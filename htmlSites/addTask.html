@@ -1,0 +1,201 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Add Task</title>
+    <link rel="stylesheet" href="/layout.css" />
+    <link rel="stylesheet" href="/layoutMobile.css" />
+    <link rel="stylesheet" href="../style/addTask.css" />
+    <link rel="stylesheet" href="../style/addTaskMobile.css" />
+    <link rel="icon" href="../assets/img/Capa 2.svg" />
+  </head>
+  <body>
+    <div class="mainContainer">
+      <aside class="sidebar">
+        <div class="sidebarTop">
+          <img
+            class="joinLogo"
+            src="../assets/img/join-logo.svg"
+            alt="Join Logo"
+          />
+
+          <nav class="mainNav">
+            <a href="#" class="navLink">
+              <img src="../assets/img/summary-icon.svg" alt="summary icon" />
+              <span>Summary</span>
+            </a>
+
+            <a href="#" class="navLink activeNavLink">
+              <img src="../assets/img/addTask-icon.svg" alt="add task icon" />
+              <span>Add Task</span>
+            </a>
+
+            <a href="#" class="navLink">
+              <img src="../assets/img/board-icon.svg" alt="board icon" />
+              <span>Board</span>
+            </a>
+
+            <a href="#" class="navLink">
+              <img src="../assets/img/contacts-icon.svg" alt="contacts icon" />
+              <span>Contacts</span>
+            </a>
+          </nav>
+        </div>
+
+        <div class="sidebarBottom">
+          <a href="#" class="footerLink">Privacy Policy</a>
+          <a href="#" class="footerLink">Legal notice</a>
+        </div>
+      </aside>
+
+      <div class="mainContentArea">
+        <header class="header">
+          <img
+            class="mobileJoinLogo"
+            src="../assets/img/Logo-logged-in-mobile.svg"
+            alt="Join Logo"
+          />
+
+          <p class="headlineText">Kanban Project Management Tool</p>
+
+          <div class="headerRight">
+            <img
+              class="helpIcon"
+              src="../assets/img/help-icon.svg"
+              alt="Help Icon"
+            />
+            <img
+              class="userProfileSvg"
+              src="../assets/img/user profile default.svg"
+              alt="User Profile svg"
+            />
+          </div>
+        </header>
+
+        <main class="content">
+          <section class="addTaskContent">
+            <h1 class="addTaskTitle">Add Task</h1>
+
+            <form class="taskForm">
+              <div class="formGrid">
+                <div class="formColumn">
+                  <div class="formGroup">
+                    <label for="taskTitle">Title<span class="required">*</span></label>
+                    <input
+                      id="taskTitle"
+                      type="text"
+                      placeholder="Enter a title"
+                    />
+                  </div>
+
+                  <div class="formGroup">
+                    <label for="taskDescription">Description</label>
+                    <textarea
+                      id="taskDescription"
+                      placeholder="Enter a Description"
+                    ></textarea>
+                  </div>
+
+                  <div class="formGroup">
+                    <label for="taskDate">Due date<span class="required">*</span></label>
+                    <div class="inputWithIcon">
+                      <input id="taskDate" type="date" />
+                      <img
+                        src="../assets/img/calendar-icon.svg"
+                        alt="calendar icon"
+                      />
+                    </div>
+                  </div>
+                </div>
+
+                <div class="formDivider"></div>
+
+                <div class="formColumn">
+                  <div class="formGroup">
+                    <label>Priority</label>
+
+                    <div class="priorityButtons">
+                      <button type="button" class="priorityBtn urgentBtn">
+                        <span>Urgent</span>
+                        <img src="../assets/img/PrioDown-icon.svg" alt="urgent" />
+                      </button>
+
+                      <button type="button" class="priorityBtn mediumBtn activePriority">
+                        <span>Medium</span>
+                        <img src="../assets/img/PrioMedium-icon.svg" alt="medium" />
+                      </button>
+
+                      <button type="button" class="priorityBtn lowBtn">
+                        <span>Low</span>
+                        <img src="../assets/img/PrioUP-icon.svg" alt="low" />
+                      </button>
+                    </div>
+                  </div>
+
+                  <div class="formGroup">
+                    <label for="assignedTo">Assigned to</label>
+                    <select id="assignedTo">
+                      <option>Select contacts to assign</option>
+                    </select>
+                  </div>
+
+                  <div class="formGroup">
+                    <label for="category">Category<span class="required">*</span></label>
+                    <select id="category">
+                      <option>Select task category</option>
+                    </select>
+                  </div>
+
+                  <div class="formGroup">
+                    <label for="subtasks">Subtasks</label>
+                    <input
+                      id="subtasks"
+                      type="text"
+                      placeholder="Add new subtask"
+                    />
+                  </div>
+                </div>
+              </div>
+
+              <div class="taskFooter">
+                <p class="requiredText">
+                  <span class="required">*</span>This field is required
+                </p>
+
+                <div class="taskActions">
+                  <button type="reset" class="clearBtn">Clear ✕</button>
+                  <button type="submit" class="createTaskBtn">
+                    Create Task ✓
+                  </button>
+                </div>
+              </div>
+            </form>
+          </section>
+        </main>
+      </div>
+    </div>
+
+    <nav class="mobileBottomNav">
+      <a href="#" class="mobileNavLink">
+        <img src="../assets/img/summary-icon.svg" alt="Summary" />
+        <span>Summary</span>
+      </a>
+
+      <a href="#" class="mobileNavLink activeMobileNavLink">
+        <img src="../assets/img/addTask-icon.svg" alt="Add Task" />
+        <span>Add Task</span>
+      </a>
+
+      <a href="#" class="mobileNavLink">
+        <img src="../assets/img/board-icon.svg" alt="Board" />
+        <span>Board</span>
+      </a>
+
+      <a href="#" class="mobileNavLink">
+        <img src="../assets/img/contacts-icon.svg" alt="Contacts" />
+        <span>Contacts</span>
+      </a>
+    </nav>
+  </body>
+</html>
