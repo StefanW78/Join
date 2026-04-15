@@ -1,0 +1,338 @@
+
+    /* ===== RESET ===== */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      display: flex;
+      height: 100vh;
+      font-family: 'Segoe UI', Arial, sans-serif;
+      font-size: 14px;
+      overflow: hidden;
+    }
+ 
+    /* ===== SIDEBAR ===== */
+    .sidebar {
+      display: flex;
+      flex-direction: column;
+      width: 232px;
+      min-width: 232px;
+      background: #2b3a4e;
+      color: #fff;
+    }
+ 
+    /* --- Logo --- */
+    .logo-area {
+      padding: 28px 24px 48px 24px;
+    }
+ 
+    /*
+      LOGO PLATZHALTER
+      Ersetze den gesamten <div class="logo-placeholder"> Block
+      durch dein <img src="logo.png" alt="Logo" />
+    */
+    .logo-placeholder {
+      display: flex;
+      flex-direction: row;
+      align-items: flex-end;
+      line-height: 1;
+      gap: 0;
+    }
+    .logo-j-wrap {
+      position: relative;
+      width: 62px;
+      height: 72px;
+    }
+    .logo-j-wrap .blue-sq {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 22px;
+      height: 22px;
+      background: #29abe2;
+    }
+    .logo-j-wrap .white-sq {
+      position: absolute;
+      top: 4px;
+      left: 18px;
+      width: 14px;
+      height: 14px;
+      background: #fff;
+    }
+    .logo-j-wrap .letter-j {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      font-size: 72px;
+      font-weight: 800;
+      color: #fff;
+      line-height: 1;
+    }
+    .logo-oin {
+      font-size: 20px;
+      font-weight: 700;
+      color: #fff;
+      padding-bottom: 8px;
+      margin-left: 2px;
+    }
+ 
+    /* --- Nav --- */
+    .nav {
+      display: flex;
+      flex-direction: column;
+    }
+ 
+    .nav-item {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      padding: 13px 24px;
+      color: #b0bec8;
+      text-decoration: none;
+      font-size: 14px;
+      font-weight: 500;
+      /* transition: background .15s, color .15s; */
+    }
+    .nav-item svg {
+      width: 19px;
+      height: 19px;
+      flex-shrink: 0;
+      stroke: currentColor;
+      fill: none;
+      stroke-width: 1.8;
+    }
+    .nav-item:hover {
+      background: rgba(255,255,255,.07);
+      color: #fff;
+    }
+    .nav-item.active {
+      background: #1e2c3d;
+      color: #fff;
+    }
+ 
+    /* --- Sidebar Footer --- */
+    .sidebar-footer {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      margin-top: auto;
+      padding: 28px 24px;
+    }
+    .sidebar-footer a {
+      color: #7a8f9e;
+      text-decoration: none;
+      font-size: 12px;
+    }
+    .sidebar-footer a:hover { color: #fff; }
+ 
+    /* ===== MAIN WRAPPER ===== */
+    .main-wrapper {
+      display: flex;
+      flex-direction: column;
+      flex: 1;
+      overflow: hidden;
+    }
+ 
+    /* ===== HEADER ===== */
+    .header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 38px;
+      height: 64px;
+      background: #fff;
+      border-bottom: 1px solid #dde3ea;
+      flex-shrink: 0;
+      height: 100px;
+    }
+ 
+    .header-title {
+      font-size: 20px;
+      font-weight: 400;
+      color: #1e2c3d;
+    }
+ 
+    .header-actions {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+    }
+ 
+    .icon-btn {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 34px;
+      height: 34px;
+      border-radius: 50%;
+      border: 1.5px solid #b0bec8;
+      background: none;
+      cursor: pointer;
+      font-size: 16px;
+      font-weight: 600;
+      color: #5a6a78;
+      line-height: 1;
+    }
+    .icon-btn:hover { background: #f0f4f7; }
+ 
+    .avatar {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      border: 2px solid #29abe2;
+      color: #29abe2;
+      font-weight: 700;
+      font-size: 13px;
+      letter-spacing: .5px;
+      background: #fff;
+    }
+ 
+    /* ===== CONTENT ===== */
+    .content {
+      flex: 1;
+      background: #f0f2f5;
+      overflow: auto;
+      padding: 38px;
+    }
+ 
+    /* ===== BOARD ===== */
+    .board-header {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      margin-bottom: 28px;
+      flex-wrap: wrap;
+    }
+    .board-title { font-size: 40px; font-weight: 800; color: #1e2c3d; flex: 1; }
+ 
+    .search-box {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      background: #fff;
+      border: 1.5px solid #c8d2db;
+      border-radius: 8px;
+      padding: 8px 14px;
+    }
+    .search-box input { border: none; outline: none; font-size: 14px; color: #1e2c3d; width: 180px; }
+    .search-box svg { width: 16px; height: 16px; stroke: #8898a8; fill: none; flex-shrink: 0; }
+ 
+    .btn-add-task {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      background: #1e2c3d;
+      color: #fff;
+      border: none;
+      border-radius: 8px;
+      padding: 10px 20px;
+      font-size: 15px;
+      font-weight: 600;
+      cursor: pointer;
+    }
+    .btn-add-task:hover { background: #29abe2; }
+ 
+    /* Columns */
+    .board-columns {
+      display: flex;
+      gap: 20px;
+      align-items: flex-start;
+      flex-wrap: wrap;
+    }
+    .column { 
+        display: flex; 
+        flex-direction: column; 
+        flex: 1; 
+        /* min-width: 200px;  */
+        gap: 12px; }
+ 
+    .column-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      font-size: 15px;
+      font-weight: 600;
+      color: #1e2c3d;
+    }
+    .column-header button {
+      display: flex; align-items: center; justify-content: center;
+      width: 26px; height: 26px;
+      border: 1.5px solid #c8d2db;
+      border-radius: 6px;
+      background: none;
+      cursor: pointer;
+      font-size: 18px;
+      color: #5a6a78;
+      line-height: 1;
+    }
+ 
+    /* Empty state */
+    .empty-card {
+      background: #e4e8ed;
+      border-radius: 10px;
+      padding: 18px;
+      text-align: center;
+      color: #8898a8;
+      font-size: 13px;
+    }
+ 
+    /* Task Card */
+    .card {
+      background: #fff;
+      border-radius: 12px;
+      padding: 16px;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      box-shadow: 0 2px 6px rgba(0,0,0,.06);
+      /* width: 268px; */
+    }
+    .tag {
+      display: inline-block;
+      border-radius: 6px;
+      padding: 4px 12px;
+      font-size: 12px;
+      font-weight: 600;
+      color: #fff;
+      width: fit-content;
+    }
+
+
+    /* Test Card */
+
+    .tag-blue    { background: #0038ff; }
+    .tag-teal    { background: #1fbcb4; }
+ 
+    .card-title  { font-size: 14px; font-weight: 700; color: #1e2c3d; }
+    .card-desc   { font-size: 12px; color: #8898a8; line-height: 1.5; }
+ 
+    .card-footer { display: flex; align-items: center; justify-content: space-between; }
+ 
+    .subtasks { display: flex; flex-direction: column; gap: 4px; font-size: 12px; color: #5a6a78; }
+    .progress-bar { height: 6px; background: #e4e8ed; border-radius: 4px; }
+    .progress-fill { height: 100%; border-radius: 4px; background: #29abe2; }
+ 
+    .avatars { display: flex; }
+    .av {
+      width: 30px; height: 30px; border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 11px; font-weight: 700; color: #fff;
+      border: 2px solid #fff;
+      margin-left: -8px;
+    }
+
+
+    /* Test Card Farben */
+    .avatars .av:first-child { margin-left: 0; }
+    .av-orange { background: #ff7a00; }
+    .av-purple { background: #9747ff; }
+    .av-teal   { background: #1fbcb4; }
+ 
+    .priority svg { width: 18px; height: 18px; }
+    .prio-medium { color: #ffa800; }
+    .prio-low    { color: #7ab648; }
+    .prio-urgent { color: #e74c3c; }
+ 
+
+
