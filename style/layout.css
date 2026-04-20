@@ -1,0 +1,9 @@
+* {
+  font-family: "Comic_Relief", sans-serif;
+  box-sizing: border-box;
+  scroll-behavior: smooth;
+}
+
+body {
+    margin: 0;
+}

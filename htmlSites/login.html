@@ -1,0 +1,82 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Log in</title>
+    <link rel="stylesheet" href="../style/layout.css" />
+    <link rel="stylesheet" href="../style/authSignupLogin.css" />
+    <link rel="stylesheet" href="../style/authMobilSignUpLogin.css" />
+    <link rel="icon" href="../assets/img/Capa 2.svg" />
+  </head>
+  <body>
+    <main class="authPage">
+      <header class="authTopbar">
+        <img
+          class="authLogo"
+          src="../assets/img/Capa 2.svg"
+          alt="Join Logo"
+        />
+
+        <div class="authTopbarRight">
+          <span class="authTopbarText">Not a Join user?</span>
+          <a href="./signup.html" class="smallPrimaryBtn">Sign up</a>
+        </div>
+      </header>
+
+      <section class="authCenter">
+        <div class="authCard loginCard">
+          <h1 class="authTitle">Log in</h1>
+          <div class="authUnderline"></div>
+
+          <form class="authForm">
+            <div class="authInputWrapper">
+              <input
+                class="authInput"
+                type="email"
+                placeholder="Email"
+                required
+              />
+              <img
+                class="authInputIcon"
+                src="../assets/img/add-contact-mail-icon.svg"
+                alt="Email Icon"
+              />
+            </div>
+
+            <div class="authInputWrapper">
+              <input
+                class="authInput"
+                type="password"
+                placeholder="Password"
+                required
+              />
+              <img
+                class="authInputIcon"
+                src="../assets/img/lock.svg"
+                alt="Password Icon"
+              />
+            </div>
+
+            <div class="authButtonRow">
+              <button type="submit" class="primaryAuthBtn">Log in</button>
+              <button type="button" class="secondaryAuthBtn">
+                Guest Log in
+              </button>
+            </div>
+          </form>
+        </div>
+      </section>
+
+      <div class="mobileSignupPrompt">
+        <span class="authTopbarText">Not a Join user?</span>
+        <a href="./signup.html" class="smallPrimaryBtn">Sign up</a>
+      </div>
+
+      <footer class="authFooter">
+        <a href="./privacy.html">Privacy Policy</a>
+        <a href="./legalNotice.html">Legal notice</a>
+      </footer>
+    </main>
+  </body>
+</html>

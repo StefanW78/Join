@@ -1,0 +1,242 @@
+@media (max-width: 768px) {
+  .authPage {
+    min-height: 100vh;
+    padding: 24px 16px 24px;
+    display: flex;
+    flex-direction: column;
+    overflow-x: hidden;
+  }
+
+  .authTopbar {
+    min-height: auto;
+    align-items: flex-start;
+    margin-bottom: 32px;
+  }
+
+  .authLogo {
+    width: 64px;
+    height: auto;
+  }
+
+  .authTopbarRight {
+    display: none;
+  }
+
+  .authCenter {
+    flex: 0;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+  }
+
+  .authCard {
+    width: 100%;
+    max-width: 396px;
+    border-radius: 30px;
+    padding: 32px 16px;
+  }
+
+  .loginCard,
+  .signupCard {
+    max-width: 396px;
+  }
+
+  .authTitle {
+    font-size: 47px;
+    line-height: 1.2;
+  }
+
+  .authUnderline {
+    width: 90px;
+    margin: 12px auto 24px;
+  }
+
+  .authForm {
+    gap: 16px;
+  }
+
+  .authInputWrapper {
+    width: 100%;
+    max-width: 100%;
+  }
+
+  .authInput {
+    height: 48px;
+    font-size: 16px;
+    padding: 0 44px 0 16px;
+  }
+
+  .authInputIcon {
+    width: 18px;
+    height: 18px;
+    right: 14px;
+  }
+
+  .authButtonRow {
+    width: 100%;
+    flex-direction: column;
+    align-items: center;
+    gap: 16px;
+    margin-top: 8px;
+  }
+
+  .primaryAuthBtn,
+  .secondaryAuthBtn {
+    width: 180px;
+    height: 51px;
+    font-size: 16px;
+    padding: 0 16px;
+  }
+
+  .signupHeaderRow {
+    justify-content: center;
+    margin-bottom: 8px;
+  }
+
+  .authBackArrow {
+    left: 0;
+    top: 6px;
+  }
+
+  .authBackArrow img {
+    width: 24px;
+    height: 24px;
+  }
+
+  .authCheckboxRow {
+    width: 100%;
+    justify-content: center;
+    font-size: 14px;
+    gap: 8px;
+    margin-top: 8px;
+    text-align: center;
+    flex-wrap: wrap;
+  }
+
+  .signupButtonRow {
+    margin-top: 8px;
+  }
+
+  .signupButtonRow .primaryAuthBtn {
+    width: 180px;
+  }
+
+  .mobileSignupPrompt {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 24px;
+    margin-top: 32px;
+  }
+
+  .mobileSignupPrompt .authTopbarText {
+    font-size: 20px;
+  }
+
+  .mobileSignupPrompt .smallPrimaryBtn {
+    height: 48px;
+    padding: 0 16px;
+    font-size: 16px;
+  }
+
+  .authFooter {
+    justify-content: center;
+    gap: 24px;
+    padding-top: 32px;
+    margin-top: auto;
+  }
+
+  .authFooter a {
+    font-size: 14px;
+  }
+}
+
+@media (max-width: 428px) {
+  .authPage {
+    padding: 24px 16px;
+  }
+
+  .authCard {
+    max-width: 100%;
+    padding: 32px 16px;
+  }
+
+  .authTitle {
+    font-size: 47px;
+  }
+
+  .primaryAuthBtn,
+  .secondaryAuthBtn {
+    width: 180px;
+  }
+
+  .mobileSignupPrompt {
+    gap: 20px;
+  }
+
+  .mobileSignupPrompt .authTopbarText {
+    font-size: 20px;
+  }
+}
+
+@media (max-width: 350px) {
+  .authPage {
+    padding: 20px 12px;
+  }
+
+  .authLogo {
+    width: 56px;
+  }
+
+  .authCard {
+    padding: 24px 12px;
+    border-radius: 24px;
+  }
+
+  .authTitle {
+    font-size: 40px;
+  }
+
+  .authUnderline {
+    width: 72px;
+    margin: 10px auto 20px;
+  }
+
+  .authInput {
+    font-size: 16px;
+    padding: 0 40px 0 12px;
+  }
+
+  .authInputIcon {
+    width: 16px;
+    height: 16px;
+    right: 12px;
+  }
+
+  .primaryAuthBtn,
+  .secondaryAuthBtn {
+    width: 100%;
+    max-width: 180px;
+    font-size: 16px;
+  }
+
+  .mobileSignupPrompt {
+    flex-direction: column;
+    gap: 12px;
+    margin-top: 24px;
+  }
+
+  .mobileSignupPrompt .authTopbarText {
+    font-size: 18px;
+  }
+
+  .authFooter {
+    gap: 16px;
+    flex-wrap: wrap;
+    padding-top: 24px;
+  }
+
+  .authFooter a {
+    font-size: 13px;
+  }
+}
