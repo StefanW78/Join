@@ -12,21 +12,14 @@
   <body>
     <main class="authPage">
       <header class="authTopbar signupTopbar">
-        <img
-          class="authLogo"
-          src="../assets/img/Capa 2.svg"
-          alt="Join Logo"
-        />
+        <img class="authLogo" src="../assets/img/Capa 2.svg" alt="Join Logo" />
       </header>
 
       <section class="authCenter">
         <div class="authCard signupCard">
           <div class="signupHeaderRow">
             <a href="./login.html" class="authBackArrow" aria-label="Zurück">
-              <img
-                src="../assets/img/arrow-left-line.svg"
-                alt="Back Arrow"
-              />
+              <img src="../assets/img/arrow-left-line.svg" alt="Back Arrow" />
             </a>
 
             <div class="signupTitleWrapper">
@@ -35,10 +28,11 @@
             </div>
           </div>
 
-          <form class="authForm">
+          <form class="authForm" id="signupForm">
             <div class="authInputWrapper">
               <input
                 class="authInput"
+                id="signupName"
                 type="text"
                 placeholder="Name"
                 required
@@ -53,6 +47,7 @@
             <div class="authInputWrapper">
               <input
                 class="authInput"
+                id="signupEmail"
                 type="email"
                 placeholder="Email"
                 required
@@ -67,6 +62,7 @@
             <div class="authInputWrapper">
               <input
                 class="authInput"
+                id="signupPassword"
                 type="password"
                 placeholder="Password"
                 required
@@ -81,6 +77,7 @@
             <div class="authInputWrapper">
               <input
                 class="authInput"
+                id="signupConfirmPassword"
                 type="password"
                 placeholder="Confirm Password"
                 required
@@ -93,7 +90,7 @@
             </div>
 
             <label class="authCheckboxRow">
-              <input type="checkbox" required />
+              <input id="signupPrivacy" type="checkbox" required />
               <span>
                 I accept the <a href="./privacy.html">Privacy policy</a>
               </span>
@@ -103,6 +100,8 @@
               <button type="submit" class="primaryAuthBtn">Sign up</button>
             </div>
           </form>
+          <p id="signupError" class="authMessage authError"></p>
+          <p id="signupSuccess" class="authMessage authSuccess"></p>
         </div>
       </section>
 
@@ -111,5 +110,6 @@
         <a href="./legalNotice.html">Legal notice</a>
       </footer>
     </main>
+    <script type="module" src="../scripts/signup.js"></script>
   </body>
 </html>

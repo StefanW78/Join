@@ -29,10 +29,11 @@
           <h1 class="authTitle">Log in</h1>
           <div class="authUnderline"></div>
 
-          <form class="authForm">
+          <form class="authForm" id="loginForm">
             <div class="authInputWrapper">
               <input
                 class="authInput"
+                id="loginEmail"
                 type="email"
                 placeholder="Email"
                 required
@@ -47,6 +48,7 @@
             <div class="authInputWrapper">
               <input
                 class="authInput"
+                id="loginPassword"
                 type="password"
                 placeholder="Password"
                 required
@@ -60,11 +62,13 @@
 
             <div class="authButtonRow">
               <button type="submit" class="primaryAuthBtn">Log in</button>
-              <button type="button" class="secondaryAuthBtn">
+              <button type="button" class="secondaryAuthBtn" id="guestLoginBtn">
                 Guest Log in
               </button>
             </div>
           </form>
+          <p id="loginError" class="authMessage authError"></p>
+
         </div>
       </section>
 
@@ -72,11 +76,12 @@
         <span class="authTopbarText">Not a Join user?</span>
         <a href="./signup.html" class="smallPrimaryBtn">Sign up</a>
       </div>
-
       <footer class="authFooter">
         <a href="./privacy.html">Privacy Policy</a>
         <a href="./legalNotice.html">Legal notice</a>
       </footer>
+
+      <script type="module" src="../scripts/login.js" ></script>
     </main>
   </body>
 </html>

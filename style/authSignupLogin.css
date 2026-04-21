@@ -219,3 +219,19 @@
 .mobileSignupPrompt {
   display: none;
 }
+
+.authMessage {
+  width: 100%;
+  max-width: 422px;
+  margin: -8px auto 0;
+  font-size: 14px;
+  text-align: center;
+}
+
+.authError {
+  color: #ff8190;
+}
+
+.authSuccess {
+  color: #29abe2;
+}
