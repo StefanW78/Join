@@ -1,56 +1,54 @@
-import { requireAuth } from "./guard.js";
 
-requireAuth();
 
-import { requireAuth } from "./guard.js";
-import { createTask } from "./tasks.js";
+import { db } from "./firebase.js";
 
-requireAuth();
+import {
+  collection,
+  addDoc,
+} from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
 
-const taskForm = document.querySelector(".taskForm");
+import { observeAuthState } from "./auth.js";
 
-let selectedPriority = "medium";
+const taskForm = document.getElementById("taskForm");
+const taskTitle = document.getElementById("taskTitle");
+const taskDescription = document.getElementById("taskDescription");
+const taskDate = document.getElementById("taskDate");
+const taskCategory = document.getElementById("category");
+
+let currentUser = null;
+
+observeAuthState((user) => {
+  currentUser = user;
+  console.log("Aktueller User:", user);
+});
 
 taskForm.addEventListener("submit", async (event) => {
   event.preventDefault();
 
-  const title = document.getElementById("taskTitle").value.trim();
-  const description = document.getElementById("taskDescription").value.trim();
-  const dueDate = document.getElementById("taskDate").value;
-  const category = document.getElementById("category").value;
-  const assignedTo = [];
-  const subtasks = [];
+  if (!currentUser) {
+    console.error("Kein User eingeloggt!");
+    return;
+  }
+
+  const title = taskTitle.value.trim();
+  const description = taskDescription.value.trim();
+  const dueDate = taskDate.value;
+  const category = taskCategory.value;
+
+  const task = {
+    title,
+    description,
+    dueDate,
+    category,
+    createdBy: currentUser.uid,
+    status: "todo",
+  };
 
   try {
-    await createTask({
-      title,
-      description,
-      dueDate,
-      priority: selectedPriority,
-      assignedTo,
-      category,
-      subtasks,
-      status: "todo",
-    });
-
-    alert("Task erfolgreich erstellt.");
-    taskForm.reset();
-    selectedPriority = "medium";
+    const docRef = await addDoc(collection(db, "tasks"), task);
+    console.log("Task gespeichert mit ID:", docRef.id);
   } catch (error) {
-    console.error(error);
-    alert("Task konnte nicht gespeichert werden.");
+    console.error("Fehler beim Speichern:", error);
   }
 });
 
-const priorityButtons = document.querySelectorAll(".priorityBtn");
-
-priorityButtons.forEach((button) => {
-  button.addEventListener("click", () => {
-    priorityButtons.forEach((btn) => btn.classList.remove("activePriority"));
-    button.classList.add("activePriority");
-
-    if (button.classList.contains("urgentBtn")) selectedPriority = "urgent";
-    if (button.classList.contains("mediumBtn")) selectedPriority = "medium";
-    if (button.classList.contains("lowBtn")) selectedPriority = "low";
-  });
-});
