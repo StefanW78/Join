@@ -10,13 +10,18 @@
     <link rel="icon" href="../assets/img/Capa 2.svg" />
   </head>
   <body>
+    <div id="splashScreen">
+      <div id="splashBackground"></div>
+      <img
+        id="splashLogo"
+        src="../assets/img/Capa 2.svg"
+        alt="Join Logo"
+      />
+    </div>
+
     <main class="authPage">
       <header class="authTopbar">
-        <img
-          class="authLogo"
-          src="../assets/img/Capa 2.svg"
-          alt="Join Logo"
-        />
+        <img class="authLogo" src="../assets/img/Capa 2.svg" alt="Join Logo" />
 
         <div class="authTopbarRight">
           <span class="authTopbarText">Not a Join user?</span>
@@ -68,7 +73,6 @@
             </div>
           </form>
           <p id="loginError" class="authMessage authError"></p>
-
         </div>
       </section>
 
@@ -81,7 +85,7 @@
         <a href="./legalNotice.html">Legal notice</a>
       </footer>
 
-      <script type="module" src="../scripts/login.js" ></script>
+      <script type="module" src="../scripts/login.js"></script>
     </main>
   </body>
 </html>

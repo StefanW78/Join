@@ -1,10 +1,25 @@
 import { loginUser, observeAuthState } from "./auth.js";
 
+const splashScreen = document.getElementById("splashScreen");
+const splashLogo = document.getElementById("splashLogo");
+const authLogo = document.querySelector(".authLogo");
+const splashBackground = document.getElementById("splashBackground");
+
 const loginForm = document.getElementById("loginForm");
 const loginEmail = document.getElementById("loginEmail");
 const loginPassword = document.getElementById("loginPassword");
 const loginError = document.getElementById("loginError");
 const guestLoginBtn = document.getElementById("guestLoginBtn");
+
+window.addEventListener("load", () => {
+  splashLogo.classList.add("animate");
+  splashBackground.classList.add("fadeOut");
+
+  setTimeout(() => {
+    authLogo.classList.add("show");
+    splashScreen.style.display = "none";
+  }, 1500);
+});
 
 loginForm.addEventListener("submit", async (event) => {
   event.preventDefault();

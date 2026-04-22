@@ -1,3 +1,64 @@
+#splashScreen {
+  position: fixed;
+  inset: 0;
+  z-index: 9998;
+  overflow: hidden;
+}
+
+#splashBackground {
+  position: absolute;
+  inset: 0;
+  background-color: white;
+}
+
+#splashBackground.fadeOut {
+  animation: fadeSplash 1s linear forwards;
+  animation-delay: 0.5s;
+}
+
+@keyframes fadeSplash {
+  0% {
+    opacity: 1;
+  }
+
+  50% {
+    opacity: 1;
+  }
+
+  100% {
+    opacity: 0;
+  }
+}
+
+#splashLogo {
+  position: absolute;
+  width: 274px;
+  height: auto;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 1;
+}
+
+#splashLogo.animate {
+  animation: moveLogo 1s ease-in-out forwards;
+  animation-delay: 0.5s;
+}
+
+@keyframes moveLogo {
+  from {
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%) scale(1);
+  }
+
+  to {
+    top: -64px;
+    left: -40px;
+    transform: translate(0, 0) scale(0.37);
+  }
+}
+
 .authPage {
   min-height: 100vh;
   background-color: #f6f7f8;
@@ -20,6 +81,11 @@
 .authLogo {
   width: 100px;
   height: auto;
+  opacity: 0;
+}
+
+.authLogo.show {
+  opacity: 1;
 }
 
 .authTopbarRight {
