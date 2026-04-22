@@ -105,15 +105,15 @@
                                     </div>
                                     <div class="contactForm">
                                         <div class="inputContainer">
-                                            <input type="text" placeholder="Full Name" id="name_input" required onblur="">
+                                            <input type="text" placeholder="Full Name" id="name_input" required onblur="contactNameValidation()">
                                             <img src="./assets/img/add-contact-person-icon.svg" alt="person-icon">
                                         </div>
                                         <div class="inputContainer">
-                                            <input type="email" placeholder="test@hot.de" id="email_input" required onblur="">
+                                            <input type="email" placeholder="test@hot.de" id="email_input" required onblur="contactEmailValidation()">
                                             <img src="./assets/img/add-contact-mail-icon.svg" alt="mail-icon">
                                         </div>
                                         <div class="inputContainer">
-                                            <input type="tel" placeholder="+49 123 4567890" id="phone_input" required onblur="">
+                                            <input type="tel" placeholder="+49 123 4567890" id="phone_input" required onblur="contactPhoneValidation()">
                                             <img src="./assets/img/add-contact-call-icon.svg" alt="call-icon">
                                         </div>
                                         <div class="validationErrorMsg" id="validationErrorMsg"></div>
@@ -121,7 +121,7 @@
                                             <button class="secondary-btn-default-icon" id="cancelBtn" onclick="">Cancel
                                                 <img src="" alt="">
                                             </button>
-                                            <button class="primary-btn-default-icon" id="createContactBtn" onclick="">Create contact
+                                            <button class="primary-btn-default-icon" id="createContactBtn" onclick="addNewContact()">Create contact
                                                 <img src="./assets/img/create-contact-check.svg" alt="">
                                             </button>
                                         </div>

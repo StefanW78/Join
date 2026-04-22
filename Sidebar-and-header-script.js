@@ -1,7 +1,8 @@
 let DropDowncontain = document.getElementById(`dropdown-menu`)
 let dropdownButton = document.getElementById(`header-button`)
 const mediaQuery = window.matchMedia("(max-width: 1092px)");
-localStorage.setItem("username", "Max Musterman");
+//später entfernen
+localStorage.setItem("username", "Dennis Kollak");
 
 
 DropDowncontain.classList.add("d_none");
@@ -28,12 +29,26 @@ document.addEventListener("click", () => {
 function renderInitials() {
   const user = localStorage.getItem("username");
 
-  if (!user) return;
+  if (!dropdownButton) return;
 
-  const initials = user.split(" ").map(w => w[0].toUpperCase()).join("");
+  if (!user) {
+    dropdownButton.innerText = "?";
+    return "?";
+  }
 
-  dropdownButton.innerText = initials;
+  const initials = user
+    .split(" ")
+    .map(w => w[0]?.toUpperCase() || "")
+    .join("");
+
+  const finalInitials = initials || "?";
+
+  dropdownButton.innerText = finalInitials;
+
+  return finalInitials;
 }
+ 
+document.addEventListener("DOMContentLoaded", renderInitials);
 
 
 // Andere variante zum schließen

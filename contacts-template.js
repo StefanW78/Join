@@ -35,22 +35,22 @@ function contactDetailsTemplate(name, email, phone, color, initials) {
                                     </div>
 
                                     <div class="contact-edit-tools" id="contact-edit-tools">
-                                        <div class="edit-delete-component-default" id="edit" onclick="OpenEditDialog()">
+                                        <div class="edit-delete-component-default" id="edit" onclick="renderEditOverlay()">
                                             <img src="" alt="edit-logo">
                                             <span>Edit</span>
                                         </div>
-                                        <div class="edit-delete-component-default" id="delete">
+                                        <div class="edit-delete-component-default" id="delete" onclick="deleteFloatingData(event)">
                                             <img src="./assets/img/delete-contact.svg" alt="delete-logo">
                                             <span>Delete</span>
                                         </div>
                                     </div>
                                     <!-- als Test -->
                                     <div id="edit-menu-dialog" class="edit-menu-dialog d_none">
-                                        <div id="editMobile" class="edit-delete-component-default" onclick="OpenEditDialog()">
+                                        <div id="editMobile" class="edit-delete-component-default" onclick="renderEditOverlay()">
                                             <img src="" alt="">
                                             <span>Edit</span>
                                         </div>
-                                        <div id="deleteMobile" class="edit-delete-component-default">
+                                        <div id="deleteMobile" class="edit-delete-component-default" onclick="deleteFloatingData(event)">
                                             <img src="" alt="">
                                             <span>Delete</span>
                                         </div>
@@ -65,5 +65,57 @@ function contactDetailsTemplate(name, email, phone, color, initials) {
                                 <h4 class="contact-phone" id="contact-phone">Phone</h4>
                                 <span class="span-phone" id="span-phone">${phone}</span>
                             </div>
+    `
+}
+
+function renderEditTemplate(name, email, phone, contactColor, initials) {
+    return`
+                                    <div class="edit-contact-overlay slide-out" id="edit-contact-overlay">
+                                    <div class="edit-contact-overview">
+                                        <div class="join-logo-contact">
+                                            <img src="./assets/img/join-logo-add-contact.svg" alt="logo-join">
+                                        </div>
+                                        <div class="edit-contact-text">
+                                            <h2 class="edit-contact-title">Edit contact</h2>
+                                            <div class="blue-vector">
+                                                <img src="./assets/img/add-contact-blue-vector.svg" alt="seperator">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="edit-contact-container">
+                                        <div class="close-btn" onclick="CloseEditDialog()">
+                                            <img src="./assets/img/add-contact-close-button.svg" alt="close-btn">
+                                        </div>
+                                        <div class="edit-contact-form">
+                                            <div class="contact-badge" style="background-color: ${contactColor}">
+                                                ${initials}
+                                            </div>
+                                            <div class="contactForm">
+                                                <div class="inputContainer">
+                                                    <input type="text" placeholder="name" id="nameInput" value="${name}">
+                                                    <img src="./assets/img/add-contact-person-icon.svg" alt="person-icon">
+                                                </div>
+                                                <div class="inputContainer">
+                                                    <input type="email" placeholder="Email" id="emailInput" value="${email}">
+                                                    <img src="./assets/img/add-contact-mail-icon.svg" alt="mail-icon">
+                                                </div>
+                                                <div class="inputContainer">
+                                                    <input type="tel" placeholder="Phone" id="phoneInput" value="${phone}">
+                                                    <img src="./assets/img/add-contact-call-icon.svg" alt="phone-icon">
+                                                </div>
+                                                <div class="edit-contact-buttons">
+                                                    <button class="secondary-btn-default-icon" id="delete-btn" onclick="deleteContactFromEditOverlay(event)">
+                                                        Delete
+                                                        <img src="" alt="">
+                                                    </button>
+                                                    <button class="primary-btn-default-icon" id="saveContact-btn" onclick="saveEditedContact()">
+                                                        Save
+                                                        <img src="./assets/img/create-contact-check.svg" alt="">
+                                                    </button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
     `
 }
