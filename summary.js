@@ -11,6 +11,7 @@ let SummaryName = document.getElementById(`userName`)
 let SummaryDiv = document.getElementById(`summary-div`)
 let AnimationWelcomePage = document.getElementById(`anima-welcom-page`)
 const SignedUserName = document.getElementById("signedUser");
+
 let Firebase_URL = "./test-databank.json"
 
 
@@ -51,20 +52,28 @@ async function loadTodos() {
 }
 
 async function renderSummary() {
-   
-    renderName();
-    const fetchdData = await loadTodos();
+  renderName();
 
-    const todos = Object.values(fetchdData);
+  const fetchdData = await loadTodos();
+  const todos = Object.values(fetchdData);
 
-    // Zahlen berechnen
+  // Zahlen berechnen
   const totalTodos = todos.length;
   const totalDone = todos.filter(t => t.status === "done").length;
   const totalTodo = todos.filter(t => t.status === "todo").length;
   const totalInProgress = todos.filter(t => t.status === "inProgress").length;
   const totalFeedback = todos.filter(t => t.status === "feedback").length;
   const totalUrgent = todos.filter(t => t.urgent).length;
-  const totalWithDate = todos.filter(t => t.date).length;
+  const nextDeadline = getUpcomingDeadline(todos);
+
+
+  const formattedDeadline = nextDeadline
+    ? nextDeadline.toLocaleDateString("de-DE", {
+        day: "2-digit",
+        month: "2-digit",
+        year: "numeric"
+      })
+    : "No upcoming deadlines";
 
   toDoNumbers.innerText = totalTodo;
   doneNumbers.innerText = totalDone;
@@ -72,18 +81,19 @@ async function renderSummary() {
   totalTasksNumbers.innerText = totalTodos;
   inProgressNumber.innerText = totalInProgress;
   awaitingFeedbackNumber.innerText = totalFeedback;
+  dueDate.innerText = formattedDeadline;
+}
 
-    // // Zahlen in Konsole ausgeben als test
-  // console.log("Summary Zahlen:");
-  // console.log("Total Todos:", totalTodos);
-  // console.log("Done:", totalDone);
-  // console.log("Todo:", totalTodo);
-  // console.log("In Progress:", totalInProgress);
-  // console.log("Awaiting Feedback:", totalFeedback);
-  // console.log("Urgent:", totalUrgent);
-  // console.log("With Date:", totalWithDate);
+function getUpcomingDeadline(todos) {
+  const now = new Date();
 
+  const upcoming = todos
+    .filter(t => t.date)
+    .map(t => new Date(t.date))
+    .filter(date => date >= now)
+    .sort((a, b) => a - b);
 
+  return upcoming.length > 0 ? upcoming[0] : null;
 }
 
 function renderName() {

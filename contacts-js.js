@@ -24,7 +24,7 @@ const mediaQueryForD_none = window.matchMedia("(max-width: 864px)")
 const editToolmobileButton = document.getElementById(`contact-edit-tools`)
 const createMessage = document.getElementById(`createMessage`)
 
-const color = ["rgba(255, 122, 0, 1)", 
+const colors = ["rgba(255, 122, 0, 1)", 
   "rgba(255, 94, 179, 1)", 
   "rgba(110, 82, 255, 1)", 
   "rgba(147, 39, 255, 1)", 
@@ -40,7 +40,7 @@ const color = ["rgba(255, 122, 0, 1)",
   "rgba(255, 70, 70, 1)", 
   "rgba(255, 187, 43, 1)"];
 
-  //hier Firebase URL eingeben
+  //FirebaseURLHere
 let Firebase_URL = ""
 
 // mediaQueryForD_none.addEventListener("change", handleResponsiveChange);
@@ -349,7 +349,7 @@ function findDataFromEditOverlayToDelete() {
 
 async function deleteContact(contactId) {
   try {
-    const response = await fetch(`${storageUrl}/${contactId}.json`, {
+    const response = await fetch(`${Firebase_URL}/${contactId}.json`, {
       method: "DELETE",
     });
 
@@ -378,7 +378,7 @@ async function deleteFloatingData(event) {
       await deleteContact(foundId);
       await loadDataBase();
       await createContactList();
-      container.classList.add("d-none");
+      contactDetailDiv.innerHTML = ""
       popupMessage("Contact successfully deleted!");
     } catch (error) {
       console.error("Error deleting contact:", error);
@@ -599,6 +599,32 @@ async function contactNameValidation() {
   return true;
 }
 
+async function existingNameValidation() {
+  const contactName = document
+    .getElementById("name_input")
+    .value.trim()
+    .toLowerCase();
+  const nameInput = document.getElementById("name_input");
+
+  try {
+    const existingUserNames = await fetchExistingContactName();
+    if (
+      existingUserNames.find(
+        (existingName) => existingName.toLowerCase() === contactName,
+      )
+    ) {
+      contactErrorMsg("Contact with this name already exists.");
+      nameInput.value = "";
+      nameInput.parentElement.style.borderColor = "rgb(170, 22, 22)";
+      return false;
+    }
+    return true;
+  } catch (error) {
+    console.error("Error validating name:", error);
+    return true;
+  }
+}
+
 async function contactEmailValidation() {
   const contactEmail = document.getElementById("email_input").value.trim().toLowerCase();
   const contactEmailInput = document.getElementById("email_input");
@@ -652,6 +678,30 @@ async function existingEmailValidation() {
   }
 }
 
+async function fetchExistingContactEmail() {
+  try {
+    const response = await fetch(Firebase_URL + ".json");
+    if (!response.ok) {
+      throw new Error(`HTTP error! status: ${response.status}`);
+    }
+
+    const data = await response.json();
+    const existingEmails = [];
+
+    if (data && typeof data === "object") {
+      for (const [id, contactData] of Object.entries(data)) {
+        if (contactData.email) {
+          existingEmails.push(contactData.email);
+        }
+      }
+      return existingEmails;
+    }
+  } catch (error) {
+    console.error(error);
+    return [];
+  }
+}
+
 function contactPhoneValidation() {
   const contactPhone = document.getElementById("phone_input").value.trim();
   const phoneInput = document.getElementById("phone_input");
@@ -675,6 +725,30 @@ function contactPhoneValidation() {
   ErrorMsgBox.style.visibility = "hidden";
   phoneInput.parentElement.style.borderColor = "#ccc";
   return true;
+}
+
+async function fetchExistingContactName() {
+  try {
+    const response = await fetch(Firebase_URL + ".json");
+    if (!response.ok) {
+      throw new Error(`HTTP error! status: ${response.status}`);
+    }
+
+    const data = await response.json();
+    const existingNames = [];
+
+    if (data && typeof data === "object") {
+      for (const [id, contactData] of Object.entries(data)) {
+        if (contactData.name) {
+          existingNames.push(contactData.name);
+        }
+      }
+      return existingNames;
+    }
+  } catch (error) {
+    console.error(error);
+    return [];
+  }
 }
 // mediaQuery2.addEventListener("change", (e) => {
 //   if (e.matches) {
