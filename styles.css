@@ -230,7 +230,7 @@
       color: #fff;
       font-size: 18px;
       font-weight: 700;
-      flex: 1 0 50%
+      flex: 1 0 50%;
       }
  
     .search-box {
@@ -302,6 +302,13 @@
         flex: 1; 
         /* min-width: 200px;  */
         gap: 12px; }
+
+
+    .column.is-drag-over {
+      outline: 2px dashed #29abe2;
+      outline-offset: 6px;
+      border-radius: 10px;
+    }
  
     .column-header {
       display: flex;
