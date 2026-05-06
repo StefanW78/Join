@@ -1,13 +1,22 @@
-import { loadTasks } from "./task.js";
+import { loadTasks } from "./tasks.js";
 
-async function initBoard() {
-  const tasks = await loadTasks();
-  console.log(tasks);
+initBoard();
 
+import { listenToTasks } from "./tasks.js";
+
+listenToTasks((tasks) => {
   renderTasks(tasks);
+});
+
+function initBoard() {
+  listenToTasks((tasks) => {
+    console.log("Live Tasks:", tasks);
+    renderTasks(tasks);
+  });
 }
 
 initBoard();
+
 function createTaskCard(task) {
   const card = document.createElement("div");
 
@@ -36,8 +45,8 @@ function renderTasks(tasks) {
     const card = createTaskCard(task);
 
     if (!task.status || task.status === "todo") {
-  todoColumn.appendChild(card);
-}
+      todoColumn.appendChild(card);
+    }
 
     if (task.status === "todo") {
       todoColumn.appendChild(card);
@@ -48,4 +57,3 @@ function renderTasks(tasks) {
     }
   });
 }
-

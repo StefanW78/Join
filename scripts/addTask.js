@@ -1,11 +1,9 @@
-
-
 import { db } from "./firebase.js";
-
 import {
-  collection,
-  addDoc,
-} from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
+  ref,
+  push,
+  set,
+} from "https://www.gstatic.com/firebasejs/10.12.2/firebase-database.js";
 
 import { observeAuthState } from "./auth.js";
 
@@ -19,7 +17,6 @@ let currentUser = null;
 
 observeAuthState((user) => {
   currentUser = user;
-  console.log("Aktueller User:", user);
 });
 
 taskForm.addEventListener("submit", async (event) => {
@@ -30,25 +27,23 @@ taskForm.addEventListener("submit", async (event) => {
     return;
   }
 
-  const title = taskTitle.value.trim();
-  const description = taskDescription.value.trim();
-  const dueDate = taskDate.value;
-  const category = taskCategory.value;
-
   const task = {
-    title,
-    description,
-    dueDate,
-    category,
+    title: taskTitle.value.trim(),
+    description: taskDescription.value.trim(),
+    dueDate: taskDate.value,
+    category: taskCategory.value,
     createdBy: currentUser.uid,
     status: "todo",
+    createdAt: Date.now(),
   };
 
   try {
-    const docRef = await addDoc(collection(db, "tasks"), task);
-    console.log("Task gespeichert mit ID:", docRef.id);
+    const newTaskRef = push(ref(db, "tasks"));
+    await set(newTaskRef, task);
+
+    console.log("Task gespeichert mit ID:", newTaskRef.key);
+    taskForm.reset();
   } catch (error) {
     console.error("Fehler beim Speichern:", error);
   }
 });
-
