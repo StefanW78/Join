@@ -59,3 +59,9 @@ document.addEventListener("DOMContentLoaded", renderInitials);
 // closeDropdown(); // beim Laden
 
 // mediaQuery.addEventListener("change", closeDropdown);
+
+function logout() {
+  localStorage.removeItem("userStatus")
+  localStorage.removeItem("username")
+  window.location.href = "./index.html";
+}

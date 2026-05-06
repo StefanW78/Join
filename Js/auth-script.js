@@ -4,6 +4,6 @@ window.onload = function () {
 
   // Wenn der Benutzer nicht eingeloggt ist.
   if (!userStatus || (userStatus !== "guest" && userStatus !== "loggedIn")) {
-    window.location.href = "../html/index.html"; // Weiterleitung zur Login-Seite
+    window.location.href = "./index.html"; // Weiterleitung zur Login-Seite
   }
 };
