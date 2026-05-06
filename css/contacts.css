@@ -157,13 +157,13 @@ main{
 }
 
 #edit img{
-    content: url(./assets/img/edit-contact.svg);
+    content: url(../assets/img/edit-contact.svg);
     width: 24px;
     height: 24px;
 }
 
 #edit:hover img{
-    content: url(./assets/img/edit-hover-contact.svg);
+    content: url(../assets/img/edit-hover-contact.svg);
 }
 
 #edit:hover span{
@@ -172,7 +172,7 @@ main{
 }
 
 #delete img{
-    content: url(./assets/img/delete-contact.svg);
+    content: url(../assets/img/delete-contact.svg);
     width: 24px;
     height: 24px;
 }
@@ -183,7 +183,7 @@ main{
 }
 
 #delete:hover img{
-    content: url(./assets/img/delete-hover-contact.svg);
+    content: url(../assets/img/delete-hover-contact.svg);
 }
 
 .edit-delete-component-default span{
@@ -469,11 +469,11 @@ main{
 }
 
 .close-btn img{
-    content: url(./assets/img/close-icon.svg);
+    content: url(../assets/img/close-icon.svg);
 }
 
 .close-btn img:hover{
-    content: url(./assets/img/close-iconm.svg);
+    content: url(../assets/img/close-iconm.svg);
 }
 
 .add-contact-form{
@@ -579,13 +579,13 @@ main{
 }
 
  .secondary-btn-default-icon img {
-    content: url(./assets/img/add-contact-close-button.svg);
+    content: url(../assets/img/add-contact-close-button.svg);
     width: 24px;
     height: 24px;
 }
 
  .secondary-btn-default-icon:hover img {
-    content: url(./assets/img/add-contact-cancel-hover.svg);
+    content: url(../assets/img/add-contact-cancel-hover.svg);
 }
 
 .edit-contact-popup{
@@ -790,13 +790,13 @@ main{
 }
 
 #editMobile.edit-delete-component-default img{
-    content: url(./assets/img/edit-contact.svg);
+    content: url(../assets/img/edit-contact.svg);
     width: 24px;
     height: 24px;
 }
 
 #deleteMobile.edit-delete-component-default img{
-    content: url(./assets/img/delete-contact.svg);
+    content: url(../assets/img/delete-contact.svg);
     width: 24px;
     height: 24px;    
 }

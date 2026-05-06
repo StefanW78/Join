@@ -53,7 +53,7 @@ padding: 25px 20px 25px 0px;
 }
 
 .blue-arrow{
-    content: url(./assets/img/blue-arrow-left-contacts.svg);
+    content: url(../assets/img/blue-arrow-left-contacts.svg);
     width: 36px;
     height: 36px;
     position: fixed;
@@ -65,7 +65,7 @@ padding: 25px 20px 25px 0px;
 
 
 .contacts-list-sec #add-contact{
-    content: url(./assets/img/person_add-mobile.svg);
+    content: url(../assets/img/person_add-mobile.svg);
     position: fixed;
     right: 40px;
     top: calc(100vh - 160px);
@@ -92,7 +92,7 @@ padding: 25px 20px 25px 0px;
 }
 
 .contact-edit-tools{
-    content: url(./assets/img/more-option-contacts.svg);
+    content: url(../assets/img/more-option-contacts.svg);
     position: absolute;
     background: #2a3647;
     right: 40px;
@@ -147,7 +147,7 @@ padding: 25px 20px 25px 0px;
 }
 
 .close-btn img{
-    content: url(./assets/img/add-contact-clicked.svg);
+    content: url(../assets/img/add-contact-clicked.svg);
 }
 
 .contactForm{
