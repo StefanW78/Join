@@ -11,6 +11,7 @@ const signupSuccess = document.getElementById("signupSuccess");
 
 signupForm.addEventListener("submit", async (event) => {
   event.preventDefault();
+
   signupError.textContent = "";
   signupSuccess.textContent = "";
 
@@ -31,7 +32,10 @@ signupForm.addEventListener("submit", async (event) => {
 
   try {
     await registerUser(name, email, password);
-    signupSuccess.textContent = "Registrierung erfolgreich. Du wirst weitergeleitet...";
+
+    signupSuccess.textContent =
+      "Registrierung erfolgreich. Du wirst weitergeleitet...";
+
     setTimeout(() => {
       window.location.href = "../summary.html";
     }, 1200);
@@ -48,7 +52,7 @@ function getSignupErrorMessage(errorCode) {
     case "auth/invalid-email":
       return "Die E-Mail-Adresse ist ungültig.";
     case "auth/weak-password":
-      return "Das Passwort ist zu schwach.";
+      return "Das Passwort ist zu schwach. Mindestens 6 Zeichen.";
     case "auth/missing-password":
       return "Bitte gib ein Passwort ein.";
     default:
@@ -56,16 +60,3 @@ function getSignupErrorMessage(errorCode) {
   }
 }
 
-import { observeAuthState } from "./auth.js";
-
-observeAuthState((user) => {
-  if (user) {
-    const initials = user.displayName
-      .split(" ")
-      .map(n => n[0])
-      .join("")
-      .toUpperCase();
-
-    document.querySelector(".userProfileSvg").textContent = initials;
-  }
-});

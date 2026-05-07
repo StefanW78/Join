@@ -7,11 +7,10 @@ import {
 } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
 
 import {
-  doc,
-  setDoc,
-  getDoc,
-  serverTimestamp,
-} from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
+  ref,
+  get,
+  set,
+} from "https://www.gstatic.com/firebasejs/10.12.2/firebase-database.js";
 
 import { auth, db } from "./firebase.js";
 
@@ -28,16 +27,16 @@ function getInitials(name = "") {
 export async function ensureUserDocument(user, extraData = {}) {
   if (!user) return;
 
-  const userRef = doc(db, "users", user.uid);
-  const userSnap = await getDoc(userRef);
+  const userRef = ref(db, `users/${user.uid}`);
+  const userSnap = await get(userRef);
 
   if (!userSnap.exists()) {
-    await setDoc(userRef, {
+    await set(userRef, {
       uid: user.uid,
       name: extraData.name || user.displayName || "",
       email: user.email || "",
       initials: getInitials(extraData.name || user.displayName || ""),
-      createdAt: serverTimestamp(),
+      createdAt: Date.now(),
     });
   }
 }
