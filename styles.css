@@ -226,7 +226,7 @@
       justify-content: center;
       width: 120px;
       height: 60px;
-      background: #29abe2;
+      /* background: #29abe2; */
       color: #fff;
       font-size: 18px;
       font-weight: 700;
@@ -236,6 +236,7 @@
     .search-box {
       display: flex;
       align-items: center;
+      justify-content: space-between;
       gap: 8px;
       background: #fff;
       border: 1.5px solid #c8d2db;
@@ -288,6 +289,13 @@
     .plus-none {
       display: none;
     }
+
+
+    .plus-box:hover {
+    color: #29ABE2;
+    border-color: #29ABE2;
+  }
+
  
     /* Columns */
     .board-columns {
