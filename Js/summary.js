@@ -12,7 +12,7 @@ let SummaryDiv = document.getElementById(`summary-div`)
 let AnimationWelcomePage = document.getElementById(`anima-welcom-page`)
 const SignedUserName = document.getElementById("signedUser");
 
-let Firebase_URL = "./test-databank.json"
+let Firebase_URL = "Firebase_URL"
 
 
 function init() {
@@ -25,7 +25,7 @@ function init() {
 async function loadTodos() {
     
     try{
-        const response = await fetch(Firebase_URL)
+        const response = await fetch(Firebase_URL + ".json")
 
         if (!response.ok) {
             throw new Error(`HTTP error! status: ${response.status}`);
@@ -41,7 +41,6 @@ async function loadTodos() {
       }
     }
 
-        console.log("fetchData:", fetchdData);
         return fetchdData;
     }catch (error) {
     console.error("Error loading todos:", error);
@@ -63,7 +62,7 @@ async function renderSummary() {
   const totalTodo = todos.filter(t => t.status === "todo").length;
   const totalInProgress = todos.filter(t => t.status === "inProgress").length;
   const totalFeedback = todos.filter(t => t.status === "feedback").length;
-  const totalUrgent = todos.filter(t => t.urgent).length;
+  const totalUrgent = todos.filter(t => t.priority === "urgent").length;
   const nextDeadline = getUpcomingDeadline(todos);
 
 
@@ -88,9 +87,9 @@ function getUpcomingDeadline(todos) {
   const now = new Date();
 
   const upcoming = todos
-    .filter(t => t.date)
-    .map(t => new Date(t.date))
-    .filter(date => date >= now)
+    .filter(t => t.dueDate)
+    .map(t => new Date(t.dueDate))
+    .filter(dueDate => dueDate >= now)
     .sort((a, b) => a - b);
 
   return upcoming.length > 0 ? upcoming[0] : null;
