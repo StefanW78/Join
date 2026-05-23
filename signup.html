@@ -1,0 +1,115 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Sign up</title>
+    <link rel="stylesheet" href="./css/layout.css" />
+    <link rel="stylesheet" href="./css/authSignupLogin.css" />
+    <link rel="stylesheet" href="./css/authMobilSignUpLogin.css" />
+    <link rel="icon" href="./assets/img/Capa 2.svg" />
+  </head>
+  <body>
+    <main class="authPage">
+      <header class="authTopbar signupTopbar">
+        <img class="authLogo" src="./assets/img/Capa 2.svg" alt="Join Logo" />
+      </header>
+
+      <section class="authCenter">
+        <div class="authCard signupCard">
+          <div class="signupHeaderRow">
+            <a href="./index.html" class="authBackArrow" aria-label="Zurück">
+              <img src="./assets/img/arrow-left-line.svg" alt="Back Arrow" />
+            </a>
+
+            <div class="signupTitleWrapper">
+              <h1 class="authTitle">Sign up</h1>
+              <div class="authUnderline"></div>
+            </div>
+          </div>
+
+          <form class="authForm" id="signupForm">
+            <div class="authInputWrapper">
+              <input
+                class="authInput"
+                id="signupName"
+                type="text"
+                placeholder="Name"
+                required
+              />
+              <img
+                class="authInputIcon"
+                src="./assets/img/add-contact-person-icon.svg"
+                alt="Person Icon"
+              />
+            </div>
+
+            <div class="authInputWrapper">
+              <input
+                class="authInput"
+                id="signupEmail"
+                type="email"
+                placeholder="Email"
+                required
+              />
+              <img
+                class="authInputIcon"
+                src="./assets/img/add-contact-mail-icon.svg"
+                alt="Email Icon"
+              />
+            </div>
+
+            <div class="authInputWrapper">
+              <input
+                class="authInput"
+                id="signupPassword"
+                type="password"
+                placeholder="Password"
+                required
+              />
+              <img
+                class="authInputIcon"
+                src="./assets/img/lock.svg"
+                alt="Password Icon"
+              />
+            </div>
+
+            <div class="authInputWrapper">
+              <input
+                class="authInput"
+                id="signupConfirmPassword"
+                type="password"
+                placeholder="Confirm Password"
+                required
+              />
+              <img
+                class="authInputIcon"
+                src="./assets/img/lock.svg"
+                alt="Password Icon"
+              />
+            </div>
+
+            <label class="authCheckboxRow">
+              <input id="signupPrivacy" type="checkbox" required />
+              <span>
+                I accept the <a href="./privacy.html">Privacy policy</a>
+              </span>
+            </label>
+
+            <div class="signupButtonRow">
+              <button type="submit" class="primaryAuthBtn">Sign up</button>
+            </div>
+          </form>
+          <p id="signupError" class="authMessage authError"></p>
+          <p id="signupSuccess" class="authMessage authSuccess"></p>
+        </div>
+      </section>
+
+      <footer class="authFooter">
+        <a href="./privacy.html">Privacy Policy</a>
+        <a href="./legalnotes.html">Legal notice</a>
+      </footer>
+    </main>
+    <script type="module" src="./Js/signup.js"></script>
+  </body>
+</html>
