@@ -1,0 +1,65 @@
+body {
+    margin: 0;
+    overflow: hidden; /* verhindert Seiten-Scroll */
+}
+
+.body-div{
+    min-height: 100vh;
+    display: flex;
+}
+
+.d_none{
+    display: none !important;
+}
+
+.hidden-on-desktop {
+    display: none !important;
+}
+
+.header-and-content-div{
+    min-height: 0;
+}
+
+main{
+    flex: 1;
+    width: 100%;
+    padding: 75px 50px 50px 75px;
+    display: flex;
+    flex-direction: column;
+    max-width: 1440px;
+    min-height: 0;
+    overflow-y: auto;
+}
+
+
+.Help-info-container{
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+}
+
+.help-headerfont{
+    font-size: 55px;
+}
+
+.join-bluetext{
+    color: #00BEE8;
+}
+
+.help-wahtisjoin-contain{
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.help-wahtisjoin-header{
+    font-weight: bolder;
+}
+
+.help-wahtisjoin-info{
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
