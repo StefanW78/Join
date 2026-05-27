@@ -84,10 +84,15 @@ footer a{
     color: #cdcdcd;
 }
 
+footer a.current-link{
+    background-color: #091931;
+    color: #ffffff;
+    font-weight: 400;
+}
+
 footer a:hover{
     opacity: 0.8;
     color: #29abe2;
-    transform: scale(1.1)
 }
 
 /*header css*/
