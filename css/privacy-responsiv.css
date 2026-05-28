@@ -1,0 +1,26 @@
+@media (max-width: 1092px) {
+    .links-and-footer-div footer {
+        display: flex !important;
+        margin-bottom: 0;
+        flex-direction: row;
+        
+    }
+
+    .links-and-footer-div{
+        flex-direction: row;
+    }
+
+    footer{
+        gap: 10px;
+    }
+
+    footer a{
+        height: 100%;
+        width: 120px;
+        padding: 0;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        border-radius: 20px;
+    }
+}
