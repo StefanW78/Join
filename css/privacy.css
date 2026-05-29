@@ -23,9 +23,14 @@ body {
     display: none !important;
 }
 
+.d_flex{
+    display: flex !important;
+}
+
 .hidden-on-desktop {
     display: none !important;
 }
+
 
 .header-and-content-div{
     min-height: 0;
@@ -53,7 +58,7 @@ main{
 .back-button {
   height: 40px;
   width: 40px;
-  display: flex;
+  display: none;
   justify-content: center;
   align-items: center;
   border-radius: 50%;
@@ -76,4 +81,19 @@ main{
   height: 38px;
   filter: invert(54%) sepia(86%) saturate(2076%) hue-rotate(175deg)
     brightness(91%) contrast(89%);
+}
+
+.mobile-view-linkandfooter{
+    display: none;
+}
+
+footer a:hover{
+    background-color: #2a3d59;
+}
+
+ul{
+    display: flex;
+    flex-direction: column;
+    margin-left: 20px;
+    gap: 5px;
 }

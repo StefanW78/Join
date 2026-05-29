@@ -20,7 +20,24 @@
                     <img src="./assets/img/join-logo.svg" alt="">
                 </div>
                 <div class="links-and-footer-div">
-                <div class="sidebar-links">
+                <div class="sidebar-links" id="sidebar-links">
+                  <div class="mobile-view-linkandfooter" id="mobile-view-linkandfooter">
+                    <a id="LogInA_Mobile" class="hide-login-user-mobile" href="./index.html"><svg width="22" height="22" viewBox="0 0 22 22" fill="none" xmlns="http://www.w3.org/2000/svg">
+<mask id="mask0_471260_1315" style="mask-type:alpha" maskUnits="userSpaceOnUse" x="0" y="0" width="26" height="26">
+<rect width="26" height="26" fill="#D9D9D9"/>
+</mask>
+<g mask="url(#mask0_471260_1315)">
+<path d="M10.8667 17.7931C10.6211 17.7931 10.4153 17.7101 10.2492 17.5439C10.0831 17.3778 10 17.172 10 16.9264C10 16.6809 10.0831 16.4751 10.2492 16.3089C10.4153 16.1428 10.6211 16.0598 10.8667 16.0598H16.0667V3.92645H10.8667C10.6211 3.92645 10.4153 3.84339 10.2492 3.67728C10.0831 3.51117 10 3.30534 10 3.05978C10 2.81423 10.0831 2.60839 10.2492 2.44228C10.4153 2.27617 10.6211 2.19312 10.8667 2.19312H16.0667C16.5433 2.19312 16.9514 2.36284 17.2908 2.70228C17.6303 3.04173 17.8 3.44978 17.8 3.92645V16.0598C17.8 16.5364 17.6303 16.9445 17.2908 17.2839C16.9514 17.6234 16.5433 17.7931 16.0667 17.7931H10.8667ZM9.285 10.8598H3.06666C2.82111 10.8598 2.61527 10.7767 2.44916 10.6106C2.28305 10.4445 2.2 10.2387 2.2 9.99312C2.2 9.74756 2.28305 9.54173 2.44916 9.37562C2.61527 9.2095 2.82111 9.12645 3.06666 9.12645H9.285L7.66 7.50145C7.50111 7.34256 7.42166 7.14756 7.42166 6.91645C7.42166 6.68534 7.50111 6.48312 7.66 6.30978C7.81889 6.13645 8.02111 6.04617 8.26666 6.03895C8.51222 6.03173 8.72166 6.11478 8.895 6.28812L11.9933 9.38645C12.1667 9.55978 12.2533 9.762 12.2533 9.99312C12.2533 10.2242 12.1667 10.4264 11.9933 10.5998L8.895 13.6981C8.72166 13.8714 8.51583 13.9545 8.2775 13.9473C8.03916 13.9401 7.83333 13.8498 7.66 13.6764C7.50111 13.5031 7.42527 13.2973 7.4325 13.0589C7.43972 12.8206 7.52278 12.622 7.68166 12.4631L9.285 10.8598Z" fill="#CDCDCD"/>
+</g>
+</svg>
+ Log-in</a>
+ 
+                <footer id="footer-mobile" class="mobile-footer-view">
+                    <a class="current-link" href="./privacy.html">Privacy Policy</a>
+                    <a href="./legalnotice.html">Legal notice</a>
+                </footer>
+                  </div>
+                  
                         <a id="summaryA" class="" href="./summary.html"><img src="./assets/img/summary-icon.svg" alt="summary-logo"> Summary</a>
                     
                         <a id="addTaskA" href="./add-task.html"><img src="./assets/img/addTask-icon.svg" alt="add-task-logo"> Add-Task</a>
@@ -40,7 +57,7 @@
  Log-in</a>
                     
                 </div>
-                <footer>
+                <footer id="footer">
                     <a class="current-link" href="./privacy.html">Privacy Policy</a>
                     <a href="./legalnotice.html">Legal notice</a>
                 </footer>
@@ -55,7 +72,7 @@
                         <div class="header-title">
                             Kanban Project Management Tool
                         </div>
-                        <div class="user-header">
+                        <div class="user-header" id="user-header">
                             <a class="help" href="./help.html"><img src="./assets/img/help.svg" alt="help-logo"></a>
                             <div class="user-icon">
                                 <button class="header-button" id="header-button">SM</button>
@@ -193,33 +210,31 @@
             </p>
 
             <h2>10. Retention Period (Summary)</h2>
-            <table>
-              <tr>
-                <th>Data type</th>
-                <th>Purpose</th>
-                <th>Deletion</th>
-              </tr>
-              <tr>
-                <td>Server log files</td>
-                <td>Operation & security</td>
-                <td>30 days</td>
-              </tr>
-              <tr>
-                <td>Registration data</td>
-                <td>Account administration</td>
-                <td>Upon account deletion</td>
-              </tr>
-              <tr>
-                <td>Guest accounts</td>
-                <td>Testing purposes</td>
-                <td>Upon logout</td>
-              </tr>
-              <tr>
-                <td>To-do lists & contacts</td>
-                <td>User functionality</td>
-                <td>Upon account deletion</td>
-              </tr>
-            </table>
+
+    <ul class="col">
+      <li><h3>Data type</h3></li> <br>
+      <li>Server log files</li>
+      <li>Registration data</li>
+      <li>Guest accounts</li>
+      <li>To-do lists & contacts</li>
+  </ul>
+
+  <ul class="col">
+    <li><h3>Purpose</h3></li> <br>
+    <li class="head">Purpose</li>
+    <li>Operation & security</li>
+    <li>Account administration</li>
+    <li>Testing purposes</li>
+    <li>User functionality</li>
+  </ul>
+
+  <ul class="col">
+    <li><h3>Deletion</h3></li> <br>
+    <li>30 days</li>
+    <li>Upon account deletion</li>
+    <li>Upon logout</li>
+    <li>Upon account deletion</li>
+  </ul>
 
             <h2>11. Rights of Data Subjects</h2>
             <p>
