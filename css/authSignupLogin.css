@@ -88,6 +88,10 @@
   opacity: 1;
 }
 
+.signupTopbar .authLogo {
+  opacity: 1;
+}
+
 .authTopbarRight {
   display: flex;
   align-items: center;
