@@ -230,3 +230,45 @@ body {
 
   flex-shrink: 0;
 }
+
+.authFooter {
+  display: flex;
+  justify-content: center;
+  gap: 24px;
+}
+
+.authFooter a {
+  text-decoration: none;
+  color: #a8a8a8;
+  font-size: 16px;
+  font-weight: 400;
+  transition: color 0.2s ease;
+}
+
+.authFooter a:hover {
+  color: #29abe2;
+}
+
+.guestLoginLink {
+  display: none;
+}
+
+body.guestView .appNavLink {
+  display: none;
+}
+
+body.guestView .guestLoginLink {
+  display: flex;
+}
+
+body.guestView .headerRight {
+  display: none;
+}
+
+body.guestView .mainNav {
+  margin-top: 80px;
+}
+
+body.guestView .mobileBottomNav {
+  display: none;
+}
