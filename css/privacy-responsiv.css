@@ -78,3 +78,13 @@
         padding: 70px 15px 50px 15px;
     }
 }
+
+@media (max-width: 400px){
+.mobile-view-linkandfooter footer a{
+    width: 100px;
+    font-size: 15px;
+}
+.mobile-view-linkandfooter{
+    padding: 0px 0px;
+}
+}
