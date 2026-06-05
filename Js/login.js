@@ -1,5 +1,8 @@
 import { loadData } from "./storage.js";
 
+const loginEmailError = document.getElementById("loginEmailError");
+const loginPasswordError = document.getElementById("loginPasswordError");
+
 const splashScreen = document.getElementById("splashScreen");
 const splashLogo = document.getElementById("splashLogo");
 const authLogo = document.querySelector(".authLogo");
@@ -24,8 +27,21 @@ window.addEventListener("load", () => {
 loginForm.addEventListener("submit", async (event) => {
   event.preventDefault();
 
+  clearInputError(loginEmail, loginEmailError);
+  clearInputError(loginPassword, loginPasswordError);
+
   const email = loginEmail.value.trim();
   const password = loginPassword.value.trim();
+
+  if (!email) {
+    setInputError(loginEmail, loginEmailError, "Please enter your email.");
+    return;
+  }
+
+  if (!password) {
+    setInputError(loginPassword, loginPasswordError, "Please enter your password.");
+    return;
+  }
 
   try {
     const users = await loadData("users");
@@ -35,7 +51,8 @@ loginForm.addEventListener("submit", async (event) => {
     });
 
     if (!foundEntry) {
-      loginError.textContent = "E-Mail oder Passwort ist falsch.";
+      setInputError(loginEmail, loginEmailError, "Check your email and password. Please try again.");
+      setInputError(loginPassword, loginPasswordError, "");
       return;
     }
 
@@ -51,10 +68,10 @@ loginForm.addEventListener("submit", async (event) => {
       })
     );
 
-    window.location.href = "../htmlSites1/addTask.html";
+    window.location.href = "./addTask.html";
   } catch (error) {
     console.error(error);
-    loginError.textContent = "Login fehlgeschlagen.";
+    setInputError(loginEmail, loginEmailError, "Login failed. Please try again.");
   }
 });
 
@@ -72,4 +89,37 @@ guestLoginBtn.addEventListener("click", () => {
   localStorage.setItem("username", "guest")
 
   window.location.href = "./summary.html";
+});
+
+function setInputError(input, errorElement, message) {
+  input.classList.add("inputError");
+  errorElement.textContent = message;
+}
+
+function clearInputError(input, errorElement) {
+  input.classList.remove("inputError");
+  errorElement.textContent = "";
+}
+
+loginEmail.addEventListener("input", () => {
+  clearInputError(loginEmail, loginEmailError);
+});
+
+loginPassword.addEventListener("input", () => {
+  clearInputError(loginPassword, loginPasswordError);
+});
+
+loginForm.addEventListener("submit", (event) => {
+  event.preventDefault();
+
+  const email = loginEmail.value.trim();
+
+  if (!email.includes("@")) {
+    setInputError(
+      loginEmail,
+      loginEmailError,
+      "Please enter a valid email address."
+    );
+    return;
+  }
 });

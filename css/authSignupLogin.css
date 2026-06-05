@@ -179,6 +179,27 @@
   position: relative;
   width: 100%;
   max-width: 422px;
+  display: flex;
+  flex-direction: column;
+}
+
+.fieldError {
+  color: #ff8190;
+  font-size: 13px;
+  margin: 6px 0 0 0;
+  min-height: 16px;
+}
+
+.authInput:focus {
+  border-color: #29abe2;
+}
+
+.authInput.inputError {
+  border-color: #ff8190;
+}
+
+.authInput.inputError:focus {
+  border-color: #ff8190;
 }
 
 .authInput {

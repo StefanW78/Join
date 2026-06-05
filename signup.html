@@ -28,7 +28,7 @@
             </div>
           </div>
 
-          <form class="authForm" id="signupForm">
+          <form class="authForm" id="signupForm" novalidate>
             <div class="authInputWrapper">
               <input
                 class="authInput"
@@ -57,6 +57,7 @@
                 src="./assets/img/add-contact-mail-icon.svg"
                 alt="Email Icon"
               />
+              <p class="fieldError" id="emailError"></p>
             </div>
 
             <div class="authInputWrapper">
@@ -72,6 +73,7 @@
                 src="./assets/img/lock.svg"
                 alt="Password Icon"
               />
+              <p class="fieldError" id="passwordError"></p>
             </div>
 
             <div class="authInputWrapper">
@@ -87,6 +89,7 @@
                 src="./assets/img/lock.svg"
                 alt="Password Icon"
               />
+              <p class="fieldError" id="confirmPasswordError"></p>
             </div>
 
             <label class="authCheckboxRow">
@@ -106,8 +109,12 @@
       </section>
 
       <footer class="authFooter">
-        <a href="./privacy.html">Privacy Policy</a>
-        <a href="./legalnotes.html">Legal notice</a>
+        <div class="authFooterContainer">
+          <a class="privacyFooter" href="./privacy.html">Privacy Policy</a>
+        </div>
+        <div class="authFooterContainer">
+          <a class="legalNotesFooter" href="./legalnotes.html">Legal notice</a>
+        </div>
       </footer>
     </main>
     <script type="module" src="./Js/signup.js"></script>

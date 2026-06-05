@@ -1,5 +1,5 @@
 const BASE_URL =
-  "Your Firebase_URL";
+  "https://test-2651c-default-rtdb.europe-west1.firebasedatabase.app/";
 
 export async function loadData(path = "") {
   const response = await fetch(`${BASE_URL}${path}.json`);

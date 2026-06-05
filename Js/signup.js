@@ -9,19 +9,40 @@ const signupPrivacy = document.getElementById("signupPrivacy");
 const signupError = document.getElementById("signupError");
 const signupSuccess = document.getElementById("signupSuccess");
 
+const emailError = document.getElementById("emailError");
+const passwordError = document.getElementById("passwordError");
+const confirmPasswordError = document.getElementById("confirmPasswordError");
+
 signupForm.addEventListener("submit", async (event) => {
   event.preventDefault();
 
-  signupError.textContent = "";
-  signupSuccess.textContent = "";
+  clearAllErrors();
 
   const name = signupName.value.trim();
   const email = signupEmail.value.trim();
   const password = signupPassword.value.trim();
   const confirmPassword = signupConfirmPassword.value.trim();
 
+  if (!isValidEmail(email)) {
+    setInputError(signupEmail, emailError, "Please enter a valid email.");
+    return;
+  }
+
+  if (password.length < 6) {
+    setInputError(
+      signupPassword,
+      passwordError,
+      "Password must be at least 6 characters."
+    );
+    return;
+  }
+
   if (password !== confirmPassword) {
-    signupError.textContent = "Die Passwörter stimmen nicht überein.";
+    setInputError(
+      signupConfirmPassword,
+      confirmPasswordError,
+      "Passwords do not match."
+    );
     return;
   }
 
@@ -35,7 +56,11 @@ signupForm.addEventListener("submit", async (event) => {
     const userExists = Object.values(users).some((user) => user.email === email);
 
     if (userExists) {
-      signupError.textContent = "Diese E-Mail-Adresse wird bereits verwendet.";
+      setInputError(
+        signupEmail,
+        emailError,
+        "Diese E-Mail-Adresse wird bereits verwendet."
+      );
       return;
     }
 
@@ -52,13 +77,48 @@ signupForm.addEventListener("submit", async (event) => {
     signupSuccess.textContent = "Registrierung erfolgreich.";
 
     setTimeout(() => {
-      window.location.href = "./login.html";
+      window.location.href = "./index.html";
     }, 1000);
   } catch (error) {
     console.error(error);
     signupError.textContent = "Registrierung fehlgeschlagen.";
   }
 });
+
+signupEmail.addEventListener("input", () => {
+  clearInputError(signupEmail, emailError);
+});
+
+signupPassword.addEventListener("input", () => {
+  clearInputError(signupPassword, passwordError);
+});
+
+signupConfirmPassword.addEventListener("input", () => {
+  clearInputError(signupConfirmPassword, confirmPasswordError);
+});
+
+function setInputError(input, errorElement, message) {
+  input.classList.add("inputError");
+  errorElement.textContent = message;
+}
+
+function clearInputError(input, errorElement) {
+  input.classList.remove("inputError");
+  errorElement.textContent = "";
+}
+
+function clearAllErrors() {
+  signupError.textContent = "";
+  signupSuccess.textContent = "";
+
+  clearInputError(signupEmail, emailError);
+  clearInputError(signupPassword, passwordError);
+  clearInputError(signupConfirmPassword, confirmPasswordError);
+}
+
+function isValidEmail(email) {
+  return email.includes("@") && email.includes(".");
+}
 
 function getInitials(name = "") {
   return name
