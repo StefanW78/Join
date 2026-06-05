@@ -1,6 +1,6 @@
 <!doctype html>
 <html lang="en">
-  <head>  
+  <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Log in</title>
@@ -12,11 +12,7 @@
   <body>
     <div id="splashScreen">
       <div id="splashBackground"></div>
-      <img
-        id="splashLogo"
-        src="./assets/img/Capa 2.svg"
-        alt="Join Logo"
-      />
+      <img id="splashLogo" src="./assets/img/Capa 2.svg" alt="Join Logo" />
     </div>
 
     <main class="authPage">
@@ -81,8 +77,12 @@
         <a href="./signup.html" class="smallPrimaryBtn">Sign up</a>
       </div>
       <footer class="authFooter">
-        <a href="./privacy.html">Privacy Policy</a>
-        <a href="./legalnotes.html">Legal notice</a>
+        <div class="authFooterContainer">
+          <a class="privacyFooter" href="./privacy.html">Privacy Policy</a>
+        </div>
+        <div class="authFooterContainer">
+          <a class="legalNotesFooter" href="./legalnotes.html">Legal notice</a>
+        </div>
       </footer>
 
       <script type="module" src="./Js/login.js"></script>

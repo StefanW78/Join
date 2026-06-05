@@ -120,6 +120,13 @@
   text-decoration: none;
   font-size: 16px;
   font-weight: 700;
+  transition:
+    background-color 150ms ease-in-out,
+    box-shadow 150ms ease-in-out;
+}
+
+.smallPrimaryBtn:hover{
+  background-color: #29abe2;
 }
 
 .authCenter {
@@ -219,6 +226,15 @@
   color: white;
   border: none;
   font-weight: 700;
+  transition:
+    background-color 500ms ease-in-out,
+    box-shadow 500ms ease-in-out;
+}
+
+.primaryAuthBtn:hover {
+  background-color: #29abe2;
+  box-shadow: 0 4px 3px #a8a8a8;
+  
 }
 
 .secondaryAuthBtn {
@@ -226,6 +242,15 @@
   color: #2a3647;
   border: 1px solid #2a3647;
   font-weight: 700;
+  transition:
+    background-color 500ms ease-in-out,
+    box-shadow 500ms ease-in-out;
+}
+
+.secondaryAuthBtn:hover {
+  color: #29abe2;
+  border-color: #29abe2;
+  box-shadow: 0 4px 3px #a8a8a8;
 }
 
 .signupHeaderRow {
@@ -310,3 +335,10 @@
   color: #29abe2;
 }
 
+.authFooterContainer {
+  width: 120px;
+  height: 50px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}

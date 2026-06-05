@@ -246,8 +246,14 @@ body {
   transition: color 0.2s ease;
 }
 
-.authFooter a:hover {
+.authFooter .privacyFooter:hover {
   color: #29abe2;
+  font-size: large;
+}
+
+.authFooter .legalNotesFooter:hover {
+  color: #29abe2;
+  font-size: large;
 }
 
 .guestLoginLink {
