@@ -61,11 +61,7 @@
           <p class="headlineText">Kanban Project Management Tool</p>
 
           <div class="headerRight">
-            <img
-              class="helpIcon"
-              src="./assets/img/help.svg"
-              alt="Help Icon"
-            />
+            <img class="helpIcon" src="./assets/img/help.svg" alt="Help Icon" />
             <div class="userBadge userInitials">SM</div>
           </div>
         </header>
@@ -86,6 +82,7 @@
                       type="text"
                       placeholder="Enter a title"
                     />
+                    <p class="fieldError" id="taskTitleError"></p>
                   </div>
 
                   <div class="formGroup">
@@ -107,6 +104,7 @@
                         alt="calendar icon"
                       />
                     </div>
+                    <p class="fieldError" id="taskDateError"></p>
                   </div>
                 </div>
 
@@ -164,6 +162,7 @@
                     <label for="category"
                       >Category<span class="required">*</span></label
                     >
+
                     <div class="customDropdown" id="categoryDropdown">
                       <button
                         type="button"
@@ -185,6 +184,8 @@
                         </div>
                       </div>
                     </div>
+
+                    <p class="fieldError" id="categoryError"></p>
                   </div>
 
                   <div class="formGroup">

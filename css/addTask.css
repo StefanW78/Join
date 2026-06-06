@@ -41,6 +41,21 @@
   gap: 8px;
 }
 
+.inputFocus {
+  border-color: #29abe2 !important;
+}
+
+.inputError {
+  border-color: #ff8190 !important;
+}
+
+.fieldError {
+  color: #ff8190;
+  font-size: 13px;
+  margin: 2px 0 0 0;
+  min-height: 16px;
+}
+
 .formGroup label {
   font-size: 20px;
   font-weight: 400;

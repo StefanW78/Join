@@ -1,5 +1,9 @@
 import { loadData, postData } from "./storage.js";
 
+const taskTitleError = document.getElementById("taskTitleError");
+const taskDateError = document.getElementById("taskDateError");
+const categoryError = document.getElementById("categoryError");
+
 const currentUser = JSON.parse(localStorage.getItem("currentUser"));
 
 const taskForm = document.getElementById("taskForm");
@@ -32,6 +36,23 @@ loadContacts();
 taskForm.addEventListener("submit", async (event) => {
   event.preventDefault();
 
+  clearAllErrors();
+
+  if (!taskTitle.value.trim()) {
+    setInputError(taskTitle, taskTitleError, "This field is required");
+    return;
+  }
+
+  if (!taskDate.value) {
+    setInputError(taskDate, taskDateError, "This field is required");
+    return;
+  }
+
+  if (!selectedCategory) {
+    setInputError(categoryButton, categoryError, "This field is required");
+    return;
+  }
+
   if (!currentUser) {
     console.error("Kein User eingeloggt!");
     return;
@@ -59,6 +80,22 @@ taskForm.addEventListener("submit", async (event) => {
   } catch (error) {
     console.error("Fehler beim Speichern:", error);
   }
+});
+
+taskTitle.addEventListener("input", () => {
+  handleInputChange(taskTitle, taskTitleError);
+});
+
+taskDate.addEventListener("input", () => {
+  handleInputChange(taskDate, taskDateError);
+});
+
+taskDescription.addEventListener("input", () => {
+  toggleInputFocus(taskDescription);
+});
+
+subtaskInput.addEventListener("input", () => {
+  toggleInputFocus(subtaskInput);
 });
 
 function addCurrentSubtaskInput() {
@@ -112,6 +149,9 @@ function initCategoryDropdown() {
       selectedCategory = option.dataset.category;
       categoryButton.textContent = selectedCategory;
       categoryList.classList.add("dNone");
+      clearInputError(categoryButton, categoryError);
+
+      categoryButton.classList.add("inputFocus");
     });
   });
 }
@@ -244,7 +284,14 @@ function getInitials(name = "") {
 }
 
 function getAvatarColor(index) {
-  const colors = ["#9327ff", "#ff7a00", "#fc71ff", "#6e52ff", "#1fd7c1", "#ffbb2b"];
+  const colors = [
+    "#9327ff",
+    "#ff7a00",
+    "#fc71ff",
+    "#6e52ff",
+    "#1fd7c1",
+    "#ffbb2b",
+  ];
   return colors[index % colors.length];
 }
 
@@ -259,6 +306,13 @@ function resetFormState() {
   categoryButton.textContent = "Select task category";
   assignedInput.value = "";
 
+  clearAllErrors();
+  taskTitle.classList.remove("inputFocus");
+  taskDate.classList.remove("inputFocus");
+  taskDescription.classList.remove("inputFocus");
+  subtaskInput.classList.remove("inputFocus");
+  categoryButton.classList.remove("inputFocus");
+
   renderSelectedContacts();
   renderSubtasks();
   renderContacts();
@@ -268,4 +322,34 @@ function resetFormState() {
   });
 
   document.querySelector(".mediumBtn").classList.add("activeMedium");
+}
+
+function setInputError(input, errorElement, message) {
+  input.classList.remove("inputFocus");
+  input.classList.add("inputError");
+  errorElement.textContent = message;
+}
+
+function clearInputError(input, errorElement) {
+  input.classList.remove("inputError");
+  errorElement.textContent = "";
+}
+
+function handleInputChange(input, errorElement) {
+  clearInputError(input, errorElement);
+  toggleInputFocus(input);
+}
+
+function toggleInputFocus(input) {
+  if (input.value.trim()) {
+    input.classList.add("inputFocus");
+  } else {
+    input.classList.remove("inputFocus");
+  }
+}
+
+function clearAllErrors() {
+  clearInputError(taskTitle, taskTitleError);
+  clearInputError(taskDate, taskDateError);
+  clearInputError(categoryButton, categoryError);
 }
