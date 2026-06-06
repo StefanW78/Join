@@ -11,7 +11,6 @@ const splashBackground = document.getElementById("splashBackground");
 const loginForm = document.getElementById("loginForm");
 const loginEmail = document.getElementById("loginEmail");
 const loginPassword = document.getElementById("loginPassword");
-const loginError = document.getElementById("loginError");
 const guestLoginBtn = document.getElementById("guestLoginBtn");
 
 window.addEventListener("load", () => {
@@ -27,19 +26,26 @@ window.addEventListener("load", () => {
 loginForm.addEventListener("submit", async (event) => {
   event.preventDefault();
 
-  clearInputError(loginEmail, loginEmailError);
-  clearInputError(loginPassword, loginPasswordError);
+  clearAllErrors();
 
   const email = loginEmail.value.trim();
   const password = loginPassword.value.trim();
 
-  if (!email) {
-    setInputError(loginEmail, loginEmailError, "Please enter your email.");
+  if (!isValidEmail(email)) {
+    setInputError(
+      loginEmail,
+      loginEmailError,
+      "Please enter a valid email address."
+    );
     return;
   }
 
   if (!password) {
-    setInputError(loginPassword, loginPasswordError, "Please enter your password.");
+    setInputError(
+      loginPassword,
+      loginPasswordError,
+      "Please enter your password."
+    );
     return;
   }
 
@@ -51,7 +57,11 @@ loginForm.addEventListener("submit", async (event) => {
     });
 
     if (!foundEntry) {
-      setInputError(loginEmail, loginEmailError, "Check your email and password. Please try again.");
+      setInputError(
+        loginEmail,
+        loginEmailError,
+        "Check your email and password. Please try again."
+      );
       setInputError(loginPassword, loginPasswordError, "");
       return;
     }
@@ -71,7 +81,11 @@ loginForm.addEventListener("submit", async (event) => {
     window.location.href = "./addTask.html";
   } catch (error) {
     console.error(error);
-    setInputError(loginEmail, loginEmailError, "Login failed. Please try again.");
+    setInputError(
+      loginEmail,
+      loginEmailError,
+      "Login failed. Please try again."
+    );
   }
 });
 
@@ -85,10 +99,19 @@ guestLoginBtn.addEventListener("click", () => {
       initials: "GU",
     })
   );
-  localStorage.setItem("userStatus", "guest")
-  localStorage.setItem("username", "guest")
+
+  localStorage.setItem("userStatus", "guest");
+  localStorage.setItem("username", "guest");
 
   window.location.href = "./summary.html";
+});
+
+loginEmail.addEventListener("input", () => {
+  clearInputError(loginEmail, loginEmailError);
+});
+
+loginPassword.addEventListener("input", () => {
+  clearInputError(loginPassword, loginPasswordError);
 });
 
 function setInputError(input, errorElement, message) {
@@ -101,25 +124,11 @@ function clearInputError(input, errorElement) {
   errorElement.textContent = "";
 }
 
-loginEmail.addEventListener("input", () => {
+function clearAllErrors() {
   clearInputError(loginEmail, loginEmailError);
-});
-
-loginPassword.addEventListener("input", () => {
   clearInputError(loginPassword, loginPasswordError);
-});
+}
 
-loginForm.addEventListener("submit", (event) => {
-  event.preventDefault();
-
-  const email = loginEmail.value.trim();
-
-  if (!email.includes("@")) {
-    setInputError(
-      loginEmail,
-      loginEmailError,
-      "Please enter a valid email address."
-    );
-    return;
-  }
-});
+function isValidEmail(email) {
+  return email.includes("@") && email.includes(".");
+}

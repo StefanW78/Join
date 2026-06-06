@@ -10,7 +10,6 @@
     <link rel="stylesheet" href="./css/addTaskMobile.css" />
     <link rel="icon" href="./assets/img/Capa 2.svg" />
   </head>
-  <script type="module" src="./Js/userBadge.js"></script>
   <body>
     <div class="mainContainer">
       <aside class="sidebar">
@@ -22,28 +21,44 @@
           />
 
           <nav class="mainNav">
-            <a href="./summary.html" class="navLink"
-              ><img src="./assets/img/summary-icon.svg" alt="summary icon" />
+            <a href="./index.html" class="navLink guestLoginLink">
+              <img src="./assets/img/lock.svg" alt="login icon" />
+              <span>Log In</span>
+            </a>
+
+            <a href="./summary.html" class="navLink appNavLink">
+              <img src="./assets/img/summary-icon.svg" alt="summary icon" />
               <span>Summary</span>
             </a>
-            <a href="./addTask.html" class="navLink"
-              ><img src="./assets/img/addTask-icon.svg" alt="addTask-icon" />
-              <span>Add Task</span></a
-            >
-            <a href="./board.html" class="navLink"
-              ><img src="./assets/img/board-icon.svg" alt="board-icon" />
-              <span>Board</span></a
-            >
-            <a href="./contacts.html" class="navLink"
-              ><img src="./assets/img/contacts-icon.svg" alt="contacts-icon" />
-              <span>Contacts</span></a
-            >
+
+            <a href="./addTask.html" class="navLink appNavLink">
+              <img src="./assets/img/addTask-icon.svg" alt="add task icon" />
+              <span>Add Task</span>
+            </a>
+
+            <a href="./board.html" class="navLink appNavLink">
+              <img src="./assets/img/board-icon.svg" alt="board icon" />
+              <span>Board</span>
+            </a>
+
+            <a href="./contacts.html" class="navLink appNavLink">
+              <img src="./assets/img/contacts-icon.svg" alt="contacts icon" />
+              <span>Contacts</span>
+            </a>
           </nav>
         </div>
 
         <div class="sidebarBottom">
-          <a href="./privacy.html" class="footerLink">Privacy Policy</a>
-          <a href="./legalnotes.html" class="footerLink activeFooterLink">Legal notice</a>
+          <a href="./privacy.html?public=true" class="footerLink">
+            Privacy Policy
+          </a>
+
+          <a
+            href="./legalnotes.html?public=true"
+            class="footerLink activeFooterLink"
+          >
+            Legal notice
+          </a>
         </div>
       </aside>
 
@@ -58,11 +73,7 @@
           <p class="headlineText">Kanban Project Management Tool</p>
 
           <div class="headerRight">
-            <img
-              class="helpIcon"
-              src="./assets/img/help.svg"
-              alt="Help Icon"
-            />
+            <img class="helpIcon" src="./assets/img/help.svg" alt="Help Icon" />
             <div class="userBadge userInitials">SM</div>
           </div>
         </header>
@@ -72,11 +83,11 @@
             <h1>Legal Notice</h1>
 
             <h2>Imprint</h2>
-          <ul>
-            <li>[Student Names List]</li>
-            <li>[Address of JOIN operator- e.g. one of the Students]</li>
-            <li>[Postcode and City]</li>
-          </ul>
+            <ul>
+              <li>[Student Names List]</li>
+              <li>[Address of JOIN operator- e.g. one of the Students]</li>
+              <li>[Postcode and City]</li>
+            </ul>
 
             <h3>Exploring the Board</h3>
             <p>
@@ -100,5 +111,7 @@
         </main>
       </div>
     </div>
+    <script src="./Js/pageMode.js"></script>
+    <script type="module" src="./Js/userBadge.js"></script>
   </body>
 </html>
