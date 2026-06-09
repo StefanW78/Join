@@ -1,0 +1,99 @@
+body {
+    margin: 0;
+    overflow: hidden; /* verhindert Seiten-Scroll */
+}
+
+/* für die sidebar eigentlich */
+.sidebar-wraper{
+    height: 100vh;
+}
+
+.header-and-content-div{
+    min-height: 0;
+}
+/* für die sidebar eigentlich */
+
+
+.body-div{
+    min-height: 100vh;
+    display: flex;
+}
+
+.d_none{
+    display: none !important;
+}
+
+.d_flex{
+    display: flex !important;
+}
+
+.hidden-on-desktop {
+    display: none !important;
+}
+
+
+.header-and-content-div{
+    min-height: 0;
+}
+
+main{
+    flex: 1;
+    width: 100%;
+    padding: 70px 50px 50px 75px;
+    display: flex;
+    flex-direction: column;
+    min-height: 0;
+    overflow-y: auto;
+}
+
+.privacyContent{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+    position: relative;
+    max-width: 1440px;
+}
+
+.back-button {
+  height: 40px;
+  width: 40px;
+  display: none;
+  justify-content: center;
+  align-items: center;
+  border-radius: 50%;
+  background: none;
+  cursor: pointer;
+  padding: 1px;
+  border: none;
+  position: absolute;
+    right: 0px;
+    top: -25px;
+}
+
+.back-button:hover {
+  background: white;
+  border: 2px solid #29abe2;
+}
+
+.back-button img {
+  width: 38px;
+  height: 38px;
+  filter: invert(54%) sepia(86%) saturate(2076%) hue-rotate(175deg)
+    brightness(91%) contrast(89%);
+}
+
+.mobile-view-linkandfooter{
+    display: none;
+}
+
+footer a:hover{
+    background-color: #2a3d59;
+}
+
+ul{
+    display: flex;
+    flex-direction: column;
+    margin-left: 20px;
+    gap: 5px;
+}

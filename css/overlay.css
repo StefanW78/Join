@@ -346,3 +346,37 @@
     padding: 10px 12px;
   }
 }
+
+.dNone {
+  display: none;
+}
+
+.add-task-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.35);
+  z-index: 2000;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.add-task-modal {
+  position: relative;
+  width: min(1100px, 90vw);
+  max-height: 90vh;
+  overflow-y: auto;
+  background: white;
+  border-radius: 30px;
+  padding: 64px;
+}
+
+.add-task-close {
+  position: absolute;
+  top: 40px;
+  right: 40px;
+  border: none;
+  background: transparent;
+  font-size: 32px;
+  cursor: pointer;
+}
