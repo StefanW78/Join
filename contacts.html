@@ -4,13 +4,13 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Join</title>
-    <!-- <script type="module" src="./Js/auth-script.js"></script> -->
+    <!-- <script src="./Js/auth-script.js"></script> -->
     <link rel="stylesheet" href="./css/standart.css">
     <link rel="stylesheet" href="./css/contacts.css">
     <link rel="stylesheet" href="./css/contacts-responsiv.css">
     <link rel="stylesheet" href="./css/sidebar-and-header-css.css">
     <link rel="stylesheet" href="./css/sidebar-and-header-responsiv.css">
-    <link rel="shortcut icon" href="./assets/Favicon/favicon.ico" type="image/x-icon">
+    <link rel="shortcut icon" href="#" type="image/x-icon">
 </head>
 <body onload="init()">
     <div class="body-div">
@@ -21,18 +21,18 @@
                 </div>
                 <div class="links-and-footer-div">
                 <div class="sidebar-links">
-                        <a  href="./summary.html"><img src="./assets/img/summary-icon.svg" alt="summary-logo"> Summary</a>
+                        <a  href="./Index.html"><img src="./assets/img/summary-icon.svg" alt="summary-logo"> Summary</a>
                     
-                        <a href="./add-task.html"><img src="./assets/img/addTask-icon.svg" alt="add-task-logo"> Add-Task</a>
+                        <a href=""><img src="./assets/img/addTask-icon.svg" alt="add-task-logo"> Add-Task</a>
                 
-                        <a href="./board.html"><img src="./assets/img/board-icon.svg" alt="board-logo">Board</a>
+                        <a href=""><img src="./assets/img/board-icon.svg" alt="board-logo">Board</a>
 
-                        <a class="current-link" href="./contacts.html"><img src="./assets/img/contacts-icon.svg" alt="contacts-logo"> Contacts</a>
+                        <a class="current-link" href=""><img src="./assets/img/contacts-icon.svg" alt="contacts-logo"> Contacts</a>
                     
                 </div>
                 <footer>
-                    <a href="./privacy.html">Privacy Policy</a>
-                    <a href="./legalnotes.html">Legal notice</a>
+                    <a href="">Privacy Policy</a>
+                    <a href="">Legal notice</a>
                 </footer>
                 </div>
             </div>
@@ -46,7 +46,7 @@
                             Kanban Project Management Tool
                         </div>
                         <div class="user-header">
-                            <a class="help" href="./help.html"><img src="./assets/img/help.svg" alt="help-logo"></a>
+                            <a class="help" href=""><img src="./assets/img/help.svg" alt="help-logo"></a>
                             <div class="user-icon">
                                 <button class="header-button" id="header-button">SM</button>
                             </div>
@@ -54,7 +54,7 @@
                                 <a class="help-switch hidden-on-desktop" id="help-switch" href="./help.html">Help</a>
                                 <a href="./legalnotes.html">Legal notice</a>
                                 <a href="./privacy.html">Privacy Policy</a>
-                                <a href="">Log Out</a>
+                                <a onclick="">Log Out</a>
                             </div>
                         </div>
                     </div>
@@ -97,7 +97,7 @@
                                 </div>
                             </div>
                             <div class="add-contact-container">
-                                <div class="close-btn" onclick="CloseAddDialog()">
+                                <div class="close-btn" onclick="CloseAddContactDialog()">
                                     <img src="" alt="">
                                 </div>
                                 <div class="add-contact-form">
@@ -105,24 +105,35 @@
                                         <img src="./assets/img/add-contact-badge.svg" alt="contact-badge">
                                     </div>
                                     <div class="contactForm">
-                                        <div class="inputContainer">
-                                            <input type="text" placeholder="Full Name" id="name_input" required onblur="contactNameValidation()">
+                                        <div class="input-and-errordiv">
+                                        <div class="inputContainer" id="inputContainer_name">
+                                            <input type="text" placeholder="Full Name" id="name_input" required onblur="checkField(`contact`, `name`, `name_input`,`name_error`, `createContactBtn`, `inputContainer_name`)">
                                             <img src="./assets/img/add-contact-person-icon.svg" alt="person-icon">
                                         </div>
-                                        <div class="inputContainer">
-                                            <input type="email" placeholder="test@hot.de" id="email_input" required onblur="contactEmailValidation()">
+                                        <span id="name_error"></span>
+                                        </div>
+
+                                        <div class="input-and-errordiv">
+                                        <div class="inputContainer" id="inputContainer_email">
+                                            <input type="email" placeholder="test@hot.de" id="email_input" required onblur="checkField(`contact`, `email`, `email_input`,`email_error`, `createContactBtn`, `inputContainer_email`)">
                                             <img src="./assets/img/add-contact-mail-icon.svg" alt="mail-icon">
                                         </div>
-                                        <div class="inputContainer">
-                                            <input type="tel" placeholder="+49 123 4567890" id="phone_input" required onblur="contactPhoneValidation()">
+                                        <span id="email_error"></span>
+                                        </div>
+
+                                        <div class="input-and-errordiv">
+                                        <div class="inputContainer" id="inputContainer_phone">
+                                            <input type="tel" placeholder="+49 123 4567890" id="phone_input" required onblur="checkField(`contact`, `phone`, `phone_input`,`phone_error`, `createContactBtn`, `inputContainer_phone`)">
                                             <img src="./assets/img/add-contact-call-icon.svg" alt="call-icon">
+                                        </div>
+                                        <Span id="phone_error"></Span>
                                         </div>
                                         <div class="validationErrorMsg" id="validationErrorMsg"></div>
                                         <div class="add-contact-buttons">
                                             <button class="secondary-btn-default-icon" id="cancelBtn" onclick="">Cancel
                                                 <img src="" alt="">
                                             </button>
-                                            <button class="primary-btn-default-icon" id="createContactBtn" onclick="addNewContact()">Create contact
+                                            <button class="primary-btn-default-icon" id="createContactBtn" disabled onclick="addNewContact()">Create contact
                                                 <img src="./assets/img/create-contact-check.svg" alt="">
                                             </button>
                                         </div>
@@ -194,7 +205,8 @@
         </div>
     </div>
 </body>
-<script src="./Js/contactsFirebaseCode.js"></script>
+<script src="./Js/color.js"></script>
+<script src="./Js/script.js"></script>
 <script src="./Js/contact-Overlay.js"></script>
 <script src="./Js/contacts-js.js"></script>
 <script src="./Js/contacts-template.js"></script>
