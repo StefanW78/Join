@@ -12,7 +12,6 @@ let SummaryDiv = document.getElementById(`summary-div`)
 let AnimationWelcomePage = document.getElementById(`anima-welcom-page`)
 const SignedUserName = document.getElementById("signedUser");
 
-let Firebase_URL = "Firebase_URL"
 
 
 function init() {
@@ -22,38 +21,10 @@ function init() {
 }
 
 
-async function loadTodos() {
-    
-    try{
-        const response = await fetch(Firebase_URL + ".json")
-
-        if (!response.ok) {
-            throw new Error(`HTTP error! status: ${response.status}`);
-        }
-        
-        const ResponseToJson = await response.json();
-
-        let fetchdData = {};
-        
-        if (ResponseToJson && typeof ResponseToJson === "object") {
-      for (const [id, todoData] of Object.entries(ResponseToJson)) {
-        fetchdData[id] = { id, ...todoData };
-      }
-    }
-
-        return fetchdData;
-    }catch (error) {
-    console.error("Error loading todos:", error);
-    return {};
-  }
-
-
-}
-
 async function renderSummary() {
   renderName();
 
-  const fetchdData = await loadTodos();
+  const fetchdData = await loadDataBase("tasks");
   const todos = Object.values(fetchdData);
 
   // Zahlen berechnen
