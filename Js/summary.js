@@ -77,7 +77,7 @@ function renderName() {
 
 
 function greetingGuest() {
-  const checkQueries = window.matchMedia("(max-width: 864px)");
+  const checkQueries = window.matchMedia("(max-width: 1092px)");
   if (checkQueries.matches) {
     AnimationWelcomeAnimation()
   }

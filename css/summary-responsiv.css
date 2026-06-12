@@ -1,11 +1,6 @@
 @media (max-width: 1092px) {
 
-main{
-    padding: 45px 50px 0px 75px;
-}
-}
 
-@media (max-width: 864px){
     /* Welcome-Mobile Div */
     .anima-welcom-page {
         position: absolute;
@@ -50,14 +45,6 @@ main{
         padding: 20px 15px;
     }
 
-    .main-title{
-        font-size: 47px;
-
-    }
-
-    .second-title{
-        font-size: 20px;
-    }
 
     .summary-div{
         gap: 40px;
@@ -74,6 +61,23 @@ main{
         height: 3px;
         width: 90px;
         order: 2;
+    }
+
+    .summary-main-board{
+        justify-content: center;
+    }
+}
+
+@media (max-width: 864px){
+    /* Welcome-Mobile Div */
+
+    .main-title{
+        font-size: 47px;
+
+    }
+
+    .second-title{
+        font-size: 20px;
     }
 
     .overview-container-items.box-1:hover,
