@@ -81,8 +81,5 @@ document.addEventListener('DOMContentLoaded', () => {
     initSimpleDragAndDrop();
 });
 
-function renderAddTaskOverlay(params) {
-    let addTaskOverlaystart = document.getElementById{}
-    
-}
+
 
