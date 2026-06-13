@@ -117,3 +117,21 @@
         font-size: 18px;
     }
 }
+
+@media (max-width: 400px){
+        .overview-container-items{
+            padding: 16px 10px;
+            gap: 15px;
+        }
+        .overview-container-items img{
+            width: 40px;
+        }
+
+        .summary-overview-boxes h4{
+            font-size: 15px;
+        }
+
+        .summary-overview-boxes span{
+            font-size: 35px;
+        }
+}

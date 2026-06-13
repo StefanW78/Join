@@ -58,3 +58,10 @@
         padding: 20px 15px;
     }
 }
+
+@media (max-width: 470px){
+    .sidebar-links a{
+        width: 70px;
+        font-size: 15px;
+    }
+}
