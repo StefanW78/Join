@@ -135,3 +135,13 @@
             font-size: 35px;
         }
 }
+
+@media (max-width: 350px){
+    .welcomeMsg{
+        font-size: 35px;
+    }
+
+    .signedUser{
+        font-size: 38px;
+    }
+}

@@ -79,9 +79,9 @@
     }
 }
 
-@media (max-width: 400px){
+@media (max-width: 470px){
 .mobile-view-linkandfooter footer a{
-    width: 100px;
+    width: 100px !important;
     font-size: 15px;
 }
 .mobile-view-linkandfooter{
