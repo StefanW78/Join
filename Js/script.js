@@ -373,3 +373,9 @@ function resetForm(formKey, buttonId, fields) {
 //Beispiel 
 //resetForm("contact", "createContactBtn", ["name", "email", "phone"]);
 //Wird dann in Beispiel in addnewContact unter popUpMassage gepackt
+
+function logout() {
+  localStorage.removeItem("userStatus")
+  localStorage.removeItem("username")
+  window.location.href = "./index.html";
+}
