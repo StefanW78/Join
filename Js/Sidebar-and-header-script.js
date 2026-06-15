@@ -2,7 +2,7 @@ let DropDowncontain = document.getElementById(`dropdown-menu`)
 let dropdownButton = document.getElementById(`header-button`)
 const mediaQuery = window.matchMedia("(max-width: 1092px)");
 //später entfernen
-localStorage.setItem("username", "Dennis Kollak");
+// localStorage.setItem("username", "Dennis Kollak");
 
 
 DropDowncontain.classList.add("d_none");
