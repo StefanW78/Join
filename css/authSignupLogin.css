@@ -60,35 +60,21 @@
 }
 
 .authPage {
-
   min-height: 100vh;
-
   background-color: #f6f7f8;
-
   display: flex;
-
   flex-direction: column;
-
   padding: 40px 48px;
-
   width: 100%;
-
   max-width: 1440px;
-
   margin: 0 auto;
-
 }
 
 .authCenter {
-
   flex: 1;
-
   display: flex;
-
   justify-content: center;
-
   align-items: center;
-
 }
 
 .authTopbar {
@@ -145,7 +131,7 @@
     box-shadow 150ms ease-in-out;
 }
 
-.smallPrimaryBtn:hover{
+.smallPrimaryBtn:hover {
   background-color: #29abe2;
 }
 
@@ -275,7 +261,6 @@
 .primaryAuthBtn:hover {
   background-color: #29abe2;
   box-shadow: 0 4px 3px #a8a8a8;
-  
 }
 
 .secondaryAuthBtn {
@@ -382,4 +367,43 @@
   display: flex;
   justify-content: center;
   align-items: center;
+}
+
+.dNone {
+  display: none !important;
+}
+
+.login-success-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 3000;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  pointer-events: none;
+}
+
+.login-success-box {
+  background-color: #2a3647;
+  color: white;
+  padding: 24px 32px;
+  border-radius: 20px;
+
+  font-size: 20px;
+  font-weight: 700;
+  text-align: center;
+
+  transform: translateY(100vh);
+  opacity: 0;
+
+  transition:
+    transform 350ms ease-in-out,
+    opacity 350ms ease-in-out;
+}
+
+.login-success-overlay.show .login-success-box {
+  transform: translateY(0);
+  opacity: 1;
 }

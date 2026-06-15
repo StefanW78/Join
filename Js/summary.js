@@ -12,7 +12,7 @@ let SummaryDiv = document.getElementById(`summary-div`)
 let AnimationWelcomePage = document.getElementById(`anima-welcom-page`)
 const SignedUserName = document.getElementById("signedUser");
 
-let Firebase_URL = "Your Firebase_URL"
+let Firebase_URL = "https://test-2651c-default-rtdb.europe-west1.firebasedatabase.app/";
 
 
 function init() {

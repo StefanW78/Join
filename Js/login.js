@@ -35,7 +35,7 @@ loginForm.addEventListener("submit", async (event) => {
     setInputError(
       loginEmail,
       loginEmailError,
-      "Please enter a valid email address."
+      "Please enter a valid email address.",
     );
     return;
   }
@@ -44,7 +44,7 @@ loginForm.addEventListener("submit", async (event) => {
     setInputError(
       loginPassword,
       loginPasswordError,
-      "Please enter your password."
+      "Please enter your password.",
     );
     return;
   }
@@ -60,7 +60,7 @@ loginForm.addEventListener("submit", async (event) => {
       setInputError(
         loginEmail,
         loginEmailError,
-        "Check your email and password. Please try again."
+        "Check your email and password. Please try again.",
       );
       setInputError(loginPassword, loginPasswordError, "");
       return;
@@ -75,16 +75,22 @@ loginForm.addEventListener("submit", async (event) => {
         name: user.name,
         email: user.email,
         initials: user.initials,
-      })
+      }),
     );
+    localStorage.setItem("userStatus", "user");
+    localStorage.setItem("username", user.name);
 
-    window.location.href = "./addTask.html";
+    showLoginSuccessOverlay();
+
+    setTimeout(() => {
+      window.location.href = "./summary.html";
+    }, 1000);
   } catch (error) {
     console.error(error);
     setInputError(
       loginEmail,
       loginEmailError,
-      "Login failed. Please try again."
+      "Login failed. Please try again.",
     );
   }
 });
@@ -97,13 +103,17 @@ guestLoginBtn.addEventListener("click", () => {
       name: "Guest User",
       email: "guest@example.com",
       initials: "GU",
-    })
+    }),
   );
 
   localStorage.setItem("userStatus", "guest");
   localStorage.setItem("username", "guest");
 
-  window.location.href = "./summary.html";
+  showLoginSuccessOverlay();
+
+  setTimeout(() => {
+    window.location.href = "./summary.html";
+  }, 1000);
 });
 
 loginEmail.addEventListener("input", () => {
@@ -131,4 +141,14 @@ function clearAllErrors() {
 
 function isValidEmail(email) {
   return email.includes("@") && email.includes(".");
+}
+
+function showLoginSuccessOverlay() {
+  const overlay = document.getElementById("loginSuccessOverlay");
+
+  overlay.classList.remove("dNone");
+
+  setTimeout(() => {
+    overlay.classList.add("show");
+  }, 10);
 }
