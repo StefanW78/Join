@@ -1,19 +1,31 @@
 const addTaskOverlay = document.getElementById("addTaskOverlay");
-const closeAddTaskOverlay = document.getElementById("closeAddTaskOverlay");
+const closeAddTaskOverlayBtn = document.getElementById("closeAddTaskOverlay");
 const openAddTaskButtons = document.querySelectorAll(".openAddTaskBtn");
 
 openAddTaskButtons.forEach((button) => {
-  button.addEventListener("click", () => {
-    addTaskOverlay.classList.remove("dNone");
-  });
+  button.addEventListener("click", openAddTaskOverlay);
 });
 
-closeAddTaskOverlay.addEventListener("click", () => {
-  addTaskOverlay.classList.add("dNone");
-});
+closeAddTaskOverlayBtn.addEventListener("click", closeAddTaskOverlay);
 
 addTaskOverlay.addEventListener("click", (event) => {
   if (event.target === addTaskOverlay) {
-    addTaskOverlay.classList.add("dNone");
+    closeAddTaskOverlay();
   }
 });
+
+function openAddTaskOverlay() {
+  addTaskOverlay.classList.remove("dNone");
+
+  setTimeout(() => {
+    addTaskOverlay.classList.add("show");
+  }, 10);
+}
+
+function closeAddTaskOverlay() {
+  addTaskOverlay.classList.remove("show");
+
+  setTimeout(() => {
+    addTaskOverlay.classList.add("dNone");
+  }, 300);
+}

@@ -348,17 +348,30 @@
 }
 
 .dNone {
-  display: none;
+  display: none !important;
 }
 
 .add-task-overlay {
   position: fixed;
   inset: 0;
-  background: rgba(0, 0, 0, 0.35);
+  background: rgba(0, 0, 0, 0);
   z-index: 2000;
+
   display: flex;
   justify-content: center;
   align-items: center;
+
+  opacity: 0;
+  pointer-events: none;
+  transition:
+    opacity 250ms ease-in-out,
+    background 250ms ease-in-out;
+}
+
+.add-task-overlay.show {
+  opacity: 1;
+  pointer-events: auto;
+  background: rgba(0, 0, 0, 0.35);
 }
 
 .add-task-modal {
@@ -369,14 +382,11 @@
   background: white;
   border-radius: 30px;
   padding: 64px;
+
+  transform: translateX(100vw);
+  transition: transform 300ms ease-in-out;
 }
 
-.add-task-close {
-  position: absolute;
-  top: 40px;
-  right: 40px;
-  border: none;
-  background: transparent;
-  font-size: 32px;
-  cursor: pointer;
+.add-task-overlay.show .add-task-modal {
+  transform: translateX(0);
 }
