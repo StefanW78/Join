@@ -1,4 +1,5 @@
-@media (max-width: 768px) {
+
+@media (max-width: 1092px) {
   .addTaskContent,
   .taskForm,
   .formGrid,
@@ -10,9 +11,6 @@
     min-width: 0;
   }
 
-  .addTaskContent {
-    max-width: 100%;
-  }
 
   .addTaskTitle {
     margin: 0 0 32px 0;
@@ -111,7 +109,6 @@
   }
 
   .taskFooter {
-    margin-top: 24px;
     display: flex;
     flex-direction: column-reverse;
     align-items: stretch;
