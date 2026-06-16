@@ -8,6 +8,8 @@
     <link rel="stylesheet" href="./css/layoutMobil.css" />
     <link rel="stylesheet" href="./css/addTask.css" />
     <link rel="stylesheet" href="./css/addTaskMobile.css" />
+    <link rel="stylesheet" href="./css/sidebar-and-header-css.css">
+    <link rel="stylesheet" href="./css/sidebar-and-header-responsiv.css">
     <link rel="icon" href="./assets/img/Capa 2.svg" />
     <script type="module" src="./Js/auth-script.js"></script>
   </head>
@@ -49,9 +51,32 @@
           <a href="./legalnotes.html" class="footerLink">Legal notice</a>
         </div>
       </aside>
+      <div class="header-and-content-div">
+                <div class="header-div">
+                    <div class="header-content">
+                        <div class="header-img">
+                            <img src="./assets/img/Logo_for_Favicon_construction.png" alt="header-logo">
+                        </div>
+                        <div class="header-title">
+                            Kanban Project Management Tool
+                        </div>
+                        <div class="user-header">
+                            <a class="help" href=""><img src="./assets/img/help.svg" alt="help-logo"></a>
+                            <div class="user-icon">
+                                <button class="header-button" id="header-button">SM</button>
+                            </div>
+                            <div class="dropdown-menu d_none" id="dropdown-menu">
+                                <a class="help-switch hidden-on-desktop" id="help-switch" href="./help.html">Help</a>
+                                <a href="./legalnotes.html">Legal notice</a>
+                                <a href="./privacy.html">Privacy Policy</a>
+                                <a href="" onclick="logout()">Log Out</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
 
       <div class="mainContentArea">
-        <header class="header">
+        <!-- <header class="header-div">
           <img
             class="mobileJoinLogo"
             src="./assets/img/Logo-logged-in-mobile.svg"
@@ -64,7 +89,7 @@
             <img class="helpIcon" src="./assets/img/help.svg" alt="Help Icon" />
             <div class="userBadge userInitials">SM</div>
           </div>
-        </header>
+        </header> -->
 
         <main class="content">
           <section class="addTaskContent">
@@ -241,5 +266,6 @@
     </nav>
     <script type="module" src="./Js/userBadge.js"></script>
     <script type="module" src="./Js/addTask.js"></script>
+    <script src="./Js/Sidebar-and-header-script.js"></script>
   </body>
 </html>

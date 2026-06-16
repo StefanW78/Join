@@ -129,6 +129,10 @@
   gap: 8px;
 }
 
+.priorityBtn:hover {
+  box-shadow: 0 4px 4px rgba(0, 0, 0, 0.18);
+}
+
 .urgentBtn img,
 .mediumBtn img,
 .lowBtn img {
@@ -265,10 +269,15 @@
   margin-bottom: 6px;
 }
 
+
 .activeUrgent {
   background: #ff3d00;
   color: white;
   font-weight: 700;
+}
+
+.activeUrgent:hover {
+  box-shadow: none;
 }
 
 .activeMedium {
@@ -277,9 +286,16 @@
   font-weight: 700;
 }
 
+.activeMedium:hover {
+  box-shadow: none;
+}
+
 .activeLow {
   background: #7ae229;
   color: white;
   font-weight: 700;
 }
 
+.activeLow:hover {
+  box-shadow: none;
+}

@@ -133,7 +133,10 @@
 
 .smallPrimaryBtn:hover {
   background-color: #29abe2;
+  box-shadow: 0 4px 3px #a8a8a8;
+  
 }
+
 
 .authCenter {
   flex: 1;

@@ -74,7 +74,7 @@ signupForm.addEventListener("submit", async (event) => {
 
     await postData("users", user);
 
-    signupSuccess.textContent = "Registrierung erfolgreich.";
+    showSignupSuccessOverlay();
 
     setTimeout(() => {
       window.location.href = "./index.html";
@@ -128,4 +128,14 @@ function getInitials(name = "") {
     .slice(0, 2)
     .map((part) => part[0].toUpperCase())
     .join("");
+}
+
+function showSignupSuccessOverlay() {
+  const overlay = document.getElementById("signupSuccessOverlay");
+
+  overlay.classList.remove("dNone");
+
+  setTimeout(() => {
+    overlay.classList.add("show");
+  }, 10);
 }
