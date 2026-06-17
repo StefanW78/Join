@@ -103,7 +103,7 @@ function AnimationWelcomeAnimation() {
 const boxItems = document.querySelectorAll(".overview-container-items");
 boxItems.forEach((box) => {
   box.addEventListener("click", () => {
-    window.location.href = "index.html";
+    window.location.href = "board.html";
   });
 });
 
