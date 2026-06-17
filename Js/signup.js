@@ -9,6 +9,7 @@ const signupPrivacy = document.getElementById("signupPrivacy");
 const signupError = document.getElementById("signupError");
 const signupSuccess = document.getElementById("signupSuccess");
 
+const nameError = document.getElementById("nameError");
 const emailError = document.getElementById("emailError");
 const passwordError = document.getElementById("passwordError");
 const confirmPasswordError = document.getElementById("confirmPasswordError");
@@ -17,6 +18,10 @@ signupForm.addEventListener("submit", async (event) => {
   event.preventDefault();
 
   clearAllErrors();
+
+  if (!validateUsername()) {
+  return;
+}
 
   const name = signupName.value.trim();
   const email = signupEmail.value.trim();
@@ -47,7 +52,7 @@ signupForm.addEventListener("submit", async (event) => {
   }
 
   if (!signupPrivacy.checked) {
-    signupError.textContent = "Bitte akzeptiere die Privacy Policy.";
+    signupError.textContent = "Please accept Privacy Policy.";
     return;
   }
 
@@ -59,7 +64,7 @@ signupForm.addEventListener("submit", async (event) => {
       setInputError(
         signupEmail,
         emailError,
-        "Diese E-Mail-Adresse wird bereits verwendet."
+        "These email-address is already in use."
       );
       return;
     }
@@ -81,8 +86,40 @@ signupForm.addEventListener("submit", async (event) => {
     }, 1000);
   } catch (error) {
     console.error(error);
-    signupError.textContent = "Registrierung fehlgeschlagen.";
+    signupError.textContent = "Something went wrong. Registry does not work.";
   }
+});
+
+signupName.addEventListener("blur", validateUsername);
+
+function validateUsername() {
+  const name = signupName.value.trim();
+
+  clearInputError(signupName, nameError);
+
+  if (name === "") {
+    setInputError(
+      signupName,
+      nameError,
+      "Bitte Vor- und Nachname eintragen."
+    );
+    return false;
+  }
+
+  if (!name.includes(" ")) {
+    setInputError(
+      signupName,
+      nameError,
+      "Bitte Vor- und Nachname eintragen."
+    );
+    return false;
+  }
+
+  return true;
+}
+
+signupName.addEventListener("input", () => {
+  clearInputError(signupName, nameError);
 });
 
 signupEmail.addEventListener("input", () => {
@@ -111,6 +148,7 @@ function clearAllErrors() {
   signupError.textContent = "";
   signupSuccess.textContent = "";
 
+  clearInputError(signupName, nameError);
   clearInputError(signupEmail, emailError);
   clearInputError(signupPassword, passwordError);
   clearInputError(signupConfirmPassword, confirmPasswordError);
