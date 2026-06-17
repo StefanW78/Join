@@ -22,6 +22,11 @@ const categoryList = document.getElementById("categoryList");
 
 const subtaskInput = document.getElementById("subtasks");
 const subtaskList = document.getElementById("subtaskList");
+const addSubtaskBtn = document.getElementById("addSubtaskBtn");
+const clearSubtaskBtn = document.getElementById("clearSubtaskBtn");
+const moreSubtasksDropdown = document.getElementById("moreSubtasksDropdown");
+
+const taskAddedOverlay = document.getElementById("taskAddedOverlay");
 
 let selectedPriority = "medium";
 let selectedCategory = "";
@@ -137,7 +142,13 @@ taskForm.addEventListener("submit", async (event) => {
   try {
     const result = await postData("tasks", task);
     console.log("Task gespeichert mit ID:", result.name);
+
+    showTaskAddedOverlay();
     resetFormState();
+
+    setTimeout(() => {
+      window.location.href = "./board.html";
+    }, 1200);
   } catch (error) {
     console.error("Fehler beim Speichern:", error);
   }
@@ -250,17 +261,20 @@ function initAssignedDropdown() {
   });
 
   document.addEventListener("click", (event) => {
-  const clickedInsideAssignedDropdown = event.target.closest("#assignedDropdown");
-  const clickedInsideMoreContacts = event.target.closest(".selectedContactsWrapper");
+    const clickedInsideAssignedDropdown =
+      event.target.closest("#assignedDropdown");
+    const clickedInsideMoreContacts = event.target.closest(
+      ".selectedContactsWrapper",
+    );
 
-  if (!clickedInsideAssignedDropdown) {
-    assignedList.classList.add("d_none");
-  }
+    if (!clickedInsideAssignedDropdown) {
+      assignedList.classList.add("d_none");
+    }
 
-  if (!clickedInsideMoreContacts) {
-    moreContactsDropdown.classList.add("d_none");
-  }
-});
+    if (!clickedInsideMoreContacts) {
+      moreContactsDropdown.classList.add("d_none");
+    }
+  });
 }
 
 async function loadContacts() {
@@ -316,7 +330,7 @@ function renderContacts() {
   document.querySelectorAll(".contactOption").forEach((option) => {
     option.addEventListener("click", () => {
       event.stopPropagation();
-      
+
       toggleContact(option.dataset.contactId);
       assignedInput.value = "";
       assignedInput.focus();
@@ -392,14 +406,118 @@ function initSubtasks() {
     event.preventDefault();
     addCurrentSubtaskInput();
   });
+
+  addSubtaskBtn.addEventListener("click", () => {
+    addCurrentSubtaskInput();
+  });
+
+  clearSubtaskBtn.addEventListener("click", () => {
+    subtaskInput.value = "";
+    subtaskInput.focus();
+    toggleInputFocus(subtaskInput);
+  });
+
+  document.addEventListener("click", (event) => {
+    const clickedInsideSubtasks = event.target.closest(".subtasksWrapper");
+
+    if (!clickedInsideSubtasks) {
+      moreSubtasksDropdown.classList.add("d_none");
+    }
+  });
 }
 
 function renderSubtasks() {
   subtaskList.innerHTML = "";
+  moreSubtasksDropdown.innerHTML = "";
+  moreSubtasksDropdown.classList.add("d_none");
 
-  subtasks.forEach((subtask) => {
-    subtaskList.innerHTML += `<li>${subtask.title}</li>`;
+  const visibleSubtasks = subtasks.slice(0, 4);
+  const hiddenSubtasks = subtasks.slice(4);
+
+  visibleSubtasks.forEach((subtask, index) => {
+    subtaskList.innerHTML += `
+    <li class="subtaskItem">
+      <span class="subtaskText">• ${subtask.title}</span>
+
+      <div class="subtaskItemActions">
+        <button type="button" class="editSubtaskBtn" data-index="${index}">
+          <img src="./assets/img/Subtasks change.svg" alt="Edit subtask" />
+        </button>
+
+        <button type="button" class="deleteSubtaskBtn" data-index="${index}">
+          <img src="./assets/img/SubTask delete.svg" alt="Delete subtask" />
+        </button>
+      </div>
+    </li>
+  `;
   });
+
+  if (hiddenSubtasks.length > 0) {
+    subtaskList.innerHTML += `
+      <li>
+        <button type="button" class="moreSubtasksBtn" id="moreSubtasksBtn">
+          +${hiddenSubtasks.length}
+        </button>
+      </li>
+    `;
+
+    hiddenSubtasks.forEach((subtask, index) => {
+      const realIndex = index + 4;
+
+      moreSubtasksDropdown.innerHTML += `
+    <div class="moreSubtaskItem">
+      <span class="moreSubtaskText">• ${subtask.title}</span>
+
+      <div class="subtaskItemActions">
+        <button type="button" class="editSubtaskBtn" data-index="${realIndex}">
+          <img src="./assets/img/Subtasks change.svg" alt="Edit subtask" />
+        </button>
+
+        <button type="button" class="deleteSubtaskBtn" data-index="${realIndex}">
+          <img src="./assets/img/SubTask delete.svg" alt="Delete subtask" />
+        </button>
+      </div>
+    </div>
+  `;
+    });
+
+    const moreSubtasksBtn = document.getElementById("moreSubtasksBtn");
+
+    moreSubtasksBtn.addEventListener("click", (event) => {
+      event.stopPropagation();
+      moreSubtasksDropdown.classList.toggle("d_none");
+    });
+  }
+  initSubtaskItemButtons();
+}
+
+function initSubtaskItemButtons() {
+  document.querySelectorAll(".deleteSubtaskBtn").forEach((button) => {
+    button.addEventListener("click", () => {
+      const index = Number(button.dataset.index);
+      deleteSubtask(index);
+    });
+  });
+
+  document.querySelectorAll(".editSubtaskBtn").forEach((button) => {
+    button.addEventListener("click", () => {
+      const index = Number(button.dataset.index);
+      editSubtask(index);
+    });
+  });
+}
+
+function deleteSubtask(index) {
+  subtasks.splice(index, 1);
+  renderSubtasks();
+}
+
+function editSubtask(index) {
+  subtaskInput.value = subtasks[index].title;
+  subtasks.splice(index, 1);
+  renderSubtasks();
+  subtaskInput.focus();
+  toggleInputFocus(subtaskInput);
 }
 
 function getInitials(name = "") {
@@ -481,4 +599,20 @@ function clearAllErrors() {
   clearInputError(taskTitle, taskTitleError);
   clearInputError(taskDate, taskDateError);
   clearInputError(categoryButton, categoryError);
+}
+
+function showTaskAddedOverlay() {
+  taskAddedOverlay.classList.remove("d_none");
+
+  setTimeout(() => {
+    taskAddedOverlay.classList.add("show");
+  }, 10);
+
+  setTimeout(() => {
+    taskAddedOverlay.classList.remove("show");
+  }, 1200);
+
+  setTimeout(() => {
+    taskAddedOverlay.classList.add("d_none");
+  }, 1500);
 }

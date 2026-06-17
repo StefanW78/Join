@@ -11,6 +11,7 @@
     <link rel="stylesheet" href="./css/sidebar-and-header-css.css" />
     <link rel="stylesheet" href="./css/sidebar-and-header-responsiv.css" />
     <link rel="stylesheet" href="./css/addTask.css" />
+    <link rel="stylesheet" href="./css/overlay.css" />
     <link rel="stylesheet" href="./css/addTaskMobile.css" />
 
     <link rel="icon" href="./assets/img/Capa 2.svg" />
@@ -236,12 +237,28 @@
 
                     <div class="formGroup">
                       <label for="subtasks">Subtasks</label>
-                      <input
-                        id="subtasks"
-                        type="text"
-                        placeholder="Add new subtask"
-                      />
-                      <ul class="subtaskList" id="subtaskList"></ul>
+
+                      <div class="subtaskInputWrapper">
+                        <input
+                          id="subtasks"
+                          type="text"
+                          placeholder="Add new subtask"
+                        />
+
+                        <div class="subtaskActions">
+                          <button type="button" id="clearSubtaskBtn">×</button>
+                          <div class="subtaskDivider"></div>
+                          <button type="button" id="addSubtaskBtn">✓</button>
+                        </div>
+                      </div>
+
+                      <div class="subtasksWrapper">
+                        <ul class="subtaskList" id="subtaskList"></ul>
+                        <div
+                          class="moreSubtasksDropdown d_none"
+                          id="moreSubtasksDropdown"
+                        ></div>
+                      </div>
                     </div>
                   </div>
                 </div>
@@ -262,6 +279,12 @@
             </section>
           </main>
         </div>
+      </div>
+    </div>
+    <div id="taskAddedOverlay" class="taskAddedOverlay d_none">
+      <div class="taskAddedBox">
+        <span>Task added to board</span>
+        <img src="./assets/img/board-icon.svg" alt="Board icon" />
       </div>
     </div>
 
