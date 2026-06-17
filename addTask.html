@@ -4,266 +4,267 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Add Task</title>
-    <link rel="stylesheet" href="./css/layout.css" />
-    <link rel="stylesheet" href="./css/layoutMobil.css" />
+
+    <script type="module" src="./Js/auth-script.js"></script>
+
+    <link rel="stylesheet" href="./css/standart.css" />
+    <link rel="stylesheet" href="./css/sidebar-and-header-css.css" />
+    <link rel="stylesheet" href="./css/sidebar-and-header-responsiv.css" />
     <link rel="stylesheet" href="./css/addTask.css" />
     <link rel="stylesheet" href="./css/addTaskMobile.css" />
-    <link rel="stylesheet" href="./css/sidebar-and-header-css.css">
-    <link rel="stylesheet" href="./css/sidebar-and-header-responsiv.css">
+
     <link rel="icon" href="./assets/img/Capa 2.svg" />
-    <script type="module" src="./Js/auth-script.js"></script>
   </head>
+
   <body>
-    <div class="mainContainer">
-      <aside class="sidebar">
-        <div class="sidebarTop">
-          <img
-            class="joinLogo"
-            src="./assets/img/join-logo.svg"
-            alt="Join Logo"
-          />
-
-          <nav class="mainNav">
-            <a href="./summary.html" class="navLink">
-              <img src="./assets/img/summary-icon.svg" alt="summary icon" />
-              <span>Summary</span>
-            </a>
-
-            <a href="./addTask.html" class="navLink activeNavLink">
-              <img src="./assets/img/addTask-icon.svg" alt="add task icon" />
-              <span>Add Task</span>
-            </a>
-
-            <a href="./board.html" class="navLink">
-              <img src="./assets/img/board-icon.svg" alt="board icon" />
-              <span>Board</span>
-            </a>
-
-            <a href="./contacts.html" class="navLink">
-              <img src="./assets/img/contacts-icon.svg" alt="contacts icon" />
-              <span>Contacts</span>
-            </a>
-          </nav>
-        </div>
-
-        <div class="sidebarBottom">
-          <a href="./privacy.html" class="footerLink">Privacy Policy</a>
-          <a href="./legalnotes.html" class="footerLink">Legal notice</a>
-        </div>
-      </aside>
-      <div class="header-and-content-div">
-                <div class="header-div">
-                    <div class="header-content">
-                        <div class="header-img">
-                            <img src="./assets/img/Logo_for_Favicon_construction.png" alt="header-logo">
-                        </div>
-                        <div class="header-title">
-                            Kanban Project Management Tool
-                        </div>
-                        <div class="user-header">
-                            <a class="help" href=""><img src="./assets/img/help.svg" alt="help-logo"></a>
-                            <div class="user-icon">
-                                <button class="header-button" id="header-button">SM</button>
-                            </div>
-                            <div class="dropdown-menu d_none" id="dropdown-menu">
-                                <a class="help-switch hidden-on-desktop" id="help-switch" href="./help.html">Help</a>
-                                <a href="./legalnotes.html">Legal notice</a>
-                                <a href="./privacy.html">Privacy Policy</a>
-                                <a href="" onclick="logout()">Log Out</a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-      <div class="mainContentArea">
-        <!-- <header class="header-div">
-          <img
-            class="mobileJoinLogo"
-            src="./assets/img/Logo-logged-in-mobile.svg"
-            alt="Join Logo"
-          />
-
-          <p class="headlineText">Kanban Project Management Tool</p>
-
-          <div class="headerRight">
-            <img class="helpIcon" src="./assets/img/help.svg" alt="Help Icon" />
-            <div class="userBadge userInitials">SM</div>
+    <div class="body-div">
+      <div class="sidebar-wraper">
+        <div class="sidebar">
+          <div class="sidebar-logo-div">
+            <img src="./assets/img/join-logo.svg" alt="Join Logo" />
           </div>
-        </header> -->
 
-        <main class="content">
-          <section class="addTaskContent">
-            <h1 class="addTaskTitle">Add Task</h1>
+          <div class="links-and-footer-div">
+            <div class="sidebar-links">
+              <a href="./summary.html">
+                <img src="./assets/img/summary-icon.svg" alt="summary-logo" />
+                Summary
+              </a>
 
-            <form class="taskForm" id="taskForm">
-              <div class="formGrid">
-                <div class="formColumn">
-                  <div class="formGroup">
-                    <label for="taskTitle"
-                      >Title<span class="required">*</span></label
-                    >
-                    <input
-                      id="taskTitle"
-                      type="text"
-                      placeholder="Enter a title"
-                    />
-                    <p class="fieldError" id="taskTitleError"></p>
-                  </div>
+              <a class="current-link" href="./addTask.html">
+                <img src="./assets/img/addTask-icon.svg" alt="add-task-logo" />
+                Add-Task
+              </a>
 
-                  <div class="formGroup">
-                    <label for="taskDescription">Description</label>
-                    <textarea
-                      id="taskDescription"
-                      placeholder="Enter a Description"
-                    ></textarea>
-                  </div>
+              <a href="./board.html">
+                <img src="./assets/img/board-icon.svg" alt="board-logo" />
+                Board
+              </a>
 
-                  <div class="formGroup">
-                    <label for="taskDate"
-                      >Due date<span class="required">*</span></label
-                    >
-                    <div class="inputWithIcon">
-                      <input id="taskDate" type="date" />
-                      <img
-                        src="./assets/img/calendar-icon.svg"
-                        alt="calendar icon"
-                      />
-                    </div>
-                    <p class="fieldError" id="taskDateError"></p>
-                  </div>
+              <a href="./contacts.html">
+                <img src="./assets/img/contacts-icon.svg" alt="contacts-logo" />
+                Contacts
+              </a>
+            </div>
+
+            <footer>
+              <a href="./privacy.html">Privacy Policy</a>
+              <a href="./legalnotes.html">Legal notice</a>
+            </footer>
+          </div>
+        </div>
+
+        <div class="header-and-content-div">
+          <div class="header-div">
+            <div class="header-content">
+              <div class="header-img">
+                <img
+                  src="./assets/img/Logo_for_Favicon_construction.png"
+                  alt="header-logo"
+                />
+              </div>
+
+              <div class="header-title">Kanban Project Management Tool</div>
+
+              <div class="user-header">
+                <a class="help" href="./help.html">
+                  <img src="./assets/img/help.svg" alt="help-logo" />
+                </a>
+
+                <div class="user-icon">
+                  <button class="header-button" id="header-button">SM</button>
                 </div>
 
-                <div class="formDivider"></div>
+                <div class="dropdown-menu d_none" id="dropdown-menu">
+                  <a
+                    class="help-switch hidden-on-desktop"
+                    id="help-switch"
+                    href="./help.html"
+                  >
+                    Help
+                  </a>
+                  <a href="./legalnotes.html">Legal notice</a>
+                  <a href="./privacy.html">Privacy Policy</a>
+                  <a href="" onclick="logout()">Log Out</a>
+                </div>
+              </div>
+            </div>
+          </div>
 
-                <div class="formColumn">
-                  <div class="formGroup">
-                    <label>Priority</label>
+          <main class="main-container">
+            <section class="addTaskContent">
+              <h1 class="addTaskTitle">Add Task</h1>
 
-                    <div class="priorityButtons">
-                      <button type="button" class="priorityBtn urgentBtn">
-                        <span>Urgent</span>
-                        <img
-                          src="./assets/img/PrioDown-icon.svg"
-                          alt="urgent"
-                        />
-                      </button>
-
-                      <button
-                        type="button"
-                        class="priorityBtn mediumBtn activeMedium"
+              <form class="taskForm" id="taskForm">
+                <div class="formGrid">
+                  <div class="formColumn">
+                    <div class="formGroup">
+                      <label for="taskTitle"
+                        >Title<span class="required">*</span></label
                       >
-                        <span>Medium</span>
-                        <img
-                          src="./assets/img/PrioMedium-icon.svg"
-                          alt="medium"
-                        />
-                      </button>
-
-                      <button type="button" class="priorityBtn lowBtn">
-                        <span>Low</span>
-                        <img src="./assets/img/PrioUP-icon.svg" alt="low" />
-                      </button>
-                    </div>
-                  </div>
-
-                  <div class="formGroup">
-                    <label for="assignedTo">Assigned to</label>
-                    <div class="customDropdown" id="assignedDropdown">
                       <input
+                        id="taskTitle"
                         type="text"
-                        class="dropdownButton"
-                        id="assignedInput"
-                        placeholder="Select contacts to assign"
-                        autocomplete="off"
+                        placeholder="Enter a title"
                       />
-
-                      <div class="dropdownList dNone" id="assignedList"></div>
+                      <p class="fieldError" id="taskTitleError"></p>
                     </div>
 
-                    <div class="selectedContacts" id="selectedContacts"></div>
+                    <div class="formGroup">
+                      <label for="taskDescription">Description</label>
+                      <textarea
+                        id="taskDescription"
+                        placeholder="Enter a Description"
+                      ></textarea>
+                    </div>
+
+                    <div class="formGroup">
+                      <label for="taskDate"
+                        >Due date<span class="required">*</span></label
+                      >
+                      <div class="inputWithIcon">
+                        <input
+                          id="taskDate"
+                          type="text"
+                          placeholder="dd/mm/yyyy"
+                          inputmode="numeric"
+                          maxlength="10"
+                        />
+                        <img
+                          src="./assets/img/calendar-icon.svg"
+                          alt="calendar icon"
+                        />
+                      </div>
+                      <p class="fieldError" id="taskDateError"></p>
+                    </div>
                   </div>
 
-                  <div class="formGroup">
-                    <label for="category"
-                      >Category<span class="required">*</span></label
-                    >
+                  <div class="formDivider"></div>
 
-                    <div class="customDropdown" id="categoryDropdown">
-                      <button
-                        type="button"
-                        class="dropdownButton"
-                        id="categoryButton"
-                      >
-                        Select task category
-                      </button>
+                  <div class="formColumn">
+                    <fieldset class="formGroup priorityGroup">
+                      <legend>Priority</legend>
 
-                      <div class="dropdownList dNone" id="categoryList">
-                        <div
-                          class="dropdownOption"
-                          data-category="Technical Task"
+                      <div class="priorityButtons">
+                        <button type="button" class="priorityBtn urgentBtn">
+                          <span>Urgent</span>
+                          <img
+                            src="./assets/img/PrioDown-icon.svg"
+                            alt="urgent"
+                          />
+                        </button>
+
+                        <button
+                          type="button"
+                          class="priorityBtn mediumBtn activeMedium"
                         >
-                          Technical Task
-                        </div>
-                        <div class="dropdownOption" data-category="User Story">
-                          User Story
-                        </div>
+                          <span>Medium</span>
+                          <img
+                            src="./assets/img/PrioMedium-icon.svg"
+                            alt="medium"
+                          />
+                        </button>
+
+                        <button type="button" class="priorityBtn lowBtn">
+                          <span>Low</span>
+                          <img src="./assets/img/PrioUP-icon.svg" alt="low" />
+                        </button>
+                      </div>
+                    </fieldset>
+
+                    <div class="formGroup">
+                      <label for="assignedInput">Assigned to</label>
+                      <div class="customDropdown" id="assignedDropdown">
+                        <input
+                          type="text"
+                          class="dropdownButton"
+                          id="assignedInput"
+                          placeholder="Select contacts to assign"
+                          autocomplete="off"
+                        />
+
+                        <div
+                          class="dropdownList d_none"
+                          id="assignedList"
+                        ></div>
+                      </div>
+
+                      <div class="selectedContactsWrapper">
+                        <div
+                          class="selectedContacts"
+                          id="selectedContacts"
+                        ></div>
+                        <div
+                          class="moreContactsDropdown d_none"
+                          id="moreContactsDropdown"
+                        ></div>
                       </div>
                     </div>
 
-                    <p class="fieldError" id="categoryError"></p>
-                  </div>
+                    <div class="formGroup">
+                      <label for="categoryButton"
+                        >Category<span class="required">*</span></label
+                      >
 
-                  <div class="formGroup">
-                    <label for="subtasks">Subtasks</label>
-                    <input
-                      id="subtasks"
-                      type="text"
-                      placeholder="Add new subtask"
-                    />
-                    <ul class="subtaskList" id="subtaskList"></ul>
+                      <div class="customDropdown" id="categoryDropdown">
+                        <button
+                          type="button"
+                          class="dropdownButton"
+                          id="categoryButton"
+                        >
+                          Select task category
+                        </button>
+
+                        <div class="dropdownList d_none" id="categoryList">
+                          <div
+                            class="dropdownOption"
+                            data-category="Technical Task"
+                          >
+                            Technical Task
+                          </div>
+                          <div
+                            class="dropdownOption"
+                            data-category="User Story"
+                          >
+                            User Story
+                          </div>
+                        </div>
+                      </div>
+
+                      <p class="fieldError" id="categoryError"></p>
+                    </div>
+
+                    <div class="formGroup">
+                      <label for="subtasks">Subtasks</label>
+                      <input
+                        id="subtasks"
+                        type="text"
+                        placeholder="Add new subtask"
+                      />
+                      <ul class="subtaskList" id="subtaskList"></ul>
+                    </div>
                   </div>
                 </div>
-              </div>
 
-              <div class="taskFooter">
-                <p class="requiredText">
-                  <span class="required">*</span>This field is required
-                </p>
+                <div class="taskFooter">
+                  <p class="requiredText">
+                    <span class="required">*</span>This field is required
+                  </p>
 
-                <div class="taskActions">
-                  <button type="reset" class="clearBtn">Clear ✕</button>
-                  <button type="submit" class="createTaskBtn">
-                    Create Task ✓
-                  </button>
+                  <div class="taskActions">
+                    <button type="reset" class="clearBtn">Clear ✕</button>
+                    <button type="submit" class="createTaskBtn">
+                      Create Task ✓
+                    </button>
+                  </div>
                 </div>
-              </div>
-            </form>
-          </section>
-        </main>
+              </form>
+            </section>
+          </main>
+        </div>
       </div>
     </div>
 
-    <nav class="mobileBottomNav">
-      <a href="./summary.html" class="mobileNavLink">
-        <img src="./assets/img/summary-icon.svg" alt="Summary" />
-        <span>Summary</span>
-      </a>
-
-      <a href="./addTask.html" class="mobileNavLink activeMobileNavLink">
-        <img src="./assets/img/addTask-icon.svg" alt="Add Task" />
-        <span>Add Task</span>
-      </a>
-
-      <a href="./board.html" class="mobileNavLink">
-        <img src="./assets/img/board-icon.svg" alt="Board" />
-        <span>Board</span>
-      </a>
-
-      <a href="./contacts.html" class="mobileNavLink">
-        <img src="./assets/img/contacts-icon.svg" alt="Contacts" />
-        <span>Contacts</span>
-      </a>
-    </nav>
     <script type="module" src="./Js/userBadge.js"></script>
     <script type="module" src="./Js/addTask.js"></script>
     <script src="./Js/Sidebar-and-header-script.js"></script>

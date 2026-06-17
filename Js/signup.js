@@ -57,14 +57,14 @@ signupForm.addEventListener("submit", async (event) => {
   }
 
   try {
-    const users = await loadData("users");
+    const users = (await loadData("users")) || {};
     const userExists = Object.values(users).some((user) => user.email === email);
 
     if (userExists) {
       setInputError(
         signupEmail,
         emailError,
-        "These email-address is already in use."
+        "This email address is already in use."
       );
       return;
     }
@@ -86,7 +86,7 @@ signupForm.addEventListener("submit", async (event) => {
     }, 1000);
   } catch (error) {
     console.error(error);
-    signupError.textContent = "Something went wrong. Registry does not work.";
+    signupError.textContent = "Something went wrong. Registration failed.";
   }
 });
 
@@ -94,19 +94,11 @@ signupName.addEventListener("blur", validateUsername);
 
 function validateUsername() {
   const name = signupName.value.trim();
+  const nameParts = name.split(" ").filter(Boolean);
 
   clearInputError(signupName, nameError);
 
-  if (name === "") {
-    setInputError(
-      signupName,
-      nameError,
-      "Bitte Vor- und Nachname eintragen."
-    );
-    return false;
-  }
-
-  if (!name.includes(" ")) {
+  if (nameParts.length < 2) {
     setInputError(
       signupName,
       nameError,
