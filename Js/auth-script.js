@@ -1,9 +1,9 @@
-window.onload = function () {
+window.addEventListener("load", function () {
   const userStatus = localStorage.getItem("userStatus");
-  const UID = localStorageStorage.getItem("userID");
+  const UID = localStorage.getItem("userID");
 
   // Wenn der Benutzer nicht eingeloggt ist.
   if (!userStatus || (userStatus !== "guest" && userStatus !== "loggedIn")) {
-    window.location.href = "../html/index.html"; // Weiterleitung zur Login-Seite
+    window.location.href = "./index.html";
   }
-};
+});
