@@ -11,6 +11,7 @@ const currentUser = JSON.parse(localStorage.getItem("currentUser"));
 const taskForm = document.getElementById("taskForm");
 const taskTitle = document.getElementById("taskTitle");
 const taskDescription = document.getElementById("taskDescription");
+const clearTaskBtn = document.getElementById("clearTaskBtn");
 
 const assignedInput = document.getElementById("assignedInput");
 const assignedList = document.getElementById("assignedList");
@@ -39,6 +40,10 @@ initCategoryDropdown();
 initAssignedDropdown();
 initSubtasks();
 loadContacts();
+
+clearTaskBtn.addEventListener("click", () => {
+  resetFormState();
+});
 
 function validateTaskDate() {
   clearInputError(taskDate, taskDateError);
@@ -328,7 +333,7 @@ function renderContacts() {
   });
 
   document.querySelectorAll(".contactOption").forEach((option) => {
-    option.addEventListener("click", () => {
+    option.addEventListener("click", (event) => {
       event.stopPropagation();
 
       toggleContact(option.dataset.contactId);
@@ -552,8 +557,15 @@ function resetFormState() {
 
   categoryButton.textContent = "Select task category";
   assignedInput.value = "";
+  subtaskInput.value = "";
+
+  assignedList.classList.add("d_none");
+  moreContactsDropdown.classList.add("d_none");
+  moreSubtasksDropdown.classList.add("d_none");
+  categoryList.classList.add("d_none");
 
   clearAllErrors();
+
   taskTitle.classList.remove("inputFocus");
   taskDate.classList.remove("inputFocus");
   taskDescription.classList.remove("inputFocus");

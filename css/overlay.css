@@ -347,22 +347,27 @@
   }
 }
 
-.dNone {
+.d_none {
   display: none !important;
 }
+
+/* Add Task Overlay */
 
 .add-task-overlay {
   position: fixed;
   inset: 0;
-  background: rgba(0, 0, 0, 0);
   z-index: 2000;
 
   display: flex;
   justify-content: center;
   align-items: center;
 
+  padding: 40px;
+
+  background: rgba(0, 0, 0, 0);
   opacity: 0;
   pointer-events: none;
+
   transition:
     opacity 250ms ease-in-out,
     background 250ms ease-in-out;
@@ -376,13 +381,15 @@
 
 .add-task-modal {
   position: relative;
-  width: min(1100px, 90vw);
-  max-width: 1440px;
-  max-height: 95vh;
-  overflow-y: auto;
+
+  width: min(1120px, 100%);
+
   background: white;
   border-radius: 30px;
-  padding: 64px;
+  padding: 56px 72px 40px 72px;
+
+  overflow-y: auto;
+  overflow-x: hidden;
 
   transform: translateX(100vw);
   transition: transform 300ms ease-in-out;
@@ -392,3 +399,178 @@
   transform: translateX(0);
 }
 
+.add-task-close {
+  position: absolute;
+  top: 48px;
+  right: 48px;
+
+  border: none;
+  background: transparent;
+  color: #2a3647;
+  font-size: 32px;
+  line-height: 1;
+  cursor: pointer;
+}
+
+#addTaskOverlay .add-task-close {
+  position: absolute;
+  top: 64px;
+  right: 56px;
+
+  border: none;
+  background: transparent;
+  color: #2a3647;
+  font-size: 32px;
+  line-height: 1;
+  cursor: pointer;
+}
+
+#addTaskOverlay .addTaskContent {
+  width: 100%;
+  max-width: none;
+}
+
+#addTaskOverlay .addTaskTitle {
+  margin: 0 0 42px 0;
+  font-size: 61px;
+  font-weight: 700;
+  color: #000;
+}
+
+#addTaskOverlay .taskForm {
+  min-height: 610px;
+  display: flex;
+  flex-direction: column;
+}
+
+#addTaskOverlay .formGrid {
+  display: grid;
+  grid-template-columns: 1fr 1px 1fr;
+  gap: 48px;
+  align-items: start;
+}
+
+#addTaskOverlay .formDivider {
+  width: 1px;
+  min-height: 428px;
+  background-color: #d1d1d1;
+}
+
+#addTaskOverlay .taskFooter {
+  margin-top: auto;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+}
+
+#addTaskOverlay .clearBtn,
+#addTaskOverlay .createTaskBtn {
+  height: 56px;
+}
+
+#addTaskOverlay .dropdownList {
+  z-index: 3000;
+}
+
+#addTaskOverlay .moreContactsDropdown,
+#addTaskOverlay .moreSubtasksDropdown {
+  z-index: 3000;
+}
+
+#addTaskOverlay .addTaskContent {
+  width: 100%;
+  max-width: none;
+}
+
+#addTaskOverlay .addTaskTitle {
+  margin: 0 0 40px 0;
+  font-size: 61px;
+}
+
+#addTaskOverlay .taskForm {
+  min-height: calc(100dvh - 250px);
+}
+
+#addTaskOverlay .formGrid {
+  display: grid;
+  grid-template-columns: 1fr 1px 1fr;
+  gap: 48px;
+  align-items: start;
+}
+
+#addTaskOverlay .formDivider {
+  width: 1px;
+  min-height: 420px;
+  background-color: #d1d1d1;
+}
+
+#addTaskOverlay .taskFooter {
+  margin-top: 48px;
+}
+
+@media (max-width: 1092px) {
+  .add-task-overlay {
+    padding: 24px;
+    align-items: center;
+  }
+
+  .add-task-modal {
+    width: 100%;
+    max-height: calc(100dvh - 48px);
+    padding: 48px 32px 32px 32px;
+    border-radius: 24px;
+  }
+
+  .add-task-close {
+    top: 32px;
+    right: 32px;
+  }
+
+  #addTaskOverlay .addTaskTitle {
+    font-size: 47px;
+    margin-bottom: 32px;
+  }
+
+  #addTaskOverlay .taskForm {
+    min-height: auto;
+  }
+
+  #addTaskOverlay .formGrid {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+  }
+
+  #addTaskOverlay .formColumn {
+    width: 100%;
+    gap: 20px;
+  }
+
+  #addTaskOverlay .formDivider {
+    display: none;
+  }
+
+  #addTaskOverlay .priorityButtons {
+    width: 100%;
+    gap: 12px;
+  }
+
+  #addTaskOverlay .priorityBtn {
+    flex: 1 1 0;
+    min-width: 0;
+    height: 48px;
+    font-size: 18px;
+  }
+
+  #addTaskOverlay .taskFooter {
+    margin-top: 32px;
+    flex-direction: column-reverse;
+    align-items: stretch;
+    gap: 16px;
+  }
+
+  #addTaskOverlay .taskActions {
+    justify-content: flex-end;
+    width: 100%;
+  }
+}
