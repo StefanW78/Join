@@ -26,3 +26,31 @@ export async function postData(path = "", data = {}) {
 
   return await response.json();
 }
+
+export async function patchData(path = "", data = {}) {
+  const response = await fetch(`${BASE_URL}${path}.json`, {
+    method: "PATCH",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(data),
+  });
+
+  if (!response.ok) {
+    throw new Error(`Fehler beim Aktualisieren: ${response.status}`);
+  }
+
+  return await response.json();
+}
+
+export async function deleteData(path = "") {
+  const response = await fetch(`${BASE_URL}${path}.json`, {
+    method: "DELETE",
+  });
+
+  if (!response.ok) {
+    throw new Error(`Fehler beim Löschen: ${response.status}`);
+  }
+
+  return true;
+}

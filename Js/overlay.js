@@ -1,5 +1,5 @@
 function renderCardOverlay(id) {
-    const card = cardsData.find(c => c.id === id);
+    const task = boardTasks.find((task) => task.id === taskId);
     if (!card) return;
 
     const overlay = document.getElementById("cardOverlay");

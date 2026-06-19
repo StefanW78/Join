@@ -81,7 +81,6 @@
               <button class="plus-box openAddTaskBtn">+</button>
             </div>
             <div class="task-column" id="todoTasks"></div>
-            <div class="empty-card">No tasks To do</div>
           </div>
 
           <div class="column">
@@ -90,35 +89,6 @@
               <button class="plus-box openAddTaskBtn">+</button>
             </div>
             <div class="task-column" id="inProgressTasks"></div>
-
-
-            <div class="card">
-              <span class="tag tag-blue">User Story</span>
-              <div class="card-title">
-                Kochwelt Page &amp; Recipe Recommender
-              </div>
-              <div class="card-desc">
-                Build start page with recipe recommendation...
-              </div>
-              <div class="subtasks">
-                <div class="progress-bar">
-                  <div class="progress-fill" style="width: 50%"></div>
-                </div>
-                1/2 Subtasks
-              </div>
-              <div class="card-footer">
-                <div class="avatars">
-                  <div class="av av-orange">AN</div>
-                  <div class="av av-purple">EM</div>
-                  <div class="av av-teal">MB</div>
-                </div>
-                <div class="priority prio-medium">
-                  <svg viewBox="0 0 24 24" fill="currentColor">
-                    <path d="M4 6h16M4 12h10M4 18h6" />
-                  </svg>
-                </div>
-              </div>
-            </div>
           </div>
 
           <div class="column">
@@ -127,52 +97,6 @@
               <button class="plus-box openAddTaskBtn">+</button>
             </div>
             <div class="task-column" id="awaitFeedbackTasks"></div>
-
-
-            <div class="card">
-              <span class="tag tag-teal">Technical Task</span>
-              <div class="card-title">HTML Base Template Creation</div>
-              <div class="card-desc">
-                Create reusable HTML base templates...
-              </div>
-              <div class="card-footer">
-                <div class="avatars">
-                  <div class="av av-orange">AN</div>
-                  <div class="av av-purple">EM</div>
-                  <div class="av av-teal">MB</div>
-                </div>
-                <div class="priority prio-low">
-                  <svg
-                    viewBox="0 0 24 24"
-                    fill="none"
-                    stroke="currentColor"
-                    stroke-width="2.5"
-                  >
-                    <polyline points="6 9 12 15 18 9" />
-                  </svg>
-                </div>
-              </div>
-            </div>
-
-            <div class="card">
-              <span class="tag tag-blue">User Story</span>
-              <div class="card-title">Daily Kochwelt Recipe</div>
-              <div class="card-desc">
-                Implement daily recipe and portion calculator...
-              </div>
-              <div class="card-footer">
-                <div class="avatars">
-                  <div class="av av-orange">AN</div>
-                  <div class="av av-purple">EM</div>
-                  <div class="av av-teal">MB</div>
-                </div>
-                <div class="priority prio-medium">
-                  <svg viewBox="0 0 24 24" fill="currentColor">
-                    <path d="M4 6h16M4 12h10M4 18h6" />
-                  </svg>
-                </div>
-              </div>
-            </div>
           </div>
 
           <div class="column">
@@ -180,9 +104,6 @@
               <span>Done</span>
             </div>
             <div class="task-column" id="doneTasks"></div>
-            
-
-            <div id="toDo-box"></div>
           </div>
         </div>
       </main>
@@ -376,11 +297,10 @@
         <img src="./assets/img/board-icon.svg" alt="Board icon" />
       </div>
     </div>
-    <script src="./Js/db.js"></script>
-    <script src="./Js/template.js"></script>
-    <script src="./Js/overlay.js"></script>
     <script type="module" src="./Js/addTask.js"></script>
+    <script type="module" src="./Js/board.js"></script>
     <script src="./Js/boardAddTaskOverlay.js"></script>
     <script type="module" src="./Js/userBadge.js"></script>
+    <script src="./Js/boardTemplate.js"></script>
   </body>
 </html>

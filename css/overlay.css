@@ -574,3 +574,85 @@
     width: 100%;
   }
 }
+
+.card-overlay-content.edit-mode {
+  width: min(100%, 680px);
+}
+
+.edit-task-card {
+  padding: 32px;
+}
+
+.edit-task-title {
+  font-size: 32px;
+  font-weight: 700;
+  color: #000;
+}
+
+.edit-task-card .taskForm {
+  min-height: auto;
+  gap: 24px;
+}
+
+.edit-task-card .editFormGrid {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.edit-task-card .formColumn {
+  gap: 20px;
+}
+
+.edit-task-card textarea {
+  min-height: 120px;
+  resize: none;
+}
+
+.edit-task-card .priorityButtons {
+  width: 100%;
+  gap: 12px;
+}
+
+.edit-task-card .priorityBtn {
+  flex: 1 1 0;
+  min-width: 0;
+  height: 48px;
+  font-size: 18px;
+}
+
+.editTaskActions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 16px;
+}
+
+.editInfoBox {
+  padding: 12px 16px;
+  border-radius: 10px;
+  background-color: #f0f2f5;
+  color: #42526b;
+  font-size: 15px;
+}
+
+.editSubtaskCheckboxLabel {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex: 1;
+  cursor: pointer;
+}
+
+.editSubtaskCheckbox {
+  width: 18px;
+  height: 18px;
+  accent-color: #29abe2;
+}
+
+.edit-task-card .subtaskItem:hover .subtaskItemActions {
+  display: flex;
+}
+
+#editAssignedList {
+  z-index: 4000;
+}
