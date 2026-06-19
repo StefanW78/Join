@@ -46,7 +46,7 @@ main{
   gap: 5px;
   display: flex;
   flex-direction: column;
-  max-height: 370px;
+  max-height: 100%;
     overflow-y: auto;
 }
 
@@ -61,6 +61,8 @@ main{
 .board-content-div{
   max-width: 1440px;
   flex: 1;
+  max-height: 100%;
+  width: 100%;
 }
 
 /* Versuchen es von contacts.css zu übernehmen */
@@ -262,11 +264,10 @@ main{
   justify-content: center;
   width: 120px;
   height: 60px;
-
   color: #fff;
   font-size: 18px;
   font-weight: 700;
-  flex: 1 0 50%;
+  flex: 1 0 40%;
 }
 
 .search-box {
@@ -284,7 +285,7 @@ main{
   outline: none;
   font-size: 14px;
   color: #1e2c3d;
-  width: 180px;
+  width: 100%;
 }
 .search-box svg {
   width: 16px;
@@ -302,10 +303,12 @@ main{
   color: #fff;
   border: none;
   border-radius: 8px;
-  padding: 10px 20px;
   font-size: 15px;
   font-weight: 600;
   cursor: pointer;
+  width: 120px;
+  height: 37px;
+  justify-content: center;
 }
 .btn-add-task:hover {
   background: #29abe2;
@@ -358,6 +361,7 @@ main{
   flex-direction: column;
   /* flex: 1; */
   gap: 12px;
+  height: 100%;
 }
 
 .column.is-drag-over {
@@ -406,6 +410,7 @@ main{
   flex-direction: column;
   gap: 10px;
   box-shadow: 0 2px 6px rgba(0, 0, 0, 0.06);
+  max-width: 252px;
 }
 .tag {
   display: inline-block;
