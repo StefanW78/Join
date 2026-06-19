@@ -32,6 +32,10 @@ flex-direction: column;
   width: 100%;
 }
 
+.board-header{
+  margin-bottom: 15px;
+}
+
  .btn-add-task {
     align-items: center;
     justify-content: center;
