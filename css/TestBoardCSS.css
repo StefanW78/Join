@@ -59,7 +59,7 @@ main{
 }
 
 .board-content-div{
-  max-width: 1440px;
+  max-width: 1060px;
   flex: 1;
   max-height: 100%;
   width: 100%;
@@ -362,6 +362,7 @@ main{
   /* flex: 1; */
   gap: 12px;
   height: 100%;
+  width: 100%;
 }
 
 .column.is-drag-over {
@@ -400,6 +401,7 @@ main{
   text-align: center;
   color: #8898a8;
   font-size: 13px;
+  width: 100%;
 }
 
 .card {
