@@ -36,6 +36,10 @@ flex-direction: column;
   margin-bottom: 15px;
 }
 
+.card{
+  min-width: 250px;
+}
+
  .btn-add-task {
     align-items: center;
     justify-content: center;
