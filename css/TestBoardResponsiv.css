@@ -54,6 +54,10 @@ flex-direction: column;
     display: none;
   }
 
+  .swap-horiz-div{
+    display: flex;
+  }
+
   .logo-area,
   .sidebar-footer {
     display: none;

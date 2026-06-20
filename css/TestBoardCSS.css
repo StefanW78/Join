@@ -65,6 +65,26 @@ main{
   width: 100%;
 }
 
+.header-card{
+  display: flex;
+  justify-content: space-between;
+}
+
+.swap-horiz-div{
+  width: 20px;
+  height: 20px;
+  border: 2px solid black;
+  display: none;
+  justify-content: center;
+  align-items: center;
+  border-radius: 5px;
+}
+
+.swap-horiz-div img{
+  width: 15px;
+  height: 15px;
+}
+
 /* Versuchen es von contacts.css zu übernehmen */
 
 .logo-area {
@@ -395,6 +415,7 @@ main{
 }
 
 .empty-card {
+  border: 1px dashed #8898a8;
   background: #e4e8ed;
   border-radius: 10px;
   padding: 18px;
