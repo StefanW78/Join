@@ -57,23 +57,39 @@ function initSimpleDragAndDrop() {
     });
 
     columns.forEach((column) => {
-        column.addEventListener('dragover', (event) => {
-            event.preventDefault();
-            column.classList.add('is-drag-over');
-        });
 
-        column.addEventListener('dragleave', () => {
-            column.classList.remove('is-drag-over');
-        });
+    let dragCounter = 0;
 
-        column.addEventListener('drop', (event) => {
-            event.preventDefault();
-            column.classList.remove('is-drag-over');
-
-            if (!draggedCard) return;
-            column.appendChild(draggedCard);
-        });
+    column.addEventListener('dragenter', () => {
+        dragCounter++;
+        column.classList.add('is-drag-over');
     });
+
+    column.addEventListener('dragover', (event) => {
+        event.preventDefault();
+        column.classList.add('is-drag-over');
+    });
+
+    column.addEventListener('dragleave', () => {
+        dragCounter--;
+
+        if (dragCounter === 0) {
+            column.classList.remove('is-drag-over');
+        }
+    });
+
+    column.addEventListener('drop', (event) => {
+        event.preventDefault();
+
+        dragCounter = 0;
+        column.classList.remove('is-drag-over');
+
+        if (!draggedCard) return;
+
+        const taskList = column.querySelector('.task-list');
+        taskList.appendChild(draggedCard);
+    });
+});
 }
 
 document.addEventListener('DOMContentLoaded', () => {
