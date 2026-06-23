@@ -97,5 +97,22 @@ document.addEventListener('DOMContentLoaded', () => {
     initSimpleDragAndDrop();
 });
 
+//ist für denn button
+document.querySelectorAll('.swap-horiz-div').forEach(button => {
+    button.addEventListener('click', () => {
+        toggleMoveMenu(button);
+    });
+});
 
+function toggleMoveMenu(button) {
+    const card = button.closest('.card');
+    const menu = card.querySelector('.move-menu');
+
+    const currentColumn =
+        card.closest('.column').dataset.column;
+
+    renderMoveMenu(menu, currentColumn);
+
+    menu.classList.toggle('d_none');
+}
 

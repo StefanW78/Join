@@ -85,6 +85,29 @@ main{
   height: 15px;
 }
 
+.swap-horiz-div:hover{
+  cursor: pointer;
+}
+
+.move-menu {
+    position: absolute;
+    top: 40px;
+    right: 15px;
+
+    background: white;
+    border-radius: 8px;
+
+    padding: 8px;
+
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+
+    box-shadow: 0 4px 12px rgba(0,0,0,.15);
+
+    z-index: 100;
+}
+
 /* Versuchen es von contacts.css zu übernehmen */
 
 .logo-area {
@@ -434,6 +457,7 @@ main{
   gap: 10px;
   box-shadow: 0 2px 6px rgba(0, 0, 0, 0.06);
   max-width: 252px;
+  position: relative;
 }
 .tag {
   display: inline-block;
