@@ -421,6 +421,7 @@ main{
   font-size: 15px;
   font-weight: 600;
   color: #1e2c3d;
+  height: 26px;
 }
 .column-header button {
   display: flex;

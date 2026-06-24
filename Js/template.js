@@ -259,7 +259,7 @@ async function moveTask(taskId, newStatus) {
 //Template 
 function getTaskCard(task) {
     return `
-        <div class="card" onclick="renderCardOverlay(${card.id})">
+        <div class="card" onclick="renderCardOverlay(${task.id})" data-id="${task.id}" data-status="${task.status}" >
             <span class="tag ${card.tagClass}">${card.tag}</span>
             <div class="card-title">${card.title}</div>
             <div class="card-desc">${card.description}</div>
@@ -276,4 +276,5 @@ function getTaskCard(task) {
                 </div>
             </div>
         </div>`;
-}
+};
+
