@@ -278,3 +278,54 @@ function getTaskCard(task) {
         </div>`;
 };
 
+
+
+//Test 
+// function getTaskCard(task) {
+
+//     return `
+//         <div class="card" draggable="true" data-id="${task.id}" data-status="${task.status}">
+
+//             <div class="card-header">
+//                 <span class="tag">${task.category || "Task"}</span>
+//             </div>
+
+//             <div class="card-body">
+//                 <div class="card-title">
+//                     ${task.title}
+//                 </div>
+
+//                 <div class="card-desc">
+//                     ${task.description || ""}
+//                 </div>
+//             </div>
+
+//             <div class="card-footer">
+
+//                 <div class="card-assignees">
+//                     ${renderAssignees(task.assignees)}
+//                 </div>
+
+//                 <div class="card-priority priority-${task.priority || "medium"}">
+//                     ${task.priority || "medium"}
+//                 </div>
+
+//             </div>
+
+//         </div>
+//     `;
+// }
+
+
+// function renderAssignees(assignees = []) {
+
+//     if (!assignees.length) return "";
+
+//     return assignees
+//         .map(user => `
+//             <div class="avatar">
+//                 ${user.initials || "?"}
+//             </div>
+//         `)
+//         .join("");
+// }
