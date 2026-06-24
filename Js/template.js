@@ -92,10 +92,75 @@ function initSimpleDragAndDrop() {
 });
 }
 
+
+//Verbesserte Version vom DragnDrop
+// function initSimpleDragAndDrop() {
+
+//     const cards = document.querySelectorAll(".card");
+//     const columns = document.querySelectorAll(".column");
+
+//     // -------------------------
+//     // CARDS
+//     // -------------------------
+//     cards.forEach(card => {
+
+//         card.setAttribute("draggable", "true");
+
+//         card.addEventListener("dragstart", () => {
+
+//             draggedCard = card;
+//             card.classList.add("is-dragging");
+
+//         });
+
+//         card.addEventListener("dragend", () => {
+
+//             card.classList.remove("is-dragging");
+//             draggedCard = null;
+
+//         });
+
+//     });
+
+//     // -------------------------
+//     // COLUMNS
+//     // -------------------------
+//     columns.forEach(column => {
+
+//         column.addEventListener("dragover", (e) => {
+//             e.preventDefault(); // wichtig für drop
+//             column.classList.add("is-drag-over");
+//         });
+
+//         column.addEventListener("dragleave", () => {
+//             column.classList.remove("is-drag-over");
+//         });
+
+//         column.addEventListener("drop", async (e) => {
+//             e.preventDefault();
+
+//             column.classList.remove("is-drag-over");
+
+//             if (!draggedCard) return;
+
+//             const taskId = draggedCard.dataset.id;
+//             const newStatus = column.dataset.status;
+
+//             await moveTask(taskId, newStatus);
+//         });
+
+//     });
+// }
+
 document.addEventListener('DOMContentLoaded', () => {
     renderCards();
     initSimpleDragAndDrop();
 });
+
+async function testInit() {
+    await loadTasks()
+    renderTasks()
+}
 
 //ist für denn button
 document.querySelectorAll('.swap-horiz-div').forEach(button => {
@@ -116,3 +181,99 @@ function toggleMoveMenu(button) {
     menu.classList.toggle('d_none');
 }
 
+let tasks = []
+
+const columns = {
+    todo: document.getElementById("toDo-list"),
+    inProgress: document.getElementById("inProgress-list"),
+    awaitFeedback: document.getElementById("awaitFeedback-list"),
+    done: document.getElementById("Done-list")
+};
+
+const STATUS = {
+    TODO: "todo",
+    IN_PROGRESS: "inProgress",
+    AWAIT_FEEDBACK: "awaitFeedback",
+    DONE: "done"
+};
+
+async function loadTasks() {
+    const data = await loadDataBase("tasks");
+
+    tasks = Object.values(data || {});
+}
+
+
+function renderTasks() {
+
+    const html = {
+        todo: "",
+        inProgress: "",
+        awaitFeedback: "",
+        done: ""
+    };
+
+    for (const task of tasks) {
+
+        const bucket = html[task.status];
+
+        if (bucket !== undefined) {
+            html[task.status] += getTaskCard(task);
+        }
+    }
+
+    for (const status in columns) {
+
+        columns[status].innerHTML =
+            html[status] || `<div class="empty-card">No tasks</div>`;
+    }
+
+    initSimpleDragAndDrop();
+}
+
+
+//für das moven von Tasks update.
+async function moveTask(taskId, newStatus) {
+
+    const task = tasks.find(t => t.id === taskId);
+    if (!task) return;
+
+    const oldStatus = task.status;
+
+    task.status = newStatus;
+    renderTasks();
+
+    try {
+        await updateData("tasks", taskId, { status: newStatus });
+
+    } catch (error) {
+
+        console.error(error);
+
+        task.status = oldStatus;
+        renderTasks();
+    }
+}
+
+
+//Template 
+function getTaskCard(task) {
+    return `
+        <div class="card" onclick="renderCardOverlay(${card.id})">
+            <span class="tag ${card.tagClass}">${card.tag}</span>
+            <div class="card-title">${card.title}</div>
+            <div class="card-desc">${card.description}</div>
+            <div class="subtasks">
+                <div class="progress-bar"><div class="progress-fill" style="width:${card.progress}%"></div></div>
+                ${card.completedSubtasks}/${card.totalSubtasks} Subtasks
+            </div>
+            <div class="card-footer">
+                <div class="avatars">
+                    ${card.avatars.map(av => `<div class="av ${av.cardColor}">${av.initials}</div>`).join('')}
+                </div>
+                <div class="priority ${card.priorityClass}">
+                    ${getPriorityIcon(card.priorityClass)}
+                </div>
+            </div>
+        </div>`;
+}

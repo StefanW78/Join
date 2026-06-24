@@ -14,7 +14,7 @@ const BASE_URL = "https://test-2651c-default-rtdb.europe-west1.firebasedatabase.
 
 async function loadDataBase(collection) {
 
-  fetchedData = {};
+  const fetchedData = {};
 
   try {
 

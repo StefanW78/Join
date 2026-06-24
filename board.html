@@ -15,7 +15,7 @@
     <link rel="stylesheet" href="./css/addTaskMobile.css">
     <link rel="shortcut icon" href="./assets/Favicon/favicon.ico" type="image/x-icon">
 </head>
-<body onload="">
+<body onload="testInit()">
     <div class="body-div">
         <div class="sidebar-wraper">
             <div class="sidebar">
@@ -80,7 +80,7 @@
 
       <div class="board-columns">
 
-        <div class="column">
+        <div class="column" data-status="todo">
           <div class="column-header">
             <span>To do</span>
             <button class="plus-box openAddTaskBtn">+</button>
@@ -90,7 +90,7 @@
           </div>
         </div>
 
-        <div class="column">
+        <div class="column" data-status="inProgress">
           <div class="column-header">
             <span>In progress</span>
            <button class="plus-box openAddTaskBtn">+</button>
@@ -118,7 +118,7 @@
           </div>
         </div>
 
-        <div class="column">
+        <div class="column" data-status="awaitFeedback">
           <div class="column-header">
             <span>Await feedback</span>
             <button class="plus-box openAddTaskBtn">+</button>
@@ -188,7 +188,7 @@
         </div>
  
 
-        <div class="column">
+        <div class="column" data-status="done">
           <div class="column-header">
             <span>Done</span>
           </div>
