@@ -91,21 +91,69 @@ main{
 
 .move-menu {
     position: absolute;
-    top: 40px;
-    right: 15px;
-
+    top: 15px;
+    left: 200px;
     background: white;
-    border-radius: 8px;
-
-    padding: 8px;
-
+    border-radius: 0px 10px 10px 10px;
+    padding: 10px;
     display: flex;
     flex-direction: column;
-    gap: 4px;
-
+    gap: 15px;
     box-shadow: 0 4px 12px rgba(0,0,0,.15);
-
     z-index: 100;
+    height: 113px;
+    width: 106px;
+    background: #2A3647;
+    color: white;
+}
+
+.move-to-header{
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  justify-content: center;
+  align-items: center;
+}
+
+.movingto-Div{
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  gap: 10px;
+}
+
+.moving-top{
+  display: flex;
+  justify-content: space-evenly;
+  width: 100%;
+}
+
+.moving-top img{
+  width: 20px;
+  height: 20px;
+}
+
+.moving-top:hover{
+  background-color: #1e2c3d;
+  cursor: pointer;
+  border-radius: 5px;
+}
+
+.moving-down{
+  display: flex;
+  justify-content: space-evenly;
+  width: 100%;
+}
+
+.moving-down img{
+width: 20px;
+height: 20px;
+}
+
+.moving-down:hover{
+  background-color: #1e2c3d;
+  cursor: pointer;
+  border-radius: 5px;
 }
 
 /* Versuchen es von contacts.css zu übernehmen */
