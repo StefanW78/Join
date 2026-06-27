@@ -96,30 +96,30 @@ function initSimpleDragAndDrop() {
 // Verbesserte Version vom DragnDrop
 // function initSimpleDragAndDrop() {
 
-//     const cards = document.querySelectorAll(".card");
+//     const board = document.querySelector(".board-columns");
 //     const columns = document.querySelectorAll(".column");
 
+//     let draggedCard = null;
+
 //     // -------------------------
-//     // CARDS
+//     // DRAG START / END
 //     // -------------------------
-//     cards.forEach(card => {
+//     board.addEventListener("dragstart", (e) => {
 
-//         card.setAttribute("draggable", "true");
+//         const card = e.target.closest(".card");
+//         if (!card) return;
 
-//         card.addEventListener("dragstart", () => {
+//         draggedCard = card;
+//         card.classList.add("is-dragging");
+//     });
 
-//             draggedCard = card;
-//             card.classList.add("is-dragging");
+//     board.addEventListener("dragend", (e) => {
 
-//         });
+//         const card = e.target.closest(".card");
+//         if (!card) return;
 
-//         card.addEventListener("dragend", () => {
-
-//             card.classList.remove("is-dragging");
-//             draggedCard = null;
-
-//         });
-
+//         card.classList.remove("is-dragging");
+//         draggedCard = null;
 //     });
 
 //     // -------------------------
@@ -128,7 +128,7 @@ function initSimpleDragAndDrop() {
 //     columns.forEach(column => {
 
 //         column.addEventListener("dragover", (e) => {
-//             e.preventDefault(); // wichtig für drop
+//             e.preventDefault();
 //             column.classList.add("is-drag-over");
 //         });
 
@@ -137,6 +137,7 @@ function initSimpleDragAndDrop() {
 //         });
 
 //         column.addEventListener("drop", async (e) => {
+
 //             e.preventDefault();
 
 //             column.classList.remove("is-drag-over");
@@ -147,6 +148,8 @@ function initSimpleDragAndDrop() {
 //             const newStatus = column.dataset.status;
 
 //             await moveTask(taskId, newStatus);
+
+//             renderTasks();
 //         });
 
 //     });
@@ -198,37 +201,36 @@ const STATUS = {
 };
 
 async function loadTasks() {
-    const data = await loadDataBase("tasks");
-
-    tasks = Object.values(data || {});
+  tasks = Object.values(await loadDataBase("tasks"));
 }
 
 
 function renderTasks() {
 
-    const html = {
-        todo: "",
-        inProgress: "",
-        awaitFeedback: "",
-        done: ""
-    };
+    // HTML für jede Spalte vorbereiten
+    const html = {};
 
-    for (const task of tasks) {
-
-        const bucket = html[task.status];
-
-        if (bucket !== undefined) {
-            html[task.status] += getTaskCard(task);
-        }
+    for (const status in columns) {
+        html[status] = "";
     }
 
+    // Tasks den passenden Spalten zuordnen
+    for (const task of tasks) {
+
+        if (html[task.status] !== undefined) {
+            html[task.status] += getTaskCard(task);
+        }
+
+    }
+
+    // HTML in die Spalten schreiben
     for (const status in columns) {
 
         columns[status].innerHTML =
             html[status] || `<div class="empty-card">No tasks</div>`;
+
     }
 
-    initSimpleDragAndDrop();
 }
 
 
@@ -240,18 +242,23 @@ async function moveTask(taskId, newStatus) {
 
     const oldStatus = task.status;
 
+    // UI sofort updaten
     task.status = newStatus;
     renderTasks();
 
     try {
+
         await updateData("tasks", taskId, { status: newStatus });
 
     } catch (error) {
 
-        console.error(error);
+        console.error("MoveTask failed:", error);
 
+        // rollback
         task.status = oldStatus;
+
         renderTasks();
+
     }
 }
 
