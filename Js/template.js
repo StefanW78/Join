@@ -101,41 +101,40 @@ function initSimpleDragAndDrop() {
 
 //     let draggedCard = null;
 
-//     setupDragStart(board, draggedCard);
-//     setupDragEnd(board, draggedCard);
-//     setupColumns(columns, () => draggedCard);
+//     setupDragStart(board, () => draggedCard, (val) => draggedCard = val);
+//     setupDragEnd(board, () => draggedCard, (val) => draggedCard = val);
+//     setupDropZones(columns, () => draggedCard);
 
 // }
 
-// function setupDragStart(board, getCard) {
+// function setupDragStart(board, getCard, setCard) {
 
 //     board.addEventListener("dragstart", (e) => {
 
 //         const card = e.target.closest(".card");
 //         if (!card) return;
 
-//         getCard = card;
+//         setCard(card);
 //         card.classList.add("is-dragging");
 
 //     });
 
 // }
 
-// function setupDragEnd(board, getCard) {
+// function setupDragEnd(board, getCard, setCard) {
 
 //     board.addEventListener("dragend", () => {
 
-//         if (getCard) {
-//             getCard.classList.remove("is-dragging");
-//         }
+//         const card = getCard();
+//         if (card) card.classList.remove("is-dragging");
 
-//         getCard = null;
+//         setCard(null);
 
 //     });
 
 // }
 
-// function setupColumns(columns, getDraggedCard) {
+// function setupDropZones(columns, getCard) {
 
 //     columns.forEach(column => {
 
@@ -145,21 +144,16 @@ function initSimpleDragAndDrop() {
 
 //             e.preventDefault();
 
-//             const draggedCard = getDraggedCard();
-//             if (!draggedCard) return;
+//             const card = getCard();
+//             if (!card) return;
 
-//             moveCardInDOM(taskList, draggedCard, e);
+//             moveCard(taskList, card, e);
 
 //         });
 
-//         column.addEventListener("drop", async (e) => {
+//         column.addEventListener("drop", (e) => {
 
-//             e.preventDefault();
-
-//             const draggedCard = getDraggedCard();
-//             if (!draggedCard) return;
-
-//             await handleDrop(draggedCard, column);
+//             handleDrop(e, column, getCard);
 
 //         });
 
@@ -167,9 +161,28 @@ function initSimpleDragAndDrop() {
 
 // }
 
-// async function handleDrop(draggedCard, column) {
+// function moveCard(taskList, card, e) {
 
-//     const taskId = draggedCard.dataset.id;
+//     const afterElement = getDragAfterElement(taskList, e.clientY);
+
+//     if (!afterElement) {
+//         taskList.appendChild(card);
+//     } else {
+//         taskList.insertBefore(card, afterElement);
+//     }
+
+// }
+
+// async function handleDrop(e, column, getCard) {
+
+//     e.preventDefault();
+
+//     const card = getCard();
+//     if (!card) return;
+
+//     column.classList.remove("is-drag-over");
+
+//     const taskId = card.dataset.id;
 //     const newStatus = column.dataset.status;
 
 //     try {
@@ -183,15 +196,22 @@ function initSimpleDragAndDrop() {
 
 // }
 
-// function moveCardInDOM(taskList, draggedCard, e) {
+// function getDragAfterElement(container, mouseY) {
 
-//     const afterElement = getDragAfterElement(taskList, e.clientY);
+//     const elements = [...container.querySelectorAll(".card:not(.is-dragging)")];
 
-//     if (!afterElement) {
-//         taskList.appendChild(draggedCard);
-//     } else {
-//         taskList.insertBefore(draggedCard, afterElement);
-//     }
+//     return elements.reduce((closest, child) => {
+
+//         const box = child.getBoundingClientRect();
+//         const offset = mouseY - box.top - box.height / 2;
+
+//         if (offset < 0 && offset > closest.offset) {
+//             return { offset, element: child };
+//         }
+
+//         return closest;
+
+//     }, { offset: Number.NEGATIVE_INFINITY }).element;
 
 // }
 
