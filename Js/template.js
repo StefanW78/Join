@@ -101,58 +101,98 @@ function initSimpleDragAndDrop() {
 
 //     let draggedCard = null;
 
-//     // -------------------------
-//     // DRAG START / END
-//     // -------------------------
+//     setupDragStart(board, draggedCard);
+//     setupDragEnd(board, draggedCard);
+//     setupColumns(columns, () => draggedCard);
+
+// }
+
+// function setupDragStart(board, getCard) {
+
 //     board.addEventListener("dragstart", (e) => {
 
 //         const card = e.target.closest(".card");
 //         if (!card) return;
 
-//         draggedCard = card;
+//         getCard = card;
 //         card.classList.add("is-dragging");
+
 //     });
 
-//     board.addEventListener("dragend", (e) => {
+// }
 
-//         const card = e.target.closest(".card");
-//         if (!card) return;
+// function setupDragEnd(board, getCard) {
 
-//         card.classList.remove("is-dragging");
-//         draggedCard = null;
+//     board.addEventListener("dragend", () => {
+
+//         if (getCard) {
+//             getCard.classList.remove("is-dragging");
+//         }
+
+//         getCard = null;
+
 //     });
 
-//     // -------------------------
-//     // COLUMNS
-//     // -------------------------
+// }
+
+// function setupColumns(columns, getDraggedCard) {
+
 //     columns.forEach(column => {
 
-//         column.addEventListener("dragover", (e) => {
-//             e.preventDefault();
-//             column.classList.add("is-drag-over");
-//         });
+//         const taskList = column.querySelector(".task-list");
 
-//         column.addEventListener("dragleave", () => {
-//             column.classList.remove("is-drag-over");
+//         column.addEventListener("dragover", (e) => {
+
+//             e.preventDefault();
+
+//             const draggedCard = getDraggedCard();
+//             if (!draggedCard) return;
+
+//             moveCardInDOM(taskList, draggedCard, e);
+
 //         });
 
 //         column.addEventListener("drop", async (e) => {
 
 //             e.preventDefault();
 
-//             column.classList.remove("is-drag-over");
-
+//             const draggedCard = getDraggedCard();
 //             if (!draggedCard) return;
 
-//             const taskId = draggedCard.dataset.id;
-//             const newStatus = column.dataset.status;
+//             await handleDrop(draggedCard, column);
 
-//             await moveTask(taskId, newStatus);
-
-//             renderTasks();
 //         });
 
 //     });
+
+// }
+
+// async function handleDrop(draggedCard, column) {
+
+//     const taskId = draggedCard.dataset.id;
+//     const newStatus = column.dataset.status;
+
+//     try {
+//         await updateData("tasks", taskId, { status: newStatus });
+//     } catch (error) {
+//         console.error(error);
+//         renderTasks();
+//     }
+
+//     renderTasks();
+
+// }
+
+// function moveCardInDOM(taskList, draggedCard, e) {
+
+//     const afterElement = getDragAfterElement(taskList, e.clientY);
+
+//     if (!afterElement) {
+//         taskList.appendChild(draggedCard);
+//     } else {
+//         taskList.insertBefore(draggedCard, afterElement);
+//     }
+
 // }
 
 document.addEventListener('DOMContentLoaded', () => {
