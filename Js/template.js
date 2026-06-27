@@ -93,7 +93,7 @@ function initSimpleDragAndDrop() {
 }
 
 
-//Verbesserte Version vom DragnDrop
+// Verbesserte Version vom DragnDrop
 // function initSimpleDragAndDrop() {
 
 //     const cards = document.querySelectorAll(".card");
@@ -259,24 +259,48 @@ async function moveTask(taskId, newStatus) {
 //Template 
 function getTaskCard(task) {
     return `
-        <div class="card" onclick="renderCardOverlay(${task.id})" data-id="${task.id}" data-status="${task.status}" >
-            <span class="tag ${card.tagClass}">${card.tag}</span>
-            <div class="card-title">${card.title}</div>
-            <div class="card-desc">${card.description}</div>
+        <div class="card" onclick="renderCardOverlay('${task.id}')" data-id="${task.id}" data-status="${task.status}">
+            <div class="header-card">
+            <span class="tag tag-teal">${task.category}</span>
+            <div class="swap-horiz-div" onclick="">
+              <img src="./assets/img/swap1_horiz.svg" alt="">
+            </div>
+            </div>
+            <div class="card-title">${task.title}</div>
+            <div class="card-desc">${task.description}</div>
             <div class="subtasks">
-                <div class="progress-bar"><div class="progress-fill" style="width:${card.progress}%"></div></div>
-                ${card.completedSubtasks}/${card.totalSubtasks} Subtasks
+              <div class="progress-bar"><div class="progress-fill" style="width:50%"></div></div>
+              1/2 Subtasks
+            </div>
+            <div class="move-menu"id="move-menu">
+              <div class="move-to-header">
+                <span>Move To</span>
+              </div>
+              <div class="movingto-Div">
+                <div class="moving-top">
+                  <img src="./assets/img/arrowUup.svg" alt="">
+                  <span>To-Do</span>
+                </div>
+                <div class="moving-down">
+                    <img src="./assets/img/arrow_drop_down-icon.svg" alt="">
+                    <span>Review</span>
+                </div>
+              </div>
+
             </div>
             <div class="card-footer">
-                <div class="avatars">
-                    ${card.avatars.map(av => `<div class="av ${av.cardColor}">${av.initials}</div>`).join('')}
-                </div>
-                <div class="priority ${card.priorityClass}">
-                    ${getPriorityIcon(card.priorityClass)}
-                </div>
+              <div class="avatars">
+                ${task.assignedTo.map(av => `<div class="av" style="background-color:${av.color} ;">${av.initials}</div>`).join('')}
+              </div>
+              <div class="priority ${task.priority}">
+                ${getPriorityIcon(task.priority)}
+              </div>
             </div>
-        </div>`;
+          </div>`;
 };
+
+
+
 
 
 
