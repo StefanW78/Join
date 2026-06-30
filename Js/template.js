@@ -38,61 +38,6 @@ function renderCards() {
 
 let draggedCard = null;
 
-// function initSimpleDragAndDrop() {
-//     const cards = document.querySelectorAll('.card');
-//     const columns = document.querySelectorAll('.column');
-
-//     cards.forEach((card) => {
-//         card.setAttribute('draggable', 'true');
-
-//         card.addEventListener('dragstart', () => {
-//             draggedCard = card;
-//             card.classList.add('is-dragging');
-//         });
-
-//         card.addEventListener('dragend', () => {
-//             card.classList.remove('is-dragging');
-//             draggedCard = null;
-//         });
-//     });
-
-//     columns.forEach((column) => {
-
-//     let dragCounter = 0;
-
-//     column.addEventListener('dragenter', () => {
-//         dragCounter++;
-//         column.classList.add('is-drag-over');
-//     });
-
-//     column.addEventListener('dragover', (event) => {
-//         event.preventDefault();
-//         column.classList.add('is-drag-over');
-//     });
-
-//     column.addEventListener('dragleave', () => {
-//         dragCounter--;
-
-//         if (dragCounter === 0) {
-//             column.classList.remove('is-drag-over');
-//         }
-//     });
-
-//     column.addEventListener('drop', (event) => {
-//         event.preventDefault();
-
-//         dragCounter = 0;
-//         column.classList.remove('is-drag-over');
-
-//         if (!draggedCard) return;
-
-//         const taskList = column.querySelector('.task-list');
-//         taskList.appendChild(draggedCard);
-//     });
-// });
-// }
-
-
 // Verbesserte Version vom DragnDrop
 function initSimpleDragAndDrop() {
 
@@ -228,26 +173,51 @@ async function testInit() {
     await loadTasks()
     renderTasks()
     initSimpleDragAndDrop()
+
+    document.addEventListener("click", handleBoardClick);
 }
 
-//ist für denn button
-document.querySelectorAll('.swap-horiz-div').forEach(button => {
-    button.addEventListener('click', () => {
-        toggleMoveMenu(button);
-    });
-});
+function handleBoardClick(event) {
+
+    const moveButton = event.target.closest(".swap-horiz-div");
+    const clickedMenu = event.target.closest(".move-menu");
+    const card = event.target.closest(".card");
+
+    // 👉 Menü öffnen
+    if (moveButton) {
+        event.stopPropagation();
+        toggleMoveMenu(moveButton);
+        return;
+    }
+
+    if (clickedMenu) return;
+
+    if (card) {
+        renderCardOverlay(card.dataset.id);
+        return;
+    }
+    closeAllMoveMenus();
+}
 
 function toggleMoveMenu(button) {
-    const card = button.closest('.card');
-    const menu = card.querySelector('.move-menu');
 
-    const currentColumn =
-        card.closest('.column').dataset.column;
+    const card = button.closest(".card");
+    const menu = card.querySelector(".move-menu");
 
-    renderMoveMenu(menu, currentColumn);
+    const currentStatus = card.closest(".column").dataset.status;
 
-    menu.classList.toggle('d_none');
+    const taskId = card.dataset.id;
+
+    renderMoveMenu(menu, currentStatus, taskId);
+
+    document.querySelectorAll(".move-menu").forEach(m => {
+        m.classList.add("d_none");
+    });
+
+    menu.classList.remove("d_none");
 }
+
+
 
 let tasks = []
 
@@ -272,7 +242,6 @@ async function loadTasks() {
 
 function renderTasks() {
 
-    // HTML für jede Spalte vorbereiten
     const html = {};
 
     for (const status in columns) {
@@ -281,21 +250,15 @@ function renderTasks() {
 
     // Tasks den passenden Spalten zuordnen
     for (const task of tasks) {
-
         if (html[task.status] !== undefined) {
             html[task.status] += getTaskCard(task);
         }
-
     }
 
-    // HTML in die Spalten schreiben
     for (const status in columns) {
-
         columns[status].innerHTML =
             html[status] || `<div class="empty-card">No tasks</div>`;
-
     }
-
 }
 
 
@@ -327,14 +290,56 @@ async function moveTask(taskId, newStatus) {
     }
 }
 
+function renderMoveMenu(menu, currentStatus, taskId) {
+
+    const container = menu.querySelector(".movingto-Div");
+
+    const statusNames = {
+        todo: "To Do",
+        inProgress: "In Progress",
+        awaitFeedback: "Await Feedback",
+        done: "Done"
+    };
+
+    const allowedStatuses = getAllowedMoves(currentStatus);
+
+    container.innerHTML = "";
+
+    allowedStatuses.forEach((status, index) => {
+
+        container.innerHTML += `
+            <div class="${index === 0 ? 'moving-top' : 'moving-down'} move-option"
+                 data-task-id="${taskId}"
+                 data-status="${status}">
+
+                <img src="./assets/img/${index === 0 ? 'arrowUup.svg' : 'arrow_drop_down-icon.svg'}">
+                <span>${statusNames[status]}</span>
+
+            </div>
+        `;
+    });
+}
+
+async function moveTaskFromMenu(taskId, newStatus) {
+
+    await moveTask(taskId, newStatus);
+
+    event.stopPropagation();
+
+    document.querySelectorAll(".move-menu").forEach(menu => {
+        menu.classList.add("d_none");
+    });
+
+}
+
 
 //Template 
 function getTaskCard(task) {
     return `
-        <div class="card" onclick="renderCardOverlay('${task.id}')" data-id="${task.id}" data-status="${task.status}" draggable="true">
+        <div class="card" data-id="${task.id}" data-status="${task.status}" draggable="true">
             <div class="header-card">
             <span class="tag tag-teal">${task.category}</span>
-            <div class="swap-horiz-div" onclick="">
+            <div class="swap-horiz-div">
               <img src="./assets/img/swap1_horiz.svg" alt="">
             </div>
             </div>
@@ -344,7 +349,7 @@ function getTaskCard(task) {
               <div class="progress-bar"><div class="progress-fill" style="width:50%"></div></div>
               1/2 Subtasks
             </div>
-            <div class="move-menu"id="move-menu">
+            <div class="move-menu d_none"id="move-menu">
               <div class="move-to-header">
                 <span>Move To</span>
               </div>
@@ -371,47 +376,47 @@ function getTaskCard(task) {
           </div>`;
 };
 
+document.addEventListener("click", (event) => {
+
+    const option = event.target.closest(".move-option");
+
+    if (!option) return;
+
+    event.stopPropagation();
+
+    const taskId = option.dataset.taskId;
+    const status = option.dataset.status;
+
+    moveTask(taskId, status);
+});
 
 
+function getAllowedMoves(currentStatus) {
 
+    const statusOrder = ["todo", "inProgress", "awaitFeedback", "done"];
 
+    const index = statusOrder.indexOf(currentStatus);
 
-//Test 
-// function getTaskCard(task) {
+    const options = [];
 
-//     return `
-//         <div class="card" draggable="true" data-id="${task.id}" data-status="${task.status}">
+    // nach oben
+    if (index > 0) {
+        options.push(statusOrder[index - 1]);
+    }
 
-//             <div class="card-header">
-//                 <span class="tag">${task.category || "Task"}</span>
-//             </div>
+    // nach unten
+    if (index < statusOrder.length - 1) {
+        options.push(statusOrder[index + 1]);
+    }
 
-//             <div class="card-body">
-//                 <div class="card-title">
-//                     ${task.title}
-//                 </div>
+    return options;
+}
 
-//                 <div class="card-desc">
-//                     ${task.description || ""}
-//                 </div>
-//             </div>
-
-//             <div class="card-footer">
-
-//                 <div class="card-assignees">
-//                     ${renderAssignees(task.assignees)}
-//                 </div>
-
-//                 <div class="card-priority priority-${task.priority || "medium"}">
-//                     ${task.priority || "medium"}
-//                 </div>
-
-//             </div>
-
-//         </div>
-//     `;
-// }
-
+function closeAllMoveMenus() {
+    document.querySelectorAll(".move-menu").forEach(menu => {
+        menu.classList.add("d_none");
+    });
+}
 
 // function renderAssignees(assignees = []) {
 
