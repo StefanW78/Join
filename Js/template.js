@@ -248,12 +248,12 @@ function renderTasks() {
         html[status] = "";
     }
 
-    // Tasks den passenden Spalten zuordnen
     for (const task of tasks) {
-        if (html[task.status] !== undefined) {
-            html[task.status] += getTaskCard(task);
-        }
-    }
+
+    const preparedTask = prepareTaskData(task);
+
+    html[task.status] += getTaskCard(preparedTask);
+}
 
     for (const status in columns) {
         columns[status].innerHTML =
@@ -338,7 +338,7 @@ function getTaskCard(task) {
     return `
         <div class="card" data-id="${task.id}" data-status="${task.status}" draggable="true">
             <div class="header-card">
-            <span class="tag tag-teal">${task.category}</span>
+            <span class="tag ${task.categoryClass}">${task.category}</span>
             <div class="swap-horiz-div">
               <img src="./assets/img/swap1_horiz.svg" alt="">
             </div>
@@ -346,8 +346,7 @@ function getTaskCard(task) {
             <div class="card-title">${task.title}</div>
             <div class="card-desc">${task.description}</div>
             <div class="subtasks">
-              <div class="progress-bar"><div class="progress-fill" style="width:50%"></div></div>
-              1/2 Subtasks
+              ${task.subtasksHTML}
             </div>
             <div class="move-menu d_none"id="move-menu">
               <div class="move-to-header">
@@ -367,7 +366,7 @@ function getTaskCard(task) {
             </div>
             <div class="card-footer">
               <div class="avatars">
-                ${task.assignedTo.map(av => `<div class="av" style="background-color:${av.color} ;">${av.initials}</div>`).join('')}
+               ${task.avatarsHTML}
               </div>
               <div class="priority ${task.priority}">
                 ${getPriorityIcon(task.priority)}
@@ -375,6 +374,41 @@ function getTaskCard(task) {
             </div>
           </div>`;
 };
+
+function prepareTaskData(task) {
+
+    const assignedTo = task.assignedTo || [];
+    const subtasks = task.subtasks || [];
+
+    const avatarsHTML = assignedTo
+        .map(av => `<div class="av" style="background-color:${av.color}">${av.initials}</div>`)
+        .join('');
+
+    const total = subtasks.length;
+    const done = subtasks.filter(s => s.checked).length;
+    const progress = total > 0 ? (done / total) * 100 : 0;
+
+    const subtasksHTML = total > 0
+        ? `
+            <div class="progress-bar">
+                <div class="progress-fill" style="width:${progress}%"></div>
+            </div>
+            ${done}/${total} Subtasks
+          `
+        : '';
+
+    const categoryClassMap = {
+        "User Story": "tag-blue",
+        "Technical Task": "tag-teal"
+    };
+    const categoryClass = categoryClassMap[task.category] || "tag-default";
+    return {
+        ...task,
+        avatarsHTML,
+        subtasksHTML,
+        categoryClass   // 👈 WICHTIG: hier hinzufügen
+    };
+}
 
 document.addEventListener("click", (event) => {
 
