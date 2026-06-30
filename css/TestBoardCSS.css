@@ -561,15 +561,19 @@ height: 20px;
 
 .subtasks {
   display: flex;
-  flex-direction: column;
   gap: 4px;
   font-size: 12px;
   color: #5a6a78;
+  width: 100%;
+  justify-content: space-between;
+  align-items: center;
 }
+
 .progress-bar {
   height: 6px;
   background: #e4e8ed;
   border-radius: 4px;
+  width: 50%;
 }
 .progress-fill {
   height: 100%;
