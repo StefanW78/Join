@@ -379,10 +379,19 @@ function prepareTaskData(task) {
 
     const assignedTo = task.assignedTo || [];
     const subtasks = task.subtasks || [];
+    const maxVisible = 4;
+    const visibleAvatars = assignedTo.slice(0, maxVisible);
+    const extraCount = assignedTo.length - maxVisible;
 
-    const avatarsHTML = assignedTo
+    const avatarsHTML = visibleAvatars
         .map(av => `<div class="av" style="background-color:${av.color}">${av.initials}</div>`)
         .join('');
+
+    const extraHTML = extraCount > 0
+        ? `<div class="av-more">+${extraCount}</div>`
+        : '';
+
+    const finalAvatarsHTML = avatarsHTML + extraHTML;
 
     const total = subtasks.length;
     const done = subtasks.filter(s => s.checked).length;
@@ -397,16 +406,20 @@ function prepareTaskData(task) {
           `
         : '';
 
+
     const categoryClassMap = {
         "User Story": "tag-blue",
         "Technical Task": "tag-teal"
     };
+
     const categoryClass = categoryClassMap[task.category] || "tag-default";
+
+
     return {
         ...task,
-        avatarsHTML,
+        avatarsHTML: finalAvatarsHTML,
         subtasksHTML,
-        categoryClass   // 👈 WICHTIG: hier hinzufügen
+        categoryClass
     };
 }
 
