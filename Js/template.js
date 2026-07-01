@@ -8,33 +8,6 @@ function getPriorityIcon(priorityClass) {
     return `<svg width="20" height="15" viewBox="0 0 20 15" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M10 8.76077C9.7654 8.76118 9.53687 8.68634 9.34802 8.54726L0.444913 1.97752C0.329075 1.89197 0.231235 1.78445 0.15698 1.66111C0.0827245 1.53777 0.033508 1.40102 0.0121402 1.25868C-0.031014 0.971193 0.0418855 0.678356 0.214802 0.444584C0.387718 0.210811 0.646486 0.0552534 0.934181 0.0121312C1.22188 -0.0309911 1.51493 0.0418545 1.74888 0.214643L10 6.29712L18.2511 0.214643C18.367 0.129087 18.4985 0.0671675 18.6383 0.0324205C18.7781 -0.00232646 18.9234 -0.00922079 19.0658 0.0121312C19.2083 0.0334832 19.3451 0.0826633 19.4685 0.156864C19.592 0.231064 19.6996 0.328831 19.7852 0.444584C19.8708 0.560336 19.9328 0.691806 19.9676 0.831488C20.0023 0.97117 20.0092 1.11633 19.9879 1.25868C19.9665 1.40102 19.9173 1.53777 19.843 1.66111C19.7688 1.78445 19.6709 1.89197 19.5551 1.97752L10.652 8.54726C10.4631 8.68634 10.2346 8.76118 10 8.76077Z" fill="#7AE229"/><path d="M10 14.5093C9.7654 14.5097 9.53687 14.4349 9.34802 14.2958L0.444913 7.72606C0.210967 7.55327 0.0552944 7.29469 0.0121402 7.00721C-0.031014 6.71973 0.0418855 6.42689 0.214802 6.19312C0.387718 5.95935 0.646486 5.80379 0.934181 5.76067C1.22188 5.71754 1.51493 5.79039 1.74888 5.96318L10 12.0457L18.2511 5.96318C18.4851 5.79039 18.7781 5.71754 19.0658 5.76067C19.3535 5.80379 19.6123 5.95935 19.7852 6.19312C19.9581 6.42689 20.031 6.71973 19.9879 7.00721C19.9447 7.29469 19.789 7.55327 19.5551 7.72606L10.652 14.2958C10.4631 14.4349 10.2346 14.5097 10 14.5093Z" fill="#7AE229"/></svg>`;
 }
 
-function cardTemplate(card) {
-    return `
-        <div class="card" onclick="renderCardOverlay(${card.id})">
-            <span class="tag ${card.tagClass}">${card.tag}</span>
-            <div class="card-title">${card.title}</div>
-            <div class="card-desc">${card.description}</div>
-            <div class="subtasks">
-                <div class="progress-bar"><div class="progress-fill" style="width:${card.progress}%"></div></div>
-                ${card.completedSubtasks}/${card.totalSubtasks} Subtasks
-            </div>
-            <div class="card-footer">
-                <div class="avatars">
-                    ${card.avatars.map(av => `<div class="av ${av.cardColor}">${av.initials}</div>`).join('')}
-                </div>
-                <div class="priority ${card.priorityClass}">
-                    ${getPriorityIcon(card.priorityClass)}
-                </div>
-            </div>
-        </div>`;
-}
-
-function renderCards() {
-    const container = document.getElementById("Done-list");
-    if (!container) return;
-
-    container.innerHTML = cardsData.map(card => cardTemplate(card)).join('');
-}
 
 let draggedCard = null;
 
@@ -164,11 +137,6 @@ function getDragAfterElement(container, mouseY) {
 
 }
 
-// document.addEventListener('DOMContentLoaded', () => {
-//     renderCards();
-//     initSimpleDragAndDrop();
-// });
-
 async function testInit() {
     await loadTasks()
     renderTasks()
@@ -202,21 +170,46 @@ function handleBoardClick(event) {
 function toggleMoveMenu(button) {
 
     const card = button.closest(".card");
-    const menu = card.querySelector(".move-menu");
+    const menu = document.getElementById("move-menu");
+    if (!menu) return;
 
     const currentStatus = card.closest(".column").dataset.status;
-
     const taskId = card.dataset.id;
 
     renderMoveMenu(menu, currentStatus, taskId);
 
-    document.querySelectorAll(".move-menu").forEach(m => {
-        m.classList.add("d_none");
-    });
+    closeAllMoveMenus();
+
+    // 🔥 HIER EINSETZEN
+    const rect = card.getBoundingClientRect();
+
+    const menuWidth = 127;
+    const menuHeight = 113;
+    const offset = 230;
+
+    let left = rect.left + offset;
+    let top = rect.top;
+
+    const maxLeft = window.innerWidth - menuWidth - 10;
+    const maxTop = window.innerHeight - menuHeight - 10;
+
+    if (left > maxLeft) left = maxLeft;
+    if (top > maxTop) top = maxTop;
+
+    menu.style.left = `${left}px`;
+    menu.style.top = `${top}px`;
 
     menu.classList.remove("d_none");
 }
 
+function clamp(value, min, max) {
+    return Math.min(Math.max(value, min), max);
+}
+
+function closeAllMoveMenus() {
+    const menu = document.getElementById("move-menu");
+    if (menu) menu.classList.add("d_none");
+}
 
 
 let tasks = []
@@ -312,7 +305,7 @@ function renderMoveMenu(menu, currentStatus, taskId) {
                  data-task-id="${taskId}"
                  data-status="${status}">
 
-                <img src="./assets/img/${index === 0 ? 'arrowUup.svg' : 'arrow_drop_down-icon.svg'}">
+                <img src="./assets/img/${index === 0 ? 'arrow-left-line.svg' : 'arrow-left-line.svg'}">
                 <span>${statusNames[status]}</span>
 
             </div>
@@ -339,7 +332,7 @@ function getTaskCard(task) {
         <div class="card" data-id="${task.id}" data-status="${task.status}" draggable="true">
             <div class="header-card">
             <span class="tag ${task.categoryClass}">${task.category}</span>
-            <div class="swap-horiz-div">
+            <div class="swap-horiz-div" data-id="${task.id}">
               <img src="./assets/img/swap1_horiz.svg" alt="">
             </div>
             </div>
@@ -347,22 +340,6 @@ function getTaskCard(task) {
             <div class="card-desc">${task.description}</div>
             <div class="subtasks">
               ${task.subtasksHTML}
-            </div>
-            <div class="move-menu d_none"id="move-menu">
-              <div class="move-to-header">
-                <span>Move To</span>
-              </div>
-              <div class="movingto-Div">
-                <div class="moving-top">
-                  <img src="./assets/img/arrowUup.svg" alt="">
-                  <span>To-Do</span>
-                </div>
-                <div class="moving-down">
-                    <img src="./assets/img/arrow_drop_down-icon.svg" alt="">
-                    <span>Review</span>
-                </div>
-              </div>
-
             </div>
             <div class="card-footer">
               <div class="avatars">
@@ -459,21 +436,21 @@ function getAllowedMoves(currentStatus) {
     return options;
 }
 
-function closeAllMoveMenus() {
-    document.querySelectorAll(".move-menu").forEach(menu => {
-        menu.classList.add("d_none");
-    });
-}
-
-// function renderAssignees(assignees = []) {
-
-//     if (!assignees.length) return "";
-
-//     return assignees
-//         .map(user => `
-//             <div class="avatar">
-//                 ${user.initials || "?"}
-//             </div>
-//         `)
-//         .join("");
+// function closeAllMoveMenus() {
+//     document.querySelectorAll(".move-menu").forEach(menu => {
+//         menu.classList.add("d_none");
+//     });
 // }
+
+function renderAssignees(assignees = []) {
+
+    if (!assignees.length) return "";
+
+    return assignees
+        .map(user => `
+            <div class="avatar">
+                ${user.initials || "?"}
+            </div>
+        `)
+        .join("");
+}
