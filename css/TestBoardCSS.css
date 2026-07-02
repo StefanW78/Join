@@ -71,6 +71,7 @@ main{
 }
 
 .swap-horiz-div{
+  position: relative;
   width: 20px;
   height: 20px;
   border: 2px solid black;
@@ -90,7 +91,9 @@ main{
 }
 
 .move-menu {
-    position: fixed;
+    position: absolute;
+    top: 20px;
+    left: 11px;
     background: #2A3647;
     color: white;
     border-radius: 0px 10px 10px 10px;
@@ -99,7 +102,7 @@ main{
     flex-direction: column;
     gap: 15px;
     box-shadow: 0 4px 12px rgba(0,0,0,.15);
-    /* z-index: 1000; */
+    z-index: 1000;
     width: 127px;
 }
 

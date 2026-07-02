@@ -170,45 +170,22 @@ function handleBoardClick(event) {
 function toggleMoveMenu(button) {
 
     const card = button.closest(".card");
-    const menu = document.getElementById("move-menu");
+    const menu = card.querySelector(".move-menu");
+
     if (!menu) return;
+
+    const wasOpen = !menu.classList.contains("d_none");
+
+    closeAllMoveMenus();
+
+    if (wasOpen) return;
 
     const currentStatus = card.closest(".column").dataset.status;
     const taskId = card.dataset.id;
 
     renderMoveMenu(menu, currentStatus, taskId);
 
-    closeAllMoveMenus();
-
-    // 🔥 HIER EINSETZEN
-    const rect = card.getBoundingClientRect();
-
-    const menuWidth = 127;
-    const menuHeight = 113;
-    const offset = 230;
-
-    let left = rect.left + offset;
-    let top = rect.top;
-
-    const maxLeft = window.innerWidth - menuWidth - 10;
-    const maxTop = window.innerHeight - menuHeight - 10;
-
-    if (left > maxLeft) left = maxLeft;
-    if (top > maxTop) top = maxTop;
-
-    menu.style.left = `${left}px`;
-    menu.style.top = `${top}px`;
-
     menu.classList.remove("d_none");
-}
-
-function clamp(value, min, max) {
-    return Math.min(Math.max(value, min), max);
-}
-
-function closeAllMoveMenus() {
-    const menu = document.getElementById("move-menu");
-    if (menu) menu.classList.add("d_none");
 }
 
 
@@ -334,6 +311,15 @@ function getTaskCard(task) {
             <span class="tag ${task.categoryClass}">${task.category}</span>
             <div class="swap-horiz-div" data-id="${task.id}">
               <img src="./assets/img/swap1_horiz.svg" alt="">
+              <div class="move-menu d_none">
+              <div class="move-to-header">
+                <span>Move To</span>
+              </div>
+              <div class="movingto-Div">
+                
+              </div>
+
+        </div>
             </div>
             </div>
             <div class="card-title">${task.title}</div>
@@ -436,11 +422,11 @@ function getAllowedMoves(currentStatus) {
     return options;
 }
 
-// function closeAllMoveMenus() {
-//     document.querySelectorAll(".move-menu").forEach(menu => {
-//         menu.classList.add("d_none");
-//     });
-// }
+function closeAllMoveMenus() {
+    document.querySelectorAll(".move-menu").forEach(menu => {
+        menu.classList.add("d_none");
+    });
+}
 
 function renderAssignees(assignees = []) {
 
