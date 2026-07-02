@@ -1,4 +1,14 @@
 
+const moveRules = {
+    todo: ["done", "inProgress"],
+    inProgress: ["todo", "awaitFeedback"],
+    awaitFeedback: ["inProgress", "done"],
+    done: ["awaitFeedback", "todo"]
+};
+
+function getAllowedMoves(currentStatus) {
+    return moveRules[currentStatus] || [];
+}
 
 function getPriorityIcon(priorityClass) {
     if (priorityClass === 'prio-urgent')  
@@ -238,6 +248,14 @@ async function moveTask(taskId, newStatus) {
     const task = tasks.find(t => t.id === taskId);
     if (!task) return;
 
+    // 🔥 HIER NEU: Validierung
+    const allowed = moveRules[task.status];
+
+    if (!allowed?.includes(newStatus)) {
+        console.warn("Move not allowed:", task.status, "→", newStatus);
+        return;
+    }
+
     const oldStatus = task.status;
 
     // UI sofort updaten
@@ -245,18 +263,14 @@ async function moveTask(taskId, newStatus) {
     renderTasks();
 
     try {
-
         await updateData("tasks", taskId, { status: newStatus });
-
     } catch (error) {
 
         console.error("MoveTask failed:", error);
 
         // rollback
         task.status = oldStatus;
-
         renderTasks();
-
     }
 }
 
@@ -290,16 +304,13 @@ function renderMoveMenu(menu, currentStatus, taskId) {
     });
 }
 
-async function moveTaskFromMenu(taskId, newStatus) {
-
-    await moveTask(taskId, newStatus);
+async function moveTaskFromMenu(event, taskId, newStatus) {
 
     event.stopPropagation();
 
-    document.querySelectorAll(".move-menu").forEach(menu => {
-        menu.classList.add("d_none");
-    });
+    await moveTask(taskId, newStatus);
 
+    closeAllMoveMenus()
 }
 
 
@@ -401,26 +412,26 @@ document.addEventListener("click", (event) => {
 });
 
 
-function getAllowedMoves(currentStatus) {
+// function getAllowedMoves(currentStatus) {
 
-    const statusOrder = ["todo", "inProgress", "awaitFeedback", "done"];
+//     const statusOrder = ["todo", "inProgress", "awaitFeedback", "done"];
 
-    const index = statusOrder.indexOf(currentStatus);
+//     const index = statusOrder.indexOf(currentStatus);
 
-    const options = [];
+//     const options = [];
 
-    // nach oben
-    if (index > 0) {
-        options.push(statusOrder[index - 1]);
-    }
+//     // nach oben
+//     if (index > 0) {
+//         options.push(statusOrder[index - 1]);
+//     }
 
-    // nach unten
-    if (index < statusOrder.length - 1) {
-        options.push(statusOrder[index + 1]);
-    }
+//     // nach unten
+//     if (index < statusOrder.length - 1) {
+//         options.push(statusOrder[index + 1]);
+//     }
 
-    return options;
-}
+//     return options;
+// }
 
 function closeAllMoveMenus() {
     document.querySelectorAll(".move-menu").forEach(menu => {
