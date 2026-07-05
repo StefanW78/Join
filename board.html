@@ -7,7 +7,14 @@
     <link rel="stylesheet" href="./css/board-responsiv.css" />
     <link rel="stylesheet" href="./css/overlay.css" />
     <link rel="stylesheet" href="./css/addTask.css" />
+    
     <link rel="stylesheet" href="./css/addTaskMobile.css" />
+
+    <link rel="stylesheet" href="./css/standart.css" />
+    <link rel="stylesheet" href="./css/sidebar-and-header-css.css" />
+    <link rel="stylesheet" href="./css/sidebar-and-header-responsiv.css" />
+    <link rel="icon" href="./assets/img/Capa 2.svg" />
+
     <script type="module" src="./Js/auth-script.js"></script>
 
     <title>JOIN-PROJEKT</title>
@@ -43,14 +50,42 @@
       </div>
     </aside>
 
-    <div class="main-wrapper">
-      <header class="header">
-        <span class="header-title">Kanban Project Management Tool</span>
-        <div class="header-actions">
-          <button class="icon-btn" title="Hilfe">?</button>
-          <div class="avatar">SM</div>
-        </div>
-      </header>
+    <div class="header-and-content-div">
+          <div class="header-div">
+            <div class="header-content">
+              <div class="header-img">
+                <img
+                  src="./assets/img/Logo_for_Favicon_construction.png"
+                  alt="header-logo"
+                />
+              </div>
+
+              <div class="header-title">Kanban Project Management Tool</div>
+
+              <div class="user-header">
+                <a class="help" href="./help.html">
+                  <img src="./assets/img/help.svg" alt="help-logo" />
+                </a>
+
+                <div class="user-icon">
+                  <button class="header-button" id="header-button">SM</button>
+                </div>
+
+                <div class="dropdown-menu d_none" id="dropdown-menu">
+                  <a
+                    class="help-switch hidden-on-desktop"
+                    id="help-switch"
+                    href="./help.html"
+                  >
+                    Help
+                  </a>
+                  <a href="./legalnotes.html">Legal notice</a>
+                  <a href="./privacy.html">Privacy Policy</a>
+                  <a href="" onclick="logout()">Log Out</a>
+                </div>
+              </div>
+            </div>
+          </div>
 
       <main class="content">
         <div class="board-header">
@@ -302,4 +337,5 @@
     <script src="./Js/boardAddTaskOverlay.js"></script>
     <script type="module" src="./Js/userBadge.js"></script>
     <script src="./Js/boardTemplate.js"></script>
+    <script src="./Js/Sidebar-and-header-script.js"></script>
 </html>
