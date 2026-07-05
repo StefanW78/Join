@@ -2,6 +2,7 @@ import { loadData, patchData, deleteData } from "./storage.js";
 
 let boardTasks = [];
 let contacts = [];
+let filteredTasks = [];
 
 async function initBoard() {
   try {
@@ -17,14 +18,18 @@ async function initBoard() {
       };
     });
 
-    boardTasks = Object.entries(tasksObject).map(([id, task]) => {
-      return {
-        id,
-        ...task,
-      };
-    });
+   boardTasks = Object.entries(tasksObject).map(([id, task]) => {
+  return {
+    id,
+    ...task,
+  };
+});
 
-    renderBoardTasks();
+filteredTasks = boardTasks;
+
+initBoardSearch();
+renderBoardTasks();
+
   } catch (error) {
     console.error("Fehler beim Laden der Board-Daten:", error);
   }
@@ -33,7 +38,7 @@ async function initBoard() {
 function renderBoardTasks() {
   clearBoardColumns();
 
-  boardTasks.forEach((task) => {
+  filteredTasks.forEach((task) => {
     const targetColumn = getTargetColumn(task.status);
 
     if (!targetColumn) return;
@@ -44,6 +49,29 @@ function renderBoardTasks() {
   renderEmptyMessages();
   initTaskCardClicks();
   initDragAndDrop();
+}
+
+function initBoardSearch() {
+  const boardSearch = document.getElementById("boardSearch");
+
+  if (!boardSearch) return;
+
+  boardSearch.addEventListener("input", () => {
+    updateFilteredTasks();
+    renderBoardTasks();
+  });
+}
+
+function updateFilteredTasks() {
+  const boardSearch = document.getElementById("boardSearch");
+  const searchText = boardSearch ? boardSearch.value.trim().toLowerCase() : "";
+
+  filteredTasks = boardTasks.filter((task) => {
+    const title = (task.title || "").toLowerCase();
+    const description = (task.description || "").toLowerCase();
+
+    return title.includes(searchText) || description.includes(searchText);
+  });
 }
 
 function clearBoardColumns() {
@@ -294,7 +322,7 @@ async function moveTaskToStatus(taskId, newStatus) {
     await patchData(`tasks/${taskId}`, {
       status: newStatus,
     });
-
+    updateFilteredTasks();
     task.status = newStatus;
 
     renderBoardTasks();
@@ -516,6 +544,7 @@ async function deleteTask(taskId) {
 
     boardTasks = boardTasks.filter((task) => task.id !== taskId);
 
+    updateFilteredTasks();
     closeTaskDetailOverlay();
     renderBoardTasks();
   } catch (error) {
@@ -610,7 +639,7 @@ async function saveEditedTask(
 
       return task;
     });
-
+    updateFilteredTasks();
     closeTaskDetailOverlay();
     renderBoardTasks();
   } catch (error) {
