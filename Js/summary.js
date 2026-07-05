@@ -12,7 +12,6 @@ let SummaryDiv = document.getElementById(`summary-div`)
 let AnimationWelcomePage = document.getElementById(`anima-welcom-page`)
 const SignedUserName = document.getElementById("signedUser");
 
-let Firebase_URL = "https://test-2651c-default-rtdb.europe-west1.firebasedatabase.app/";
 
 
 function init() {
@@ -22,38 +21,10 @@ function init() {
 }
 
 
-async function loadTodos() {
-    
-    try{
-        const response = await fetch(Firebase_URL + ".json")
-
-        if (!response.ok) {
-            throw new Error(`HTTP error! status: ${response.status}`);
-        }
-        
-        const ResponseToJson = await response.json();
-
-        let fetchdData = {};
-        
-        if (ResponseToJson && typeof ResponseToJson === "object") {
-      for (const [id, todoData] of Object.entries(ResponseToJson)) {
-        fetchdData[id] = { id, ...todoData };
-      }
-    }
-
-        return fetchdData;
-    }catch (error) {
-    console.error("Error loading todos:", error);
-    return {};
-  }
-
-
-}
-
 async function renderSummary() {
   renderName();
 
-  const fetchdData = await loadTodos();
+  const fetchdData = await loadDataBase("tasks");
   const todos = Object.values(fetchdData);
 
   // Zahlen berechnen
@@ -106,7 +77,7 @@ function renderName() {
 
 
 function greetingGuest() {
-  const checkQueries = window.matchMedia("(max-width: 864px)");
+  const checkQueries = window.matchMedia("(max-width: 1092px)");
   if (checkQueries.matches) {
     AnimationWelcomeAnimation()
   }
@@ -132,7 +103,7 @@ function AnimationWelcomeAnimation() {
 const boxItems = document.querySelectorAll(".overview-container-items");
 boxItems.forEach((box) => {
   box.addEventListener("click", () => {
-    window.location.href = "./board.html";
+    window.location.href = "board.html";
   });
 });
 
