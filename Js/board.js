@@ -43,6 +43,7 @@ function renderBoardTasks() {
 
   renderEmptyMessages();
   initTaskCardClicks();
+  initDragAndDrop();
 }
 
 function clearBoardColumns() {
@@ -79,7 +80,7 @@ function getTaskCardTemplate(task) {
   const progress = getSubtaskProgress(completedSubtasks, totalSubtasks);
 
   return `
-    <div class="card" data-task-id="${task.id}">
+    <div class="card" draggable="true" data-task-id="${task.id}">
       <span class="tag ${getCategoryClass(task.category)}">
         ${task.category || "Task"}
       </span>
@@ -231,11 +232,84 @@ function renderEmptyMessage(containerId, message) {
   }
 }
 
+let draggedTaskId = null;
+let isDraggingTask = false;
+
+function initDragAndDrop() {
+  initDraggableCards();
+  initDropColumns();
+}
+
+function initDraggableCards() {
+  document.querySelectorAll(".card[data-task-id]").forEach((card) => {
+    card.addEventListener("dragstart", () => {
+      draggedTaskId = card.dataset.taskId;
+      isDraggingTask = true;
+      card.classList.add("is-dragging");
+    });
+
+    card.addEventListener("dragend", () => {
+      card.classList.remove("is-dragging");
+
+      setTimeout(() => {
+        draggedTaskId = null;
+        isDraggingTask = false;
+      }, 0);
+    });
+  });
+}
+
+function initDropColumns() {
+  document.querySelectorAll(".column[data-status]").forEach((column) => {
+    column.addEventListener("dragover", (event) => {
+      event.preventDefault();
+      column.classList.add("is-drag-over");
+    });
+
+    column.addEventListener("dragleave", () => {
+      column.classList.remove("is-drag-over");
+    });
+
+    column.addEventListener("drop", async (event) => {
+      event.preventDefault();
+      column.classList.remove("is-drag-over");
+
+      const newStatus = column.dataset.status;
+
+      await moveTaskToStatus(draggedTaskId, newStatus);
+    });
+  });
+}
+
+async function moveTaskToStatus(taskId, newStatus) {
+  if (!taskId || !newStatus) return;
+
+  const task = boardTasks.find((task) => task.id === taskId);
+
+  if (!task) return;
+
+  if (task.status === newStatus) return;
+
+  try {
+    await patchData(`tasks/${taskId}`, {
+      status: newStatus,
+    });
+
+    task.status = newStatus;
+
+    renderBoardTasks();
+  } catch (error) {
+    console.error("Fehler beim Verschieben des Tasks:", error);
+  }
+}
+
 initBoard();
 
 function initTaskCardClicks() {
   document.querySelectorAll(".card[data-task-id]").forEach((card) => {
     card.addEventListener("click", () => {
+      if (isDraggingTask) return;
+
       openTaskDetailOverlay(card.dataset.taskId);
     });
   });
@@ -281,7 +355,6 @@ function closeTaskDetailOverlay() {
   document.body.style.overflow = "auto";
   formContainer.innerHTML = "";
   formContainer.classList.remove("edit-mode");
-  formContainer.innerHTML = getTaskDetailOverlayTemplate(task);
 
   overlay.removeEventListener("click", closeTaskOverlayOnBackgroundClick);
 }
@@ -496,13 +569,6 @@ function initEditTaskForm(task) {
     saveEditedTask(task.id, selectedEditPriority, selectedEditContacts, editSubtasks);
   });
 }
-
-  document.getElementById("editTaskForm").addEventListener("submit", (event) => {
-    event.preventDefault();
-
-    saveEditedTask(task.id, selectedEditPriority);
-  });
-
 
 async function saveEditedTask(
   taskId,
