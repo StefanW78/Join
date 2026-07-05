@@ -3,6 +3,13 @@ let contactPopUpAdd = document.getElementById(`contact-pop-add`)
 let addContactOverlay = document.getElementById(`add-contact-overlay`)
 let editContactPopup = document.getElementById(`edit-contact-popup`)
 
+const formState = {
+    contact: {
+        name: false,
+        email: false,
+        phone: false
+    }
+};
 
 function OpenAddDialog() {
   contactPopUpAdd.classList.remove("d_none");
@@ -20,6 +27,18 @@ function CloseAddDialog() {
   addContactOverlay.classList.add(`slide-out`)
   setTimeout(() => {
     contactPopUpAdd.classList.add("d_none");
+  }, 460)
+  }, 200)
+ 
+}
+
+function CloseAddContactDialog() {
+  setTimeout(() =>{
+  addContactOverlay.classList.remove(`slide-in`)
+  addContactOverlay.classList.add(`slide-out`)
+  setTimeout(() => {
+    contactPopUpAdd.classList.add("d_none");
+    resetForm("contact", "createContactBtn", ["name", "email", "phone"]);
   }, 460)
   }, 200)
  
@@ -51,264 +70,173 @@ function CloseEditDialog() {
 }
 
 async function addNewContact() {
-  const newContact = await getDataToMakeNewContact();
-  const contactName = document.getElementById("name_input").value.trim();
-  const contactEmail = document.getElementById("email_input").value.trim();
-  const contactPhone = document.getElementById("phone_input").value.trim();
-  
-  if (!contactName || !contactEmail || !contactPhone) {
-    contactErrorMsg("Please fill in all fields");
 
-    return;
-  }
-  if (newContact.name && newContact.email && newContact.phone) {
+    const data = getContactFormData();
+
+    if (!validateContactForm(data)) return;
+
+    if (!checkDuplicateContact(data)) return;
+
+    const newContact = {
+        ...data,
+        initials: getInitials(data.name),
+        color: randomColor(),
+        checked: false,
+    };
+
     try {
-      await validateContactForm();
-      await saveContact(newContact);
-      await loadDataBase();
-      await createContactList();
-      CloseAddDialog();
-      popupMessage("Contact successfully created!");
+
+        const result = await saveData("contacts", newContact);
+
+        const id = result.name;
+
+        fetchedData[id] = {
+            id,
+            ...newContact,
+        };
+
+        renderContactList();
+        CloseAddContactDialog()
+        popupMessage("Contact created!");
+
     } catch (error) {
-      console.error("Error adding contact:", error);
-      alert("Failed to add contact. Please try again.");
+
+        console.error("Error creating contact:", error);
+        contactErrorMsg("Failed to create contact");
+
     }
-  } else {
-    contactErrorMsg("Please fill in all fields");
-  }
+
 }
 
+function randomColor() {
 
-async function getDataToMakeNewContact() {
-  const nameInputField = document.getElementById("name_input");
-  const emailInputField = document.getElementById("email_input");
-  const phoneInputField = document.getElementById("phone_input");
-  const initials = getInitials(nameInputField.value.trim());
-  const contactColor = colors[Math.floor(Math.random() * colors.length)];
+    return colors[Math.floor(Math.random() * colors.length)];
 
-  if (!nameInputField || !emailInputField || !phoneInputField) {
-    console.error("Input fields not found in DOM");
-    alert("Error: Form fields not available");
-    return;
-  }
-  const newContact = {
-    name: nameInputField.value.trim(),
-    email: emailInputField.value.trim(),
-    phone: phoneInputField.value.trim(),
-    initials: initials,
-    color: contactColor,
-    checked: false,
-  };
-  
-  return newContact;
 }
 
+function getContactFormData() {
 
-async function validateContactForm() {
-  const isNameValid = await contactNameValidation();
-  const isEmailValid = await contactEmailValidation();
-  const isPhoneValid = contactPhoneValidation();
-  return isNameValid && isEmailValid && isPhoneValid;
+    return {
+        name: document.getElementById("name_input").value.trim(),
+        email: document.getElementById("email_input").value.trim(),
+        phone: document.getElementById("phone_input").value.trim(),
+    };
+
 }
 
-async function contactNameValidation() {
-  const contactName = document.getElementById("name_input").value.trim().toLowerCase();
-  const nameInput = document.getElementById("name_input");
-  const ErrorMsgBox = document.getElementById("validationErrorMsg");
+function validateContactForm(data) {
 
-  if (!contactName) {
-    contactErrorMsg("Name cannot be empty.");
-    nameInput.value = "";
-    nameInput.parentElement.style.borderColor = "rgb(170, 22, 22)";
-    return false;
-  }
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    const phoneRegex = /^\+?[0-9\s\-()]{7,}$/;
 
-  const isNameAvailable = await existingNameValidation();
-  if (!isNameAvailable) {
-    return false;
-  }
-
-  ErrorMsgBox.style.visibility = "hidden";
-  nameInput.parentElement.style.borderColor = "#ccc";
-  return true;
-}
-
-async function existingNameValidation() {
-  const contactName = document
-    .getElementById("name_input")
-    .value.trim()
-    .toLowerCase();
-  const nameInput = document.getElementById("name_input");
-
-  try {
-    const existingUserNames = await fetchExistingContactName();
-    if (
-      existingUserNames.find(
-        (existingName) => existingName.toLowerCase() === contactName,
-      )
-    ) {
-      contactErrorMsg("Contact with this name already exists.");
-      nameInput.value = "";
-      nameInput.parentElement.style.borderColor = "rgb(170, 22, 22)";
-      return false;
+    if (!data.name) {
+        contactErrorMsg("Name is required");
+        return false;
     }
+
+    if (!data.email) {
+        contactErrorMsg("Email is required");
+        return false;
+    }
+
+    if (!emailRegex.test(data.email)) {
+        contactErrorMsg("Invalid email format");
+        return false;
+    }
+
+    if (!data.phone) {
+        contactErrorMsg("Phone is required");
+        return false;
+    }
+
+    if (!phoneRegex.test(data.phone)) {
+        contactErrorMsg("Invalid phone format");
+        return false;
+    }
+
     return true;
-  } catch (error) {
-    console.error("Error validating name:", error);
+
+}
+
+function checkDuplicateContact(data) {
+
+    const contacts = Object.values(fetchedData);
+
+    const nameExists = contacts.some(contact =>
+        contact.name?.toLowerCase() === data.name.toLowerCase()
+    );
+
+    const emailExists = contacts.some(contact =>
+        contact.email?.toLowerCase() === data.email.toLowerCase()
+    );
+
+    if (nameExists) {
+        contactErrorMsg("Name already exists");
+        return false;
+    }
+
+    if (emailExists) {
+        contactErrorMsg("Email already exists");
+        return false;
+    }
+
     return true;
-  }
+
 }
 
-async function fetchExistingContactName() {
-  try {
-    const response = await fetch(Firebase_URL + ".json");
-    if (!response.ok) {
-      throw new Error(`HTTP error! status: ${response.status}`);
-    }
-
-    const data = await response.json();
-    const existingNames = [];
-
-    if (data && typeof data === "object") {
-      for (const [id, contactData] of Object.entries(data)) {
-        if (contactData.name) {
-          existingNames.push(contactData.name);
-        }
-      }
-      return existingNames;
-    }
-  } catch (error) {
-    console.error(error);
-    return [];
-  }
-}
-
-async function contactEmailValidation() {
-  const contactEmail = document.getElementById("email_input").value.trim().toLowerCase();
-  const contactEmailInput = document.getElementById("email_input");
-  const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-  const ErrorMsgBox = document.getElementById("validationErrorMsg");
-
-  if (!contactEmail) {
-    contactErrorMsg("Email cannot be empty.");
-    contactEmailInput.value = "";
-    contactEmailInput.parentElement.style.borderColor = "rgb(170, 22, 22)";
-    return false;
-  }
-
-  if (!emailRegex.test(contactEmail)) {
-    contactErrorMsg("Please enter a valid email address.");
-    contactEmailInput.value = "";
-    contactEmailInput.parentElement.style.borderColor = "rgb(170, 22, 22)";
-    return false;
-  }
-  const isEmailAvailable = await existingEmailValidation();
-  if (!isEmailAvailable) {
-    return false;
-  }
-
-  contactEmailInput.parentElement.style.borderColor = "#ccc";
-  ErrorMsgBox.style.visibility = "hidden";
-  return true;
-}
-
-async function existingEmailValidation() {
-  const contactEmail = document.getElementById("email_input").value.trim().toLowerCase();
-  const emailInput = document.getElementById("email_input");
-
-  try {
-    const existingContactEmails = await fetchExistingContactEmail();
-    if (
-      existingContactEmails.find(
-        (existingEmail) => existingEmail.toLowerCase() === contactEmail,
-      )
-    ) {
-      contactErrorMsg("This email already exists.");
-      emailInput.value = "";
-      emailInput.parentElement.style.borderColor = "rgb(170, 22, 22)";
-      return false;
-    }
-    return true;
-  } catch (error) {
-    console.error("Error validating email:", error);
-    // Bei Fehler: Allow registration (fail-safe)
-    return true;
-  }
-}
-
-async function fetchExistingContactEmail() {
-  try {
-    const response = await fetch(Firebase_URL + ".json");
-    if (!response.ok) {
-      throw new Error(`HTTP error! status: ${response.status}`);
-    }
-
-    const data = await response.json();
-    const existingEmails = [];
-
-    if (data && typeof data === "object") {
-      for (const [id, contactData] of Object.entries(data)) {
-        if (contactData.email) {
-          existingEmails.push(contactData.email);
-        }
-      }
-      return existingEmails;
-    }
-  } catch (error) {
-    console.error(error);
-    return [];
-  }
-}
-
-function contactPhoneValidation() {
-  const contactPhone = document.getElementById("phone_input").value.trim();
-  const phoneInput = document.getElementById("phone_input");
-  const ErrorMsgBox = document.getElementById("validationErrorMsg");
-  const phoneRegex = /^\+?[0-9\s\-()]{7,}$/;
-
-  if (!contactPhone) {
-    contactErrorMsg("Phone number cannot be empty.");
-    phoneInput.value = "";
-    phoneInput.parentElement.style.borderColor = "rgb(170, 22, 22)";
-    return false;
-  }
-
-  if (!phoneRegex.test(contactPhone)) {
-    contactErrorMsg("Invalid phone number format.");
-    phoneInput.value = "";
-    phoneInput.parentElement.style.borderColor = "rgb(170, 22, 22)";
-    return false;
-  }
-
-  ErrorMsgBox.style.visibility = "hidden";
-  phoneInput.parentElement.style.borderColor = "#ccc";
-  return true;
-}
-
+//Neue Version vom saveEditContact
 async function saveEditedContact() {
-  const editedData = getEditedContactData();
-  if (!editedData) return;
-  const contactId = findContactIdFromDisplayed();
-  if (!contactId) {
-    alert("Contact not found");
-    return;
-  }
-  const updatedContact = {
-    name: editedData.editedName,
-    email: editedData.editedEmail,
-    phone: editedData.editedPhone,
-    initials: getInitials(editedData.editedName)
+    const id = currentContactId;
 
-  };
-  try {
-    await updateContactInFirebase(contactId, updatedContact);
-    await loadDataBase();
-    await createContactList();
-    CloseEditDialog();
-    popupMessage("Contact successfully saved!");
-    contactDetailDiv.innerHTML = ""
-  } catch (error) {
-    console.error("Error saving edited contact:", error);
-    alert("Failed to save contact. Please try again.");
-  }
+    if (!id) return;
+
+    const updatedData = {
+        name: document.getElementById("nameInput").value.trim(),
+        email: document.getElementById("emailInput").value.trim(),
+        phone: document.getElementById("phoneInput").value.trim(),
+    };
+
+    if (!updatedData.name || !updatedData.email || !updatedData.phone) {
+        contactErrorMsg("Please fill all fields");
+        return;
+    }
+
+    try {
+        // 🔥 1. Firebase wird geändert
+        await updateData("contacts", id, updatedData);
+
+        // 🔥 2. Lokaler Cache wird aktualisiert
+        fetchedData[id] = {
+            ...fetchedData[id],
+            ...updatedData,
+            initials: getInitials(updatedData.name),
+        };
+
+        // 🔥 3. UI aktualisieren
+        renderContactList();
+        renderContactDetails(fetchedData[id]);
+        CloseEditDialog();
+        popupMessage("Contact updated!");
+    } catch (error) {
+        console.error("Update failed:", error);
+    }
 }
+
+function openEdit(contactId) {
+
+    const contact = fetchedData[contactId];
+
+    if (!contact) return;
+
+    currentContactId = contactId;
+
+    editContactPopup.innerHTML =
+        renderEditTemplate(contact);
+        OpenEditDialog();
+
+}
+
+
+
+
+
