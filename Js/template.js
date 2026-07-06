@@ -196,6 +196,22 @@ function toggleMoveMenu(button) {
     renderMoveMenu(menu, currentStatus, taskId);
 
     menu.classList.remove("d_none");
+
+    requestAnimationFrame(() => {
+
+    const taskList = card.closest(".task-list");
+
+    const menuRect = menu.getBoundingClientRect();
+    const listRect = taskList.getBoundingClientRect();
+
+    if (menuRect.right > listRect.right) {
+        taskList.scrollBy({
+            left: menuRect.right - listRect.right + 20,
+            behavior: "smooth"
+        });
+    }
+
+});
 }
 
 

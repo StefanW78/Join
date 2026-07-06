@@ -126,3 +126,9 @@ flex-direction: column;
     order: 2;
   }
 }
+
+@media (max-width: 400px){
+  main{
+    padding: 20px 15px 35px 15px;
+  }
+}
