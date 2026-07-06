@@ -257,6 +257,27 @@ function renderTasks() {
     }
 }
 
+function renderOneTask(taskId) {
+
+    const task = tasks.find(t => t.id === taskId);
+
+    if (!task) return;
+
+    const preparedTask = prepareTaskData(task);
+
+    const newCardHTML = getTaskCard(preparedTask);
+
+    const oldCard = document.querySelector(`.card[data-id="${taskId}"]`);
+
+    if (!oldCard) return;
+
+    const wrapper = document.createElement("div");
+    wrapper.innerHTML = newCardHTML;
+
+    oldCard.replaceWith(wrapper.firstElementChild);
+
+}
+
 
 //für das moven von Tasks update.
 async function moveTask(taskId, newStatus) {
@@ -467,3 +488,48 @@ function renderAssignees(assignees = []) {
         `)
         .join("");
 }
+
+function getSubtaskStats(subtasks = []) {
+    const total = subtasks.length;
+    const done = subtasks.filter(s => s.checked).length;
+
+    return {
+        total,
+        done,
+        progress: total ? (done / total) * 100 : 0
+    };
+}
+
+function getProgressHTML(subtasks = []) {
+    const { total, done, progress } = getSubtaskStats(subtasks);
+
+    if (!total) return "";
+
+    return `
+        <div class="progress-bar">
+            <div class="progress-fill" style="width:${progress}%"></div>
+        </div>
+        ${done}/${total} Subtasks
+    `;
+}
+
+//für die checkboxen
+document.addEventListener("change", async (event) => {
+    const checkbox = event.target.closest(".subtask-checkbox");
+    if (!checkbox) return;
+
+    const taskId = checkbox.dataset.taskId;
+    const subIndex = checkbox.dataset.index;
+
+    const task = tasks.find(t => t.id === taskId);
+    if (!task) return;
+
+    task.subtasks[subIndex].checked = checkbox.checked;
+
+    renderTasks();
+    renderCardOverlay(taskId);
+
+    await updateData("tasks", taskId, {
+        subtasks: task.subtasks
+    });
+});
