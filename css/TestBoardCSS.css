@@ -136,7 +136,6 @@ font-size: 15px;
 .moving-top img{
   width: 20px;
   height: 20px;
-  transform: rotate(90deg);
 }
 
 .moving-top:hover{
@@ -160,7 +159,7 @@ font-size: 15px;
 .moving-down img{
 width: 20px;
 height: 20px;
-transform: rotate(-90deg);
+transform: rotate(-180deg);
 }
 
 .moving-down:hover{
