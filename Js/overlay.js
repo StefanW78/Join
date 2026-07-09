@@ -149,7 +149,7 @@ function getAssignedPersonTemplate(avatar) {
     return `
         <div class="assigned-person">
 
-            <div class="assigned-avatar ${avatar.overlayColor}">
+            <div class="assigned-avatar" style="background-color: ${avatar.color};">
                 ${avatar.initials}
             </div>
 
@@ -200,7 +200,7 @@ function renderCardOverlay(id) {
     if (!card) return;
 
     const overlay = document.getElementById("cardOverlay");
-    const formContainer = document.getElementById("cardFormContainer");
+    const formContainer = document.getElementById("openTaskOverlay");
 
     if (!overlay || !formContainer) return;
 
@@ -216,7 +216,7 @@ function renderCardOverlay(id) {
 
 function getCardOverlayTemplate(card) {
     return `
-        <div id="openTaskOverlay" class="task-card">
+        <div class = "open_task_overlay_content">
             <div class="task-card-header">
                 <span class="task-tag ${card.overlayTagClass}">${card.tag}</span>
                 <button class="task-close-btn" onclick="closeCardOverlay()">&times;</button>
@@ -259,6 +259,8 @@ function getCardOverlayTemplate(card) {
                     </svg>
                     Delete
                 </button>
+                <div class= "vector">
+                </div>
                 <button class="task-action-btn edit-btn">
                     <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
                         <path d="M11.333 2A1.886 1.886 0 0 1 14 4.667l-9 9-3.667 1 1-3.667 9-9Z" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"/>
@@ -266,5 +268,5 @@ function getCardOverlayTemplate(card) {
                     Edit
                 </button>
             </div>
-        </div>`;
+            </div>`;
 }

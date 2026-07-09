@@ -22,8 +22,39 @@
 }
 
 .task-assigned-list{
-  max-height: 275px;
+  max-height: 160px;
   overflow-y: auto;
+}
+
+.open_task_overlay_content{
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  color: #1e2c3d;
+}
+
+.task-subtasks-list{
+  max-height: 95px;
+  overflow-y: auto;
+}
+
+.vector{
+  height: 20px;
+    background-color: #D1D1D1;
+    width: 1px;
+}
+
+.edit_content{
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  color: #1e2c3d;
+}
+
+.task-card-header-edit{
+      display: flex;
+    align-items: flex-start;
+    justify-content: flex-end;
 }
 
 .assigned-name,
@@ -79,7 +110,7 @@
 }
 
 .task-title {
-  font-size: 40px;
+  font-size: 50px;
   font-weight: 700;
   line-height: 1.2;
 }
@@ -187,9 +218,6 @@
 
 .task-actions {
   justify-content: flex-end;
-  gap: 12px;
-  padding-top: 8px;
-  border-top: 1px solid #dbe2ea;
 }
 
 .task-action-btn {
