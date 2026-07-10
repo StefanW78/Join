@@ -127,6 +127,7 @@ main{
   align-items: center;
   width: 100%;
   padding: 5px;
+  gap: 5px;
 }
 
 .moving-top span{
@@ -150,6 +151,7 @@ font-size: 15px;
   align-items: center;
   width: 100%;
   padding: 5px;
+  gap: 5px;
 }
 
 .moving-down span{
