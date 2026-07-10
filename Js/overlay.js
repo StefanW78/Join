@@ -219,7 +219,9 @@ function getCardOverlayTemplate(card) {
         <div class = "open_task_overlay_content">
             <div class="task-card-header">
                 <span class="task-tag ${card.overlayTagClass}">${card.tag}</span>
-                <button class="task-close-btn" onclick="closeCardOverlay()">&times;</button>
+                <button class="task-close-btn" onclick="closeCardOverlay()">
+                <img src="./assets/img/clearX.svg" alt="">
+                </button>
             </div>
             <h3 class="task-title">${card.title}</h3>
             <p class="task-description">${card.description}</p>
