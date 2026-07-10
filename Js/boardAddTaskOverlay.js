@@ -15,16 +15,7 @@ addTaskOverlay.addEventListener("click", (event) => {
 });
 
 function openAddTaskOverlay() {
-  const isDesktop = window.matchMedia("(min-width: 1093px)").matches;
-
-  if (!isDesktop) {
-    // Tablet & Handy -> zur Seite wechseln
-    window.location.href = "addTask.html";
-    return;
-  }
-
-  // Desktop -> Overlay öffnen
-  addTaskOverlay.classList.remove("dNone");
+  addTaskOverlay.classList.remove("d_none");
 
   setTimeout(() => {
     addTaskOverlay.classList.add("show");
@@ -35,6 +26,6 @@ function closeAddTaskOverlay() {
   addTaskOverlay.classList.remove("show");
 
   setTimeout(() => {
-    addTaskOverlay.classList.add("dNone");
+    addTaskOverlay.classList.add("d_none");
   }, 300);
 }

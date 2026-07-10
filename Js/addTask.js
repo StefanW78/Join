@@ -1,7 +1,9 @@
 import { loadData, postData } from "./storage.js";
 
-const taskTitleError = document.getElementById("taskTitleError");
+const taskDate = document.getElementById("taskDate");
 const taskDateError = document.getElementById("taskDateError");
+
+const taskTitleError = document.getElementById("taskTitleError");
 const categoryError = document.getElementById("categoryError");
 
 const currentUser = JSON.parse(localStorage.getItem("currentUser"));
@@ -9,17 +11,23 @@ const currentUser = JSON.parse(localStorage.getItem("currentUser"));
 const taskForm = document.getElementById("taskForm");
 const taskTitle = document.getElementById("taskTitle");
 const taskDescription = document.getElementById("taskDescription");
-const taskDate = document.getElementById("taskDate");
+const clearTaskBtn = document.getElementById("clearTaskBtn");
 
 const assignedInput = document.getElementById("assignedInput");
 const assignedList = document.getElementById("assignedList");
 const selectedContactsContainer = document.getElementById("selectedContacts");
+const moreContactsDropdown = document.getElementById("moreContactsDropdown");
 
 const categoryButton = document.getElementById("categoryButton");
 const categoryList = document.getElementById("categoryList");
 
 const subtaskInput = document.getElementById("subtasks");
 const subtaskList = document.getElementById("subtaskList");
+const addSubtaskBtn = document.getElementById("addSubtaskBtn");
+const clearSubtaskBtn = document.getElementById("clearSubtaskBtn");
+const moreSubtasksDropdown = document.getElementById("moreSubtasksDropdown");
+
+const taskAddedOverlay = document.getElementById("taskAddedOverlay");
 
 let selectedPriority = "medium";
 let selectedCategory = "";
@@ -33,6 +41,69 @@ initAssignedDropdown();
 initSubtasks();
 loadContacts();
 
+clearTaskBtn.addEventListener("click", () => {
+  resetFormState();
+});
+
+function validateTaskDate() {
+  clearInputError(taskDate, taskDateError);
+
+  const dateValue = taskDate.value.trim();
+
+  if (!dateValue) {
+    setInputError(taskDate, taskDateError, "This field is required");
+    return false;
+  }
+
+  if (!isValidDateFormat(dateValue)) {
+    setInputError(taskDate, taskDateError, "Please use the format dd/mm/yyyy");
+    return false;
+  }
+
+  const selectedDate = parseDateFromInput(dateValue);
+  const today = new Date();
+
+  today.setHours(0, 0, 0, 0);
+  selectedDate.setHours(0, 0, 0, 0);
+
+  if (selectedDate < today) {
+    setInputError(
+      taskDate,
+      taskDateError,
+      "The due date cannot be in the past.",
+    );
+    return false;
+  }
+
+  return true;
+}
+
+function isValidDateFormat(dateValue) {
+  const dateRegex = /^(0[1-9]|[12][0-9]|3[01])\/(0[1-9]|1[0-2])\/\d{4}$/;
+
+  if (!dateRegex.test(dateValue)) {
+    return false;
+  }
+
+  const selectedDate = parseDateFromInput(dateValue);
+
+  const day = Number(dateValue.slice(0, 2));
+  const month = Number(dateValue.slice(3, 5));
+  const year = Number(dateValue.slice(6, 10));
+
+  return (
+    selectedDate.getFullYear() === year &&
+    selectedDate.getMonth() === month - 1 &&
+    selectedDate.getDate() === day
+  );
+}
+
+function parseDateFromInput(dateValue) {
+  const [day, month, year] = dateValue.split("/");
+
+  return new Date(Number(year), Number(month) - 1, Number(day));
+}
+
 taskForm.addEventListener("submit", async (event) => {
   event.preventDefault();
 
@@ -43,8 +114,7 @@ taskForm.addEventListener("submit", async (event) => {
     return;
   }
 
-  if (!taskDate.value) {
-    setInputError(taskDate, taskDateError, "This field is required");
+  if (!validateTaskDate()) {
     return;
   }
 
@@ -64,11 +134,12 @@ taskForm.addEventListener("submit", async (event) => {
     title: taskTitle.value.trim(),
     description: taskDescription.value.trim(),
     dueDate: taskDate.value,
+    dueDateISO: convertDateToISO(taskDate.value),
     category: selectedCategory,
     priority: selectedPriority,
     assignedTo: selectedContacts,
     subtasks,
-    createdBy: currentUser.id || "guest",
+    createdBy: currentUser.id || currentUser.uid || "guest",
     status: "todo",
     createdAt: Date.now(),
   };
@@ -76,17 +147,45 @@ taskForm.addEventListener("submit", async (event) => {
   try {
     const result = await postData("tasks", task);
     console.log("Task gespeichert mit ID:", result.name);
+
+    showTaskAddedOverlay();
     resetFormState();
+
+    setTimeout(() => {
+      window.location.href = "./board.html";
+    }, 1200);
   } catch (error) {
     console.error("Fehler beim Speichern:", error);
   }
 });
 
+function convertDateToISO(dateValue) {
+  const [day, month, year] = dateValue.split("/");
+  return `${year}-${month}-${day}`;
+}
+
 taskTitle.addEventListener("input", () => {
   handleInputChange(taskTitle, taskTitleError);
 });
 
+function formatDateInput() {
+  let value = taskDate.value.replace(/\D/g, "");
+
+  if (value.length > 8) {
+    value = value.slice(0, 8);
+  }
+
+  if (value.length >= 5) {
+    value = value.slice(0, 2) + "/" + value.slice(2, 4) + "/" + value.slice(4);
+  } else if (value.length >= 3) {
+    value = value.slice(0, 2) + "/" + value.slice(2);
+  }
+
+  taskDate.value = value;
+}
+
 taskDate.addEventListener("input", () => {
+  formatDateInput();
   handleInputChange(taskDate, taskDateError);
 });
 
@@ -141,14 +240,14 @@ function initPriorityButtons() {
 
 function initCategoryDropdown() {
   categoryButton.addEventListener("click", () => {
-    categoryList.classList.toggle("dNone");
+    categoryList.classList.toggle("d_none");
   });
 
   document.querySelectorAll("[data-category]").forEach((option) => {
     option.addEventListener("click", () => {
       selectedCategory = option.dataset.category;
       categoryButton.textContent = selectedCategory;
-      categoryList.classList.add("dNone");
+      categoryList.classList.add("d_none");
       clearInputError(categoryButton, categoryError);
 
       categoryButton.classList.add("inputFocus");
@@ -158,7 +257,7 @@ function initCategoryDropdown() {
 
 function initAssignedDropdown() {
   assignedInput.addEventListener("focus", () => {
-    assignedList.classList.remove("dNone");
+    assignedList.classList.remove("d_none");
     renderContacts();
   });
 
@@ -167,17 +266,25 @@ function initAssignedDropdown() {
   });
 
   document.addEventListener("click", (event) => {
-    const clickedInsideDropdown = event.target.closest("#assignedDropdown");
+    const clickedInsideAssignedDropdown =
+      event.target.closest("#assignedDropdown");
+    const clickedInsideMoreContacts = event.target.closest(
+      ".selectedContactsWrapper",
+    );
 
-    if (!clickedInsideDropdown) {
-      assignedList.classList.add("dNone");
+    if (!clickedInsideAssignedDropdown) {
+      assignedList.classList.add("d_none");
+    }
+
+    if (!clickedInsideMoreContacts) {
+      moreContactsDropdown.classList.add("d_none");
     }
   });
 }
 
 async function loadContacts() {
   try {
-    const usersObject = await loadData("users");
+    const usersObject = (await loadData("users")) || {};
 
     contacts = Object.entries(usersObject).map(([id, user]) => ({
       id,
@@ -203,26 +310,36 @@ function renderContacts() {
     return contact.name.toLowerCase().includes(searchText);
   });
 
-  filteredContacts.forEach((contact, index) => {
+  filteredContacts.forEach((contact) => {
+    const contactIndex = contacts.findIndex((item) => item.id === contact.id);
     const isSelected = selectedContacts.some((item) => item.id === contact.id);
 
     assignedList.innerHTML += `
-      <div class="contactOption" data-contact-id="${contact.id}">
-        <div class="contactAvatar" style="background:${getAvatarColor(index)}">
+      <div class="contactOption ${isSelected ? "selectedContactOption" : ""}" data-contact-id="${contact.id}">
+        <div class="contactAvatar" style="background:${getAvatarColor(contactIndex)}">
           ${contact.initials || getInitials(contact.name)}
         </div>
+
         <span>${contact.name}</span>
-        <input class="contactCheckbox" type="checkbox" ${isSelected ? "checked" : ""}>
+
+        <input
+          class="contactCheckbox"
+          type="checkbox"
+          aria-label="Select ${contact.name}"
+          ${isSelected ? "checked" : ""}
+        >
       </div>
     `;
   });
 
   document.querySelectorAll(".contactOption").forEach((option) => {
-    option.addEventListener("click", () => {
+    option.addEventListener("click", (event) => {
+      event.stopPropagation();
+
       toggleContact(option.dataset.contactId);
       assignedInput.value = "";
       assignedInput.focus();
-      assignedList.classList.remove("dNone");
+      assignedList.classList.remove("d_none");
       renderContacts();
     });
   });
@@ -246,14 +363,45 @@ function toggleContact(contactId) {
 
 function renderSelectedContacts() {
   selectedContactsContainer.innerHTML = "";
+  moreContactsDropdown.innerHTML = "";
+  moreContactsDropdown.classList.add("d_none");
 
-  selectedContacts.forEach((contact, index) => {
+  const visibleContacts = selectedContacts.slice(0, 4);
+  const hiddenContacts = selectedContacts.slice(4);
+
+  visibleContacts.forEach((contact, index) => {
     selectedContactsContainer.innerHTML += `
-      <div class="selectedAvatar" style="background:${getAvatarColor(index)}">
+      <div class="selectedAvatar" style="background:${getAvatarColor(index)}" title="${contact.name}">
         ${contact.initials || getInitials(contact.name)}
       </div>
     `;
   });
+
+  if (hiddenContacts.length > 0) {
+    selectedContactsContainer.innerHTML += `
+      <button type="button" class="moreContactsBtn" id="moreContactsBtn">
+        +${hiddenContacts.length}
+      </button>
+    `;
+
+    hiddenContacts.forEach((contact, index) => {
+      moreContactsDropdown.innerHTML += `
+        <div class="moreContactItem">
+          <div class="selectedAvatar" style="background:${getAvatarColor(index + 4)}">
+            ${contact.initials || getInitials(contact.name)}
+          </div>
+          <span>${contact.name}</span>
+        </div>
+      `;
+    });
+
+    const moreContactsBtn = document.getElementById("moreContactsBtn");
+
+    moreContactsBtn.addEventListener("click", (event) => {
+      event.stopPropagation();
+      moreContactsDropdown.classList.toggle("d_none");
+    });
+  }
 }
 
 function initSubtasks() {
@@ -263,14 +411,118 @@ function initSubtasks() {
     event.preventDefault();
     addCurrentSubtaskInput();
   });
+
+  addSubtaskBtn.addEventListener("click", () => {
+    addCurrentSubtaskInput();
+  });
+
+  clearSubtaskBtn.addEventListener("click", () => {
+    subtaskInput.value = "";
+    subtaskInput.focus();
+    toggleInputFocus(subtaskInput);
+  });
+
+  document.addEventListener("click", (event) => {
+    const clickedInsideSubtasks = event.target.closest(".subtasksWrapper");
+
+    if (!clickedInsideSubtasks) {
+      moreSubtasksDropdown.classList.add("d_none");
+    }
+  });
 }
 
 function renderSubtasks() {
   subtaskList.innerHTML = "";
+  moreSubtasksDropdown.innerHTML = "";
+  moreSubtasksDropdown.classList.add("d_none");
 
-  subtasks.forEach((subtask) => {
-    subtaskList.innerHTML += `<li>${subtask.title}</li>`;
+  const visibleSubtasks = subtasks.slice(0, 4);
+  const hiddenSubtasks = subtasks.slice(4);
+
+  visibleSubtasks.forEach((subtask, index) => {
+    subtaskList.innerHTML += `
+    <li class="subtaskItem">
+      <span class="subtaskText">• ${subtask.title}</span>
+
+      <div class="subtaskItemActions">
+        <button type="button" class="editSubtaskBtn" data-index="${index}">
+          <img src="./assets/img/Subtasks change.svg" alt="Edit subtask" />
+        </button>
+
+        <button type="button" class="deleteSubtaskBtn" data-index="${index}">
+          <img src="./assets/img/SubTask delete.svg" alt="Delete subtask" />
+        </button>
+      </div>
+    </li>
+  `;
   });
+
+  if (hiddenSubtasks.length > 0) {
+    subtaskList.innerHTML += `
+      <li>
+        <button type="button" class="moreSubtasksBtn" id="moreSubtasksBtn">
+          +${hiddenSubtasks.length}
+        </button>
+      </li>
+    `;
+
+    hiddenSubtasks.forEach((subtask, index) => {
+      const realIndex = index + 4;
+
+      moreSubtasksDropdown.innerHTML += `
+    <div class="moreSubtaskItem">
+      <span class="moreSubtaskText">• ${subtask.title}</span>
+
+      <div class="subtaskItemActions">
+        <button type="button" class="editSubtaskBtn" data-index="${realIndex}">
+          <img src="./assets/img/Subtasks change.svg" alt="Edit subtask" />
+        </button>
+
+        <button type="button" class="deleteSubtaskBtn" data-index="${realIndex}">
+          <img src="./assets/img/SubTask delete.svg" alt="Delete subtask" />
+        </button>
+      </div>
+    </div>
+  `;
+    });
+
+    const moreSubtasksBtn = document.getElementById("moreSubtasksBtn");
+
+    moreSubtasksBtn.addEventListener("click", (event) => {
+      event.stopPropagation();
+      moreSubtasksDropdown.classList.toggle("d_none");
+    });
+  }
+  initSubtaskItemButtons();
+}
+
+function initSubtaskItemButtons() {
+  document.querySelectorAll(".deleteSubtaskBtn").forEach((button) => {
+    button.addEventListener("click", () => {
+      const index = Number(button.dataset.index);
+      deleteSubtask(index);
+    });
+  });
+
+  document.querySelectorAll(".editSubtaskBtn").forEach((button) => {
+    button.addEventListener("click", () => {
+      const index = Number(button.dataset.index);
+      editSubtask(index);
+    });
+  });
+}
+
+function deleteSubtask(index) {
+  subtasks.splice(index, 1);
+  renderSubtasks();
+}
+
+function editSubtask(index) {
+  subtaskInput.value = subtasks[index].title;
+  subtasks.splice(index, 1);
+  renderSubtasks();
+  subtaskInput.focus();
+  toggleInputFocus(subtaskInput);
 }
 
 function getInitials(name = "") {
@@ -305,8 +557,15 @@ function resetFormState() {
 
   categoryButton.textContent = "Select task category";
   assignedInput.value = "";
+  subtaskInput.value = "";
+
+  assignedList.classList.add("d_none");
+  moreContactsDropdown.classList.add("d_none");
+  moreSubtasksDropdown.classList.add("d_none");
+  categoryList.classList.add("d_none");
 
   clearAllErrors();
+
   taskTitle.classList.remove("inputFocus");
   taskDate.classList.remove("inputFocus");
   taskDescription.classList.remove("inputFocus");
@@ -352,4 +611,20 @@ function clearAllErrors() {
   clearInputError(taskTitle, taskTitleError);
   clearInputError(taskDate, taskDateError);
   clearInputError(categoryButton, categoryError);
+}
+
+function showTaskAddedOverlay() {
+  taskAddedOverlay.classList.remove("d_none");
+
+  setTimeout(() => {
+    taskAddedOverlay.classList.add("show");
+  }, 10);
+
+  setTimeout(() => {
+    taskAddedOverlay.classList.remove("show");
+  }, 1200);
+
+  setTimeout(() => {
+    taskAddedOverlay.classList.add("d_none");
+  }, 1500);
 }
