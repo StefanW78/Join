@@ -25,6 +25,25 @@ body{
     display: flex;
 }
 
+.context-message {
+    position: fixed;
+    right: -400px;
+    bottom: 100px;
+    background-color: #2a3647;
+    color: white;
+    padding: 16px 24px;
+    border-radius: 20px;
+    font-size: 18px;
+    transition: right 0.4s ease;
+    z-index: 9999;
+    height: 74px;
+    width: 326px;
+}
+
+
+.context-message.show {
+    right: 40px;
+}
 
 /* Main Container */
 /* ----------------------- */

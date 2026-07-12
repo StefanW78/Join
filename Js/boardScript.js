@@ -531,3 +531,44 @@ document.addEventListener("change", async (event) => {
     });
 });
 
+async function deleteCard(taskId) {
+
+    const oldTasks = [...tasks];
+
+    try {
+
+        await deleteData("tasks", taskId);
+
+        tasks = tasks.filter(task => task.id !== taskId);
+
+        renderTasks();
+        closeCardOverlay();
+        showContextMessage("Task deleted successfully");
+
+    } catch (error) {
+        tasks = oldTasks;
+        console.error("Fehler beim Löschen:", error);
+    }
+}
+
+function showContextMessage(message) {
+
+    const box = document.getElementById("contextMessage");
+    const text = document.getElementById("contextMessageText");
+
+    if (!box || !text) return;
+
+
+    text.textContent = message;
+
+
+    box.classList.add("show");
+
+
+    setTimeout(() => {
+
+        box.classList.remove("show");
+
+    }, 3000);
+
+}
