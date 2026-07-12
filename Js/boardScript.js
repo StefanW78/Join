@@ -25,12 +25,11 @@ const STATUS = {
     DONE: "done"
 };
 
-async function testInit() {
+async function Init() {
     await loadTasks()
     renderTasks()
     initSimpleDragAndDrop()
     initBoardSearch()
-
     document.addEventListener("click", handleBoardClick);
 }
 
