@@ -9,6 +9,8 @@ let draggedCard = null;
 
 let tasks = []
 
+let SearchText = "";
+
 const columns = {
     todo: document.getElementById("toDo-list"),
     inProgress: document.getElementById("inProgress-list"),
@@ -27,6 +29,7 @@ async function testInit() {
     await loadTasks()
     renderTasks()
     initSimpleDragAndDrop()
+    initBoardSearch()
 
     document.addEventListener("click", handleBoardClick);
 }
@@ -74,6 +77,65 @@ function renderOneTask(taskId) {
     wrapper.innerHTML = newCardHTML;
 
     oldCard.replaceWith(wrapper.firstElementChild);
+
+}
+
+function renderFilteredTasks() {
+
+    const filteredTasks = filterTasks();
+
+    const html = {};
+
+    for (const status in columns) {
+        html[status] = "";
+    }
+
+    for (const task of filteredTasks) {
+
+        const preparedTask = prepareTaskData(task);
+
+        html[task.status] += getTaskCard(preparedTask);
+
+    }
+
+    for (const status in columns) {
+
+        columns[status].innerHTML =
+            html[status] || `<div class="empty-card">No matching tasks</div>`;
+
+    }
+
+}
+
+function initBoardSearch() {
+
+    const searchInput = document.getElementById("searchTasks");
+
+    if (!searchInput) return;
+
+    searchInput.addEventListener("input", (event) => {
+
+        SearchText = event.target.value.trim().toLowerCase();
+
+        renderFilteredTasks();
+
+    });
+
+}
+
+function filterTasks() {
+
+    if (!SearchText) return tasks;
+
+    return tasks.filter(task => {
+
+        const title = (task.title || "").toLowerCase();
+        const description = (task.description || "").toLowerCase();
+
+        return title.includes(SearchText) ||
+               description.includes(SearchText);
+
+    });
 
 }
 
@@ -469,3 +531,4 @@ document.addEventListener("change", async (event) => {
         subtasks: task.subtasks
     });
 });
+
