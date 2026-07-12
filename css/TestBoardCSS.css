@@ -38,6 +38,9 @@ body{
     z-index: 9999;
     height: 74px;
     width: 326px;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
 }
 
 
