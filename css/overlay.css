@@ -18,7 +18,6 @@
 .card-overlay-content {
   width:100%;
   max-width: 524px;
-  overflow: auto;
 }
 
 .task-assigned-list{
@@ -390,6 +389,9 @@
 .dNone {
   display: none !important;
 }
+
+
+
 /* Add Task Overlay */
 
 .add-task-overlay {

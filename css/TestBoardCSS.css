@@ -72,6 +72,27 @@ main{
     overflow-y: auto;
 }
 
+.taskForm{
+  max-height: 680px;
+  overflow-y: auto;
+}
+
+.overlay-content-animation {
+    animation: overlayFadeIn 0.25s ease forwards;
+}
+
+@keyframes overlayFadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(15px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
 .sidebar-wraper{
   height: 100vh;
 }

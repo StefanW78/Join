@@ -93,7 +93,7 @@ function getCardOverlayTemplate(card) {
                 </button>
                 <div class= "vector">
                 </div>
-                <button class="task-action-btn edit-btn">
+                <button class="task-action-btn edit-btn" onclick="renderEditOverlay('${card.id}')">
                     <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
                         <path d="M11.333 2A1.886 1.886 0 0 1 14 4.667l-9 9-3.667 1 1-3.667 9-9Z" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"/>
                     </svg>
@@ -101,4 +101,326 @@ function getCardOverlayTemplate(card) {
                 </button>
             </div>
             </div>`;
+}
+
+function getEditOverlayTemplate(task) {
+    return `
+        <div class="task-card-header">
+            <h3 class="edit-task-title">Edit Task</h3>
+
+            <button
+                class="task-close-btn"
+                onclick="renderCardOverlay('${task.id}')">
+                &times;
+            </button>
+        </div>
+
+
+        <form id="editTaskForm" class="taskForm">
+
+            <div class="formGrid editFormGrid">
+
+
+                <div class="formColumn">
+
+
+                    <div class="formGroup">
+                        <label for="editTaskTitle">Title</label>
+
+                        <input
+                            id="editTaskTitle"
+                            type="text"
+                            value="${task.title || ""}">
+                    </div>
+
+
+
+                    <div class="formGroup">
+                        <label for="editTaskDescription">Description</label>
+
+                        <textarea
+                            id="editTaskDescription">${task.description || ""}</textarea>
+                    </div>
+
+
+
+                    <div class="formGroup">
+                        <label for="editTaskDate">Due date</label>
+
+                        <div class="inputWithIcon">
+
+                            <input
+                                id="editTaskDate"
+                                type="text"
+                                value="${task.dueDate || ""}"
+                                placeholder="dd/mm/yyyy"
+                                inputmode="numeric"
+                                maxlength="10">
+
+                            <img
+                                src="./assets/img/calendar-icon.svg"
+                                alt="calendar icon">
+
+                        </div>
+                    </div>
+
+
+                </div>
+
+
+
+
+                <div class="formColumn">
+
+
+
+                    <fieldset class="formGroup priorityGroup">
+
+                        <legend>Priority</legend>
+
+
+                        <div class="priorityButtons">
+
+
+                            <button
+                                type="button"
+                                class="priorityBtn editPriorityBtn urgentBtn ${task.priority === "urgent" ? "activeUrgent" : ""}"
+                                data-priority="urgent">
+
+                                <span>Urgent</span>
+
+                                <img
+                                    src="./assets/img/PrioUP-icon.svg"
+                                    alt="urgent">
+
+                            </button>
+
+
+
+                            <button
+                                type="button"
+                                class="priorityBtn editPriorityBtn mediumBtn ${task.priority === "medium" ? "activeMedium" : ""}"
+                                data-priority="medium">
+
+                                <span>Medium</span>
+
+                                <img
+                                    src="./assets/img/PrioMedium-icon.svg"
+                                    alt="medium">
+
+                            </button>
+
+
+
+                            <button
+                                type="button"
+                                class="priorityBtn editPriorityBtn lowBtn ${task.priority === "low" ? "activeLow" : ""}"
+                                data-priority="low">
+
+                                <span>Low</span>
+
+                                <img
+                                    src="./assets/img/PrioDown-icon.svg"
+                                    alt="low">
+
+                            </button>
+
+
+                        </div>
+
+                    </fieldset>
+
+
+
+
+
+
+                    <div class="formGroup">
+
+                        <label for="editTaskCategory">
+                            Category
+                        </label>
+
+
+                        <select id="editTaskCategory">
+
+
+                            <option
+                                value="Technical Task"
+                                ${task.category === "Technical Task" ? "selected" : ""}>
+                                Technical Task
+                            </option>
+
+
+                            <option
+                                value="User Story"
+                                ${task.category === "User Story" ? "selected" : ""}>
+                                User Story
+                            </option>
+
+
+                        </select>
+
+
+                    </div>
+
+
+
+
+
+
+
+                    <div class="formGroup">
+
+                        <label for="editAssignedInput">
+                            Assigned to
+                        </label>
+
+
+
+                        <div
+                            class="customDropdown"
+                            id="editAssignedDropdown">
+
+
+                            <input
+                                type="text"
+                                class="dropdownButton"
+                                id="editAssignedInput"
+                                placeholder="Select contacts to assign"
+                                autocomplete="off">
+
+
+                            <div
+                                class="dropdownList d_none"
+                                id="editAssignedList">
+                            </div>
+
+
+                        </div>
+
+
+
+
+                        <div class="selectedContactsWrapper">
+
+                            <div
+                                class="selectedContacts"
+                                id="editSelectedContacts">
+                            </div>
+
+                        </div>
+
+
+                    </div>
+
+
+
+
+
+
+
+
+                    <div class="formGroup">
+
+                        <label for="editSubtaskInput">
+                            Subtasks
+                        </label>
+
+
+
+                        <div class="subtaskInputWrapper">
+
+
+                            <input
+                                id="editSubtaskInput"
+                                type="text"
+                                placeholder="Add new subtask">
+
+
+                            <div class="subtaskActions">
+
+
+                                <button
+                                    type="button"
+                                    id="editClearSubtaskBtn">
+                                    &times;
+                                </button>
+
+
+                                <div class="subtaskDivider"></div>
+
+
+                                <button
+                                    type="button"
+                                    id="editAddSubtaskBtn">
+                                    ✓
+                                </button>
+
+
+                            </div>
+
+
+                        </div>
+
+
+
+
+
+                        <div class="subtasksWrapper">
+
+                            <ul
+                                class="subtaskList"
+                                id="editSubtaskList">
+
+                                ${task.editSubtasksHTML || ""}
+
+                            </ul>
+
+
+                        </div>
+
+
+                    </div>
+
+
+
+                </div>
+
+
+            </div>
+
+
+        </form>
+
+
+
+
+        <div class="editTaskActions">
+
+
+            <button
+                type="button"
+                class="clearBtn"
+                onclick="renderCardOverlay('${task.id}')">
+
+                Cancel ✕
+
+            </button>
+
+
+
+
+            <button
+                type="submit"
+                form="editTaskForm"
+                class="createTaskBtn">
+
+                Ok ✓
+
+            </button>
+
+
+        </div>
+    `;
 }

@@ -168,6 +168,30 @@ function renderMoveMenu(menu, currentStatus, taskId) {
     });
 }
 
+function renderEditOverlay(taskId) {
+
+    const task = tasks.find(t => t.id === taskId);
+
+    if (!task) return;
+
+    const formContainer = document.getElementById("openTaskOverlay");
+
+    if (!formContainer) return;
+
+
+    formContainer.classList.remove("overlay-content-animation");
+
+
+    // kurz warten, damit die Animation neu startet
+    setTimeout(() => {
+
+        formContainer.innerHTML = getEditOverlayTemplate(task);
+
+        formContainer.classList.add("overlay-content-animation");
+
+    }, 50);
+}
+
 function handleBoardClick(event) {
 
     const moveButton = event.target.closest(".swap-horiz-div");
