@@ -686,3 +686,15 @@ transform: rotate(-180deg);
 .prio-urgent {
   color: #e74c3c;
 }
+/* Add-task-Edit */
+.editFormGrid{
+   display: flex !important;
+  flex-direction: column;
+  gap: 24px;
+  width: 100%;
+  min-width: 0;
+}
+
+.formColumn{
+  width: 100%;
+}

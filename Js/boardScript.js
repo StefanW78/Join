@@ -447,7 +447,7 @@ function prepareTaskData(task) {
     const finalAvatarsHTML = avatarsHTML + extraHTML;
 
     const total = subtasks.length;
-    const done = subtasks.filter(s => s.checked).length;
+    const done = subtasks.filter(s => s.done).length;
     const progress = total > 0 ? (done / total) * 100 : 0;
 
     const subtasksHTML = total > 0
@@ -545,7 +545,7 @@ document.addEventListener("change", async (event) => {
     const task = tasks.find(t => t.id === taskId);
     if (!task) return;
 
-    task.subtasks[subIndex].checked = checkbox.checked;
+    task.subtasks[subIndex].done = checkbox.checked;
 
     renderTasks();
     renderCardOverlay(taskId);

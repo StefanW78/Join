@@ -67,40 +67,6 @@ function getCategoryClass(category) {
     return categoryClassMap[category] || "tag-default";
 }
 
-
-function getAssignedPersonTemplate(avatar) {
-    return `
-        <div class="assigned-person">
-
-            <div class="assigned-avatar" style="background-color: ${avatar.color};">
-                ${avatar.initials}
-            </div>
-
-            <span class="assigned-name">
-                ${avatar.name}
-            </span>
-
-        </div>
-    `;
-}
-
-function getSubtaskTemplate(subtask) {
-    return `
-        <label class="subtask-item">
-
-            <input
-                type="checkbox"
-                ${subtask.checked ? "checked" : ""}
-            >
-
-            <span class="subtask-text">
-                ${subtask.text}
-            </span>
-
-        </label>
-    `;
-}
-
   function closeCardOverlay() {
     const overlay = document.getElementById("cardOverlay");
 
