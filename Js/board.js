@@ -18,18 +18,17 @@ async function initBoard() {
       };
     });
 
-   boardTasks = Object.entries(tasksObject).map(([id, task]) => {
-  return {
-    id,
-    ...task,
-  };
-});
+    boardTasks = Object.entries(tasksObject).map(([id, task]) => {
+      return {
+        id,
+        ...task,
+      };
+    });
 
-filteredTasks = boardTasks;
+    filteredTasks = boardTasks;
 
-initBoardSearch();
-renderBoardTasks();
-
+    initBoardSearch();
+    renderBoardTasks();
   } catch (error) {
     console.error("Fehler beim Laden der Board-Daten:", error);
   }
@@ -322,9 +321,9 @@ async function moveTaskToStatus(taskId, newStatus) {
     await patchData(`tasks/${taskId}`, {
       status: newStatus,
     });
-    updateFilteredTasks();
-    task.status = newStatus;
 
+    task.status = newStatus;
+    updateFilteredTasks();
     renderBoardTasks();
   } catch (error) {
     console.error("Fehler beim Verschieben des Tasks:", error);
@@ -355,6 +354,8 @@ function openTaskDetailOverlay(taskId) {
 
   formContainer.innerHTML = getTaskDetailOverlayTemplate(task);
 
+  initDetailSubtaskCheckboxes(task);
+
   document
     .getElementById("closeTaskDetailOverlayBtn")
     .addEventListener("click", closeTaskDetailOverlay);
@@ -373,6 +374,28 @@ function openTaskDetailOverlay(taskId) {
   overlay.addEventListener("click", closeTaskOverlayOnBackgroundClick);
 }
 
+function initDetailSubtaskCheckboxes(task) {
+  document.querySelectorAll(".detailSubtaskCheckbox").forEach((checkbox) => {
+    checkbox.addEventListener("change", async () => {
+      const subtaskIndex = Number(checkbox.dataset.index);
+
+      if (!task.subtasks || !task.subtasks[subtaskIndex]) return;
+
+      task.subtasks[subtaskIndex].done = checkbox.checked;
+
+      try {
+        await patchData(`tasks/${task.id}`, {
+          subtasks: task.subtasks,
+        });
+
+        updateFilteredTasks();
+      } catch (error) {
+        console.error("Fehler beim Aktualisieren des Subtasks:", error);
+      }
+    });
+  });
+}
+
 function closeTaskDetailOverlay() {
   const overlay = document.getElementById("cardOverlay");
   const formContainer = document.getElementById("cardFormContainer");
@@ -385,6 +408,9 @@ function closeTaskDetailOverlay() {
   formContainer.classList.remove("edit-mode");
 
   overlay.removeEventListener("click", closeTaskOverlayOnBackgroundClick);
+
+  updateFilteredTasks();
+  renderBoardTasks();
 }
 
 function closeTaskOverlayOnBackgroundClick(event) {
@@ -518,10 +544,15 @@ function getSubtasksOverlayTemplate(subtasks) {
   }
 
   return subtasks
-    .map((subtask) => {
+    .map((subtask, index) => {
       return `
         <label class="subtask-item">
-          <input type="checkbox" ${subtask.done ? "checked" : ""}>
+          <input
+            type="checkbox"
+            class="detailSubtaskCheckbox"
+            data-index="${index}"
+            ${subtask.done ? "checked" : ""}
+          >
           <span class="subtask-text">${subtask.title || ""}</span>
         </label>
       `;
@@ -574,11 +605,9 @@ function initEditTaskForm(task) {
     .getElementById("closeEditTaskOverlayBtn")
     .addEventListener("click", closeTaskDetailOverlay);
 
-  document
-    .getElementById("cancelEditTaskBtn")
-    .addEventListener("click", () => {
-      openTaskDetailOverlay(task.id);
-    });
+  document.getElementById("cancelEditTaskBtn").addEventListener("click", () => {
+    openTaskDetailOverlay(task.id);
+  });
 
   initEditPriorityButtons((priority) => {
     selectedEditPriority = priority;
@@ -592,11 +621,18 @@ function initEditTaskForm(task) {
     editSubtasks = updatedSubtasks;
   });
 
-  document.getElementById("editTaskForm").addEventListener("submit", (event) => {
-    event.preventDefault();
+  document
+    .getElementById("editTaskForm")
+    .addEventListener("submit", (event) => {
+      event.preventDefault();
 
-    saveEditedTask(task.id, selectedEditPriority, selectedEditContacts, editSubtasks);
-  });
+      saveEditedTask(
+        task.id,
+        selectedEditPriority,
+        selectedEditContacts,
+        editSubtasks,
+      );
+    });
 }
 
 async function saveEditedTask(
@@ -719,7 +755,9 @@ function renderEditContactOptions(selectedEditContacts, onChange) {
   });
 
   filteredContacts.forEach((contact, index) => {
-    const isSelected = selectedEditContacts.some((item) => item.id === contact.id);
+    const isSelected = selectedEditContacts.some(
+      (item) => item.id === contact.id,
+    );
 
     editAssignedList.innerHTML += `
       <div class="contactOption ${isSelected ? "selectedContactOption" : ""}" data-contact-id="${contact.id}">
@@ -738,29 +776,35 @@ function renderEditContactOptions(selectedEditContacts, onChange) {
     `;
   });
 
-  document.querySelectorAll("#editAssignedList .contactOption").forEach((option) => {
-    option.addEventListener("click", (event) => {
-      event.stopPropagation();
+  document
+    .querySelectorAll("#editAssignedList .contactOption")
+    .forEach((option) => {
+      option.addEventListener("click", (event) => {
+        event.stopPropagation();
 
-      const contactId = option.dataset.contactId;
-      const contact = contacts.find((item) => item.id === contactId);
+        const contactId = option.dataset.contactId;
+        const contact = contacts.find((item) => item.id === contactId);
 
-      if (!contact) return;
+        if (!contact) return;
 
-      const isSelected = selectedEditContacts.some((item) => item.id === contactId);
+        const isSelected = selectedEditContacts.some(
+          (item) => item.id === contactId,
+        );
 
-      if (isSelected) {
-        selectedEditContacts = selectedEditContacts.filter((item) => item.id !== contactId);
-      } else {
-        selectedEditContacts.push(contact);
-      }
+        if (isSelected) {
+          selectedEditContacts = selectedEditContacts.filter(
+            (item) => item.id !== contactId,
+          );
+        } else {
+          selectedEditContacts.push(contact);
+        }
 
-      editAssignedInput.value = "";
-      renderEditAssignedContacts(selectedEditContacts);
-      renderEditContactOptions(selectedEditContacts, onChange);
-      onChange(selectedEditContacts);
+        editAssignedInput.value = "";
+        renderEditAssignedContacts(selectedEditContacts);
+        renderEditContactOptions(selectedEditContacts, onChange);
+        onChange(selectedEditContacts);
+      });
     });
-  });
 }
 
 function initEditSubtasks(editSubtasks, onChange) {
