@@ -18,7 +18,7 @@ function prepareOverlayData(card) {
 
         avatarsHTML: createAssignedPersons(card.assignedTo || []),
 
-        subtasksHTML: createSubtasks(card.subtasks || [])
+        subtasksHTML: createSubtasks(card.subtasks || [], card.id)
     };
 }
 
@@ -28,9 +28,9 @@ function createAssignedPersons(avatars) {
         .join("");
 }
 
-function createSubtasks(subtasks) {
+function createSubtasks(subtasks, taskId) {
     return subtasks
-        .map(subtask => getSubtaskTemplate(subtask))
+        .map((subtask, index) => getSubtaskTemplate(subtask, taskId, index))
         .join("");
 }
 

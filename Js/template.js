@@ -60,12 +60,15 @@ function getAssignedPersonTemplate(avatar) {
     `;
 }
 
-function getSubtaskTemplate(subtask) {
+function getSubtaskTemplate(subtask, taskId, index) {
     return `
         <label class="subtask-item">
 
             <input
+                class="subtask-checkbox"
                 type="checkbox"
+                data-task-id="${taskId}"
+                data-index="${index}"
                 ${subtask.done ? "checked" : ""}
             >
 
