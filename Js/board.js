@@ -217,6 +217,11 @@ function getAvatarColorClass(index) {
   return colors[index % colors.length];
 }
 
+function getAvatarColor(index) {
+  const colors = ["#ff7a00", "#9747ff", "#1fbcb4", "#29abe2", "#6e52ff"];
+  return colors[index % colors.length];
+}
+
 function getPriorityIcon(priority) {
   if (priority === "urgent") {
     return `
@@ -812,6 +817,26 @@ function renderEditContactOptions(selectedEditContacts, onChange) {
     });
 }
 
+/* function renderEditAssignedContacts(selectedEditContacts) {
+  const editSelectedContacts = document.getElementById("editSelectedContacts");
+
+  if (!editSelectedContacts) return;
+
+  editSelectedContacts.innerHTML = "";
+
+  selectedEditContacts.forEach((contact, index) => {
+    editSelectedContacts.innerHTML += `
+      <div
+        class="selectedAvatar"
+        style="background:${getAvatarColor(index)}"
+        title="${contact.name || ""}"
+      >
+        ${contact.initials || getInitials(contact.name)}
+      </div>
+    `;
+  });
+}
+ */
 function initEditSubtasks(editSubtasks, onChange) {
   const editSubtaskInput = document.getElementById("editSubtaskInput");
   const editAddSubtaskBtn = document.getElementById("editAddSubtaskBtn");
@@ -860,23 +885,15 @@ function renderEditSubtasks(editSubtasks, onChange) {
 
   editSubtasks.forEach((subtask, index) => {
     editSubtaskList.innerHTML += `
-      <li class="subtaskItem">
-        <label class="editSubtaskCheckboxLabel">
-          <input
-            type="checkbox"
-            class="editSubtaskCheckbox"
-            data-index="${index}"
-            ${subtask.done ? "checked" : ""}
-          >
-          <span class="subtaskText">${subtask.title}</span>
-        </label>
+      <li class="subtaskItem editSubtaskItem">
+        <span class="subtaskText">• ${subtask.title}</span>
 
         <div class="subtaskItemActions">
-          <button type="button" class="editSubtaskTextBtn" data-index="${index}">
+          <button type="button" class="editSubtaskBtn" data-index="${index}">
             <img src="./assets/img/Subtasks change.svg" alt="Edit subtask" />
           </button>
 
-          <button type="button" class="deleteEditSubtaskBtn" data-index="${index}">
+          <button type="button" class="deleteSubtaskBtn" data-index="${index}">
             <img src="./assets/img/SubTask delete.svg" alt="Delete subtask" />
           </button>
         </div>
@@ -888,16 +905,7 @@ function renderEditSubtasks(editSubtasks, onChange) {
 }
 
 function initEditSubtaskButtons(editSubtasks, onChange) {
-  document.querySelectorAll(".editSubtaskCheckbox").forEach((checkbox) => {
-    checkbox.addEventListener("change", () => {
-      const index = Number(checkbox.dataset.index);
-
-      editSubtasks[index].done = checkbox.checked;
-      onChange(editSubtasks);
-    });
-  });
-
-  document.querySelectorAll(".deleteEditSubtaskBtn").forEach((button) => {
+  document.querySelectorAll("#editSubtaskList .deleteSubtaskBtn").forEach((button) => {
     button.addEventListener("click", () => {
       const index = Number(button.dataset.index);
 
@@ -907,14 +915,14 @@ function initEditSubtaskButtons(editSubtasks, onChange) {
     });
   });
 
-  document.querySelectorAll(".editSubtaskTextBtn").forEach((button) => {
+  document.querySelectorAll("#editSubtaskList .editSubtaskBtn").forEach((button) => {
     button.addEventListener("click", () => {
       const index = Number(button.dataset.index);
       const editSubtaskInput = document.getElementById("editSubtaskInput");
 
       editSubtaskInput.value = editSubtasks[index].title;
-      editSubtasks.splice(index, 1);
 
+      editSubtasks.splice(index, 1);
       renderEditSubtasks(editSubtasks, onChange);
       onChange(editSubtasks);
 
