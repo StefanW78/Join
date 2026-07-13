@@ -665,22 +665,27 @@ async function saveEditedTask(
   try {
     await patchData(`tasks/${taskId}`, updatedTask);
 
-    boardTasks = boardTasks.map((task) => {
-      if (task.id === taskId) {
-        return {
-          ...task,
-          ...updatedTask,
-        };
-      }
+    updateTaskInBoardTasks(taskId, updatedTask);
 
-      return task;
-    });
     updateFilteredTasks();
     closeTaskDetailOverlay();
     renderBoardTasks();
   } catch (error) {
     console.error("Fehler beim Aktualisieren des Tasks:", error);
   }
+}
+
+function updateTaskInBoardTasks(taskId, updatedTask) {
+  boardTasks = boardTasks.map((task) => {
+    if (task.id === taskId) {
+      return {
+        ...task,
+        ...updatedTask,
+      };
+    }
+
+    return task;
+  });
 }
 
 function convertDateToISO(dateValue) {
@@ -915,5 +920,25 @@ function initEditSubtaskButtons(editSubtasks, onChange) {
 
       editSubtaskInput.focus();
     });
+  });
+}
+
+function renderEditAssignedContacts(selectedEditContacts) {
+  const editSelectedContacts = document.getElementById("editSelectedContacts");
+
+  if (!editSelectedContacts) return;
+
+  editSelectedContacts.innerHTML = "";
+
+  selectedEditContacts.forEach((contact, index) => {
+    editSelectedContacts.innerHTML += `
+      <div
+        class="selectedAvatar"
+        style="background:${getAvatarColor(index)}"
+        title="${contact.name || ""}"
+      >
+        ${contact.initials || getInitials(contact.name)}
+      </div>
+    `;
   });
 }
