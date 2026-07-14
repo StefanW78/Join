@@ -480,3 +480,13 @@ body {
   outline-offset: 6px;
   border-radius: 10px;
 }
+
+main{
+    width: 100%;
+    padding: 75px 50px 50px 75px;
+    display: flex;
+    flex-direction: column;
+    max-width: 1440px;
+    margin-top: 6px;
+
+}
