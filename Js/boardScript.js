@@ -255,31 +255,17 @@ function toggleMoveMenu(button) {
 
 //für das moven von Tasks update.
 async function moveTask(taskId, newStatus) {
-
     const task = tasks.find(t => t.id === taskId);
     if (!task) return;
 
-    // 🔥 HIER NEU: Validierung
-    const allowed = moveRules[task.status];
-
-    if (!allowed?.includes(newStatus)) {
-        console.warn("Move not allowed:", task.status, "→", newStatus);
-        return;
-    }
-
     const oldStatus = task.status;
 
-    // UI sofort updaten
     task.status = newStatus;
     renderTasks();
 
     try {
         await updateData("tasks", taskId, { status: newStatus });
-    } catch (error) {
-
-        console.error("MoveTask failed:", error);
-
-        // rollback
+    } catch (err) {
         task.status = oldStatus;
         renderTasks();
     }

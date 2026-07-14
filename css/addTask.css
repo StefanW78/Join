@@ -16,13 +16,13 @@ body {
   display: flex;
 }
 
-.main-container {
+/* .main-container {
   width: 100%;
   padding: 75px 50px 50px 75px;
   display: flex;
   flex-direction: column;
   max-width: 1440px;
-}
+} */
 
 .addTaskContent {
   width: 100%;
