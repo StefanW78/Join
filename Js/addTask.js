@@ -104,33 +104,61 @@ function parseDateFromInput(dateValue) {
   return new Date(Number(year), Number(month) - 1, Number(day));
 }
 
-taskForm.addEventListener("submit", async (event) => {
+taskForm.addEventListener("submit", handleTaskSubmit);
+
+async function handleTaskSubmit(event) {
   event.preventDefault();
 
-  clearAllErrors();
-
-  if (!taskTitle.value.trim()) {
-    setInputError(taskTitle, taskTitleError, "This field is required");
-    return;
-  }
-
-  if (!validateTaskDate()) {
-    return;
-  }
-
-  if (!selectedCategory) {
-    setInputError(categoryButton, categoryError, "This field is required");
-    return;
-  }
-
-  if (!currentUser) {
-    console.error("Kein User eingeloggt!");
-    return;
-  }
+  if (!isTaskFormValid()) return;
 
   addCurrentSubtaskInput();
 
-  const task = {
+  const task = createTaskFromForm();
+  await saveTask(task);
+}
+
+function isTaskFormValid() {
+  clearAllErrors();
+
+  return (
+    validateTaskTitle() &&
+    validateTaskDate() &&
+    validateTaskCategory() &&
+    validateCurrentUser()
+  );
+}
+
+function validateTaskTitle() {
+  if (taskTitle.value.trim()) return true;
+
+  setInputError(taskTitle, taskTitleError, "This field is required");
+  return false;
+}
+
+function validateTaskCategory() {
+  if (selectedCategory) return true;
+
+  setInputError(categoryButton, categoryError, "This field is required");
+  return false;
+}
+
+function validateCurrentUser() {
+  if (currentUser) return true;
+
+  console.error("Kein User eingeloggt!");
+  return false;
+}
+
+function createTaskFromForm() {
+  return {
+    ...getTaskFormValues(),
+    ...getTaskUserData(),
+    ...getTaskDefaultData(),
+  };
+}
+
+function getTaskFormValues() {
+  return {
     title: taskTitle.value.trim(),
     description: taskDescription.value.trim(),
     dueDate: taskDate.value,
@@ -139,25 +167,44 @@ taskForm.addEventListener("submit", async (event) => {
     priority: selectedPriority,
     assignedTo: selectedContacts,
     subtasks,
+  };
+}
+
+function getTaskUserData() {
+  return {
     createdBy: currentUser.id || currentUser.uid || "guest",
+  };
+}
+
+function getTaskDefaultData() {
+  return {
     status: "todo",
     createdAt: Date.now(),
   };
+}
 
+async function saveTask(task) {
   try {
     const result = await postData("tasks", task);
-    console.log("Task gespeichert mit ID:", result.name);
-
-    showTaskAddedOverlay();
-    resetFormState();
-
-    setTimeout(() => {
-      window.location.href = "./board.html";
-    }, 1200);
+    handleTaskSaveSuccess(result);
   } catch (error) {
     console.error("Fehler beim Speichern:", error);
   }
-});
+}
+
+function handleTaskSaveSuccess(result) {
+  console.log("Task gespeichert mit ID:", result.name);
+
+  showTaskAddedOverlay();
+  resetFormState();
+  redirectToBoardAfterDelay();
+}
+
+function redirectToBoardAfterDelay() {
+  setTimeout(() => {
+    window.location.href = "./board.html";
+  }, 1200);
+}
 
 function convertDateToISO(dateValue) {
   const [day, month, year] = dateValue.split("/");
@@ -560,39 +607,65 @@ function getAvatarColor(index) {
 }
 
 function resetFormState() {
-  taskForm.reset();
+  resetTaskForm();
+  resetTaskValues();
+  resetTaskInputs();
+  closeTaskDropdowns();
+  resetTaskFocusStyles();
+  rerenderTaskForm();
+  resetPriorityButtons();
+}
 
+function resetTaskForm() {
+  taskForm.reset();
+  clearAllErrors();
+}
+
+function resetTaskValues() {
   selectedPriority = "medium";
   selectedCategory = "";
   selectedContacts = [];
   subtasks = [];
+}
 
+function resetTaskInputs() {
   categoryButton.textContent = "Select task category";
   assignedInput.value = "";
   subtaskInput.value = "";
+}
 
+function closeTaskDropdowns() {
   assignedList.classList.add("d_none");
   moreContactsDropdown.classList.add("d_none");
   moreSubtasksDropdown.classList.add("d_none");
   categoryList.classList.add("d_none");
+}
 
-  clearAllErrors();
+function resetTaskFocusStyles() {
+  const focusElements = [
+    taskTitle,
+    taskDate,
+    taskDescription,
+    subtaskInput,
+    categoryButton,
+  ];
 
-  taskTitle.classList.remove("inputFocus");
-  taskDate.classList.remove("inputFocus");
-  taskDescription.classList.remove("inputFocus");
-  subtaskInput.classList.remove("inputFocus");
-  categoryButton.classList.remove("inputFocus");
+  focusElements.forEach((element) => element.classList.remove("inputFocus"));
+}
 
+function rerenderTaskForm() {
   renderSelectedContacts();
   renderSubtasks();
   renderContacts();
+}
 
+function resetPriorityButtons() {
   document.querySelectorAll(".priorityBtn").forEach((btn) => {
     btn.classList.remove("activeUrgent", "activeMedium", "activeLow");
   });
 
-  document.querySelector(".mediumBtn").classList.add("activeMedium");
+  const mediumBtn = document.querySelector(".mediumBtn");
+  if (mediumBtn) mediumBtn.classList.add("activeMedium");
 }
 
 function setInputError(input, errorElement, message) {
