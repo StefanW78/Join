@@ -366,8 +366,8 @@ function renderSelectedContacts() {
   moreContactsDropdown.innerHTML = "";
   moreContactsDropdown.classList.add("d_none");
 
-  const visibleContacts = selectedContacts.slice(0, 4);
-  const hiddenContacts = selectedContacts.slice(4);
+  const visibleContacts = selectedContacts.slice(0, 3);
+  const hiddenContacts = selectedContacts.slice(3);
 
   visibleContacts.forEach((contact, index) => {
     selectedContactsContainer.innerHTML += `
@@ -387,7 +387,7 @@ function renderSelectedContacts() {
     hiddenContacts.forEach((contact, index) => {
       moreContactsDropdown.innerHTML += `
         <div class="moreContactItem">
-          <div class="selectedAvatar" style="background:${getAvatarColor(index + 4)}">
+          <div class="selectedAvatar" style="background:${getAvatarColor(index + 3)}">
             ${contact.initials || getInitials(contact.name)}
           </div>
           <span>${contact.name}</span>
