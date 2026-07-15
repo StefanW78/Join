@@ -90,6 +90,10 @@ function getEditTaskTemplate(task) {
 
               <div class="selectedContactsWrapper">
                 <div class="selectedContacts" id="editSelectedContacts"></div>
+                <div
+                  class="moreContactsDropdown d_none"
+                  id="editMoreContactsDropdown"
+                ></div>
               </div>
             </div>
 

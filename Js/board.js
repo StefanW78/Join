@@ -744,12 +744,25 @@ function initEditAssignedContacts(selectedEditContacts, onChange) {
   });
 
   document.addEventListener("click", (event) => {
-    const clickedInside = event.target.closest("#editAssignedDropdown");
+  const clickedInsideDropdown = event.target.closest("#editAssignedDropdown");
+  const clickedInsideSelectedContacts = event.target.closest(
+    ".selectedContactsWrapper",
+  );
 
-    if (!clickedInside) {
-      editAssignedList.classList.add("d_none");
+  if (!clickedInsideDropdown) {
+    editAssignedList.classList.add("d_none");
+  }
+
+  if (!clickedInsideSelectedContacts) {
+    const editMoreContactsDropdown = document.getElementById(
+      "editMoreContactsDropdown",
+    );
+
+    if (editMoreContactsDropdown) {
+      editMoreContactsDropdown.classList.add("d_none");
     }
-  });
+  }
+});
 }
 
 function renderEditContactOptions(selectedEditContacts, onChange) {
@@ -933,12 +946,20 @@ function initEditSubtaskButtons(editSubtasks, onChange) {
 
 function renderEditAssignedContacts(selectedEditContacts) {
   const editSelectedContacts = document.getElementById("editSelectedContacts");
+  const editMoreContactsDropdown = document.getElementById(
+    "editMoreContactsDropdown",
+  );
 
-  if (!editSelectedContacts) return;
+  if (!editSelectedContacts || !editMoreContactsDropdown) return;
 
   editSelectedContacts.innerHTML = "";
+  editMoreContactsDropdown.innerHTML = "";
+  editMoreContactsDropdown.classList.add("d_none");
 
-  selectedEditContacts.forEach((contact, index) => {
+  const visibleContacts = selectedEditContacts.slice(0, 3);
+  const hiddenContacts = selectedEditContacts.slice(3);
+
+  visibleContacts.forEach((contact, index) => {
     editSelectedContacts.innerHTML += `
       <div
         class="selectedAvatar"
@@ -949,4 +970,33 @@ function renderEditAssignedContacts(selectedEditContacts) {
       </div>
     `;
   });
+
+  if (hiddenContacts.length > 0) {
+    editSelectedContacts.innerHTML += `
+      <button type="button" class="moreContactsBtn" id="editMoreContactsBtn">
+        +${hiddenContacts.length}
+      </button>
+    `;
+
+    hiddenContacts.forEach((contact, index) => {
+      editMoreContactsDropdown.innerHTML += `
+        <div class="moreContactItem">
+          <div
+            class="selectedAvatar"
+            style="background:${getAvatarColor(index + 3)}"
+          >
+            ${contact.initials || getInitials(contact.name)}
+          </div>
+          <span>${contact.name || ""}</span>
+        </div>
+      `;
+    });
+
+    const editMoreContactsBtn = document.getElementById("editMoreContactsBtn");
+
+    editMoreContactsBtn.addEventListener("click", (event) => {
+      event.stopPropagation();
+      editMoreContactsDropdown.classList.toggle("d_none");
+    });
+  }
 }
