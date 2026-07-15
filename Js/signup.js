@@ -69,12 +69,15 @@ signupForm.addEventListener("submit", async (event) => {
       return;
     }
 
+    const userCount = Object.keys(users).length;
+
     const user = {
       name,
       email,
       password,
       initials: getInitials(name),
       createdAt: Date.now(),
+      color: getAvatarColor(userCount),
     };
 
     await postData("users", user);
@@ -168,4 +171,17 @@ function showSignupSuccessOverlay() {
   setTimeout(() => {
     overlay.classList.add("show");
   }, 10);
+}
+
+function getAvatarColor(index) {
+  const colors = [
+    "#9327ff",
+    "#ff7a00",
+    "#fc71ff",
+    "#6e52ff",
+    "#1fd7c1",
+    "#ffbb2b",
+  ];
+
+  return colors[index % colors.length];
 }

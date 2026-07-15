@@ -1,4 +1,4 @@
-import { loadData, postData } from "./storage.js";
+import { loadData, postData, patchData } from "./storage.js";
 
 const taskDate = document.getElementById("taskDate");
 const taskDateError = document.getElementById("taskDateError");
@@ -285,13 +285,26 @@ function initAssignedDropdown() {
 async function loadContacts() {
   try {
     const usersObject = (await loadData("users")) || {};
+    const userEntries = Object.entries(usersObject);
 
-    contacts = Object.entries(usersObject).map(([id, user]) => ({
-      id,
-      name: user.name,
-      email: user.email,
-      initials: user.initials,
-    }));
+    contacts = await Promise.all(
+      userEntries.map(async ([id, user], index) => {
+        let color = user.color;
+
+        if (!color) {
+          color = getAvatarColor(index);
+          await patchData(`users/${id}`, { color });
+        }
+
+        return {
+          id,
+          name: user.name,
+          email: user.email,
+          initials: user.initials,
+          color,
+        };
+      }),
+    );
 
     renderContacts();
   } catch (error) {
@@ -311,12 +324,11 @@ function renderContacts() {
   });
 
   filteredContacts.forEach((contact) => {
-    const contactIndex = contacts.findIndex((item) => item.id === contact.id);
     const isSelected = selectedContacts.some((item) => item.id === contact.id);
 
     assignedList.innerHTML += `
       <div class="contactOption ${isSelected ? "selectedContactOption" : ""}" data-contact-id="${contact.id}">
-        <div class="contactAvatar" style="background:${getAvatarColor(contactIndex)}">
+        <div class="contactAvatar" style="background:${contact.color}">
           ${contact.initials || getInitials(contact.name)}
         </div>
 
@@ -371,7 +383,7 @@ function renderSelectedContacts() {
 
   visibleContacts.forEach((contact, index) => {
     selectedContactsContainer.innerHTML += `
-      <div class="selectedAvatar" style="background:${getAvatarColor(index)}" title="${contact.name}">
+      <div class="selectedAvatar" style="background:${contact.color}" title="${contact.name}">
         ${contact.initials || getInitials(contact.name)}
       </div>
     `;
@@ -387,7 +399,7 @@ function renderSelectedContacts() {
     hiddenContacts.forEach((contact, index) => {
       moreContactsDropdown.innerHTML += `
         <div class="moreContactItem">
-          <div class="selectedAvatar" style="background:${getAvatarColor(index + 3)}">
+          <div class="selectedAvatar" style="background:${contact.color}">
             ${contact.initials || getInitials(contact.name)}
           </div>
           <span>${contact.name}</span>

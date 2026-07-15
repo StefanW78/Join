@@ -9,12 +9,13 @@ async function initBoard() {
     const tasksObject = await loadData("tasks");
     const usersObject = await loadData("users");
 
-    contacts = Object.entries(usersObject).map(([id, user]) => {
+    contacts = Object.entries(usersObject).map(([id, user], index) => {
       return {
         id,
         name: user.name,
         email: user.email,
         initials: user.initials,
+        color: user.color || getAvatarColor(index),
       };
     });
 
@@ -33,6 +34,8 @@ async function initBoard() {
     console.error("Fehler beim Laden der Board-Daten:", error);
   }
 }
+
+
 
 function renderBoardTasks() {
   clearBoardColumns();
@@ -122,7 +125,7 @@ function getTaskCardTemplate(task) {
 
       <div class="card-footer">
         <div class="avatars">
-          ${getAssignedAvatarsTemplate(task.assignedTo || [])}
+          ${getAssignedAvatarsTemplate(enrichAssignedContacts(task.assignedTo || []))}
         </div>
 
         <div class="priority ${getPriorityClass(task.priority)}">
@@ -192,9 +195,9 @@ function getAssignedAvatarsTemplate(assignedContacts) {
   const visibleContacts = assignedContacts.slice(0, 3);
 
   return visibleContacts
-    .map((contact, index) => {
+    .map((contact) => {
       return `
-        <div class="av ${getAvatarColorClass(index)}">
+        <div class="av" style="background:${contact.color || "#2a3647"}">
           ${contact.initials || getInitials(contact.name)}
         </div>
       `;
@@ -212,14 +215,34 @@ function getInitials(name = "") {
     .join("");
 }
 
-function getAvatarColorClass(index) {
-  const colors = ["av-orange", "av-purple", "av-teal"];
-  return colors[index % colors.length];
-}
-
 function getAvatarColor(index) {
   const colors = ["#ff7a00", "#9747ff", "#1fbcb4", "#29abe2", "#6e52ff"];
   return colors[index % colors.length];
+}
+
+function enrichAssignedContacts(assignedContacts = []) {
+  return assignedContacts.map((assignedContact) => {
+    const contactFromUsers = contacts.find((contact) => {
+      return (
+        contact.id === assignedContact.id ||
+        contact.email === assignedContact.email ||
+        contact.name === assignedContact.name
+      );
+    });
+
+    if (!contactFromUsers) {
+      return assignedContact;
+    }
+
+    return {
+      ...assignedContact,
+      id: contactFromUsers.id,
+      name: contactFromUsers.name,
+      email: contactFromUsers.email,
+      initials: contactFromUsers.initials || getInitials(contactFromUsers.name),
+      color: contactFromUsers.color,
+    };
+  });
 }
 
 function getPriorityIcon(priority) {
@@ -425,7 +448,7 @@ function closeTaskOverlayOnBackgroundClick(event) {
 }
 
 function getTaskDetailOverlayTemplate(task) {
-  const assignedContacts = task.assignedTo || [];
+  const assignedContacts = enrichAssignedContacts(task.assignedTo || []);
   const subtasks = task.subtasks || [];
 
   return `
@@ -530,10 +553,10 @@ function getAssignedOverlayTemplate(assignedContacts) {
   }
 
   return assignedContacts
-    .map((contact, index) => {
+    .map((contact) => {
       return `
         <div class="assigned-person">
-          <div class="assigned-avatar ${getOverlayAvatarColorClass(index)}">
+          <div class="assigned-avatar" style="background:${contact.color || "#2a3647"}">
             ${contact.initials || getInitials(contact.name)}
           </div>
           <span class="assigned-name">${contact.name || ""}</span>
@@ -563,11 +586,6 @@ function getSubtasksOverlayTemplate(subtasks) {
       `;
     })
     .join("");
-}
-
-function getOverlayAvatarColorClass(index) {
-  const colors = ["orange", "purple", "green"];
-  return colors[index % colors.length];
 }
 
 async function deleteTask(taskId) {
@@ -603,7 +621,7 @@ function openEditTaskOverlay(taskId) {
 
 function initEditTaskForm(task) {
   let selectedEditPriority = task.priority || "medium";
-  let selectedEditContacts = [...(task.assignedTo || [])];
+  let selectedEditContacts = enrichAssignedContacts(task.assignedTo || []);
   let editSubtasks = [...(task.subtasks || [])];
 
   document
@@ -744,25 +762,25 @@ function initEditAssignedContacts(selectedEditContacts, onChange) {
   });
 
   document.addEventListener("click", (event) => {
-  const clickedInsideDropdown = event.target.closest("#editAssignedDropdown");
-  const clickedInsideSelectedContacts = event.target.closest(
-    ".selectedContactsWrapper",
-  );
-
-  if (!clickedInsideDropdown) {
-    editAssignedList.classList.add("d_none");
-  }
-
-  if (!clickedInsideSelectedContacts) {
-    const editMoreContactsDropdown = document.getElementById(
-      "editMoreContactsDropdown",
+    const clickedInsideDropdown = event.target.closest("#editAssignedDropdown");
+    const clickedInsideSelectedContacts = event.target.closest(
+      ".selectedContactsWrapper",
     );
 
-    if (editMoreContactsDropdown) {
-      editMoreContactsDropdown.classList.add("d_none");
+    if (!clickedInsideDropdown) {
+      editAssignedList.classList.add("d_none");
     }
-  }
-});
+
+    if (!clickedInsideSelectedContacts) {
+      const editMoreContactsDropdown = document.getElementById(
+        "editMoreContactsDropdown",
+      );
+
+      if (editMoreContactsDropdown) {
+        editMoreContactsDropdown.classList.add("d_none");
+      }
+    }
+  });
 }
 
 function renderEditContactOptions(selectedEditContacts, onChange) {
@@ -784,7 +802,7 @@ function renderEditContactOptions(selectedEditContacts, onChange) {
 
     editAssignedList.innerHTML += `
       <div class="contactOption ${isSelected ? "selectedContactOption" : ""}" data-contact-id="${contact.id}">
-        <div class="contactAvatar" style="background:${getAvatarColor(index)}">
+        <div class="contactAvatar" style="background:${contact.color || getAvatarColor(index)}">
           ${contact.initials || getInitials(contact.name)}
         </div>
 
@@ -830,26 +848,6 @@ function renderEditContactOptions(selectedEditContacts, onChange) {
     });
 }
 
-/* function renderEditAssignedContacts(selectedEditContacts) {
-  const editSelectedContacts = document.getElementById("editSelectedContacts");
-
-  if (!editSelectedContacts) return;
-
-  editSelectedContacts.innerHTML = "";
-
-  selectedEditContacts.forEach((contact, index) => {
-    editSelectedContacts.innerHTML += `
-      <div
-        class="selectedAvatar"
-        style="background:${getAvatarColor(index)}"
-        title="${contact.name || ""}"
-      >
-        ${contact.initials || getInitials(contact.name)}
-      </div>
-    `;
-  });
-}
- */
 function initEditSubtasks(editSubtasks, onChange) {
   const editSubtaskInput = document.getElementById("editSubtaskInput");
   const editAddSubtaskBtn = document.getElementById("editAddSubtaskBtn");
@@ -918,30 +916,34 @@ function renderEditSubtasks(editSubtasks, onChange) {
 }
 
 function initEditSubtaskButtons(editSubtasks, onChange) {
-  document.querySelectorAll("#editSubtaskList .deleteSubtaskBtn").forEach((button) => {
-    button.addEventListener("click", () => {
-      const index = Number(button.dataset.index);
+  document
+    .querySelectorAll("#editSubtaskList .deleteSubtaskBtn")
+    .forEach((button) => {
+      button.addEventListener("click", () => {
+        const index = Number(button.dataset.index);
 
-      editSubtasks.splice(index, 1);
-      renderEditSubtasks(editSubtasks, onChange);
-      onChange(editSubtasks);
+        editSubtasks.splice(index, 1);
+        renderEditSubtasks(editSubtasks, onChange);
+        onChange(editSubtasks);
+      });
     });
-  });
 
-  document.querySelectorAll("#editSubtaskList .editSubtaskBtn").forEach((button) => {
-    button.addEventListener("click", () => {
-      const index = Number(button.dataset.index);
-      const editSubtaskInput = document.getElementById("editSubtaskInput");
+  document
+    .querySelectorAll("#editSubtaskList .editSubtaskBtn")
+    .forEach((button) => {
+      button.addEventListener("click", () => {
+        const index = Number(button.dataset.index);
+        const editSubtaskInput = document.getElementById("editSubtaskInput");
 
-      editSubtaskInput.value = editSubtasks[index].title;
+        editSubtaskInput.value = editSubtasks[index].title;
 
-      editSubtasks.splice(index, 1);
-      renderEditSubtasks(editSubtasks, onChange);
-      onChange(editSubtasks);
+        editSubtasks.splice(index, 1);
+        renderEditSubtasks(editSubtasks, onChange);
+        onChange(editSubtasks);
 
-      editSubtaskInput.focus();
+        editSubtaskInput.focus();
+      });
     });
-  });
 }
 
 function renderEditAssignedContacts(selectedEditContacts) {
@@ -963,7 +965,7 @@ function renderEditAssignedContacts(selectedEditContacts) {
     editSelectedContacts.innerHTML += `
       <div
         class="selectedAvatar"
-        style="background:${getAvatarColor(index)}"
+        style="background:${contact.color || getAvatarColor(index)}"
         title="${contact.name || ""}"
       >
         ${contact.initials || getInitials(contact.name)}
@@ -983,7 +985,7 @@ function renderEditAssignedContacts(selectedEditContacts) {
         <div class="moreContactItem">
           <div
             class="selectedAvatar"
-            style="background:${getAvatarColor(index + 3)}"
+            style="background:${contact.color || "#2a3647"}"
           >
             ${contact.initials || getInitials(contact.name)}
           </div>
