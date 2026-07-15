@@ -315,25 +315,28 @@ function initDraggableCards() {
 }
 
 function initDropColumns() {
-  document.querySelectorAll(".column[data-status]").forEach((column) => {
-    column.addEventListener("dragover", (event) => {
-      event.preventDefault();
-      column.classList.add("is-drag-over");
-    });
+  document.querySelectorAll(".column[data-status]").forEach(initDropColumn);
+}  
 
-    column.addEventListener("dragleave", () => {
-      column.classList.remove("is-drag-over");
-    });
+function initDropColumn(column) {
+  column.addEventListener("dragover", (event) => handleDragOver(event, column));
+  column.addEventListener("dragleave", () => handleDragLeave(column));
+  column.addEventListener("drop", (event) => handleDrop(event, column));
+}
 
-    column.addEventListener("drop", async (event) => {
-      event.preventDefault();
-      column.classList.remove("is-drag-over");
+function handleDragOver(event, column) {
+  event.preventDefault();
+  column.classList.add("is-drag-over");
+}
 
-      const newStatus = column.dataset.status;
+async function handleDrop(event, column) {
+  event.preventDefault();
+  column.classList.remove("is-drag-over");
 
-      await moveTaskToStatus(draggedTaskId, newStatus);
-    });
-  });
+  if (!draggedTaskId) return;
+
+  const newStatus = column.dataset.status;
+  await moveTaskToStatus(draggedTaskId, newStatus);
 }
 
 async function moveTaskToStatus(taskId, newStatus) {
@@ -371,35 +374,63 @@ function initTaskCardClicks() {
 }
 
 function openTaskDetailOverlay(taskId) {
-  const task = boardTasks.find((task) => task.id === taskId);
-
+  const task = findTaskById(taskId);
   if (!task) return;
 
+  const elements = getTaskDetailOverlayElements();
+  if (!elements) return;
+
+  renderTaskDetailOverlay(task, elements.formContainer);
+  initTaskDetailOverlayEvents(task, elements.overlay);
+  showTaskDetailOverlay(elements.overlay);
+}
+
+function findTaskById(taskId) {
+  return boardTasks.find((task) => task.id === taskId);
+}
+
+function getTaskDetailOverlayElements() {
   const overlay = document.getElementById("cardOverlay");
   const formContainer = document.getElementById("cardFormContainer");
 
-  if (!overlay || !formContainer) return;
+  if (!overlay || !formContainer) return null;
 
+  return { overlay, formContainer };
+}
+
+function renderTaskDetailOverlay(task, formContainer) {
   formContainer.innerHTML = getTaskDetailOverlayTemplate(task);
-
   initDetailSubtaskCheckboxes(task);
+}
 
+function initTaskDetailOverlayEvents(task, overlay) {
+  initCloseTaskDetailEvent();
+  initDeleteTaskEvent(task);
+  initEditTaskEvent(task);
+  overlay.addEventListener("click", closeTaskOverlayOnBackgroundClick);
+}
+
+function initCloseTaskDetailEvent() {
   document
     .getElementById("closeTaskDetailOverlayBtn")
     .addEventListener("click", closeTaskDetailOverlay);
+}
 
+function initDeleteTaskEvent(task) {
   document.getElementById("deleteTaskBtn").addEventListener("click", () => {
     deleteTask(task.id);
   });
+}
 
+function initEditTaskEvent(task) {
   document.getElementById("editTaskBtn").addEventListener("click", () => {
     openEditTaskOverlay(task.id);
   });
+}
 
+function showTaskDetailOverlay(overlay) {
   overlay.style.display = "flex";
   document.body.style.overflow = "hidden";
-
-  overlay.addEventListener("click", closeTaskOverlayOnBackgroundClick);
 }
 
 function initDetailSubtaskCheckboxes(task) {
@@ -747,41 +778,63 @@ function initEditPriorityButtons(onChange) {
 }
 
 function initEditAssignedContacts(selectedEditContacts, onChange) {
+  const elements = getEditAssignedElements();
+  if (!elements) return;
+
+  renderEditAssignedContacts(selectedEditContacts);
+  initEditAssignedInputEvents(elements, selectedEditContacts, onChange);
+  initEditAssignedDocumentClick(elements.editAssignedList);
+}
+
+function getEditAssignedElements() {
   const editAssignedInput = document.getElementById("editAssignedInput");
   const editAssignedList = document.getElementById("editAssignedList");
 
-  renderEditAssignedContacts(selectedEditContacts);
+  if (!editAssignedInput || !editAssignedList) return null;
 
-  editAssignedInput.addEventListener("focus", () => {
-    editAssignedList.classList.remove("d_none");
+  return { editAssignedInput, editAssignedList };
+}
+
+function initEditAssignedInputEvents(elements, selectedEditContacts, onChange) {
+  elements.editAssignedInput.addEventListener("focus", () => {
+    showEditAssignedList(elements.editAssignedList);
     renderEditContactOptions(selectedEditContacts, onChange);
   });
 
-  editAssignedInput.addEventListener("input", () => {
+  elements.editAssignedInput.addEventListener("input", () => {
     renderEditContactOptions(selectedEditContacts, onChange);
-  });
-
-  document.addEventListener("click", (event) => {
-    const clickedInsideDropdown = event.target.closest("#editAssignedDropdown");
-    const clickedInsideSelectedContacts = event.target.closest(
-      ".selectedContactsWrapper",
-    );
-
-    if (!clickedInsideDropdown) {
-      editAssignedList.classList.add("d_none");
-    }
-
-    if (!clickedInsideSelectedContacts) {
-      const editMoreContactsDropdown = document.getElementById(
-        "editMoreContactsDropdown",
-      );
-
-      if (editMoreContactsDropdown) {
-        editMoreContactsDropdown.classList.add("d_none");
-      }
-    }
   });
 }
+
+function showEditAssignedList(editAssignedList) {
+  editAssignedList.classList.remove("d_none");
+}
+
+function initEditAssignedDocumentClick(editAssignedList) {
+  document.addEventListener("click", (event) => {
+    closeEditAssignedListOnOutsideClick(event, editAssignedList);
+    closeEditMoreContactsOnOutsideClick(event);
+  });
+}
+
+function closeEditAssignedListOnOutsideClick(event, editAssignedList) {
+  const clickedInsideDropdown = event.target.closest("#editAssignedDropdown");
+
+  if (!clickedInsideDropdown) {
+    editAssignedList.classList.add("d_none");
+  }
+}
+
+function closeEditMoreContactsOnOutsideClick(event) {
+  const clickedInsideSelected = event.target.closest(".selectedContactsWrapper");
+
+  if (clickedInsideSelected) return;
+
+  const dropdown = document.getElementById("editMoreContactsDropdown");
+  if (dropdown) dropdown.classList.add("d_none");
+}
+
+
 
 function renderEditContactOptions(selectedEditContacts, onChange) {
   const editAssignedInput = document.getElementById("editAssignedInput");
@@ -947,58 +1000,103 @@ function initEditSubtaskButtons(editSubtasks, onChange) {
 }
 
 function renderEditAssignedContacts(selectedEditContacts) {
+  const elements = getEditAssignedContactElements();
+  if (!elements) return;
+
+  resetEditAssignedContacts(elements);
+  renderVisibleEditContacts(selectedEditContacts, elements.editSelectedContacts);
+  renderHiddenEditContacts(selectedEditContacts, elements);
+}
+
+function getEditAssignedContactElements() {
   const editSelectedContacts = document.getElementById("editSelectedContacts");
   const editMoreContactsDropdown = document.getElementById(
     "editMoreContactsDropdown",
   );
 
-  if (!editSelectedContacts || !editMoreContactsDropdown) return;
+  if (!editSelectedContacts || !editMoreContactsDropdown) return null;
 
-  editSelectedContacts.innerHTML = "";
-  editMoreContactsDropdown.innerHTML = "";
-  editMoreContactsDropdown.classList.add("d_none");
+  return { editSelectedContacts, editMoreContactsDropdown };
+}
 
+function resetEditAssignedContacts(elements) {
+  elements.editSelectedContacts.innerHTML = "";
+  elements.editMoreContactsDropdown.innerHTML = "";
+  elements.editMoreContactsDropdown.classList.add("d_none");
+}
+
+function renderVisibleEditContacts(selectedEditContacts, editSelectedContacts) {
   const visibleContacts = selectedEditContacts.slice(0, 3);
-  const hiddenContacts = selectedEditContacts.slice(3);
 
   visibleContacts.forEach((contact, index) => {
-    editSelectedContacts.innerHTML += `
-      <div
-        class="selectedAvatar"
-        style="background:${contact.color || getAvatarColor(index)}"
-        title="${contact.name || ""}"
-      >
-        ${contact.initials || getInitials(contact.name)}
-      </div>
-    `;
+    editSelectedContacts.innerHTML += getVisibleEditContactTemplate(
+      contact,
+      index,
+    );
   });
+}
 
-  if (hiddenContacts.length > 0) {
-    editSelectedContacts.innerHTML += `
-      <button type="button" class="moreContactsBtn" id="editMoreContactsBtn">
-        +${hiddenContacts.length}
-      </button>
-    `;
+function getVisibleEditContactTemplate(contact, index) {
+  const color = contact.color || getAvatarColor(index);
+  const name = contact.name || "";
+  const initials = contact.initials || getInitials(contact.name);
 
-    hiddenContacts.forEach((contact, index) => {
-      editMoreContactsDropdown.innerHTML += `
-        <div class="moreContactItem">
-          <div
-            class="selectedAvatar"
-            style="background:${contact.color || "#2a3647"}"
-          >
-            ${contact.initials || getInitials(contact.name)}
-          </div>
-          <span>${contact.name || ""}</span>
-        </div>
-      `;
-    });
+  return `
+    <div class="selectedAvatar" style="background:${color}" title="${name}">
+      ${initials}
+    </div>
+  `;
+}
 
-    const editMoreContactsBtn = document.getElementById("editMoreContactsBtn");
+function renderHiddenEditContacts(selectedEditContacts, elements) {
+  const hiddenContacts = selectedEditContacts.slice(3);
 
-    editMoreContactsBtn.addEventListener("click", (event) => {
-      event.stopPropagation();
-      editMoreContactsDropdown.classList.toggle("d_none");
-    });
-  }
+  if (hiddenContacts.length === 0) return;
+
+  renderEditMoreContactsButton(hiddenContacts, elements.editSelectedContacts);
+  renderEditMoreContactsDropdown(
+    hiddenContacts,
+    elements.editMoreContactsDropdown,
+  );
+  initEditMoreContactsButton(elements.editMoreContactsDropdown);
+}
+
+function renderEditMoreContactsButton(hiddenContacts, editSelectedContacts) {
+  editSelectedContacts.innerHTML += `
+    <button type="button" class="moreContactsBtn" id="editMoreContactsBtn">
+      +${hiddenContacts.length}
+    </button>
+  `;
+}
+
+function renderEditMoreContactsDropdown(hiddenContacts, dropdown) {
+  hiddenContacts.forEach((contact) => {
+    dropdown.innerHTML += getEditMoreContactTemplate(contact);
+  });
+}
+
+function getEditMoreContactTemplate(contact) {
+  const color = contact.color || "#2a3647";
+  const initials = contact.initials || getInitials(contact.name);
+  const name = contact.name || "";
+
+  return `
+    <div class="moreContactItem">
+      <div class="selectedAvatar" style="background:${color}">
+        ${initials}
+      </div>
+      <span>${name}</span>
+    </div>
+  `;
+}
+
+function initEditMoreContactsButton(editMoreContactsDropdown) {
+  const editMoreContactsBtn = document.getElementById("editMoreContactsBtn");
+
+  if (!editMoreContactsBtn) return;
+
+  editMoreContactsBtn.addEventListener("click", (event) => {
+    event.stopPropagation();
+    editMoreContactsDropdown.classList.toggle("d_none");
+  });
 }
