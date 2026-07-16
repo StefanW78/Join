@@ -53,26 +53,26 @@ function renderTasks() {
     }
 }
 
-function renderOneTask(taskId) {
+// function renderOneTask(taskId) {
 
-    const task = tasks.find(t => t.id === taskId);
+//     const task = tasks.find(t => t.id === taskId);
 
-    if (!task) return;
+//     if (!task) return;
 
-    const preparedTask = prepareTaskData(task);
+//     const preparedTask = prepareTaskData(task);
 
-    const newCardHTML = getTaskCard(preparedTask);
+//     const newCardHTML = getTaskCard(preparedTask);
 
-    const oldCard = document.querySelector(`.card[data-id="${taskId}"]`);
+//     const oldCard = document.querySelector(`.card[data-id="${taskId}"]`);
 
-    if (!oldCard) return;
+//     if (!oldCard) return;
 
-    const wrapper = document.createElement("div");
-    wrapper.innerHTML = newCardHTML;
+//     const wrapper = document.createElement("div");
+//     wrapper.innerHTML = newCardHTML;
 
-    oldCard.replaceWith(wrapper.firstElementChild);
+//     oldCard.replaceWith(wrapper.firstElementChild);
 
-}
+// }
 
 function renderFilteredTasks() {
 
