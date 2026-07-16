@@ -1,15 +1,13 @@
+
+let tasks = []
+let SearchText = "";
+
 const moveRules = {
     todo: ["done", "inProgress"],
     inProgress: ["todo", "awaitFeedback"],
     awaitFeedback: ["inProgress", "done"],
     done: ["awaitFeedback", "todo"]
 };
-
-let draggedCard = null;
-
-let tasks = []
-
-let SearchText = "";
 
 const columns = {
     todo: document.getElementById("toDo-list"),
@@ -690,26 +688,6 @@ function renderEditContactOptions(selectedEditContacts, onChange) {
     });
 }
 
-/* function renderEditAssignedContacts(selectedEditContacts) {
-  const editSelectedContacts = document.getElementById("editSelectedContacts");
-
-  if (!editSelectedContacts) return;
-
-  editSelectedContacts.innerHTML = "";
-
-  selectedEditContacts.forEach((contact, index) => {
-    editSelectedContacts.innerHTML += `
-      <div
-        class="selectedAvatar"
-        style="background:${getAvatarColor(index)}"
-        title="${contact.name || ""}"
-      >
-        ${contact.initials || getInitials(contact.name)}
-      </div>
-    `;
-  });
-}
- */
 function initEditSubtasks(editSubtasks, onChange) {
   const editSubtaskInput = document.getElementById("editSubtaskInput");
   const editAddSubtaskBtn = document.getElementById("editAddSubtaskBtn");

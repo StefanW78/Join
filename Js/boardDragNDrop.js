@@ -1,3 +1,6 @@
+
+let draggedCard = null;
+
 // Verbesserte Version vom DragnDrop
 function initSimpleDragAndDrop() {
 
