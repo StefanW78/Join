@@ -44,13 +44,13 @@
     order: 1;
   }
 
-  .nav {
+  .board-main {
     flex-direction: row;
     flex: 1;
     justify-content: space-evenly;
     margin-top: 12px;
   }
-  .nav-item {
+  .sidebar-links {
     flex-direction: column;
     gap: 4px;
     padding: 10px 6px;
@@ -65,7 +65,7 @@
   .main-wrapper {
     overflow: visible;
   }
-  .content {
+  .main-container {
     overflow: visible;
   }
 }

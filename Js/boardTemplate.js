@@ -16,6 +16,7 @@ function getEditTaskTemplate(task) {
                 type="text"
                 value="${task.title || ""}"
               />
+              <p class="fieldError" id="editTaskTitleError"></p>
             </div>
 
             <div class="formGroup">
@@ -36,6 +37,7 @@ function getEditTaskTemplate(task) {
                 />
                 <img src="./assets/img/calendar-icon.svg" alt="calendar icon" />
               </div>
+              <p class="fieldError" id="editTaskDateError"></p>
             </div>
           </div>
 
@@ -71,6 +73,7 @@ function getEditTaskTemplate(task) {
                   User Story
                 </option>
               </select>
+              <p class="fieldError" id="editTaskCategoryError"></p>
             </div>
 
             <div class="formGroup">

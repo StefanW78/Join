@@ -215,3 +215,13 @@ footer a:hover{
     background-color: #2a3d59;
     border-radius: 12px;
 }
+
+main{
+    width: 100%;
+    padding: 75px 50px 50px 75px;
+    display: flex;
+    flex-direction: column;
+    max-width: 1440px;
+    margin-top: 6px;
+
+}

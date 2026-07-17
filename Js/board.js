@@ -329,6 +329,10 @@ function handleDragOver(event, column) {
   column.classList.add("is-drag-over");
 }
 
+function handleDragLeave(column) {
+  column.classList.remove("is-drag-over");
+}
+
 async function handleDrop(event, column) {
   event.preventDefault();
   column.classList.remove("is-drag-over");
@@ -675,6 +679,8 @@ function initEditTaskForm(task) {
     editSubtasks = updatedSubtasks;
   });
 
+  initEditValidationEvents();
+
   document
     .getElementById("editTaskForm")
     .addEventListener("submit", (event) => {
@@ -689,6 +695,27 @@ function initEditTaskForm(task) {
     });
 }
 
+function initEditValidationEvents() {
+  const editTaskTitle = document.getElementById("editTaskTitle");
+  const editTaskDate = document.getElementById("editTaskDate");
+  const editTaskCategory = document.getElementById("editTaskCategory");
+
+  editTaskTitle.addEventListener("input", () => {
+    clearEditInputError(editTaskTitle, document.getElementById("editTaskTitleError"));
+  });
+
+  editTaskDate.addEventListener("input", () => {
+    clearEditInputError(editTaskDate, document.getElementById("editTaskDateError"));
+  });
+
+  editTaskCategory.addEventListener("change", () => {
+    clearEditInputError(
+      editTaskCategory,
+      document.getElementById("editTaskCategoryError"),
+    );
+  });
+}
+
 async function saveEditedTask(
   taskId,
   selectedPriority,
@@ -699,6 +726,8 @@ async function saveEditedTask(
   const editTaskDescription = document.getElementById("editTaskDescription");
   const editTaskDate = document.getElementById("editTaskDate");
   const editTaskCategory = document.getElementById("editTaskCategory");
+
+  if (!isEditTaskFormValid()) return;
 
   const updatedTask = {
     title: editTaskTitle.value.trim(),
@@ -727,6 +756,157 @@ async function saveEditedTask(
   } catch (error) {
     console.error("Fehler beim Aktualisieren des Tasks:", error);
   }
+}
+
+function isEditTaskFormValid() {
+  clearEditErrors();
+
+  return (
+    validateEditTaskTitle() &&
+    validateEditTaskDate() &&
+    validateEditTaskCategory()
+  );
+}
+
+function validateEditTaskTitle() {
+  const editTaskTitle = document.getElementById("editTaskTitle");
+  const editTaskTitleError = document.getElementById("editTaskTitleError");
+
+  if (editTaskTitle.value.trim()) return true;
+
+  setEditInputError(editTaskTitle, editTaskTitleError, "This field is required");
+  return false;
+}
+
+function validateEditTaskCategory() {
+  const editTaskCategory = document.getElementById("editTaskCategory");
+  const editTaskCategoryError = document.getElementById("editTaskCategoryError");
+
+  if (editTaskCategory.value) return true;
+
+  setEditInputError(
+    editTaskCategory,
+    editTaskCategoryError,
+    "This field is required",
+  );
+  return false;
+}
+
+function validateEditTaskDate() {
+  const editTaskDate = document.getElementById("editTaskDate");
+  const editTaskDateError = document.getElementById("editTaskDateError");
+  const dateValue = editTaskDate.value.trim();
+
+  if (!dateValue) {
+    setEditInputError(editTaskDate, editTaskDateError, "This field is required");
+    return false;
+  }
+
+  if (!isValidEditDateFormat(dateValue)) {
+    setEditInputError(
+      editTaskDate,
+      editTaskDateError,
+      "Please use the format dd/mm/yyyy",
+    );
+    return false;
+  }
+
+  return validateEditDateIsNotPast(editTaskDate, editTaskDateError, dateValue);
+}
+
+function validateEditDateIsNotPast(input, errorElement, dateValue) {
+  const selectedDate = parseEditDateFromInput(dateValue);
+  const today = new Date();
+
+  today.setHours(0, 0, 0, 0);
+  selectedDate.setHours(0, 0, 0, 0);
+
+  if (selectedDate >= today) return true;
+
+  setEditInputError(input, errorElement, "The due date cannot be in the past.");
+  return false;
+}
+
+function isValidEditDateFormat(dateValue) {
+  if (dateValue.includes("/")) {
+    return isValidSlashDate(dateValue);
+  }
+
+  return isValidIsoDate(dateValue);
+}
+
+function isValidSlashDate(dateValue) {
+  const dateRegex = /^(0[1-9]|[12][0-9]|3[01])\/(0[1-9]|1[0-2])\/\d{4}$/;
+
+  if (!dateRegex.test(dateValue)) return false;
+
+  const selectedDate = parseEditDateFromInput(dateValue);
+  const [day, month, year] = dateValue.split("/").map(Number);
+
+  return isRealDate(selectedDate, day, month, year);
+}
+
+function isValidIsoDate(dateValue) {
+  const dateRegex = /^\d{4}-\d{2}-\d{2}$/;
+
+  if (!dateRegex.test(dateValue)) return false;
+
+  const selectedDate = parseEditDateFromInput(dateValue);
+  const [year, month, day] = dateValue.split("-").map(Number);
+
+  return isRealDate(selectedDate, day, month, year);
+}
+
+function parseEditDateFromInput(dateValue) {
+  if (dateValue.includes("/")) {
+    const [day, month, year] = dateValue.split("/");
+    return new Date(Number(year), Number(month) - 1, Number(day));
+  }
+
+  const [year, month, day] = dateValue.split("-");
+  return new Date(Number(year), Number(month) - 1, Number(day));
+}
+
+function isRealDate(date, day, month, year) {
+  return (
+    date.getFullYear() === year &&
+    date.getMonth() === month - 1 &&
+    date.getDate() === day
+  );
+}
+
+function setEditInputError(input, errorElement, message) {
+  input.classList.remove("inputFocus");
+  input.classList.add("inputError");
+
+  if (errorElement) {
+    errorElement.textContent = message;
+  }
+}
+
+function clearEditInputError(input, errorElement) {
+  input.classList.remove("inputError");
+
+  if (errorElement) {
+    errorElement.textContent = "";
+  }
+}
+
+function clearEditErrors() {
+  clearEditInputError(
+    document.getElementById("editTaskTitle"),
+    document.getElementById("editTaskTitleError"),
+  );
+
+  clearEditInputError(
+    document.getElementById("editTaskDate"),
+    document.getElementById("editTaskDateError"),
+  );
+
+  clearEditInputError(
+    document.getElementById("editTaskCategory"),
+    document.getElementById("editTaskCategoryError"),
+  );
 }
 
 function updateTaskInBoardTasks(taskId, updatedTask) {
