@@ -295,31 +295,49 @@ function renderEditContactOptions(selectedEditContacts, onChange) {
   document
     .querySelectorAll("#editAssignedList .contactOption")
     .forEach((option) => {
-      option.addEventListener("click", (event) => {
-        event.stopPropagation();
+        option.addEventListener("click", (event) => {
+            event.stopPropagation();
 
-        const contactId = option.dataset.contactId;
-        const contact = contacts.find((item) => item.id === contactId);
+            const contactId = option.dataset.contactId;
 
-        if (!contact) return;
+            const contact = contacts.find(
+                (item) => item.id === contactId
+            );
 
-        const isSelected = selectedEditContacts.some(
-          (item) => item.id === contactId,
-        );
+            if (!contact) return;
 
-        if (isSelected) {
-          selectedEditContacts = selectedEditContacts.filter(
-            (item) => item.id !== contactId,
-          );
-        } else {
-          selectedEditContacts.push(contact);
-        }
+            const isSelected = selectedEditContacts.some(
+                (item) => item.id === contactId
+            );
 
-        editAssignedInput.value = "";
-        renderEditAssignedContacts(selectedEditContacts);
-        renderEditContactOptions(selectedEditContacts, onChange);
-        onChange(selectedEditContacts);
-      });
+            if (isSelected) {
+
+                const index = selectedEditContacts.findIndex(
+                    (item) => item.id === contactId
+                );
+
+                if (index !== -1) {
+                    selectedEditContacts.splice(index, 1);
+                }
+
+            } else {
+
+                selectedEditContacts.push(contact);
+
+            }
+
+            editAssignedInput.value = "";
+            renderEditAssignedContacts(
+                selectedEditContacts
+            );
+            renderEditContactOptions(
+                selectedEditContacts,
+                onChange
+            );
+            onChange(
+                selectedEditContacts
+            );
+        });
     });
 }
 

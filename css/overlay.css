@@ -4,6 +4,11 @@
   cursor: pointer;
 }
 
+.subtasksWrapper{
+  max-height: 120px;
+  overflow-y: auto;
+}
+
 .card-overlay {
   position: fixed;
   inset: 0;
