@@ -19,37 +19,44 @@
     <title>JOIN-PROJEKT</title>
   </head>
   <body>
-    <!-- <aside class="sidebar">
-      <div class="logo-area">
-        <img class="logo" src="./assets/img/join-logo.svg" alt="" />
-      </div>
+    <div class="body-div">
+      <div class="sidebar-wraper">
+        <div class="sidebar">
+          <div class="sidebar-logo-div">
+            <img src="./assets/img/join-logo.svg" alt="Join logo" />
+          </div>
 
-      <nav class="nav">
-        <a href="./summary.html" class="nav-item">
-          <img src="./assets/img/summary-icon.svg" alt="" />
-          Summary
-        </a>
-        <a href="./addTask.html" class="nav-item">
-          <img src="./assets/img/addTask-icon.svg" alt="" />
-          Add Task
-        </a>
-        <a href="./board.html" class="nav-item active">
-          <img src="./assets/img/board-icon.svg" alt="" />
-          Board
-        </a>
-        <a href="./contacts.html" class="nav-item">
-          <img src="./assets/img/contacts-icon.svg" alt="" />
-          Contacts
-        </a>
-      </nav>
+          <div class="links-and-footer-div">
+            <div class="sidebar-links">
+              <a href="./summary.html">
+                <img src="./assets/img/summary-icon.svg" alt="summary-logo" />
+                Summary
+              </a>
 
-      <div class="sidebar-footer">
-        <a href="./privacy.html">Privacy Policy</a>
-        <a href="./legalnotes.html">Legal notice</a>
-      </div>
-    </aside>
+              <a href="./addTask.html">
+                <img src="./assets/img/addTask-icon.svg" alt="add-task-logo" />
+                Add-Task
+              </a>
 
-    <div class="header-and-content-div">
+              <a class="current-link" href="./board.html">
+                <img src="./assets/img/board-icon.svg" alt="board-logo" />
+                Board
+              </a>
+
+              <a href="./contacts.html">
+                <img src="./assets/img/contacts-icon.svg" alt="contacts-logo" />
+                Contacts
+              </a>
+            </div>
+
+            <footer>
+              <a href="./privacy.html">Privacy Policy</a>
+              <a href="./legalnotes.html">Legal notice</a>
+            </footer>
+          </div>
+        </div>
+
+        <div class="header-and-content-div">
           <div class="header-div">
             <div class="header-content">
               <div class="header-img">
@@ -86,203 +93,71 @@
             </div>
           </div>
 
-      <main class="content">
-        <div class="board-header">
-          <div class="board-box">
-            <h1 class="board-title">Board</h1>
-          </div>
-          <div class="search-box">
-            <input
-              id="boardSearch"
-              name="boardSearch"
-              type="text"
-              placeholder="Find Task"
-            />
-            <img src="./assets/img/search.svg" alt="" />
-          </div>
-          <button class="btn-add-task btn-add-plus openAddTaskBtn">
-            Add task &nbsp;+
-          </button>
-          <button class="btn-add-task btn-add-plus plus-none openAddTaskBtn">
-            <img src="./assets/img/search-add.svg" alt="" />
-          </button>
+          <main class="main-container board-main">
+            <div class="board-header">
+              <div class="board-box">
+                <h1 class="board-title">Board</h1>
+              </div>
+
+              <div class="search-box">
+                <input
+                  id="boardSearch"
+                  name="boardSearch"
+                  type="text"
+                  placeholder="Find Task"
+                />
+                <img src="./assets/img/search.svg" alt="" />
+              </div>
+
+              <button class="btn-add-task btn-add-plus openAddTaskBtn">
+                Add task &nbsp;+
+              </button>
+
+              <button
+                class="btn-add-task btn-add-plus plus-none openAddTaskBtn"
+              >
+                <img src="./assets/img/search-add.svg" alt="" />
+              </button>
+            </div>
+
+            <div class="board-columns">
+              <div class="column" data-status="todo">
+                <div class="column-header">
+                  <span>To do</span>
+                  <button class="plus-box openAddTaskBtn">+</button>
+                </div>
+                <div class="task-column" id="todoTasks"></div>
+              </div>
+
+              <div class="column" data-status="inProgress">
+                <div class="column-header">
+                  <span>In progress</span>
+                  <button class="plus-box openAddTaskBtn">+</button>
+                </div>
+                <div class="task-column" id="inProgressTasks"></div>
+              </div>
+
+              <div class="column" data-status="awaitFeedback">
+                <div class="column-header">
+                  <span>Await feedback</span>
+                  <button class="plus-box openAddTaskBtn">+</button>
+                </div>
+                <div class="task-column" id="awaitFeedbackTasks"></div>
+              </div>
+
+              <div class="column" data-status="done">
+                <div class="column-header">
+                  <span>Done</span>
+                </div>
+                <div class="task-column" id="doneTasks"></div>
+              </div>
+            </div>
+          </main>
         </div>
-
-        <div class="board-columns">
-          <div class="column" data-status="todo">
-            <div class="column-header">
-              <span>To do</span>
-              <button class="plus-box openAddTaskBtn">+</button>
-            </div>
-            <div class="task-column" id="todoTasks"></div>
-          </div>
-
-          <div class="column" data-status="inProgress">
-            <div class="column-header">
-              <span>In progress</span>
-              <button class="plus-box openAddTaskBtn">+</button>
-            </div>
-            <div class="task-column" id="inProgressTasks"></div>
-          </div>
-
-          <div class="column" data-status="awaitFeedback">
-            <div class="column-header">
-              <span>Await feedback</span>
-              <button class="plus-box openAddTaskBtn">+</button>
-            </div>
-            <div class="task-column" id="awaitFeedbackTasks"></div>
-          </div>
-
-          <div class="column" data-status="done">
-            <div class="column-header">
-              <span>Done</span>
-            </div>
-            <div class="task-column" id="doneTasks"></div>
-          </div>
-        </div>
-      </main>
-    </div> -->
-
-
-  <div class="body-div">
-    <div class="sidebar-wraper">
-      <div class="sidebar">
-        <div class="sidebar-logo-div">
-          <img src="./assets/img/join-logo.svg" alt="Join logo" />
-        </div>
-
-        <div class="links-and-footer-div">
-          <div class="sidebar-links">
-            <a href="./summary.html">
-              <img src="./assets/img/summary-icon.svg" alt="summary-logo" />
-              Summary
-            </a>
-
-            <a href="./addTask.html">
-              <img src="./assets/img/addTask-icon.svg" alt="add-task-logo" />
-              Add-Task
-            </a>
-
-            <a class="current-link" href="./board.html">
-              <img src="./assets/img/board-icon.svg" alt="board-logo" />
-              Board
-            </a>
-
-            <a href="./contacts.html">
-              <img src="./assets/img/contacts-icon.svg" alt="contacts-logo" />
-              Contacts
-            </a>
-          </div>
-
-          <footer>
-            <a href="./privacy.html">Privacy Policy</a>
-            <a href="./legalnotes.html">Legal notice</a>
-          </footer>
-        </div>
-      </div>
-
-      <div class="header-and-content-div">
-        <div class="header-div">
-          <div class="header-content">
-            <div class="header-img">
-              <img
-                src="./assets/img/Logo_for_Favicon_construction.png"
-                alt="header-logo"
-              />
-            </div>
-
-            <div class="header-title">
-              Kanban Project Management Tool
-            </div>
-
-            <div class="user-header">
-              <a class="help" href="./help.html">
-                <img src="./assets/img/help.svg" alt="help-logo" />
-              </a>
-
-              <div class="user-icon">
-                <button class="header-button" id="header-button">SM</button>
-              </div>
-
-              <div class="dropdown-menu d_none" id="dropdown-menu">
-                <a
-                  class="help-switch hidden-on-desktop"
-                  id="help-switch"
-                  href="./help.html"
-                >
-                  Help
-                </a>
-                <a href="./legalnotes.html">Legal notice</a>
-                <a href="./privacy.html">Privacy Policy</a>
-                <a href="" onclick="logout()">Log Out</a>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <main class="main-container board-main">
-          <div class="board-header">
-            <div class="board-box">
-              <h1 class="board-title">Board</h1>
-            </div>
-
-            <div class="search-box">
-              <input
-                id="boardSearch"
-                name="boardSearch"
-                type="text"
-                placeholder="Find Task"
-              />
-              <img src="./assets/img/search.svg" alt="" />
-            </div>
-
-            <button class="btn-add-task btn-add-plus openAddTaskBtn">
-              Add task &nbsp;+
-            </button>
-
-            <button class="btn-add-task btn-add-plus plus-none openAddTaskBtn">
-              <img src="./assets/img/search-add.svg" alt="" />
-            </button>
-          </div>
-
-          <div class="board-columns">
-            <div class="column" data-status="todo">
-              <div class="column-header">
-                <span>To do</span>
-                <button class="plus-box openAddTaskBtn">+</button>
-              </div>
-              <div class="task-column" id="todoTasks"></div>
-            </div>
-
-            <div class="column" data-status="inProgress">
-              <div class="column-header">
-                <span>In progress</span>
-                <button class="plus-box openAddTaskBtn">+</button>
-              </div>
-              <div class="task-column" id="inProgressTasks"></div>
-            </div>
-
-            <div class="column" data-status="awaitFeedback">
-              <div class="column-header">
-                <span>Await feedback</span>
-                <button class="plus-box openAddTaskBtn">+</button>
-              </div>
-              <div class="task-column" id="awaitFeedbackTasks"></div>
-            </div>
-
-            <div class="column" data-status="done">
-              <div class="column-header">
-                <span>Done</span>
-              </div>
-              <div class="task-column" id="doneTasks"></div>
-            </div>
-          </div>
-        </main>
       </div>
     </div>
-  </div>
 
-  <!-- hier bleiben deine Overlays -->
+    <!-- hier bleiben deine Overlays -->
 
     <div id="cardOverlay" class="card-overlay">
       <div id="cardFormContainer" class="card-overlay-content"></div>
@@ -472,11 +347,11 @@
         <img src="./assets/img/board-icon.svg" alt="Board icon" />
       </div>
     </div>
-      <script type="module" src="./Js/addTask.js"></script>
-      <script src="./Js/boardAddTaskOverlay.js"></script>
-      <script type="module" src="./Js/userBadge.js"></script>
-      <script src="./Js/boardTemplate.js"></script>
-      <script type="module" src="./Js/board.js"></script>
-      <script src="./Js/Sidebar-and-header-script.js"></script>
-</body>
+    <script type="module" src="./Js/addTask.js"></script>
+    <script src="./Js/boardAddTaskOverlay.js"></script>
+    <script type="module" src="./Js/userBadge.js"></script>
+    <script src="./Js/boardTemplate.js"></script>
+    <script type="module" src="./Js/board.js"></script>
+    <script src="./Js/Sidebar-and-header-script.js"></script>
+  </body>
 </html>
