@@ -134,7 +134,6 @@ function filterTasks() {
 }
 
 function renderMoveMenu(menu, currentStatus, taskId) {
-
     const container = menu.querySelector(".movingto-Div");
 
     const statusNames = {
@@ -149,17 +148,12 @@ function renderMoveMenu(menu, currentStatus, taskId) {
     container.innerHTML = "";
 
     allowedStatuses.forEach((status, index) => {
-
-        container.innerHTML += `
-            <div class="${index === 0 ? 'moving-top' : 'moving-down'} move-option"
-                 data-task-id="${taskId}"
-                 data-status="${status}">
-
-                <img src="./assets/img/${index === 0 ? 'arrow_upward.svg' : 'arrow_upward.svg'}">
-                <span>${statusNames[status]}</span>
-
-            </div>
-        `;
+        container.innerHTML += moveOptionTemplate(
+            index,
+            taskId,
+            status,
+            statusNames[status]
+        );
     });
 }
 
@@ -172,11 +166,8 @@ function renderEditOverlay(taskId) {
 
     if (!formContainer) return;
 
-
     formContainer.classList.remove("overlay-content-animation");
 
-
-    // kurz warten, damit die Animation neu startet
     setTimeout(() => {
 
         formContainer.innerHTML = getEditOverlayTemplate(task);
@@ -277,53 +268,51 @@ function getAllowedMoves(currentStatus) {
     return moveRules[currentStatus] || [];
 }
 
-
 function prepareTaskData(task) {
+    return {
+        ...task,
+        avatarsHTML: createAvatarsHTML(task.assignedTo || []),
+        subtasksHTML: createSubtasksHTML(task.subtasks || []),
+        categoryClass: getCategoryClass(task.category)
+    };
+}
 
-    const assignedTo = task.assignedTo || [];
-    const subtasks = task.subtasks || [];
+function createAvatarsHTML(assignedTo) {
     const maxVisible = 4;
     const visibleAvatars = assignedTo.slice(0, maxVisible);
     const extraCount = assignedTo.length - maxVisible;
 
-    const avatarsHTML = visibleAvatars
-        .map(av => `<div class="av" style="background-color:${av.color}">${av.initials}</div>`)
-        .join('');
+    const avatars = visibleAvatars
+        .map(createAvatarTemplate)
+        .join("");
 
-    const extraHTML = extraCount > 0
-        ? `<div class="av-more">+${extraCount}</div>`
-        : '';
+    return avatars + createExtraAvatar(extraCount);
+}
 
-    const finalAvatarsHTML = avatarsHTML + extraHTML;
+function createSubtasksHTML(subtasks) {
+    if (!subtasks.length) return "";
 
-    const total = subtasks.length;
-    const done = subtasks.filter(s => s.done).length;
-    const progress = total > 0 ? (done / total) * 100 : 0;
+    const done = getDoneSubtasks(subtasks);
+    const progress = (done / subtasks.length) * 100;
 
-    const subtasksHTML = total > 0
-        ? `
-            <div class="progress-bar">
-                <div class="progress-fill" style="width:${progress}%"></div>
-            </div>
-            ${done}/${total} Subtasks
-          `
-        : '';
+    return progressTemplate(progress, done, subtasks.length);
+}
 
+function calculateProgress(subtasks) {
+    return (getDoneSubtasks(subtasks) / subtasks.length) * 100;
+}
 
+function getDoneSubtasks(subtasks) {
+    return subtasks.filter(subtask => subtask.done).length;
+}
+
+function getCategoryClass(category) {
     const categoryClassMap = {
         "User Story": "tag-blue",
         "Technical Task": "tag-teal"
     };
 
-    const categoryClass = categoryClassMap[task.category] || "tag-default";
-
-
-    return {
-        ...task,
-        avatarsHTML: finalAvatarsHTML,
-        subtasksHTML,
-        categoryClass
-    };
+    return categoryClassMap[category] || "tag-default";
 }
 
 function closeAllMoveMenus() {

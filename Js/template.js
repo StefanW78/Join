@@ -413,3 +413,38 @@ function getEditMoreContactTemplate(contact) {
         </div>
     `;
 }
+
+function createAvatarTemplate(contact) {
+    return `
+        <div class="av" style="background-color:${contact.color}">
+            ${contact.initials}
+        </div>
+    `;
+}
+
+function createExtraAvatar(extraCount) {
+    if (extraCount <= 0) return "";
+    return `<div class="av-more">+${extraCount}</div>`;
+}
+
+function progressTemplate(progress, done, total) {
+    return `
+        <div class="progress-bar">
+            <div class="progress-fill" style="width:${progress}%"></div>
+        </div>
+        ${done}/${total} Subtasks
+    `;
+}
+
+function moveOptionTemplate(index, taskId, status, statusName) {
+    return `
+        <div class="${index === 0 ? 'moving-top' : 'moving-down'} move-option"
+             data-task-id="${taskId}"
+             data-status="${status}">
+
+            <img src="./assets/img/arrow_upward.svg">
+            <span>${statusName}</span>
+
+        </div>
+    `;
+}
