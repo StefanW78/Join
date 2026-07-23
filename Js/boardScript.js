@@ -247,7 +247,6 @@ function toggleMoveMenu(button) {
 });
 }
 
-//für das moven von Tasks update.
 async function moveTask(taskId, newStatus) {
     const task = tasks.find(t => t.id === taskId);
     if (!task) return;
@@ -371,7 +370,6 @@ function getProgressHTML(subtasks = []) {
 }
 
 document.addEventListener("click", (event) => {
-
     const option = event.target.closest(".move-option");
 
     if (!option) return;
@@ -392,7 +390,6 @@ document.addEventListener("change", async (event) => {
 
     const taskId = checkbox.dataset.taskId;
     const subIndex = checkbox.dataset.index;
-
     const task = tasks.find(t => t.id === taskId);
     if (!task) return;
 
@@ -407,11 +404,9 @@ document.addEventListener("change", async (event) => {
 });
 
 async function deleteCard(taskId) {
-
     const oldTasks = [...tasks];
 
     try {
-
         await deleteData("tasks", taskId);
 
         tasks = tasks.filter(task => task.id !== taskId);
@@ -438,9 +433,6 @@ function showContextMessage(message) {
     box.classList.add("show");
 
     setTimeout(() => {
-
         box.classList.remove("show");
-
     }, 3000);
-
 }
