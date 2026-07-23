@@ -3,7 +3,6 @@ let draggedCard = null;
 
 // Verbesserte Version vom DragnDrop
 function initSimpleDragAndDrop() {
-
     const board = document.querySelector(".board-columns");
     const columns = document.querySelectorAll(".column");
 
@@ -16,7 +15,6 @@ function initSimpleDragAndDrop() {
 }
 
 function setupDragStart(board, getCard, setCard) {
-
     board.addEventListener("dragstart", (e) => {
 
         const card = e.target.closest(".card");
@@ -26,7 +24,6 @@ function setupDragStart(board, getCard, setCard) {
         card.classList.add("is-dragging");
 
     });
-
 }
 
 function setupDragEnd(board, getCard, setCard) {

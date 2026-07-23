@@ -36,14 +36,12 @@ async function loadTasks() {
 }
 
 function renderTasks() {
-
     const html = {};
 
     for (const status in columns) {
         html[status] = "";
     }
     for (const task of tasks) {
-
     const preparedTask = prepareTaskData(task);
     html[task.status] += getTaskCard(preparedTask);
 }
@@ -54,9 +52,7 @@ function renderTasks() {
 }
 
 function renderFilteredTasks() {
-
     const filteredTasks = filterTasks();
-
     const html = {};
 
     for (const status in columns) {
@@ -66,22 +62,18 @@ function renderFilteredTasks() {
     for (const task of filteredTasks) {
 
         const preparedTask = prepareTaskData(task);
-
         html[task.status] += getTaskCard(preparedTask);
-
     }
 
     for (const status in columns) {
 
         columns[status].innerHTML =
             html[status] || `<div class="empty-card">No matching tasks</div>`;
-
     }
 
 }
 
 function initBoardSearch() {
-
     const searchInput = document.getElementById("searchTasks");
 
     if (!searchInput) return;
@@ -89,17 +81,13 @@ function initBoardSearch() {
     searchInput.addEventListener("input", (event) => {
 
         SearchText = event.target.value.trim().toLowerCase();
-
         renderFilteredTasks();
 
     });
-
 }
 
 function filterTasks() {
-
     if (!SearchText) return tasks;
-
     return tasks.filter(task => {
 
         const title = (task.title || "").toLowerCase();
@@ -109,12 +97,10 @@ function filterTasks() {
                description.includes(SearchText);
 
     });
-
 }
 
 function renderMoveMenu(menu, currentStatus, taskId) {
     const container = menu.querySelector(".movingto-Div");
-
     const statusNames = {
         todo: "To Do",
         inProgress: "In Progress",
@@ -123,7 +109,6 @@ function renderMoveMenu(menu, currentStatus, taskId) {
     };
 
     const allowedStatuses = getAllowedMoves(currentStatus);
-
     container.innerHTML = "";
 
     allowedStatuses.forEach((status, index) => {
@@ -148,13 +133,9 @@ function renderEditOverlay(taskId) {
     formContainer.classList.remove("overlay-content-animation");
 
     setTimeout(() => {
-
         formContainer.innerHTML = getEditOverlayTemplate(task);
-
         initEditTaskForm(task);
-
         formContainer.classList.add("overlay-content-animation");
-
     }, 50);
 }
 
@@ -164,7 +145,6 @@ function handleBoardClick(event) {
     const clickedMenu = event.target.closest(".move-menu");
     const card = event.target.closest(".card");
 
-    // 👉 Menü öffnen
     if (moveButton) {
         event.stopPropagation();
         toggleMoveMenu(moveButton);
@@ -181,7 +161,6 @@ function handleBoardClick(event) {
 }
 
 function toggleMoveMenu(button) {
-
     const card = button.closest(".card");
     const menu = card.querySelector(".move-menu");
 
@@ -235,7 +214,6 @@ async function moveTask(taskId, newStatus) {
 }
 
 async function moveTaskFromMenu(event, taskId, newStatus) {
-
     event.stopPropagation();
 
     await moveTask(taskId, newStatus);
