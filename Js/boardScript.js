@@ -53,27 +53,6 @@ function renderTasks() {
     }
 }
 
-// function renderOneTask(taskId) {
-
-//     const task = tasks.find(t => t.id === taskId);
-
-//     if (!task) return;
-
-//     const preparedTask = prepareTaskData(task);
-
-//     const newCardHTML = getTaskCard(preparedTask);
-
-//     const oldCard = document.querySelector(`.card[data-id="${taskId}"]`);
-
-//     if (!oldCard) return;
-
-//     const wrapper = document.createElement("div");
-//     wrapper.innerHTML = newCardHTML;
-
-//     oldCard.replaceWith(wrapper.firstElementChild);
-
-// }
-
 function renderFilteredTasks() {
 
     const filteredTasks = filterTasks();
