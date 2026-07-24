@@ -452,32 +452,20 @@ function renderEditSubtasks(editSubtasks, onChange) {
 }
 
 function initEditSubtaskButtons(editSubtasks, onChange) {
-
-    const editSubtaskList =
-        document.getElementById("editSubtaskList");
+    const editSubtaskList = document.getElementById("editSubtaskList");
 
     if (!editSubtaskList) return;
 
-
     editSubtaskList.addEventListener("click", (event) => {
         const deleteButton = event.target.closest(".deleteSubtaskBtn");
-
         const editButton = event.target.closest(".editSubtaskBtn");
 
         if (deleteButton) {
-            handleDeleteSubtask(
-                deleteButton,
-                editSubtasks,
-                onChange
-            );
+            handleDeleteSubtask(deleteButton,editSubtasks,onChange);
         }
 
         if (editButton) {
-            handleEditSubtask(
-                editButton,
-                editSubtasks,
-                onChange
-            );
+            handleEditSubtask(editButton,editSubtasks,onChange);
         }
     });
 }
@@ -488,46 +476,28 @@ function handleDeleteSubtask(button, editSubtasks, onChange) {
 
     editSubtasks.splice(index, 1);
 
-
-    renderEditSubtasks(
-        editSubtasks,
-        onChange
-    );
-
+    renderEditSubtasks(editSubtasks,onChange );
 
     onChange(editSubtasks);
 }
 
 
 function handleEditSubtask(button, editSubtasks, onChange) {
-
     const index = Number(button.dataset.index);
 
-    const subtask =
-        editSubtasks[index];
+    const subtask = editSubtasks[index];
 
-
-    const input =
-        document.getElementById("editSubtaskInput");
-
+    const input = document.getElementById("editSubtaskInput");
 
     if (!subtask || !input) return;
 
-
     input.value = subtask.title;
-
 
     editSubtasks.splice(index, 1);
 
-
-    renderEditSubtasks(
-        editSubtasks,
-        onChange
-    );
-
+    renderEditSubtasks(editSubtasks,onChange);
 
     onChange(editSubtasks);
-
 
     input.focus();
 }
