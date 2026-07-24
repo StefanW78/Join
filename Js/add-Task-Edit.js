@@ -1,4 +1,5 @@
 let contacts = [];
+let editAssignedList = null;
 
 async function loadEditContacts() {
 
@@ -22,44 +23,47 @@ async function loadEditContacts() {
     }
 }
 
- async function initEditTaskForm(task) {
+async function initEditTaskForm(task) {
     await loadEditContacts();
-  let selectedEditPriority = task.priority || "medium";
-  let selectedEditContacts = [...(task.assignedTo || [])];
-  let editSubtasks = [...(task.subtasks || [])];
 
-//   document
-//     .getElementById("closeEditTaskOverlayBtn")
-//     .addEventListener("click", closeTaskDetailOverlay);
+    const state = createEditTaskState(task);
 
-//   document.getElementById("cancelEditTaskBtn").addEventListener("click", () => {
-//     renderCardOverlay(task.id);
-//   });
-
-  initEditPriorityButtons((priority) => {
-    selectedEditPriority = priority;
-  });
-
-  initEditAssignedContacts(selectedEditContacts, (updatedContacts) => {
-    selectedEditContacts = updatedContacts;
-  });
-
-  initEditSubtasks(editSubtasks, (updatedSubtasks) => {
-    editSubtasks = updatedSubtasks;
-  });
-
-  document
-    .getElementById("editTaskForm")
-    .addEventListener("submit", (event) => {
-      event.preventDefault();
-
-      saveEditedTask(
-        task.id,
-        selectedEditPriority,
-        selectedEditContacts,
-        editSubtasks,
-      );
+    initEditPriorityButtons(priority => {
+        state.priority = priority;
     });
+
+    initEditAssignedContacts(state.contacts, contacts => {
+        state.contacts = contacts;
+    });
+
+    initEditSubtasks(state.subtasks, subtasks => {
+        state.subtasks = subtasks;
+    });
+
+    registerEditFormSubmit(task.id, state);
+}
+
+function createEditTaskState(task) {
+    return {
+        priority: task.priority || "medium",
+        contacts: [...(task.assignedTo || [])],
+        subtasks: [...(task.subtasks || [])],
+    };
+}
+
+function registerEditFormSubmit(taskId, state) {
+    document
+        .getElementById("editTaskForm")
+        .addEventListener("submit", (event) => {
+            event.preventDefault();
+
+            saveEditedTask(
+                taskId,
+                state.priority,
+                state.contacts,
+                state.subtasks
+            );
+        });
 }
 
 //save functions
@@ -175,196 +179,206 @@ function convertDateToISO(dateValue) {
 }
 
 function initEditPriorityButtons(onChange) {
-
     document
         .querySelectorAll(".editPriorityBtn")
-        .forEach((button) => {
-
+        .forEach(button => {
             button.addEventListener("click", () => {
+                const priority = button.dataset.priority;
 
-                const selectedPriority = button.dataset.priority;
+                setActivePriorityButton(button);
 
-                document
-                    .querySelectorAll(".editPriorityBtn")
-                    .forEach((btn) => {
+                onChange(priority);
+            });
+        });
+}
 
-                        btn.classList.remove(
-                            "activeUrgent",
-                            "activeMedium",
-                            "activeLow"
-                        );
+function setActivePriorityButton(button) {
+    clearPriorityButtons();
 
-                    });
+    const activeClass = getPriorityClass(button.dataset.priority);
 
-                const activeClass = {
-                    urgent: "activeUrgent",
-                    medium: "activeMedium",
-                    low: "activeLow"
-                };
-                
-                const className = activeClass[selectedPriority];
+    if (activeClass) {
+        button.classList.add(activeClass);
+    }
+}
 
-                if (className) {
-                    button.classList.add(className);
-                }
+function clearPriorityButtons() {
+    document
+        .querySelectorAll(".editPriorityBtn")
+        .forEach(button => {
+            button.classList.remove(
+                "activeUrgent",
+                "activeMedium",
+                "activeLow"
+            );
+        });
+}
 
-                onChange(selectedPriority);
+function getPriorityClass(priority) {
+    const classes = {
+        urgent: "activeUrgent",
+        medium: "activeMedium",
+        low: "activeLow"
+    };
 
+    return classes[priority];
+}
+
+function initEditAssignedContacts(selectedContacts, onChange) {
+    const input = document.getElementById("editAssignedInput");
+    editAssignedList = document.getElementById("editAssignedList");
+
+    renderEditAssignedContacts(selectedContacts);
+
+    registerAssignedInputEvents(
+        input,
+        editAssignedList,
+        selectedContacts,
+        onChange
+    );
+}
+
+function registerAssignedInputEvents(
+    input,
+    list,
+    selectedContacts,
+    onChange
+) {
+    const renderOptions = () =>
+        renderEditContactOptions(selectedContacts, onChange);
+
+    input.addEventListener("focus", () => {
+        list.classList.remove("d_none");
+        renderOptions();
+    });
+
+    input.addEventListener("input", renderOptions);
+}
+
+document.addEventListener("click", handleEditAssignedOutsideClick);
+
+function handleEditAssignedOutsideClick(event) {
+    closeAssignedList(event);
+    closeMoreContactsDropdown(event);
+}
+
+function closeAssignedList(event) {
+    if (!editAssignedList) return;
+
+    if (!event.target.closest("#editAssignedDropdown")) {
+        editAssignedList.classList.add("d_none");
+    }
+}
+
+function closeMoreContactsDropdown(event) {
+    if (event.target.closest(".selectedContactsWrapper")) return;
+
+    const dropdown = document.getElementById("editMoreContactsDropdown");
+
+    if (dropdown) {
+        dropdown.classList.add("d_none");
+    }
+}
+
+function renderEditContactOptions(selectedContacts, onChange) {
+    const input = document.getElementById("editAssignedInput");
+    const list = document.getElementById("editAssignedList");
+
+    const searchText = input.value.trim().toLowerCase();
+
+    const filteredContacts = contacts.filter(contact =>
+        contact.name.toLowerCase().includes(searchText)
+    );
+
+    list.innerHTML = filteredContacts
+        .map(contact => createContactOptionTemplate(contact, selectedContacts))
+        .join("");
+
+    registerContactOptionEvents(selectedContacts, onChange);
+}
+
+function registerContactOptionEvents(selectedContacts, onChange) {
+    document
+        .querySelectorAll("#editAssignedList .contactOption")
+        .forEach(option => {
+
+            option.addEventListener("click", event => {
+                event.stopPropagation();
+
+                toggleSelectedContact(
+                    option.dataset.contactId,
+                    selectedContacts
+                );
+
+                document.getElementById("editAssignedInput").value = "";
+
+                renderEditAssignedContacts(selectedContacts);
+                renderEditContactOptions(
+                    selectedContacts,
+                    onChange
+                );
+
+                onChange(selectedContacts);
             });
 
         });
 }
 
-function initEditAssignedContacts(selectedEditContacts, onChange) {
-  const editAssignedInput = document.getElementById("editAssignedInput");
-  const editAssignedList = document.getElementById("editAssignedList");
-
-  renderEditAssignedContacts(selectedEditContacts);
-
-  editAssignedInput.addEventListener("focus", () => {
-    editAssignedList.classList.remove("d_none");
-    renderEditContactOptions(selectedEditContacts, onChange);
-  });
-
-  editAssignedInput.addEventListener("input", () => {
-    renderEditContactOptions(selectedEditContacts, onChange);
-  });
-
-  document.addEventListener("click", (event) => {
-  const clickedInsideDropdown = event.target.closest("#editAssignedDropdown");
-  const clickedInsideSelectedContacts = event.target.closest(
-    ".selectedContactsWrapper",
-  );
-
-  if (!clickedInsideDropdown) {
-    editAssignedList.classList.add("d_none");
-  }
-
-  if (!clickedInsideSelectedContacts) {
-    const editMoreContactsDropdown = document.getElementById(
-      "editMoreContactsDropdown",
+function toggleSelectedContact(contactId, selectedContacts) {
+    const index = selectedContacts.findIndex(
+        item => item.id === contactId
     );
 
-    if (editMoreContactsDropdown) {
-      editMoreContactsDropdown.classList.add("d_none");
+    if (index !== -1) {
+        selectedContacts.splice(index, 1);
+        return;
     }
-  }
-});
-}
 
-function renderEditContactOptions(selectedEditContacts, onChange) {
-  const editAssignedInput = document.getElementById("editAssignedInput");
-  const editAssignedList = document.getElementById("editAssignedList");
-
-  editAssignedList.innerHTML = "";
-
-  const searchText = editAssignedInput.value.trim().toLowerCase();
-
-  const filteredContacts = contacts.filter((contact) => {
-    return contact.name.toLowerCase().includes(searchText);
-  });
-
-  filteredContacts.forEach((contact, index) => {
-    const isSelected = selectedEditContacts.some(
-      (item) => item.id === contact.id,
+    const contact = contacts.find(
+        item => item.id === contactId
     );
 
-    editAssignedList.innerHTML += `
-    <div class="contactOption ${isSelected ? "selectedContactOption" : ""}" data-contact-id="${contact.id}">
-
-        <div 
-            class="contactAvatar"
-            style="background:${contact.color}">
-            
-            ${contact.initials || getInitials(contact.name)}
-
-        </div>
-
-        <span>${contact.name}</span>
-
-        <input
-            class="contactCheckbox"
-            type="checkbox"
-            ${isSelected ? "checked" : ""}
-        >
-
-    </div>
-`;
-  });
-
-  document
-    .querySelectorAll("#editAssignedList .contactOption")
-    .forEach((option) => {
-        option.addEventListener("click", (event) => {
-            event.stopPropagation();
-
-            const contactId = option.dataset.contactId;
-
-            const contact = contacts.find(
-                (item) => item.id === contactId
-            );
-
-            if (!contact) return;
-
-            const isSelected = selectedEditContacts.some(
-                (item) => item.id === contactId
-            );
-
-            if (isSelected) {
-
-                const index = selectedEditContacts.findIndex(
-                    (item) => item.id === contactId
-                );
-
-                if (index !== -1) {
-                    selectedEditContacts.splice(index, 1);
-                }
-
-            } else {
-
-                selectedEditContacts.push(contact);
-
-            }
-
-            editAssignedInput.value = "";
-            renderEditAssignedContacts(
-                selectedEditContacts
-            );
-            renderEditContactOptions(
-                selectedEditContacts,
-                onChange
-            );
-            onChange(
-                selectedEditContacts
-            );
-        });
-    });
+    if (contact) {
+        selectedContacts.push(contact);
+    }
 }
 
 function initEditSubtasks(editSubtasks, onChange) {
+    const elements = getEditSubtaskElements();
 
-    const editSubtaskInput =
-        document.getElementById("editSubtaskInput");
+    if (!elements) return;
 
-    const editAddSubtaskBtn =
-        document.getElementById("editAddSubtaskBtn");
+    renderEditSubtasks(editSubtasks, onChange);
 
-    const editClearSubtaskBtn =
-        document.getElementById("editClearSubtaskBtn");
-
-    if (
-        !editSubtaskInput ||
-        !editAddSubtaskBtn ||
-        !editClearSubtaskBtn
-    ) return;
-
-    renderEditSubtasks(
+    registerEditSubtaskEvents(
+        elements,
         editSubtasks,
         onChange
     );
+}
 
-    editSubtaskInput.addEventListener("keydown", (event) => {
+function getEditSubtaskElements() {
+    const input = document.getElementById("editSubtaskInput");
+    const addButton = document.getElementById("editAddSubtaskBtn");
+    const clearButton = document.getElementById("editClearSubtaskBtn");
 
+    if (!input || !addButton || !clearButton) {
+        return null;
+    }
+
+    return {
+        input,
+        addButton,
+        clearButton
+    };
+}
+
+function registerEditSubtaskEvents(
+    { input, addButton, clearButton },
+    editSubtasks,
+    onChange
+) {
+    input.addEventListener("keydown", (event) => {
         if (event.key !== "Enter") return;
 
         event.preventDefault();
@@ -375,20 +389,18 @@ function initEditSubtasks(editSubtasks, onChange) {
         );
     });
 
-    editAddSubtaskBtn.addEventListener("click", () => {
 
+    addButton.addEventListener("click", () => {
         addEditSubtask(
             editSubtasks,
             onChange
         );
     });
 
-    editClearSubtaskBtn.addEventListener("click", () => {
 
-        editSubtaskInput.value = "";
-
-        editSubtaskInput.focus();
-
+    clearButton.addEventListener("click", () => {
+        input.value = "";
+        input.focus();
     });
 }
 
@@ -410,10 +422,7 @@ function addEditSubtask(editSubtasks, onChange) {
 
     editSubtaskInput.value = "";
 
-    renderEditSubtasks(
-        editSubtasks,
-        onChange
-    );
+    renderEditSubtasks(editSubtasks,onChange);
 
     onChange(editSubtasks);
 }
@@ -423,48 +432,18 @@ function renderEditSubtasks(editSubtasks, onChange) {
     const editSubtaskList =
         document.getElementById("editSubtaskList");
 
-
     if (!editSubtaskList) return;
 
 
-    editSubtaskList.innerHTML = "";
+    editSubtaskList.innerHTML = editSubtasks
+        .map((subtask, index) => {
+            return editSubtaskTemplate(
+                subtask,
+                index
+            );
+        })
+        .join("");
 
-
-    editSubtasks.forEach((subtask, index) => {
-
-        editSubtaskList.innerHTML += `
-
-            <li class="subtaskItem editSubtaskItem">
-
-                <span class="subtaskText">
-                    • ${subtask.title}
-                </span>
-
-                <div class="subtaskItemActions">
-                    <button
-                        type="button"
-                        class="editSubtaskBtn"
-                        data-index="${index}">
-
-                        <img
-                            src="./assets/img/Subtasks change.svg"
-                            alt="Edit subtask">
-                    </button>
-
-                    <button
-                        type="button"
-                        class="deleteSubtaskBtn"
-                        data-index="${index}">
-
-                        <img
-                            src="./assets/img/SubTask delete.svg"
-                            alt="Delete subtask">
-
-                    </button>
-                </div>
-            </li>
-        `;
-    });
 
     initEditSubtaskButtons(
         editSubtasks,
@@ -474,56 +453,83 @@ function renderEditSubtasks(editSubtasks, onChange) {
 
 function initEditSubtaskButtons(editSubtasks, onChange) {
 
-    document
-        .querySelectorAll("#editSubtaskList .deleteSubtaskBtn")
-        .forEach((button) => {
+    const editSubtaskList =
+        document.getElementById("editSubtaskList");
 
-            button.addEventListener("click", () => {
+    if (!editSubtaskList) return;
 
-                const index = Number(button.dataset.index);
 
-                editSubtasks.splice(index, 1);
+    editSubtaskList.addEventListener("click", (event) => {
+        const deleteButton = event.target.closest(".deleteSubtaskBtn");
 
-                renderEditSubtasks(
-                    editSubtasks,
-                    onChange
-                );
+        const editButton = event.target.closest(".editSubtaskBtn");
 
-                onChange(editSubtasks);
-            });
-        });
+        if (deleteButton) {
+            handleDeleteSubtask(
+                deleteButton,
+                editSubtasks,
+                onChange
+            );
+        }
 
-    document
-        .querySelectorAll("#editSubtaskList .editSubtaskBtn")
-        .forEach((button) => {
+        if (editButton) {
+            handleEditSubtask(
+                editButton,
+                editSubtasks,
+                onChange
+            );
+        }
+    });
+}
 
-            button.addEventListener("click", () => {
+function handleDeleteSubtask(button, editSubtasks, onChange) {
 
-                const index = Number(button.dataset.index);
+    const index = Number(button.dataset.index);
 
-                const subtask =
-                    editSubtasks[index];
+    editSubtasks.splice(index, 1);
 
-                const editSubtaskInput =
-                    document.getElementById("editSubtaskInput");
 
-                if (!subtask || !editSubtaskInput) return;
+    renderEditSubtasks(
+        editSubtasks,
+        onChange
+    );
 
-                editSubtaskInput.value =
-                    subtask.title;
 
-                editSubtasks.splice(index, 1);
+    onChange(editSubtasks);
+}
 
-                renderEditSubtasks(
-                    editSubtasks,
-                    onChange
-                );
 
-                onChange(editSubtasks);
-                editSubtaskInput.focus();
+function handleEditSubtask(button, editSubtasks, onChange) {
 
-            });
-        });
+    const index = Number(button.dataset.index);
+
+    const subtask =
+        editSubtasks[index];
+
+
+    const input =
+        document.getElementById("editSubtaskInput");
+
+
+    if (!subtask || !input) return;
+
+
+    input.value = subtask.title;
+
+
+    editSubtasks.splice(index, 1);
+
+
+    renderEditSubtasks(
+        editSubtasks,
+        onChange
+    );
+
+
+    onChange(editSubtasks);
+
+
+    input.focus();
 }
 
 function renderEditAssignedContacts(selectedEditContacts) {

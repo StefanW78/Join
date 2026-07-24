@@ -448,3 +448,67 @@ function moveOptionTemplate(index, taskId, status, statusName) {
         </div>
     `;
 }
+
+function createContactOptionTemplate(contact, selectedContacts) {
+    const isSelected = selectedContacts.some(
+        item => item.id === contact.id
+    );
+
+    return `
+        <div class="contactOption ${isSelected ? "selectedContactOption" : ""}" 
+             data-contact-id="${contact.id}">
+
+            <div class="contactAvatar" style="background:${contact.color}">
+                ${contact.initials || getInitials(contact.name)}
+            </div>
+
+            <span>${contact.name}</span>
+
+            <input
+                class="contactCheckbox"
+                type="checkbox"
+                ${isSelected ? "checked" : ""}
+            >
+
+        </div>
+    `;
+}
+
+function editSubtaskTemplate(subtask, index) {
+    return `
+        <li class="subtaskItem editSubtaskItem">
+
+            <span class="subtaskText">
+                • ${subtask.title}
+            </span>
+
+            <div class="subtaskItemActions">
+
+                <button
+                    type="button"
+                    class="editSubtaskBtn"
+                    data-index="${index}">
+
+                    <img
+                        src="./assets/img/Subtasks change.svg"
+                        alt="Edit subtask">
+
+                </button>
+
+
+                <button
+                    type="button"
+                    class="deleteSubtaskBtn"
+                    data-index="${index}">
+
+                    <img
+                        src="./assets/img/SubTask delete.svg"
+                        alt="Delete subtask">
+
+                </button>
+
+            </div>
+
+        </li>
+    `;
+}
