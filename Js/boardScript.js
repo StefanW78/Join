@@ -172,28 +172,33 @@ function toggleMoveMenu(button) {
 
     if (wasOpen) return;
 
+    openMoveMenu(card, menu);
+}
+
+function openMoveMenu(card, menu) {
     const currentStatus = card.closest(".column").dataset.status;
     const taskId = card.dataset.id;
 
     renderMoveMenu(menu, currentStatus, taskId);
-
     menu.classList.remove("d_none");
 
+    scrollMenuIntoView(card, menu);
+}
+
+function scrollMenuIntoView(card, menu) {
     requestAnimationFrame(() => {
+        const taskList = card.closest(".task-list");
 
-    const taskList = card.closest(".task-list");
+        const menuRect = menu.getBoundingClientRect();
+        const listRect = taskList.getBoundingClientRect();
 
-    const menuRect = menu.getBoundingClientRect();
-    const listRect = taskList.getBoundingClientRect();
-
-    if (menuRect.right > listRect.right) {
-        taskList.scrollBy({
-            left: menuRect.right - listRect.right + 20,
-            behavior: "smooth"
-        });
-    }
-
-});
+        if (menuRect.right > listRect.right) {
+            taskList.scrollBy({
+                left: menuRect.right - listRect.right + 20,
+                behavior: "smooth"
+            });
+        }
+    });
 }
 
 async function moveTask(taskId, newStatus) {
@@ -328,26 +333,31 @@ document.addEventListener("click", (event) => {
     moveTask(taskId, status);
 });
 
+document.addEventListener("change", handleSubtaskChange);
 
-//für die checkboxen
-document.addEventListener("change", async (event) => {
+async function handleSubtaskChange(event) {
     const checkbox = event.target.closest(".subtask-checkbox");
     if (!checkbox) return;
 
-    const taskId = checkbox.dataset.taskId;
-    const subIndex = checkbox.dataset.index;
-    const task = tasks.find(t => t.id === taskId);
+    const task = tasks.find(task => task.id === checkbox.dataset.taskId);
     if (!task) return;
 
-    task.subtasks[subIndex].done = checkbox.checked;
+    task.subtasks[checkbox.dataset.index].done = checkbox.checked;
 
+    refreshTask(task.id);
+    await saveSubtasks(task);
+}
+
+function refreshTask(taskId) {
     renderTasks();
     renderCardOverlay(taskId);
+}
 
-    await updateData("tasks", taskId, {
-        subtasks: task.subtasks
+async function saveSubtasks(task) {
+    await updateData("tasks", task.id, {
+        subtasks: task.subtasks,
     });
-});
+}
 
 async function deleteCard(taskId) {
     const oldTasks = [...tasks];
@@ -368,7 +378,6 @@ async function deleteCard(taskId) {
 }
 
 function showContextMessage(message) {
-
     const box = document.getElementById("contextMessage");
     const text = document.getElementById("contextMessageText");
 

@@ -40,43 +40,61 @@ function setupDragEnd(board, getCard, setCard) {
 }
 
 function setupDropZones(columns, getCard) {
-
     columns.forEach(column => {
-
         const taskList = column.querySelector(".task-list");
 
         let dragCounter = 0;
 
         column.addEventListener("dragenter", () => {
-            dragCounter++;
-            column.classList.add("is-drag-over");
+            dragCounter = handleDragEnter(column, dragCounter);
         });
 
         column.addEventListener("dragleave", () => {
-            dragCounter--;
-            if (dragCounter === 0) {
-                column.classList.remove("is-drag-over");
-            }
+            dragCounter = handleDragLeave(column, dragCounter);
         });
 
-        column.addEventListener("dragover", (e) => {
-            e.preventDefault();
-
-            const card = getCard();
-            if (!card) return;
-
-            moveCard(taskList, card, e);
+        column.addEventListener("dragover", (event) => {
+            handleDragOver(event, taskList, getCard);
         });
 
-        column.addEventListener("drop", (e) => {
-            dragCounter = 0; 
-            column.classList.remove("is-drag-over");
-
-            handleDrop(e, column, getCard);
+        column.addEventListener("drop", (event) => {
+            dragCounter = handleDropZone(event, column, getCard);
         });
-
     });
 }
+
+function handleDragEnter(column, dragCounter) {
+    dragCounter++;
+    column.classList.add("is-drag-over");
+    return dragCounter;
+}
+
+function handleDragLeave(column, dragCounter) {
+    dragCounter--;
+
+    if (dragCounter === 0) {
+        column.classList.remove("is-drag-over");
+    }
+
+    return dragCounter;
+}
+
+function handleDragOver(event, taskList, getCard) {
+    event.preventDefault();
+
+    const card = getCard();
+    if (!card) return;
+
+    moveCard(taskList, card, event);
+}
+
+function handleDropZone(event, column, getCard) {
+    column.classList.remove("is-drag-over");
+    handleDrop(event, column, getCard);
+    return 0;
+}
+
+//Test
 
 function moveCard(taskList, card, e) {
 
