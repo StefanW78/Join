@@ -3,7 +3,7 @@ const closeAddTaskOverlayBtn = document.getElementById("closeAddTaskOverlay");
 const openAddTaskButtons = document.querySelectorAll(".openAddTaskBtn");
 
 openAddTaskButtons.forEach((button) => {
-  button.addEventListener("click", handleAddTask);
+  button.addEventListener("click", openAddTaskOverlay);
 });
 
 closeAddTaskOverlayBtn.addEventListener("click", closeAddTaskOverlay);
@@ -28,12 +28,4 @@ function closeAddTaskOverlay() {
   setTimeout(() => {
     addTaskOverlay.classList.add("d_none");
   }, 300);
-}
-
-function handleAddTask() {
-  if (window.innerWidth <= 768) {
-    window.location.href = "addTask.html";
-  } else {
-    openAddTaskOverlay();
-  }
 }
