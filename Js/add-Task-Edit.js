@@ -57,7 +57,7 @@ function registerEditFormSubmit(taskId, state) {
         .addEventListener("submit", (event) => {
             event.preventDefault();
 
-            if (!isTaskFormValid()) return;
+            if (!isEditTaskFormValid()) return;
 
           saveEditedTask(
                 taskId,
