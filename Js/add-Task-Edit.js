@@ -57,7 +57,9 @@ function registerEditFormSubmit(taskId, state) {
         .addEventListener("submit", (event) => {
             event.preventDefault();
 
-            saveEditedTask(
+            if (!isTaskFormValid()) return;
+
+          saveEditedTask(
                 taskId,
                 state.priority,
                 state.contacts,
@@ -559,3 +561,15 @@ function renderEditAssignedContacts(selectedEditContacts) {
         });
 }
 
+// editTaskForm.addEventListener("submit", handleTaskSubmit);
+
+// async function handleTaskSubmit(event) {
+//   event.preventDefault();
+
+//   if (!isTaskFormValid()) return;
+
+//   addCurrentSubtaskInput();
+
+//   const task = createTaskFromForm();
+//   await saveTask(task);
+// }
