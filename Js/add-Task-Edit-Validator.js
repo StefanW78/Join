@@ -1,11 +1,11 @@
 function isEditTaskFormValid() {
     clearEditErrors();
 
-    return (
-        validateEditTaskTitle() &&
-        validateEditTaskDate() &&
-        validateEditTaskCategory()
-    );
+    const isTitleValid = validateEditTaskTitle();
+    const isDateValid = validateEditTaskDate();
+    const isCategoryValid = validateEditTaskCategory();
+
+    return isTitleValid && isDateValid && isCategoryValid;
 }
 
 
@@ -27,14 +27,18 @@ function clearEditErrors() {
 }
 
 function clearInputError(input, errorElement) {
-  input.classList.remove("inputError");
-  errorElement.textContent = "";
+    if (!input || !errorElement) return;
+
+    input.classList.remove("inputError");
+    errorElement.textContent = "";
 }
 
 function setInputError(input, errorElement, message) {
-  input.classList.remove("inputFocus");
-  input.classList.add("inputError");
-  errorElement.textContent = message;
+    if (!input || !errorElement) return;
+
+    input.classList.remove("inputFocus");
+    input.classList.add("inputError");
+    errorElement.textContent = message;
 }
 
 function validateEditTaskTitle() {
@@ -49,51 +53,6 @@ function validateEditTaskTitle() {
     return false;
 }
 
-
-function validateEditTaskDate() {
-    const input = document.getElementById("editTaskDate");
-    const error = document.getElementById("editTaskDateError");
-
-    clearInputError(input, error);
-
-    const dateValue = input.value.trim();
-
-    if (!dateValue) {
-        setInputError(input, error, "This field is required");
-        return false;
-    }
-
-    if (!isValidDateFormat(dateValue)) {
-        setInputError(input, error, "Please use the format dd/mm/yyyy");
-        return false;
-    }
-
-    const selectedDate = parseDateFromInput(dateValue);
-    const today = new Date();
-
-    today.setHours(0, 0, 0, 0);
-    selectedDate.setHours(0, 0, 0, 0);
-
-    if (selectedDate < today) {
-        setInputError(
-            input,
-            error,
-            "The due date cannot be in the past."
-        );
-        return false;
-    }
-
-    return true;
-}
-
-
-function parseDateFromInput(dateValue) {
-  const [day, month, year] = dateValue.split("/");
-
-  return new Date(Number(year), Number(month) - 1, Number(day));
-}
-
-
 function validateEditTaskCategory() {
     const select = document.getElementById("editTaskCategory");
     const error = document.getElementById("editTaskCategoryError");
@@ -105,3 +64,93 @@ function validateEditTaskCategory() {
     setInputError(select, error, "This field is required");
     return false;
 }
+
+function validateEditTaskDate() {
+    const input = document.getElementById("editTaskDate");
+    const error = document.getElementById("editTaskDateError");
+
+    clearInputError(input, error);
+
+    const dateValue = input.value.trim();
+
+    if (!dateValue) {
+        setInputError(
+            input,
+            error,
+            "This field is required"
+        );
+        return false;
+    }
+
+
+    if (!isValidDateFormat(dateValue)) {
+        setInputError(
+            input,
+            error,
+            "Please use the format dd/mm/yyyy"
+        );
+        return false;
+    }
+
+
+    const selectedDate = parseDateFromInput(dateValue);
+
+    const today = new Date();
+
+    today.setHours(0, 0, 0, 0);
+    selectedDate.setHours(0, 0, 0, 0);
+
+
+    if (selectedDate < today) {
+        setInputError(
+            input,
+            error,
+            "The due date cannot be in the past."
+        );
+        return false;
+    }
+
+
+    return true;
+}
+
+
+
+function isValidDateFormat(dateValue) {
+
+    const dateRegex =
+        /^(0[1-9]|[12]\d|3[01])\/(0[1-9]|1[0-2])\/\d{4}$/;
+
+
+    if (!dateRegex.test(dateValue)) {
+        return false;
+    }
+
+
+    const selectedDate = parseDateFromInput(dateValue);
+
+
+    const [day, month, year] = dateValue.split("/");
+
+
+    return (
+        selectedDate.getDate() === Number(day) &&
+        selectedDate.getMonth() === Number(month) - 1 &&
+        selectedDate.getFullYear() === Number(year)
+    );
+}
+
+
+
+function parseDateFromInput(dateValue) {
+
+    const [day, month, year] = dateValue.split("/");
+
+
+    return new Date(
+        Number(year),
+        Number(month) - 1,
+        Number(day)
+    );
+}
+
