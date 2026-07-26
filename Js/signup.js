@@ -19,52 +19,38 @@ signupForm.addEventListener("submit", async (event) => {
 
   clearAllErrors();
 
-  if (!validateUsername()) {
-  return;
-}
+  const isNameValid = validateUsername();
+  const isEmailValid = validateEmail();
+  const isPasswordValid = validatePassword();
+  const isConfirmPasswordValid = validateConfirmPassword();
+  const isPrivacyValid = validatePrivacy();
+
+  if (
+    !isNameValid ||
+    !isEmailValid ||
+    !isPasswordValid ||
+    !isConfirmPasswordValid ||
+    !isPrivacyValid
+  ) {
+    return;
+  }
 
   const name = signupName.value.trim();
   const email = signupEmail.value.trim();
   const password = signupPassword.value.trim();
-  const confirmPassword = signupConfirmPassword.value.trim();
-
-  if (!isValidEmail(email)) {
-    setInputError(signupEmail, emailError, "Please enter a valid email.");
-    return;
-  }
-
-  if (password.length < 6) {
-    setInputError(
-      signupPassword,
-      passwordError,
-      "Password must be at least 6 characters."
-    );
-    return;
-  }
-
-  if (password !== confirmPassword) {
-    setInputError(
-      signupConfirmPassword,
-      confirmPasswordError,
-      "Passwords do not match."
-    );
-    return;
-  }
-
-  if (!signupPrivacy.checked) {
-    signupError.textContent = "Please accept Privacy Policy.";
-    return;
-  }
 
   try {
     const users = (await loadData("users")) || {};
-    const userExists = Object.values(users).some((user) => user.email === email);
+
+    const userExists = Object.values(users).some((user) => {
+      return user.email === email;
+    });
 
     if (userExists) {
       setInputError(
         signupEmail,
         emailError,
-        "This email address is already in use."
+        "This email address is already in use.",
       );
       return;
     }
@@ -89,11 +75,10 @@ signupForm.addEventListener("submit", async (event) => {
     }, 1000);
   } catch (error) {
     console.error(error);
-    signupError.textContent = "Something went wrong. Registration failed.";
+    signupError.textContent =
+      "Something went wrong. Registration failed.";
   }
 });
-
-signupName.addEventListener("blur", validateUsername);
 
 function validateUsername() {
   const name = signupName.value.trim();
@@ -113,6 +98,77 @@ function validateUsername() {
   return true;
 }
 
+function validateEmail() {
+  const email = signupEmail.value.trim();
+
+  clearInputError(signupEmail, emailError);
+
+  if (!isValidEmail(email)) {
+    setInputError(
+      signupEmail,
+      emailError,
+      "Please enter a valid email.",
+    );
+    return false;
+  }
+
+  return true;
+}
+
+function validatePassword() {
+  const password = signupPassword.value.trim();
+
+  clearInputError(signupPassword, passwordError);
+
+  if (password.length < 6) {
+    setInputError(
+      signupPassword,
+      passwordError,
+      "Password must be at least 6 characters.",
+    );
+    return false;
+  }
+
+  return true;
+}
+
+function validateConfirmPassword() {
+  const password = signupPassword.value.trim();
+  const confirmPassword = signupConfirmPassword.value.trim();
+
+  clearInputError(signupConfirmPassword, confirmPasswordError);
+
+  if (!confirmPassword) {
+    setInputError(
+      signupConfirmPassword,
+      confirmPasswordError,
+      "Please confirm your password.",
+    );
+    return false;
+  }
+
+  if (password !== confirmPassword) {
+    setInputError(
+      signupConfirmPassword,
+      confirmPasswordError,
+      "Passwords do not match.",
+    );
+    return false;
+  }
+
+  return true;
+}
+
+signupName.addEventListener("blur", validateUsername);
+signupEmail.addEventListener("blur", validateEmail);
+signupPassword.addEventListener("blur", validatePassword);
+signupConfirmPassword.addEventListener(
+  "blur",
+  validateConfirmPassword,
+);
+
+signupPrivacy.addEventListener("change", validatePrivacy);
+
 signupName.addEventListener("input", () => {
   clearInputError(signupName, nameError);
 });
@@ -123,10 +179,17 @@ signupEmail.addEventListener("input", () => {
 
 signupPassword.addEventListener("input", () => {
   clearInputError(signupPassword, passwordError);
+
+  if (signupConfirmPassword.value) {
+    validateConfirmPassword();
+  }
 });
 
 signupConfirmPassword.addEventListener("input", () => {
-  clearInputError(signupConfirmPassword, confirmPasswordError);
+  clearInputError(
+    signupConfirmPassword,
+    confirmPasswordError,
+  );
 });
 
 function setInputError(input, errorElement, message) {
@@ -184,4 +247,17 @@ function getAvatarColor(index) {
   ];
 
   return colors[index % colors.length];
+}
+
+signupPrivacy.addEventListener("change", validatePrivacy);
+
+function validatePrivacy() {
+  signupError.textContent = "";
+
+  if (!signupPrivacy.checked) {
+    signupError.textContent = "Please accept Privacy Policy.";
+    return false;
+  }
+
+  return true;
 }

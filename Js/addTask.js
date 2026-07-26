@@ -34,12 +34,14 @@ let selectedCategory = "";
 let contacts = [];
 let selectedContacts = [];
 let subtasks = [];
+let categoryWasTouched = false;
 
 initPriorityButtons();
 initCategoryDropdown();
 initAssignedDropdown();
 initSubtasks();
 loadContacts();
+initAddTaskBlurValidation();
 
 clearTaskBtn.addEventListener("click", () => {
   resetFormState();
@@ -129,14 +131,20 @@ function isTaskFormValid() {
 }
 
 function validateTaskTitle() {
-  if (taskTitle.value.trim()) return true;
+  if (taskTitle.value.trim()) {
+    clearInputError(taskTitle, taskTitleError);
+    return true;
+  }
 
   setInputError(taskTitle, taskTitleError, "This field is required");
   return false;
 }
 
 function validateTaskCategory() {
-  if (selectedCategory) return true;
+  if (selectedCategory) {
+    clearInputError(categoryButton, categoryError);
+    return true;
+  }
 
   setInputError(categoryButton, categoryError, "This field is required");
   return false;
@@ -712,4 +720,17 @@ function showTaskAddedOverlay() {
   setTimeout(() => {
     taskAddedOverlay.classList.add("d_none");
   }, 1500);
+}
+
+function initAddTaskBlurValidation() {
+  taskTitle.addEventListener("blur", validateTaskTitle);
+  taskDate.addEventListener("blur", validateTaskDate);
+
+  document.addEventListener("click", (event) => {
+    const clickedInsideCategory = event.target.closest("#categoryDropdown");
+
+    if (categoryWasTouched && !clickedInsideCategory) {
+      validateTaskCategory();
+    }
+  });
 }

@@ -240,6 +240,9 @@ body {
   border: 1px solid #2a3647;
   background-color: transparent;
   color: #2a3647;
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
 }
 
 .createTaskBtn {
@@ -247,6 +250,9 @@ body {
   background-color: #2a3647;
   color: white;
   font-weight: 700;
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
 }
 
 .customDropdown {
@@ -325,7 +331,6 @@ body {
   font-size: 16px;
   margin-bottom: 6px;
 }
-
 
 .activeUrgent {
   background: #ff3d00;

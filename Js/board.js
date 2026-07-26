@@ -700,19 +700,38 @@ function initEditValidationEvents() {
   const editTaskDate = document.getElementById("editTaskDate");
   const editTaskCategory = document.getElementById("editTaskCategory");
 
+  const editTaskTitleError =
+    document.getElementById("editTaskTitleError");
+
+  const editTaskDateError =
+    document.getElementById("editTaskDateError");
+
+  const editTaskCategoryError =
+    document.getElementById("editTaskCategoryError");
+
   editTaskTitle.addEventListener("input", () => {
-    clearEditInputError(editTaskTitle, document.getElementById("editTaskTitleError"));
+    clearEditInputError(editTaskTitle, editTaskTitleError);
+  });
+
+  editTaskTitle.addEventListener("blur", () => {
+    validateEditTaskTitle();
   });
 
   editTaskDate.addEventListener("input", () => {
-    clearEditInputError(editTaskDate, document.getElementById("editTaskDateError"));
+    clearEditInputError(editTaskDate, editTaskDateError);
+  });
+
+  editTaskDate.addEventListener("blur", () => {
+    validateEditTaskDate();
   });
 
   editTaskCategory.addEventListener("change", () => {
-    clearEditInputError(
-      editTaskCategory,
-      document.getElementById("editTaskCategoryError"),
-    );
+    clearEditInputError(editTaskCategory, editTaskCategoryError);
+    validateEditTaskCategory();
+  });
+
+  editTaskCategory.addEventListener("blur", () => {
+    validateEditTaskCategory();
   });
 }
 
@@ -769,12 +788,15 @@ function isEditTaskFormValid() {
 }
 
 function validateEditTaskTitle() {
-  const editTaskTitle = document.getElementById("editTaskTitle");
-  const editTaskTitleError = document.getElementById("editTaskTitleError");
+  const input = document.getElementById("editTaskTitle");
+  const error = document.getElementById("editTaskTitleError");
 
-  if (editTaskTitle.value.trim()) return true;
+  if (input.value.trim()) {
+    clearEditInputError(input, error);
+    return true;
+  }
 
-  setEditInputError(editTaskTitle, editTaskTitleError, "This field is required");
+  setEditInputError(input, error, "This field is required");
   return false;
 }
 
