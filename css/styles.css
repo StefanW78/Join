@@ -28,6 +28,33 @@
   flex: 1 0 50%;
 }
 
+.board-page .header-and-content-div {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+}
+
+.board-page .header-div {
+  width: 100%;
+  height: 96px;
+  padding: 20px 80px;
+  background-color: #ffffff;
+  box-shadow: 0 4px 4px rgba(0, 0, 0, 0.1);
+
+  display: flex;
+  align-items: center;
+}
+
+.board-page .header-content {
+  width: 100%;
+  max-width: 1280px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  position: relative;
+}
+
 .search-box {
   display: flex;
   align-items: center;
