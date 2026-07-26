@@ -1,21 +1,55 @@
-.d_none {
-  display: none !important;
+html,
+body {
+  width: 100%;
+  height: 100%;
 }
 
-.hidden-on-desktop {
-  display: none !important;
+.add-task-page {
+  background-color: #f6f7f8;
+  overflow: hidden;
+}
+
+.add-task-page .body-div {
+  width: 100%;
+  height: 100vh;
+  height: 100dvh;
+  min-height: 0;
+  display: flex;
+  overflow: hidden;
+}
+
+.add-task-page .sidebar-wraper {
+  width: 100%;
+  height: 100%;
+  min-height: 0;
+  display: flex;
+  overflow: hidden;
+}
+
+.add-task-page .sidebar {
+  width: 230px;
+  height: 100%;
+  min-height: 0;
+  flex-shrink: 0;
+  overflow: hidden;
+  overflow-y: auto;
 }
 
 .add-task-page .header-and-content-div {
   flex: 1;
   min-width: 0;
+  min-height: 0;
+  height: 100%;
   display: flex;
   flex-direction: column;
+  overflow: hidden;
 }
 
 .add-task-page .header-div {
   width: 100%;
   height: 96px;
+  min-height: 96px;
+  flex-shrink: 0;
   padding: 20px 80px;
   background-color: #ffffff;
   box-shadow: 0 4px 4px rgba(0, 0, 0, 0.1);
@@ -33,27 +67,43 @@
   position: relative;
 }
 
-body {
-  background-color: #f6f7f8;
-}
-
-.body-div {
-  min-height: 100vh;
-  min-height: 100dvh;
-  display: flex;
-}
-
-.main-container {
+.add-task-page .main-container {
   width: 100%;
-  padding: 75px 80px 50px 75px;
+  flex: 1;
+  min-height: 0;
+  padding: 75px 50px 50px 75px;
+
   display: flex;
   flex-direction: column;
-  max-width: 1440px;
+  justify-content: flex-start;
+  align-items: flex-start;
+  gap: 28px;
+
+  overflow-y: auto;
+  overflow-x: hidden;
+}
+
+.d_none {
+  display: none !important;
+}
+
+.hidden-on-desktop {
+  display: none !important;
+}
+
+.add-task-page .header-content {
+  width: 100%;
+  max-width: 1280px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  position: relative;
 }
 
 .addTaskContent {
   width: 100%;
   max-width: 1440px;
+  flex: 1;
 }
 
 .addTaskTitle {
@@ -81,6 +131,7 @@ body {
   display: flex;
   flex-direction: column;
   gap: 24px;
+  width: 100%;
 }
 
 .formDivider {
@@ -775,3 +826,4 @@ body {
   transform: translateY(0);
   opacity: 1;
 }
+

@@ -125,12 +125,9 @@ function getEditTaskTemplate(task) {
         </div>
 
         <div class="editTaskActions">
-          <button type="button" class="clearBtn" id="cancelEditTaskBtn">
-            Cancel ✕
-          </button>
-
+          <button type="button" class="clearBtn" id="cancelEditTaskBtn">Cancel <img src="/assets/img/Subtasks cancel.svg" alt="clear Task Button"></button>
           <button type="submit" class="createTaskBtn">
-            Ok ✓
+            Ok <img src="/assets/img/create-contact-check.svg" alt="accept Task Button">
           </button>
         </div>
       </form>
