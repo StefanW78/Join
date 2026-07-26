@@ -32,7 +32,7 @@ async function renderSummary() {
   const totalDone = todos.filter(t => t.status === "done").length;
   const totalTodo = todos.filter(t => t.status === "todo").length;
   const totalInProgress = todos.filter(t => t.status === "inProgress").length;
-  const totalFeedback = todos.filter(t => t.status === "feedback").length;
+  const totalFeedback = todos.filter(t => t.status === "awaitFeedback").length;
   const totalUrgent = todos.filter(t => t.priority === "urgent").length;
   const nextDeadline = getUpcomingDeadline(todos);
 
