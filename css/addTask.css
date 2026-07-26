@@ -554,6 +554,10 @@ body {
 }
 
 .subtaskInputWrapper input {
+  padding-right: 16px;
+}
+
+.subtaskInputWrapper:focus-within input {
   padding-right: 96px;
 }
 
@@ -562,9 +566,14 @@ body {
   right: 12px;
   top: 50%;
   transform: translateY(-50%);
-  display: flex;
+
+  display: none;
   align-items: center;
   gap: 8px;
+}
+
+.subtaskInputWrapper:focus-within .subtaskActions {
+  display: flex;
 }
 
 .subtaskActions button {
