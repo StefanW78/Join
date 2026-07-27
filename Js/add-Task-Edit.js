@@ -41,6 +41,8 @@ async function initEditTaskForm(task) {
     });
 
     registerEditFormSubmit(task.id, state);
+
+    initEditValidationEvents();
 }
 
 function createEditTaskState(task) {

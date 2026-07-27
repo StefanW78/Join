@@ -154,3 +154,43 @@ function parseDateFromInput(dateValue) {
     );
 }
 
+function initEditValidationEvents() {
+  const editTaskTitle = document.getElementById("editTaskTitle");
+  const editTaskDate = document.getElementById("editTaskDate");
+  const editTaskCategory = document.getElementById("editTaskCategory");
+
+  const editTaskTitleError =
+    document.getElementById("editTaskTitleError");
+
+  const editTaskDateError =
+    document.getElementById("editTaskDateError");
+
+  const editTaskCategoryError =
+    document.getElementById("editTaskCategoryError");
+
+  editTaskTitle.addEventListener("input", () => {
+    clearInputError(editTaskTitle, editTaskTitleError);
+  });
+
+  editTaskTitle.addEventListener("blur", () => {
+    validateEditTaskTitle();
+  });
+
+  editTaskDate.addEventListener("input", () => {
+    clearInputError(editTaskDate, editTaskDateError);
+  });
+
+  editTaskDate.addEventListener("blur", () => {
+    validateEditTaskDate();
+  });
+
+  editTaskCategory.addEventListener("change", () => {
+    clearInputError(editTaskCategory, editTaskCategoryError);
+    validateEditTaskCategory();
+  });
+
+  editTaskCategory.addEventListener("blur", () => {
+    validateEditTaskCategory();
+  });
+}
+
