@@ -1,0 +1,45 @@
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body{
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+.test{
+font-family: 'Inter';
+font-style: normal;
+font-weight: 400;
+font-size: 16px;
+line-height: 120%;
+}
+
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+  text-decoration: none;
+}
+
+body {
+  font-family: Arial, Helvetica, sans-serif;
+  background-color: #f6f7f8;
+}
+
+.d_none {
+  display: none !important;
+}
+
+.hidden-on-desktop {
+  display: none !important;
+}
+
+.body-div {
+  min-height: 100dvh;
+  min-height: 100vh;
+  display: flex;
+}

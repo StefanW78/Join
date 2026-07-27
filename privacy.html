@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Join</title>
+    <script type="module" src="./Js/auth-script.js"></script>
+    <link rel="stylesheet" href="./css/standart.css">
+    <link rel="stylesheet" href="./css/privacy.css">
+    <link rel="stylesheet" href="./css/sidebar-and-header-css.css">
+    <link rel="stylesheet" href="./css/sidebar-and-header-responsiv.css">
+    <link rel="stylesheet" href="./css/privacy-responsiv.css">
+    <link rel="shortcut icon" href="#" type="image/x-icon">
+</head>
+<body onload="init()">
+    <div class="body-div">
+        <div class="sidebar-wraper">
+            <div class="sidebar">
+                <div class="sidebar-logo-div">
+                    <img src="./assets/img/join-logo.svg" alt="">
+                </div>
+                <div class="links-and-footer-div">
+                <div class="sidebar-links" id="sidebar-links">
+                  <div class="mobile-view-linkandfooter" id="mobile-view-linkandfooter">
+                    <a id="LogInA_Mobile" class="hide-login-user-mobile" href="./index.html"><svg width="22" height="22" viewBox="0 0 22 22" fill="none" xmlns="http://www.w3.org/2000/svg">
+<mask id="mask0_471260_1315" style="mask-type:alpha" maskUnits="userSpaceOnUse" x="0" y="0" width="26" height="26">
+<rect width="26" height="26" fill="#D9D9D9"/>
+</mask>
+<g mask="url(#mask0_471260_1315)">
+<path d="M10.8667 17.7931C10.6211 17.7931 10.4153 17.7101 10.2492 17.5439C10.0831 17.3778 10 17.172 10 16.9264C10 16.6809 10.0831 16.4751 10.2492 16.3089C10.4153 16.1428 10.6211 16.0598 10.8667 16.0598H16.0667V3.92645H10.8667C10.6211 3.92645 10.4153 3.84339 10.2492 3.67728C10.0831 3.51117 10 3.30534 10 3.05978C10 2.81423 10.0831 2.60839 10.2492 2.44228C10.4153 2.27617 10.6211 2.19312 10.8667 2.19312H16.0667C16.5433 2.19312 16.9514 2.36284 17.2908 2.70228C17.6303 3.04173 17.8 3.44978 17.8 3.92645V16.0598C17.8 16.5364 17.6303 16.9445 17.2908 17.2839C16.9514 17.6234 16.5433 17.7931 16.0667 17.7931H10.8667ZM9.285 10.8598H3.06666C2.82111 10.8598 2.61527 10.7767 2.44916 10.6106C2.28305 10.4445 2.2 10.2387 2.2 9.99312C2.2 9.74756 2.28305 9.54173 2.44916 9.37562C2.61527 9.2095 2.82111 9.12645 3.06666 9.12645H9.285L7.66 7.50145C7.50111 7.34256 7.42166 7.14756 7.42166 6.91645C7.42166 6.68534 7.50111 6.48312 7.66 6.30978C7.81889 6.13645 8.02111 6.04617 8.26666 6.03895C8.51222 6.03173 8.72166 6.11478 8.895 6.28812L11.9933 9.38645C12.1667 9.55978 12.2533 9.762 12.2533 9.99312C12.2533 10.2242 12.1667 10.4264 11.9933 10.5998L8.895 13.6981C8.72166 13.8714 8.51583 13.9545 8.2775 13.9473C8.03916 13.9401 7.83333 13.8498 7.66 13.6764C7.50111 13.5031 7.42527 13.2973 7.4325 13.0589C7.43972 12.8206 7.52278 12.622 7.68166 12.4631L9.285 10.8598Z" fill="#CDCDCD"/>
+</g>
+</svg>
+ Log-in</a>
+ 
+                <footer id="footer-mobile" class="mobile-footer-view">
+                    <a class="current-link" href="./privacy.html">Privacy Policy</a>
+                    <a href="./legalnotes.html">Legal notice</a>
+                </footer>
+                  </div>
+                  
+                        <a id="summaryA" class="" href="./summary.html"><img src="./assets/img/summary-icon.svg" alt="summary-logo"> Summary</a>
+                    
+                        <a id="addTaskA" href="./addTask.html"><img src="./assets/img/addTask-icon.svg" alt="add-task-logo"> Add-Task</a>
+                
+                        <a id="boardA" href="./board.html"><img src="./assets/img/board-icon.svg" alt="board-logo">Board</a>
+
+                        <a id="contactsA" href="./contacts.html"><img src="./assets/img/contacts-icon.svg" alt="contacts-logo"> Contacts</a>
+
+                        <a id="LogInA" class="hide-login-user d_none" href="./index.html"><svg width="22" height="22" viewBox="0 0 22 22" fill="none" xmlns="http://www.w3.org/2000/svg">
+<mask id="mask0_471260_1315" style="mask-type:alpha" maskUnits="userSpaceOnUse" x="0" y="0" width="26" height="26">
+<rect width="26" height="26" fill="#D9D9D9"/>
+</mask>
+<g mask="url(#mask0_471260_1315)">
+<path d="M10.8667 17.7931C10.6211 17.7931 10.4153 17.7101 10.2492 17.5439C10.0831 17.3778 10 17.172 10 16.9264C10 16.6809 10.0831 16.4751 10.2492 16.3089C10.4153 16.1428 10.6211 16.0598 10.8667 16.0598H16.0667V3.92645H10.8667C10.6211 3.92645 10.4153 3.84339 10.2492 3.67728C10.0831 3.51117 10 3.30534 10 3.05978C10 2.81423 10.0831 2.60839 10.2492 2.44228C10.4153 2.27617 10.6211 2.19312 10.8667 2.19312H16.0667C16.5433 2.19312 16.9514 2.36284 17.2908 2.70228C17.6303 3.04173 17.8 3.44978 17.8 3.92645V16.0598C17.8 16.5364 17.6303 16.9445 17.2908 17.2839C16.9514 17.6234 16.5433 17.7931 16.0667 17.7931H10.8667ZM9.285 10.8598H3.06666C2.82111 10.8598 2.61527 10.7767 2.44916 10.6106C2.28305 10.4445 2.2 10.2387 2.2 9.99312C2.2 9.74756 2.28305 9.54173 2.44916 9.37562C2.61527 9.2095 2.82111 9.12645 3.06666 9.12645H9.285L7.66 7.50145C7.50111 7.34256 7.42166 7.14756 7.42166 6.91645C7.42166 6.68534 7.50111 6.48312 7.66 6.30978C7.81889 6.13645 8.02111 6.04617 8.26666 6.03895C8.51222 6.03173 8.72166 6.11478 8.895 6.28812L11.9933 9.38645C12.1667 9.55978 12.2533 9.762 12.2533 9.99312C12.2533 10.2242 12.1667 10.4264 11.9933 10.5998L8.895 13.6981C8.72166 13.8714 8.51583 13.9545 8.2775 13.9473C8.03916 13.9401 7.83333 13.8498 7.66 13.6764C7.50111 13.5031 7.42527 13.2973 7.4325 13.0589C7.43972 12.8206 7.52278 12.622 7.68166 12.4631L9.285 10.8598Z" fill="#CDCDCD"/>
+</g>
+</svg>
+ Log-in</a>
+                    
+                </div>
+                <footer id="footer">
+                    <a class="current-link" href="./privacy.html">Privacy Policy</a>
+                    <a href="./legalnotes.html">Legal notice</a>
+                </footer>
+                </div>
+            </div>
+            <div class="header-and-content-div">
+                <div class="header-div">
+                    <div class="header-content">
+                        <div class="header-img">
+                            <img src="./assets/img/Logo_for_Favicon_construction.png" alt="header-logo">
+                        </div>
+                        <div class="header-title">
+                            Kanban Project Management Tool
+                        </div>
+                        <div class="user-header" id="user-header">
+                            <a class="help" href="./help.html"><img src="./assets/img/help.svg" alt="help-logo"></a>
+                            <div class="user-icon">
+                                <button class="header-button" id="header-button">SM</button>
+                            </div>
+                            <div class="dropdown-menu d_none" id="dropdown-menu">
+                                <a class="help-switch hidden-on-desktop" id="help-switch" href="./help.html">Help</a>
+                                <a href="./legalnotes.html">Legal notice</a>
+                                <a href="./privacy.html">Privacy Policy</a>
+                                <a onclick="logout()">Log Out</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <main class="main-container">
+                    <section class="privacyContent">
+
+                    <button class="back-button" onclick="history.back()" aria-label="Back">
+                    <img src="../assets/img/arrow-left-line.svg" alt="Back" />
+                  </button>
+            <div class="titleRow">
+              <h1>Privacy Policy</h1>
+            </div>
+
+            <h2>1. Data Controller (within the meaning of the GDPR)</h2>
+            <p>
+              <strong>Developer Akademie – Project Group: Join-Group-3116</strong><br />
+              c/o Developer Akademie GmbH<br />
+              Tassiloplatz 25<br />
+              81541 Munich<br />
+              Email: Join@group3116.com<br />
+              Names:<br />
+              Dennis.K<br />
+              Alexander.I<br />
+              Stefan.W
+            </p>
+
+            <h2>2. Purpose of the Website</h2>
+            <p>
+              This website was created as part of a training program at Developer Akademie.
+              It is intended for the organization and implementation of the project, in particular for:
+            </p>
+            <ul>
+              <li>User registration and authentication</li>
+              <li>Provision of guest access</li>
+              <li>Management of to-do lists and contacts</li>
+              <li>
+                Display of embedded third-party content (YouTube, Google Maps)
+              </li>
+            </ul>
+            <p>
+              <strong>Legal basis:</strong> Art. 6 (1) (b) and (f) GDPR
+            </p>
+
+            <h2>3. Data Automatically Collected</h2>
+            <p>
+              When visiting our website, certain technical information is automatically collected, including, for example:
+            </p>
+            <ul>
+              <li>IP address</li>
+              <li>Date and time of access</li>
+              <li>Browser type and version</li>
+              <li>Operating system</li>
+              <li>Referrer URL</li>
+            </ul>
+            <p>
+              <strong>Purpose:</strong> Ensuring operation, security, and troubleshooting<br />
+              <strong>Retention period:</strong> Server log files are deleted or anonymized no later than 30 days after collection<br />
+              <strong>Legal basis:</strong> Art. 6 (1) (f) GDPR
+            </p>
+
+            <h2>4. Registration, Login, and Guest Access</h2>
+            <p>
+              Certain features require users to register an account or log in as a guest.
+              In this context, the following personal data may be processed:
+            </p>
+            <ul>
+              <li>Name</li>
+              <li>Email address</li>
+              <li>Password (stored in encrypted form)</li>
+              <li>Phone number</li>
+              <li>Content entered in to-do lists and contact management</li>
+              <li>IP address for the prevention of misuse</li>
+            </ul>
+            <p>
+              Guest accounts: Test accounts are deleted upon logout or at the end of the testing period.<br />
+              <strong>Legal basis:</strong> Art. 6 (1) (b) and (f) GDPR
+            </p>
+
+            <h2>5. Processing via Firebase</h2>
+            <p>
+              We use <strong>Firebase</strong> (Google Ireland Limited)
+              for the storage and processing of user data, in particular for:
+            </p>
+            <ul>
+              <li>Registration, login, and guest access</li>
+              <li>To-do lists and contacts</li>
+            </ul>
+            <p>
+              <strong>Processing on behalf:</strong> Google acts as a processor pursuant to Art. 28 GDPR.<br />
+              <strong>Third-country transfers:</strong> Data may be processed in the United States. Any transfer is carried out on the basis of the EU Standard Contractual Clauses or the EU-U.S. Data Privacy Framework.<br />
+              Further information:
+              <a href="https://policies.google.com/privacy" target="_blank" rel="noopener">Google Privacy</a>,
+              <a href="https://firebase.google.com/support/privacy" target="_blank" rel="noopener">Firebase
+                Privacy</a><br />
+              <strong>Retention period:</strong> Data will be deleted as soon as it is no longer required for the purposes of using the website or once the account has been deleted.
+            </p>
+
+            <h2>6. Embedded Content (YouTube, Google Maps)</h2>
+            <p>
+              Embedded content may, upon loading, transmit data to Google, such as the IP address.<br />
+              <strong>Legal basis:</strong> Art. 6 (1) (f) GDPR
+              (legitimate interest)<br />
+              Note: Users may block the display of such embedded content.
+            </p>
+
+            <h2>7. Cookies</h2>
+            <p>
+              Only technically necessary cookies are used, for example for login and security purposes.
+              No tracking or analytics cookies are used.<br />
+              <strong>Legal basis:</strong> Art. 6 (1) (f) GDPR, Section
+              25 (2) TDDDG
+            </p>
+
+            <h2>8. Hosting</h2>
+            <p>
+              Hosting is provided by Developer Akademie GmbH. Technical data such as IP address and browser information is processed for the purposes of ensuring operation and security.<br />
+              <strong>Legal basis:</strong> Art. 6 (1) (f) GDPR
+            </p>
+
+            <h2>9. Data Security</h2>
+            <p>
+              We implement appropriate technical and organizational measures pursuant to Art.
+              32 GDPR, including, for example: HTTPS encryption, access restrictions,
+              and encrypted password storage.
+            </p>
+
+            <h2>10. Retention Period (Summary)</h2>
+
+    <ul class="col">
+      <li><h3>Data type</h3></li> <br>
+      <li>Server log files</li>
+      <li>Registration data</li>
+      <li>Guest accounts</li>
+      <li>To-do lists & contacts</li>
+  </ul>
+
+  <ul class="col">
+    <li><h3>Purpose</h3></li> <br>
+    <li class="head">Purpose</li>
+    <li>Operation & security</li>
+    <li>Account administration</li>
+    <li>Testing purposes</li>
+    <li>User functionality</li>
+  </ul>
+
+  <ul class="col">
+    <li><h3>Deletion</h3></li> <br>
+    <li>30 days</li>
+    <li>Upon account deletion</li>
+    <li>Upon logout</li>
+    <li>Upon account deletion</li>
+  </ul>
+
+            <h2>11. Rights of Data Subjects</h2>
+            <p>
+              Users have, among other rights, the right of access, rectification,
+              erasure, restriction of processing, data portability,
+              the right to object, and the right to lodge a complaint with a supervisory authority.
+            </p>
+
+            <h2>12. Minors</h2>
+            <p>
+              This website is not directed at children under the age of 16.
+              Persons under 16 may only submit personal data with the consent of a parent or legal guardian.
+            </p>
+
+            <h2>13. Currency and Updates</h2>
+            <p>
+              This privacy policy was prepared in November 2025. It will be updated
+              if changes to legal requirements or the technical implementation make this necessary.
+            </p>
+          </section>
+                </main>
+            </div>
+        </div>
+    </div>
+</body>
+<script src="./Js/Sidebar-and-header-script.js"></script>
+<script src="./Js/privacy.js"></script>
+<script src="./script.js"></script>
+
+</html>
