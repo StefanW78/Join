@@ -9,14 +9,14 @@ let contactDetailDiv = document.getElementById(`contacts-infos`)
 const mediaQueryForD_none = window.matchMedia("(max-width: 1092px)")
 const createMessage = document.getElementById(`createMessage`)
 
-let fetchedData = {};
+let fetchedData;
 let currentContactId = null;
 
 mediaQueryForD_none.addEventListener("change", setInitialView);
 
 async function init() {
   setInitialView()
-  await loadDataBase("contacts");
+  fetchedData = await loadDataBase("contacts");
   renderContactList();
 }
 
