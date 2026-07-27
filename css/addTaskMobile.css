@@ -1,5 +1,16 @@
+@media (min-width: 1440px){
+  .priorityBtn {
+  
+  min-width: 230px;
+  
+}
+}
 
 @media (max-width: 1092px) {
+    .main-container {
+    padding: 48px 24px 110px 24px;
+  }
+
   .addTaskContent,
   .taskForm,
   .formGrid,
@@ -10,7 +21,6 @@
     width: 100%;
     min-width: 0;
   }
-  
 
 
   .addTaskTitle {
@@ -137,7 +147,7 @@
 }
 
 @media (max-width: 428px) {
-  .content {
+  .main-container {
     padding: 32px 16px 110px 16px;
   }
 
@@ -173,7 +183,7 @@
 }
 
 @media (max-width: 350px) {
-  .content {
+  .main-container {
     padding: 24px 12px 110px 12px;
   }
 

@@ -8,8 +8,6 @@ function getPriorityIcon(priorityClass) {
     return `<svg width="20" height="15" viewBox="0 0 20 15" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M10 8.76077C9.7654 8.76118 9.53687 8.68634 9.34802 8.54726L0.444913 1.97752C0.329075 1.89197 0.231235 1.78445 0.15698 1.66111C0.0827245 1.53777 0.033508 1.40102 0.0121402 1.25868C-0.031014 0.971193 0.0418855 0.678356 0.214802 0.444584C0.387718 0.210811 0.646486 0.0552534 0.934181 0.0121312C1.22188 -0.0309911 1.51493 0.0418545 1.74888 0.214643L10 6.29712L18.2511 0.214643C18.367 0.129087 18.4985 0.0671675 18.6383 0.0324205C18.7781 -0.00232646 18.9234 -0.00922079 19.0658 0.0121312C19.2083 0.0334832 19.3451 0.0826633 19.4685 0.156864C19.592 0.231064 19.6996 0.328831 19.7852 0.444584C19.8708 0.560336 19.9328 0.691806 19.9676 0.831488C20.0023 0.97117 20.0092 1.11633 19.9879 1.25868C19.9665 1.40102 19.9173 1.53777 19.843 1.66111C19.7688 1.78445 19.6709 1.89197 19.5551 1.97752L10.652 8.54726C10.4631 8.68634 10.2346 8.76118 10 8.76077Z" fill="#7AE229"/><path d="M10 14.5093C9.7654 14.5097 9.53687 14.4349 9.34802 14.2958L0.444913 7.72606C0.210967 7.55327 0.0552944 7.29469 0.0121402 7.00721C-0.031014 6.71973 0.0418855 6.42689 0.214802 6.19312C0.387718 5.95935 0.646486 5.80379 0.934181 5.76067C1.22188 5.71754 1.51493 5.79039 1.74888 5.96318L10 12.0457L18.2511 5.96318C18.4851 5.79039 18.7781 5.71754 19.0658 5.76067C19.3535 5.80379 19.6123 5.95935 19.7852 6.19312C19.9581 6.42689 20.031 6.71973 19.9879 7.00721C19.9447 7.29469 19.789 7.55327 19.5551 7.72606L10.652 14.2958C10.4631 14.4349 10.2346 14.5097 10 14.5093Z" fill="#7AE229"/></svg>`;
 }
 
-
-//Template 
 function getTaskCard(task) {
     return `
         <div class="card" data-id="${task.id}" data-status="${task.status}" draggable="true">
@@ -152,40 +150,29 @@ function getCardOverlayTemplate(card) {
 //             </button>
 //         </div>
 
-
 //         <form id="editTaskForm" class="taskForm">
 
 //             <div class="formGrid editFormGrid">
 
-
 //                 <div class="formColumn">
-
 
 //                     <div class="formGroup">
 //                         <label for="editTaskTitle">Title</label>
-
 //                         <input
 //                             id="editTaskTitle"
 //                             type="text"
 //                             value="${task.title || ""}">
 //                     </div>
 
-
-
 //                     <div class="formGroup">
 //                         <label for="editTaskDescription">Description</label>
-
-//                         <textarea
-//                             id="editTaskDescription">${task.description || ""}</textarea>
+//                         <textarea id="editTaskDescription">${task.description || ""}</textarea>
 //                     </div>
-
-
 
 //                     <div class="formGroup">
 //                         <label for="editTaskDate">Due date</label>
 
 //                         <div class="inputWithIcon">
-
 //                             <input
 //                                 id="editTaskDate"
 //                                 type="text"
@@ -197,27 +184,18 @@ function getCardOverlayTemplate(card) {
 //                             <img
 //                                 src="./assets/img/calendar-icon.svg"
 //                                 alt="calendar icon">
-
 //                         </div>
 //                     </div>
-
 
 //                 </div>
 
 
-
-
 //                 <div class="formColumn">
 
-
-
 //                     <fieldset class="formGroup priorityGroup">
-
 //                         <legend>Priority</legend>
 
-
 //                         <div class="priorityButtons">
-
 
 //                             <button
 //                                 type="button"
@@ -229,14 +207,12 @@ function getCardOverlayTemplate(card) {
 //                                 <img
 //                                     src="./assets/img/PrioUP-icon.svg"
 //                                     alt="urgent">
-
 //                             </button>
-
 
 
 //                             <button
 //                                 type="button"
-//                                 class="priorityBtn editPriorityBtn mediumBtn ${task.priority === "medium" ? "activeMedium" : ""}"
+//                                 class="priorityBtn editPriorityBtn mediumBtn ${!task.priority || task.priority === "medium" ? "activeMedium" : ""}"
 //                                 data-priority="medium">
 
 //                                 <span>Medium</span>
@@ -244,9 +220,7 @@ function getCardOverlayTemplate(card) {
 //                                 <img
 //                                     src="./assets/img/PrioMedium-icon.svg"
 //                                     alt="medium">
-
 //                             </button>
-
 
 
 //                             <button
@@ -259,28 +233,16 @@ function getCardOverlayTemplate(card) {
 //                                 <img
 //                                     src="./assets/img/PrioDown-icon.svg"
 //                                     alt="low">
-
 //                             </button>
 
-
 //                         </div>
-
 //                     </fieldset>
 
 
-
-
-
-
 //                     <div class="formGroup">
-
-//                         <label for="editTaskCategory">
-//                             Category
-//                         </label>
-
+//                         <label for="editTaskCategory">Category</label>
 
 //                         <select id="editTaskCategory">
-
 
 //                             <option
 //                                 value="Technical Task"
@@ -288,23 +250,14 @@ function getCardOverlayTemplate(card) {
 //                                 Technical Task
 //                             </option>
 
-
 //                             <option
 //                                 value="User Story"
 //                                 ${task.category === "User Story" ? "selected" : ""}>
 //                                 User Story
 //                             </option>
 
-
 //                         </select>
-
-
 //                     </div>
-
-
-
-
-
 
 
 //                     <div class="formGroup">
@@ -313,12 +266,9 @@ function getCardOverlayTemplate(card) {
 //                             Assigned to
 //                         </label>
 
-
-
 //                         <div
 //                             class="customDropdown"
 //                             id="editAssignedDropdown">
-
 
 //                             <input
 //                                 type="text"
@@ -327,16 +277,12 @@ function getCardOverlayTemplate(card) {
 //                                 placeholder="Select contacts to assign"
 //                                 autocomplete="off">
 
-
 //                             <div
 //                                 class="dropdownList d_none"
 //                                 id="editAssignedList">
 //                             </div>
 
-
 //                         </div>
-
-
 
 
 //                         <div class="selectedContactsWrapper">
@@ -346,16 +292,15 @@ function getCardOverlayTemplate(card) {
 //                                 id="editSelectedContacts">
 //                             </div>
 
+
+//                             <div
+//                                 class="moreContactsDropdown d_none"
+//                                 id="editMoreContactsDropdown">
+//                             </div>
+
 //                         </div>
 
-
 //                     </div>
-
-
-
-
-
-
 
 
 //                     <div class="formGroup">
@@ -364,10 +309,7 @@ function getCardOverlayTemplate(card) {
 //                             Subtasks
 //                         </label>
 
-
-
 //                         <div class="subtaskInputWrapper">
-
 
 //                             <input
 //                                 id="editSubtaskInput"
@@ -377,16 +319,13 @@ function getCardOverlayTemplate(card) {
 
 //                             <div class="subtaskActions">
 
-
 //                                 <button
 //                                     type="button"
 //                                     id="editClearSubtaskBtn">
 //                                     &times;
 //                                 </button>
 
-
 //                                 <div class="subtaskDivider"></div>
-
 
 //                                 <button
 //                                     type="button"
@@ -394,14 +333,9 @@ function getCardOverlayTemplate(card) {
 //                                     ✓
 //                                 </button>
 
-
 //                             </div>
 
-
 //                         </div>
-
-
-
 
 
 //                         <div class="subtasksWrapper">
@@ -409,60 +343,41 @@ function getCardOverlayTemplate(card) {
 //                             <ul
 //                                 class="subtaskList"
 //                                 id="editSubtaskList">
-
-//                                 ${task.editSubtasksHTML || ""}
-
 //                             </ul>
-
 
 //                         </div>
 
-
 //                     </div>
-
-
 
 //                 </div>
 
-
 //             </div>
-
 
 //         </form>
 
 
-
-
 //         <div class="editTaskActions">
-
 
 //             <button
 //                 type="button"
 //                 class="clearBtn"
 //                 onclick="renderCardOverlay('${task.id}')">
-
 //                 Cancel ✕
-
 //             </button>
-
-
 
 
 //             <button
 //                 type="submit"
 //                 form="editTaskForm"
 //                 class="createTaskBtn">
-
 //                 Ok ✓
-
 //             </button>
-
 
 //         </div>
 //     `;
 // }
 
-//Von stefan branch in boardTemplate.js
+//test
 function getEditOverlayTemplate(task) {
     return `
         <div class="task-card-header">
@@ -483,14 +398,18 @@ function getEditOverlayTemplate(task) {
 
                     <div class="formGroup">
                         <label for="editTaskTitle">Title</label>
+
                         <input
                             id="editTaskTitle"
                             type="text"
                             value="${task.title || ""}">
+
+                        <p class="fieldError" id="editTaskTitleError"></p>
                     </div>
 
                     <div class="formGroup">
                         <label for="editTaskDescription">Description</label>
+
                         <textarea id="editTaskDescription">${task.description || ""}</textarea>
                     </div>
 
@@ -510,10 +429,11 @@ function getEditOverlayTemplate(task) {
                                 src="./assets/img/calendar-icon.svg"
                                 alt="calendar icon">
                         </div>
+
+                        <p class="fieldError" id="editTaskDateError"></p>
                     </div>
 
                 </div>
-
 
                 <div class="formColumn">
 
@@ -534,7 +454,6 @@ function getEditOverlayTemplate(task) {
                                     alt="urgent">
                             </button>
 
-
                             <button
                                 type="button"
                                 class="priorityBtn editPriorityBtn mediumBtn ${!task.priority || task.priority === "medium" ? "activeMedium" : ""}"
@@ -546,7 +465,6 @@ function getEditOverlayTemplate(task) {
                                     src="./assets/img/PrioMedium-icon.svg"
                                     alt="medium">
                             </button>
-
 
                             <button
                                 type="button"
@@ -562,7 +480,6 @@ function getEditOverlayTemplate(task) {
 
                         </div>
                     </fieldset>
-
 
                     <div class="formGroup">
                         <label for="editTaskCategory">Category</label>
@@ -582,8 +499,9 @@ function getEditOverlayTemplate(task) {
                             </option>
 
                         </select>
-                    </div>
 
+                        <p class="fieldError" id="editTaskCategoryError"></p>
+                    </div>
 
                     <div class="formGroup">
 
@@ -609,14 +527,12 @@ function getEditOverlayTemplate(task) {
 
                         </div>
 
-
                         <div class="selectedContactsWrapper">
 
                             <div
                                 class="selectedContacts"
                                 id="editSelectedContacts">
                             </div>
-
 
                             <div
                                 class="moreContactsDropdown d_none"
@@ -626,7 +542,6 @@ function getEditOverlayTemplate(task) {
                         </div>
 
                     </div>
-
 
                     <div class="formGroup">
 
@@ -640,7 +555,6 @@ function getEditOverlayTemplate(task) {
                                 id="editSubtaskInput"
                                 type="text"
                                 placeholder="Add new subtask">
-
 
                             <div class="subtaskActions">
 
@@ -662,7 +576,6 @@ function getEditOverlayTemplate(task) {
 
                         </div>
 
-
                         <div class="subtasksWrapper">
 
                             <ul
@@ -680,7 +593,6 @@ function getEditOverlayTemplate(task) {
 
         </form>
 
-
         <div class="editTaskActions">
 
             <button
@@ -688,8 +600,8 @@ function getEditOverlayTemplate(task) {
                 class="clearBtn"
                 onclick="renderCardOverlay('${task.id}')">
                 Cancel ✕
-            </button>
 
+            </button>
 
             <button
                 type="submit"
@@ -701,6 +613,8 @@ function getEditOverlayTemplate(task) {
         </div>
     `;
 }
+
+//Test
 
 
 function getEditAssignedContactTemplate(contact) {
@@ -736,5 +650,104 @@ function getEditMoreContactTemplate(contact) {
             </span>
 
         </div>
+    `;
+}
+
+function createAvatarTemplate(contact) {
+    return `
+        <div class="av" style="background-color:${contact.color}">
+            ${contact.initials}
+        </div>
+    `;
+}
+
+function createExtraAvatar(extraCount) {
+    if (extraCount <= 0) return "";
+    return `<div class="av-more">+${extraCount}</div>`;
+}
+
+function progressTemplate(progress, done, total) {
+    return `
+        <div class="progress-bar">
+            <div class="progress-fill" style="width:${progress}%"></div>
+        </div>
+        ${done}/${total} Subtasks
+    `;
+}
+
+function moveOptionTemplate(index, taskId, status, statusName) {
+    return `
+        <div class="${index === 0 ? 'moving-top' : 'moving-down'} move-option"
+             data-task-id="${taskId}"
+             data-status="${status}">
+
+            <img src="./assets/img/arrow_upward.svg">
+            <span>${statusName}</span>
+
+        </div>
+    `;
+}
+
+function createContactOptionTemplate(contact, selectedContacts) {
+    const isSelected = selectedContacts.some(
+        item => item.id === contact.id
+    );
+
+    return `
+        <div class="contactOption ${isSelected ? "selectedContactOption" : ""}" 
+             data-contact-id="${contact.id}">
+
+            <div class="contactAvatar" style="background:${contact.color}">
+                ${contact.initials || getInitials(contact.name)}
+            </div>
+
+            <span>${contact.name}</span>
+
+            <input
+                class="contactCheckbox"
+                type="checkbox"
+                ${isSelected ? "checked" : ""}
+            >
+
+        </div>
+    `;
+}
+
+function editSubtaskTemplate(subtask, index) {
+    return `
+        <li class="subtaskItem editSubtaskItem">
+
+            <span class="subtaskText">
+                • ${subtask.title}
+            </span>
+
+            <div class="subtaskItemActions">
+
+                <button
+                    type="button"
+                    class="editSubtaskBtn"
+                    data-index="${index}">
+
+                    <img
+                        src="./assets/img/Subtasks change.svg"
+                        alt="Edit subtask">
+
+                </button>
+
+
+                <button
+                    type="button"
+                    class="deleteSubtaskBtn"
+                    data-index="${index}">
+
+                    <img
+                        src="./assets/img/SubTask delete.svg"
+                        alt="Delete subtask">
+
+                </button>
+
+            </div>
+
+        </li>
     `;
 }
