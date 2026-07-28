@@ -59,14 +59,27 @@ function getContactArray() {
 
 function openContact(event) {
 
-    const id = event.target.closest(".contact-container").dataset.id;
+    const clickedContact = event.target.closest(".contact-container");
+
+    if (!clickedContact) return;
+
+    // alten aktiven Kontakt entfernen
+    document.querySelectorAll(".contact-container")
+        .forEach(contact => {
+            contact.classList.remove("active-contact");
+        });
+
+    // neuen Kontakt markieren
+    clickedContact.classList.add("active-contact");
+
+
+    const id = clickedContact.dataset.id;
 
     currentContactId = id;
 
     const contact = fetchedData[id];
 
     renderContactDetails(contact);
-
 }
 
 function renderContactDetails(contact) {

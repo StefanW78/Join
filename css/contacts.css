@@ -163,11 +163,11 @@ main{
 }
 
 #edit:hover img{
-    content: url(../assets/img/edit-hover-contact.svg);
+    content: url(../assets/img/edit_hover.svg);
 }
 
 #edit:hover span{
-    color: rgb(41, 171, 226);
+    color: rgba(18, 70, 88, 1);
     font-weight: 700;
 }
 
@@ -178,12 +178,12 @@ main{
 }
 
 #delete:hover span{
-    color: rgb(41, 171, 226);
+    color: rgba(18, 70, 88, 1);
     font-weight: 700; 
 }
 
 #delete:hover img{
-    content: url(../assets/img/delete-hover-contact.svg);
+    content: url(../assets/img/delete_hover.svg);
 }
 
 .edit-delete-component-default span{
@@ -318,8 +318,16 @@ main{
     transition: background 125ms ease;
 }
 
-.contact-list-items .contact-container:hover{
-    background: linear-gradient(135deg, rgba(249, 249, 249, 1), rgba(237 237 237));
+.contact-list-items .contact-container:not(.active-contact):hover {
+    background: linear-gradient(135deg, rgba(249, 249, 249, 1), rgba(237, 237, 237));
+}
+
+.contact-container.active-contact {
+    background-color: #2a3647;
+}
+
+.contact-container.active-contact .contactName{
+    color: white;
 }
 
 
