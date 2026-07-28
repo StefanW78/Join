@@ -327,7 +327,15 @@ function openContactDetails() {
 }
 
 function MobileSwitchToContacts() {
-  contactInfoSec.classList.add("d_none");
-  contactListSec.classList.remove("d_none");
+
+    contactInfoSec.classList.add("d_none");
+    contactListSec.classList.remove("d_none");
+
+    if (window.innerWidth <= 1092) {
+        document.querySelectorAll(".contact-container")
+            .forEach(contact => {
+                contact.classList.remove("active-contact");
+            });
+    }
 }
 
