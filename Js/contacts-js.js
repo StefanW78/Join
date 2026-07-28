@@ -167,15 +167,14 @@ async function deleteContactFromEditOverlay(event) {
     return;
   }
   try {
-    await deleteContact(foundId);
+    await deleteContactAction(foundId);
     await loadDataBase();
-    await createContactList();
-    closeEditContactOverlay();
-    container.classList.add("d-none");
+    renderContactList();
+    CloseEditDialog();
+    MobileSwitchToContacts();
     popupMessage("Contact successfully deleted!");
   } catch (error) {
     console.error("Error deleting contact:", error);
-    alert("Failed to delete contact. Please try again.");
   }
 }
 
