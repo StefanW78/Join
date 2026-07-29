@@ -115,6 +115,8 @@ padding: 25px 20px 25px 0px;
     border-radius: 0px;
     right: calc(100vw - 100%);
     width: 100%;
+    max-width: none !important;
+    max-height: none !important;
 }
 
 
@@ -198,7 +200,9 @@ padding: 25px 20px 25px 0px;
 
 .edit-contact-form .contact-badge{
     position: absolute;
-    top: calc(45% - 55px);
+    top: calc(40% - 60px);
+    left: 50%;
+    transform: translateX(-50%);
     margin-bottom: 0;
 }
 
