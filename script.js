@@ -364,6 +364,7 @@ function resetForm(formKey, buttonId, fields) {
     fields.forEach(field => {
         document.getElementById(field + "_input").value = "";
         document.getElementById(field + "_error").textContent = "";
+        document.getElementById("inputContainer_"+ field).style.borderColor = "";
 
         formState[formKey][field] = false;
     });

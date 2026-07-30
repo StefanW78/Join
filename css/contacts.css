@@ -565,7 +565,10 @@ main{
     display: flex;
     flex-direction: row;
     align-items: center;
-    margin-bottom: 22px;
+}
+
+.input-and-errordiv{
+   height: 75px;
 }
 
 .inputContainer input{
