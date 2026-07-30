@@ -91,10 +91,6 @@ main{
     display: none;
 }
 
-footer a:hover{
-    background-color: #2a3d59;
-}
-
 ul{
     display: flex;
     flex-direction: column;
