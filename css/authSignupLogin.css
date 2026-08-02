@@ -8,7 +8,7 @@
 #splashBackground {
   position: absolute;
   inset: 0;
-  background-color: white;
+  background-color: #f6f7f8;
 }
 
 #splashBackground.fadeOut {
