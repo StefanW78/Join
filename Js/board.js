@@ -735,6 +735,8 @@ function initEditValidationEvents() {
   const editTaskDate = document.getElementById("editTaskDate");
   const editTaskCategory = document.getElementById("editTaskCategory");
 
+  editTaskDate.min = getTodayISO();
+
   const editTaskTitleError =
     document.getElementById("editTaskTitleError");
 
@@ -784,15 +786,15 @@ async function saveEditedTask(
   if (!isEditTaskFormValid()) return;
 
   const updatedTask = {
-    title: editTaskTitle.value.trim(),
-    description: editTaskDescription.value.trim(),
-    dueDate: editTaskDate.value.trim(),
-    dueDateISO: convertDateToISO(editTaskDate.value.trim()),
-    category: editTaskCategory.value,
-    priority: selectedPriority,
-    assignedTo: selectedEditContacts,
-    subtasks: editSubtasks,
-  };
+  title: editTaskTitle.value.trim(),
+  description: editTaskDescription.value.trim(),
+  dueDate: formatDateForDisplay(editTaskDate.value),
+  dueDateISO: editTaskDate.value,
+  category: editTaskCategory.value,
+  priority: selectedPriority,
+  assignedTo: selectedEditContacts,
+  subtasks: editSubtasks,
+};
 
   if (!updatedTask.title) {
     editTaskTitle.classList.add("inputError");
@@ -869,67 +871,6 @@ function validateEditTaskDate() {
   }
 
   return validateEditDateIsNotPast(editTaskDate, editTaskDateError, dateValue);
-}
-
-function validateEditDateIsNotPast(input, errorElement, dateValue) {
-  const selectedDate = parseEditDateFromInput(dateValue);
-  const today = new Date();
-
-  today.setHours(0, 0, 0, 0);
-  selectedDate.setHours(0, 0, 0, 0);
-
-  if (selectedDate >= today) return true;
-
-  setEditInputError(input, errorElement, "The due date cannot be in the past.");
-  return false;
-}
-
-function isValidEditDateFormat(dateValue) {
-  if (dateValue.includes("/")) {
-    return isValidSlashDate(dateValue);
-  }
-
-  return isValidIsoDate(dateValue);
-}
-
-function isValidSlashDate(dateValue) {
-  const dateRegex = /^(0[1-9]|[12][0-9]|3[01])\/(0[1-9]|1[0-2])\/\d{4}$/;
-
-  if (!dateRegex.test(dateValue)) return false;
-
-  const selectedDate = parseEditDateFromInput(dateValue);
-  const [day, month, year] = dateValue.split("/").map(Number);
-
-  return isRealDate(selectedDate, day, month, year);
-}
-
-function isValidIsoDate(dateValue) {
-  const dateRegex = /^\d{4}-\d{2}-\d{2}$/;
-
-  if (!dateRegex.test(dateValue)) return false;
-
-  const selectedDate = parseEditDateFromInput(dateValue);
-  const [year, month, day] = dateValue.split("-").map(Number);
-
-  return isRealDate(selectedDate, day, month, year);
-}
-
-function parseEditDateFromInput(dateValue) {
-  if (dateValue.includes("/")) {
-    const [day, month, year] = dateValue.split("/");
-    return new Date(Number(year), Number(month) - 1, Number(day));
-  }
-
-  const [year, month, day] = dateValue.split("-");
-  return new Date(Number(year), Number(month) - 1, Number(day));
-}
-
-function isRealDate(date, day, month, year) {
-  return (
-    date.getFullYear() === year &&
-    date.getMonth() === month - 1 &&
-    date.getDate() === day
-  );
 }
 
 function setEditInputError(input, errorElement, message) {

@@ -91,7 +91,6 @@ footer a.current-link{
 }
 
 footer a:hover{
-    opacity: 0.8;
     color: #29abe2;
 }
 
@@ -124,7 +123,6 @@ footer a:hover{
     display: flex;
     justify-content: space-between;
     align-items: center;
-    max-width: 1060px;
     position: relative; 
 }
 
@@ -214,14 +212,4 @@ footer a:hover{
 .dropdown-menu a:hover {
     background-color: #2a3d59;
     border-radius: 12px;
-}
-
-main{
-    width: 100%;
-    padding: 75px 50px 50px 75px;
-    display: flex;
-    flex-direction: column;
-    max-width: 1440px;
-    margin-top: 6px;
-
 }

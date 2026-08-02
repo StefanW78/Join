@@ -60,7 +60,6 @@ body {
 
 .add-task-page .header-content {
   width: 100%;
-  max-width: 1280px;
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -93,7 +92,6 @@ body {
 
 .add-task-page .header-content {
   width: 100%;
-  max-width: 1280px;
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -200,10 +198,6 @@ body {
 
 .inputWithIcon {
   position: relative;
-}
-
-.inputWithIcon input {
-  padding-right: 48px;
 }
 
 .inputWithIcon img {

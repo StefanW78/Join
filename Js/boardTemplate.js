@@ -1,3 +1,27 @@
+function getTaskDateISO(task) {
+  if (task.dueDateISO) {
+    return task.dueDateISO;
+  }
+
+  const dueDate = task.dueDate || "";
+
+  if (!dueDate.includes("/")) {
+    return dueDate;
+  }
+
+  const [day, month, year] = dueDate.split("/");
+
+  return `${year}-${month}-${day}`;
+}
+
+function getEditTaskTemplate(task) {
+  return `
+    <div class="task-card edit-task-card">
+      <!-- restliches Template -->
+    </div>
+  `;
+}
+
 function getEditTaskTemplate(task) {
   return `
     <div class="task-card edit-task-card">
@@ -29,13 +53,10 @@ function getEditTaskTemplate(task) {
               <div class="inputWithIcon">
                 <input
                   id="editTaskDate"
-                  type="text"
-                  value="${task.dueDate || ""}"
-                  placeholder="dd/mm/yyyy"
-                  inputmode="numeric"
-                  maxlength="10"
+                  type="date"
+                  value="${getTaskDateISO(task)}"
                 />
-                <img src="./assets/img/calendar-icon.svg" alt="calendar icon" />
+                
               </div>
               <p class="fieldError" id="editTaskDateError"></p>
             </div>
