@@ -1084,23 +1084,71 @@ function initEditSubtasks(editSubtasks, onChange) {
   const editAddSubtaskBtn = document.getElementById("editAddSubtaskBtn");
   const editClearSubtaskBtn = document.getElementById("editClearSubtaskBtn");
 
-  renderEditSubtasks(editSubtasks, onChange);
+  let editingSubtaskIndex = null;
+
+  renderEditSubtasks(
+    editSubtasks,
+    onChange,
+    setEditingSubtask,
+  );
 
   editSubtaskInput.addEventListener("keydown", (event) => {
     if (event.key !== "Enter") return;
 
     event.preventDefault();
-    addEditSubtask(editSubtasks, onChange);
+    saveEditSubtask();
   });
 
-  editAddSubtaskBtn.addEventListener("click", () => {
-    addEditSubtask(editSubtasks, onChange);
-  });
+  editAddSubtaskBtn.addEventListener("click", saveEditSubtask);
 
   editClearSubtaskBtn.addEventListener("click", () => {
-    editSubtaskInput.value = "";
-    editSubtaskInput.focus();
+    resetEditSubtaskInput();
   });
+
+  function setEditingSubtask(index) {
+    editingSubtaskIndex = index;
+  }
+
+  function saveEditSubtask() {
+    editingSubtaskIndex = addOrUpdateEditSubtask(
+      editSubtasks,
+      editingSubtaskIndex,
+    );
+
+    renderEditSubtasks(
+      editSubtasks,
+      onChange,
+      setEditingSubtask,
+    );
+
+    onChange(editSubtasks);
+  }
+
+  function resetEditSubtaskInput() {
+    editSubtaskInput.value = "";
+    editingSubtaskIndex = null;
+    editSubtaskInput.focus();
+  }
+}
+
+function addOrUpdateEditSubtask(editSubtasks, editingIndex) {
+  const editSubtaskInput = document.getElementById("editSubtaskInput");
+  const subtaskText = editSubtaskInput.value.trim();
+
+  if (!subtaskText) return editingIndex;
+
+  if (editingIndex === null) {
+    editSubtasks.push({
+      title: subtaskText,
+      done: false,
+    });
+  } else {
+    editSubtasks[editingIndex].title = subtaskText;
+  }
+
+  editSubtaskInput.value = "";
+
+  return null;
 }
 
 function addEditSubtask(editSubtasks, onChange) {
@@ -1120,7 +1168,7 @@ function addEditSubtask(editSubtasks, onChange) {
   onChange(editSubtasks);
 }
 
-function renderEditSubtasks(editSubtasks, onChange) {
+function renderEditSubtasks(editSubtasks, onChange, onEdit) {
   const editSubtaskList = document.getElementById("editSubtaskList");
 
   editSubtaskList.innerHTML = "";
@@ -1143,36 +1191,40 @@ function renderEditSubtasks(editSubtasks, onChange) {
     `;
   });
 
-  initEditSubtaskButtons(editSubtasks, onChange);
+  initEditSubtaskButtons(editSubtasks, onChange, onEdit);
 }
 
-function initEditSubtaskButtons(editSubtasks, onChange) {
+function initEditSubtaskButtons(editSubtasks, onChange, onEdit) {
+  initEditSubtaskDeleteButtons(editSubtasks, onChange, onEdit);
+  initEditSubtaskEditButtons(editSubtasks, onEdit);
+}
+
+function initEditSubtaskDeleteButtons(editSubtasks, onChange, onEdit) {
   document
     .querySelectorAll("#editSubtaskList .deleteSubtaskBtn")
     .forEach((button) => {
       button.addEventListener("click", () => {
         const index = Number(button.dataset.index);
 
-        editSubtasks.splice(index, 1);
-        renderEditSubtasks(editSubtasks, onChange);
+        renderEditSubtasks(editSubtasks, onChange, onEdit);
         onChange(editSubtasks);
       });
     });
+}
 
+function initEditSubtaskEditButtons(editSubtasks, onEdit) {
   document
     .querySelectorAll("#editSubtaskList .editSubtaskBtn")
     .forEach((button) => {
       button.addEventListener("click", () => {
         const index = Number(button.dataset.index);
-        const editSubtaskInput = document.getElementById("editSubtaskInput");
+        const editSubtaskInput =
+          document.getElementById("editSubtaskInput");
 
         editSubtaskInput.value = editSubtasks[index].title;
-
-        editSubtasks.splice(index, 1);
-        renderEditSubtasks(editSubtasks, onChange);
-        onChange(editSubtasks);
-
         editSubtaskInput.focus();
+
+        onEdit(index);
       });
     });
 }
