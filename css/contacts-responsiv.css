@@ -122,7 +122,6 @@ padding: 25px 20px 25px 0px;
 
 .add-contact-overview{
     width: 100%;
-    height: 45%;
     border-radius: 0 0 0 0;
 }
 
@@ -131,8 +130,8 @@ padding: 25px 20px 25px 0px;
 }
 
 .add-contact-container{
+    position: relative;
     width: 100%;
-    height: 55%;
     border-radius: 0 0 0 0;
 }
 
@@ -140,9 +139,13 @@ padding: 25px 20px 25px 0px;
     flex-direction: column;
 }
 
+.secondary-btn-default-icon{
+    display: none !important;
+}
+
 .add-contact-badge{
     position: absolute;
-    top: calc(45% - 55px);
+    top: -60px;
     margin-bottom: 0;
 }
 
@@ -157,6 +160,7 @@ padding: 25px 20px 25px 0px;
 .close-btn{
     width: 40px;
     height: 40px;
+    right: 40px;
 }
 
 .close-btn img{
@@ -217,7 +221,7 @@ padding: 25px 20px 25px 0px;
 
 
 
-@media (max-width: 470px){
+@media (max-width: 480px){
     .header-title-div h1{
         font-size: 40px;
     }
@@ -232,6 +236,23 @@ padding: 25px 20px 25px 0px;
 
     .contact-header{
         gap: 45px;
+    }
+
+    .add-contact-title{
+        font-size: 47px;
+    }
+
+    .add-contact-subtitle{
+        font-size: 20px;
+    }
+
+    .add-contact-overview{
+        max-height: 352px;
+        padding: 40px 40px;
+    }
+
+    .add-contact-container{
+        padding: 15px 30px 40px 30px;
     }
 }
 
@@ -263,5 +284,20 @@ padding: 25px 20px 25px 0px;
     }
     .contact-name{
         font-size: 25px;
+    }
+
+    .add-contact-title{
+        font-size: 40px;
+    }
+
+    .add-contact-subtitle{
+        font-size: 16px;
+    }
+}
+
+@media (max-height: 700px){
+
+    .add-contact-overlay{
+        overflow-y: auto;
     }
 }
