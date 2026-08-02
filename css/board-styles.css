@@ -191,7 +191,9 @@
   margin-bottom: 10px;
   box-shadow: 0 2px 6px rgba(0, 0, 0, 0.06);
   cursor: pointer;
+  transition: transform 125ms ease-in-out, opacity 125ms ease-in-out;
 }
+
 .tag {
   display: inline-block;
   border-radius: 6px;
@@ -288,13 +290,24 @@
   color: #e74c3c;
 }
 
-.card {
-  cursor: pointer;
+.card.is-preparing-drag,
+.card.is-dragging {
+  opacity: 0.7;
+  transform: rotate(20deg);
+  transform-origin: center;
 }
 
-.card.is-dragging {
-  opacity: 0.5;
-  transform: rotate(2deg);
+.custom-drag-image {
+  position: fixed;
+  top: -1000px;
+  left: -1000px;
+  z-index: 9999;
+
+  transform: rotate(20deg);
+  transform-origin: center;
+
+  opacity: 0.9;
+  pointer-events: none;
 }
 
 .column[data-status] {
@@ -310,4 +323,3 @@
   outline-offset: 6px;
   border-radius: 10px;
 }
-

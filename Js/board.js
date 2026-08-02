@@ -297,21 +297,56 @@ function initDragAndDrop() {
 
 function initDraggableCards() {
   document.querySelectorAll(".card[data-task-id]").forEach((card) => {
-    card.addEventListener("dragstart", () => {
-      draggedTaskId = card.dataset.taskId;
-      isDraggingTask = true;
-      card.classList.add("is-dragging");
+    card.addEventListener("dragstart", (event) => {
+      startDraggingCard(event, card);
     });
 
     card.addEventListener("dragend", () => {
-      card.classList.remove("is-dragging");
-
-      setTimeout(() => {
-        draggedTaskId = null;
-        isDraggingTask = false;
-      }, 0);
+      stopDraggingCard(card);
     });
   });
+}
+
+function startDraggingCard(event, card) {
+  draggedTaskId = card.dataset.taskId;
+  isDraggingTask = true;
+
+  card.classList.add("is-dragging");
+
+  const dragImage = createRotatedDragImage(card);
+
+  event.dataTransfer.setDragImage(
+    dragImage,
+    dragImage.offsetWidth / 2,
+    dragImage.offsetHeight / 2,
+  );
+
+  requestAnimationFrame(() => {
+    dragImage.remove();
+  });
+}
+
+function createRotatedDragImage(card) {
+  const dragImage = card.cloneNode(true);
+
+  dragImage.classList.remove("is-dragging");
+  dragImage.classList.add("custom-drag-image");
+
+  dragImage.style.width = `${card.offsetWidth}px`;
+  dragImage.style.height = `${card.offsetHeight}px`;
+
+  document.body.appendChild(dragImage);
+
+  return dragImage;
+}
+
+function stopDraggingCard(card) {
+  card.classList.remove("is-dragging");
+
+  setTimeout(() => {
+    draggedTaskId = null;
+    isDraggingTask = false;
+  }, 0);
 }
 
 function initDropColumns() {
