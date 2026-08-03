@@ -81,6 +81,9 @@ function renderEditTemplate(contact) {
     return`
                                     <div class="edit-contact-overlay slide-out" id="edit-contact-overlay">
                                     <div class="edit-contact-overview">
+                                    <div class="close-btn" onclick="CloseEditDialog()">
+                                            <img src="./assets/img/add-contact-close-button.svg" alt="close-btn">
+                                        </div>
                                         <div class="join-logo-contact">
                                             <img src="./assets/img/join-logo-add-contact.svg" alt="logo-join">
                                         </div>
@@ -92,9 +95,6 @@ function renderEditTemplate(contact) {
                                         </div>
                                     </div>
                                     <div class="edit-contact-container">
-                                        <div class="close-btn" onclick="CloseEditDialog()">
-                                            <img src="./assets/img/add-contact-close-button.svg" alt="close-btn">
-                                        </div>
                                         <div class="edit-contact-form">
                                             <div class="contact-badge" style="background-color: ${contact.color}">
                                                 ${contact.initials}

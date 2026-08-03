@@ -370,7 +370,7 @@ main{
 
 /* PopUp Event CSS */
 
-.add-contact-popup{
+.add-contact-popup, .edit-contact-popup{
     position: fixed;
     top: 0;
     right: 0;
@@ -416,7 +416,7 @@ main{
     transition: transform 0.5s ease-in-out;
 }
 
-.edit-contact-overview {
+/* .edit-contact-overview {
     flex: 0 0 40%;
 }
 
@@ -427,7 +427,7 @@ main{
 .edit-contact-container,
 .edit-contact-overview {
     min-height: 0;
-}
+} */
 
 .edit-contact-overlay,
 .add-contact-overlay {
@@ -436,9 +436,9 @@ main{
     transform: translate(-50%, -50%);
 }
 
-.edit-contact-overlay {
+/* .edit-contact-overlay {
     position: relative;
-}
+} */
 
 /* Test */
 
@@ -451,7 +451,7 @@ main{
     transform: translate(100%, -50%);
 }
 
-.add-contact-overview{
+.add-contact-overview, .edit-contact-overview{
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -496,7 +496,7 @@ main{
     display: block;
 }
 
-.add-contact-container{
+.add-contact-container, .edit-contact-container{
     width: 60%;
     height: 100%;
     display: flex;
@@ -643,7 +643,7 @@ main{
     content: url(../assets/img/add-contact-cancel-hover.svg);
 }
 
-.edit-contact-popup{
+/* .edit-contact-popup{
     position: fixed;
     top: 0;
     right: 0;
@@ -652,7 +652,7 @@ main{
     background-color: rgba(0, 0, 0, 0.4);
     display: flex;
     z-index: 1000;
-}
+} */
 
 /* .edit-contact-overlay{
     display: flex;
@@ -680,7 +680,7 @@ main{
     transform: translate(0, -50%);
 } */
 
-.edit-contact-overview{
+/* .edit-contact-overview{
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -690,7 +690,7 @@ main{
     background-color: rgba(42, 54, 71, 1);
     padding: 66px 48px;
     border-radius: 30px 0 0 30px;
-}
+} */
 
 .join-logo-contact {
       width: 55px;
@@ -721,7 +721,7 @@ main{
     display: block;
 }
 
-.edit-contact-container{
+/* .edit-contact-container{
     width: 60%;
     height: 100%;
     display: flex;
@@ -729,7 +729,7 @@ main{
     justify-content: center;
     border-radius: 0 30px 30px 0;
     padding: 48px 48px 80px 40px;
-}
+} */
 
 .close-btn{
     display: flex;
