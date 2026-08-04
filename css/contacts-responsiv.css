@@ -9,12 +9,9 @@
     padding: 48px 30px 80px 30px;
 }
 
-.add-contact-form{
-    padding-left: 10px;
-}
 
 
-.add-contact-buttons{
+.add-contact-buttons, .edit-contact-buttons{
     justify-content: center; 
 } 
 
@@ -135,8 +132,9 @@ padding: 25px 20px 25px 0px;
     border-radius: 0 0 0 0;
 }
 
-.add-contact-form{
+.add-contact-form, .edit-contact-form{
     flex-direction: column;
+     padding-left: 10px;
 }
 
 .secondary-btn-default-icon{
@@ -171,41 +169,11 @@ padding: 25px 20px 25px 0px;
 
 /* Area pop-up edit */
 
-/* .edit-contact-overlay{
-    flex-direction: column;
-    height: 100%;
-    width: 100%;
-    right: calc(100vw - 100%);
-    border-radius: 0px;
-    max-width: none !important;
-    max-height: none !important;
-} */
 
-/* .edit-contact-overview{
-    width: 100%;
-    border-radius: 0px 0 0 0px;
-} */
-
-/* .edit-contact-container{
-    width: 100%;
-    position: relative;
-} */
-
-.edit-contact-form{
-    flex-direction: column;
-    padding-left: 0;
-    margin-top: 0;
-}
-
-.edit-contact-buttons{
-    justify-content: center;
-}
 
 .edit-contact-form .contact-badge{
     position: absolute;
     top: -60px;
-    /* left: 50%;
-    transform: translateX(-50%); */
     margin-bottom: 0;
 }
 
@@ -237,7 +205,7 @@ padding: 25px 20px 25px 0px;
         gap: 45px;
     }
 
-    .add-contact-title{
+    .add-contact-title, .edit-contact-title{
         font-size: 47px;
     }
 
@@ -245,12 +213,12 @@ padding: 25px 20px 25px 0px;
         font-size: 20px;
     }
 
-    .add-contact-overview{
+    .add-contact-overview, .edit-contact-overview{
         max-height: 352px;
         padding: 40px 40px;
     }
 
-    .add-contact-container{
+    .add-contact-container, .edit-contact-container{
         padding: 15px 30px 40px 30px;
     }
 }
@@ -285,7 +253,7 @@ padding: 25px 20px 25px 0px;
         font-size: 25px;
     }
 
-    .add-contact-title{
+    .add-contact-title, .edit-contact-title{
         font-size: 40px;
     }
 
@@ -296,7 +264,7 @@ padding: 25px 20px 25px 0px;
 
 @media (max-height: 700px){
 
-    .add-contact-overlay{
+    .add-contact-overlay, .edit-contact-overlay{
         overflow-y: auto;
     }
 }
