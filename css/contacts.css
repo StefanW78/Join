@@ -241,6 +241,12 @@ main{
     cursor: pointer;
 }
 
+.primary-btn-default-icon:hover{
+    background-color: rgba(18, 70, 88, 1);
+    box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+
+}
+
 .contacts-list-sec #add-contact{
     position: sticky;
     top: 0;
@@ -542,6 +548,7 @@ main{
     align-items: center;
     gap: 18px;
     margin-top: 10px;
+    height: 55px;
 }
 
  .add-contact-buttons button {
