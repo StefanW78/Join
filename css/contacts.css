@@ -247,6 +247,16 @@ main{
 
 }
 
+.primary-btn-default-icon:active{
+    background-color: rgba(0, 0, 0, 0.25);
+    box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+}
+
+.primary-btn-default-icon:disabled{
+    background-color: gray;
+    pointer-events: none;
+}
+
 .contacts-list-sec #add-contact{
     position: sticky;
     top: 0;
