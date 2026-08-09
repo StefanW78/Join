@@ -367,6 +367,8 @@ main{
     flex-direction: column;
     justify-content: flex-start;
     align-items: flex-start;
+    overflow: hidden;
+    max-width: 100%;
 }
 
 
@@ -374,6 +376,12 @@ main{
     color: rgba(0, 0, 0, 1);
     font-size: 20px;
     font-weight: 400;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: block;
+    width: 100%;
+
 }
 
 
@@ -381,6 +389,11 @@ main{
     font-size: 16px;
     font-weight: 400;
     color: rgba(0, 124, 238, 1);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: block;
+    width: 100%;
 }
 
 
@@ -559,6 +572,11 @@ main{
     gap: 18px;
     margin-top: 10px;
     height: 55px;
+}
+
+.edit-contact-buttons .secondary-btn-default-icon{
+    height: 48px;
+    width: 99px;
 }
 
  .add-contact-buttons button {

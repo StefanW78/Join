@@ -9,7 +9,7 @@ function contactListTemplate(contact) {
                                     </div>
                                     <div class="contactDetails">
                                         <h3 class="contactName">${contact.name}</h3>
-                                        <span class="contactEmail">${contact.email}</span>
+                                        <span class="contactEmail" title ="${contact.email}">${contact.email}</span>
                                     </div>
                                 </div>
     
