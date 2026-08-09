@@ -180,14 +180,18 @@ body {
   padding: 12px 16px;
   font-size: 20px;
   background-color: white;
-  color: #000;
+  color: #d1d1d1;
   outline: none;
 }
 
 .formGroup input::placeholder,
-.formGroup textarea::placeholder,
-.formGroup select {
+.formGroup textarea::placeholder {
   color: #d1d1d1;
+}
+
+#assignedInput::placeholder {
+  color: #000;
+  opacity: 1;
 }
 
 .formGroup textarea {
@@ -315,6 +319,11 @@ body {
   font-size: 20px;
   text-align: left;
   cursor: pointer;
+}
+
+.dropdownButton::placeholder {
+  color: #000;
+  opacity: 1;
 }
 
 .dropdownList {
