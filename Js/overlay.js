@@ -54,15 +54,11 @@ function renderCardOverlay(id) {
 
             <div class="task-actions">
                 <button class="task-action-btn delete-btn">
-                    <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
-                        <path d="M3 4h10M5.5 4V2.5A1.5 1.5 0 0 1 7 1h2a1.5 1.5 0 0 1 1.5 1.5V4m1.5 0v9a1.5 1.5 0 0 1-1.5 1.5h-5A1.5 1.5 0 0 1 4 13V4h8Z" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"/>
-                    </svg>
+                    <img src="./assets/img/delete-contact.svg" alt="delete image">
                     Delete
                 </button>
                 <button class="task-action-btn edit-btn">
-                    <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
-                        <path d="M11.333 2A1.886 1.886 0 0 1 14 4.667l-9 9-3.667 1 1-3.667 9-9Z" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"/>
-                    </svg>
+                    <img src="./assets/img/edit-contact.svg" alt="delete image">
                     Edit
                 </button>
             </div>
