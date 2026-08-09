@@ -571,13 +571,13 @@ main{
     align-items: center;
     gap: 18px;
     margin-top: 10px;
-    height: 55px;
 }
 
-.edit-contact-buttons .secondary-btn-default-icon{
+.edit-contact-buttons .secondary-btn-default-icon, .add-contact-buttons .secondary-btn-default-icon{
     height: 48px;
     width: 99px;
 }
+
 
  .add-contact-buttons button {
     height: 54px;
@@ -588,10 +588,9 @@ main{
     border: 1px solid #2a3647;
     background-color: #ffffff;
     border-radius: 10px;
-    padding: 12px;
     display: flex;
     flex-direction: row;
-    justify-content: space-between;
+    justify-content: center;
     align-items: center;
     gap: 4px;
     color: #2a3647;
@@ -601,13 +600,6 @@ main{
 }
 
  .secondary-btn-default-icon:hover {
-    border-radius: 10px;
-    padding: 12px;
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    align-items: center;
-    gap: 4px;
     font-weight: 400;
     font-size: 18px;
     background-color: #ffffff;
