@@ -111,7 +111,7 @@
 .task-meta-label,
 .task-assigned-label,
 .task-subtasks-label {
-  color: #2a3647;
+  color: gray;
   font-size: 20px;
 }
 
@@ -173,10 +173,25 @@
   font-size: 18px;
 }
 
-.subtask-item input {
-  width: 18px;
-  height: 18px;
-  accent-color: #29abe2;
+.subtask-item input[type="checkbox"] {
+  appearance: none;
+  -webkit-appearance: none;
+
+  width: 20px;
+  height: 20px;
+
+  background-image: url("../assets/img/checkbox.svg");
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+
+  border: none;
+  cursor: pointer;
+  flex-shrink: 0;
+}
+
+.subtask-item input[type="checkbox"]:checked {
+  background-image: url("../assets/img/checkboxChecked.svg");
 }
 
 .task-actions {
