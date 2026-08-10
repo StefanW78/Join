@@ -18,23 +18,6 @@ body {
   overflow: hidden;
 }
 
-.add-task-page .sidebar-wraper {
-  width: 100%;
-  height: 100%;
-  min-height: 0;
-  display: flex;
-  overflow: hidden;
-}
-
-.add-task-page .sidebar {
-  width: 230px;
-  height: 100%;
-  min-height: 0;
-  flex-shrink: 0;
-  overflow: hidden;
-  overflow-y: auto;
-}
-
 .add-task-page .header-and-content-div {
   flex: 1;
   min-width: 0;
@@ -43,27 +26,6 @@ body {
   display: flex;
   flex-direction: column;
   overflow: hidden;
-}
-
-.add-task-page .header-div {
-  width: 100%;
-  height: 96px;
-  min-height: 96px;
-  flex-shrink: 0;
-  padding: 20px 80px;
-  background-color: #ffffff;
-  box-shadow: 0 4px 4px rgba(0, 0, 0, 0.1);
-
-  display: flex;
-  align-items: center;
-}
-
-.add-task-page .header-content {
-  width: 100%;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  position: relative;
 }
 
 .add-task-page .main-container {
@@ -175,12 +137,12 @@ body {
 .formGroup select {
   width: 100%;
   height: 48px;
-  border: 1px solid #d1d1d1;
+  border: 1px solid black;
   border-radius: 10px;
   padding: 12px 16px;
   font-size: 20px;
   background-color: white;
-  color: #d1d1d1;
+  color: black;
   outline: none;
 }
 
@@ -426,18 +388,44 @@ body {
 }
 
 .contactOption {
-  min-height: 48px;
-  padding: 8px 16px;
   display: flex;
   align-items: center;
   gap: 12px;
-  cursor: pointer;
+  min-height: 48px;
+  padding: 8px 16px;
   border-radius: 10px;
+  cursor: pointer;
+  background-color: #ffffff;
+
+  transition:
+    background-color 120ms ease-in-out,
+    color 120ms ease-in-out;
 }
 
-.contactOption:hover,
-.selectedContactOption {
+.contactOption span {
+  flex: 1;
+  font-size: 20px;
+  color: #000;
+}
+
+/* Hover bei nicht ausgewählten Kontakten */
+.contactOption:hover:not(.selectedContactOption) {
   background-color: #eeeeee;
+}
+
+/* Ausgewählter Kontakt */
+.contactOption.selectedContactOption {
+  background-color: #2a3647;
+}
+
+/* Name bei ausgewähltem Kontakt weiß */
+.contactOption.selectedContactOption span {
+  color: white;
+}
+
+/* optional etwas dunkler beim Hover auf ausgewähltem User */
+.contactOption.selectedContactOption:hover {
+  background-color: #091931;
 }
 
 .contactOption span {
@@ -547,11 +535,6 @@ body {
   overflow-y: auto;
 }
 
-.contactOption:hover,
-.selectedContactOption {
-  background-color: white;
-}
-
 .contactOption span {
   flex: 1;
   font-size: 20px;
@@ -568,6 +551,7 @@ body {
   justify-content: center;
   flex-shrink: 0;
   font-size: 14px;
+  border: 2px solid #ffffff;
 }
 
 .contactOption {
@@ -591,24 +575,35 @@ body {
   max-width: 20px;
 
   padding: 0;
-  margin: 0 0 0 auto;
+  margin-left: auto;
 
+  background-color: transparent;
   background-image: url("../assets/img/checkbox.svg");
   background-size: contain;
   background-repeat: no-repeat;
   background-position: center;
 
   border: none;
-  border-radius: 0;
-
   cursor: pointer;
   flex-shrink: 0;
-
   pointer-events: none;
 }
 
 .contactOption .contactCheckbox:checked {
-  background-image: url("../assets/img/checkboxChecked.svg");
+  background-image: none;
+  background-color: #ffffff;
+
+  -webkit-mask-image: url("../assets/img/checkboxChecked.svg");
+  mask-image: url("../assets/img/checkboxChecked.svg");
+
+  -webkit-mask-size: contain;
+  mask-size: contain;
+
+  -webkit-mask-repeat: no-repeat;
+  mask-repeat: no-repeat;
+
+  -webkit-mask-position: center;
+  mask-position: center;
 }
 
 .subtaskInputWrapper {
@@ -834,3 +829,51 @@ body {
   opacity: 1;
 }
 
+#assignedInput,
+#categoryButton,
+#subtasks {
+  border: 1px solid black;
+  border-radius: 10px;
+  background-color: #ffffff;
+  transition: border-color 120ms ease-in-out;
+}
+
+#assignedInput:hover,
+#categoryButton:hover,
+#subtasks:hover {
+  border-color: gainsboro;
+}
+
+#assignedInput:focus,
+#subtasks:focus {
+  border-color: gainsboro;
+  outline: none;
+}
+
+#categoryButton:focus {
+  border-color: gainsboro;
+  outline: none;
+}
+
+#assignedDropdown:focus-within #assignedInput {
+  border-color: gainsboro;
+  border-bottom-left-radius: 0;
+  border-bottom-right-radius: 0;
+}
+
+.dropdownArrow {
+  position: absolute;
+  right: 16px;
+  top: 24px;
+  transform: translateY(-50%);
+
+  width: 10px;
+  height: 10px;
+
+  pointer-events: none;
+}
+
+#assignedInput,
+#categoryButton {
+  padding-right: 48px;
+}

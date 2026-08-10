@@ -28,6 +28,8 @@ const clearSubtaskBtn = document.getElementById("clearSubtaskBtn");
 const moreSubtasksDropdown = document.getElementById("moreSubtasksDropdown");
 
 const taskAddedOverlay = document.getElementById("taskAddedOverlay");
+const assignedArrow = document.getElementById("assignedArrow");
+const categoryArrow = document.getElementById("categoryArrow");
 
 let selectedPriority = "medium";
 let selectedCategory = "";
@@ -260,6 +262,12 @@ function initPriorityButtons() {
 function initCategoryDropdown() {
   categoryButton.addEventListener("click", () => {
     categoryList.classList.toggle("d_none");
+
+      if (categoryList.classList.contains("d_none")) {
+    categoryArrow.src = "./assets/img/arrow_drop_down-icon.svg";
+  } else {
+    categoryArrow.src = "./assets/img/arrowUup.svg";
+  }
   });
 
   document.querySelectorAll("[data-category]").forEach((option) => {
@@ -267,6 +275,7 @@ function initCategoryDropdown() {
       selectedCategory = option.dataset.category;
       categoryButton.textContent = selectedCategory;
       categoryList.classList.add("d_none");
+      categoryArrow.src = "./assets/img/arrow_drop_down-icon.svg";
       clearInputError(categoryButton, categoryError);
 
       categoryButton.classList.add("inputFocus");
@@ -277,6 +286,7 @@ function initCategoryDropdown() {
 function initAssignedDropdown() {
   assignedInput.addEventListener("focus", () => {
     assignedList.classList.remove("d_none");
+    assignedArrow.src = "./assets/img/arrowUup.svg";
     renderContacts();
   });
 
@@ -293,6 +303,7 @@ function initAssignedDropdown() {
 
     if (!clickedInsideAssignedDropdown) {
       assignedList.classList.add("d_none");
+      assignedArrow.src = "./assets/img/arrow_drop_down-icon.svg";
     }
 
     if (!clickedInsideMoreContacts) {
