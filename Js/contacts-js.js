@@ -58,20 +58,16 @@ function getContactArray() {
 
 
 function openContact(event) {
-
     const clickedContact = event.target.closest(".contact-container");
 
     if (!clickedContact) return;
 
-    // alten aktiven Kontakt entfernen
     document.querySelectorAll(".contact-container")
         .forEach(contact => {
             contact.classList.remove("active-contact");
         });
 
-    // neuen Kontakt markieren
     clickedContact.classList.add("active-contact");
-
 
     const id = clickedContact.dataset.id;
 
@@ -144,10 +140,14 @@ function popupMessage(message) {
   }, 2100);
 }
 
-function contactErrorMsg(message) {
-  const ErrorMsgBox = document.getElementById("validationErrorMsg");
-  ErrorMsgBox.style.visibility = "visible";
-  ErrorMsgBox.textContent = message;
+function contactErrorMsg(message, mode = "add") {
+  const errorId = mode === "edit"
+    ? "editValidationErrorMsg"
+    : "validationErrorMsg";
+  const errorMsgBox = document.getElementById(errorId);
+  if (!errorMsgBox) return;
+  errorMsgBox.hidden = false;
+  errorMsgBox.textContent = message;
 }
 
 
@@ -327,7 +327,6 @@ function openContactDetails() {
 }
 
 function MobileSwitchToContacts() {
-
     contactInfoSec.classList.add("d_none");
     contactListSec.classList.remove("d_none");
 
@@ -338,4 +337,3 @@ function MobileSwitchToContacts() {
             });
     }
 }
-

@@ -108,34 +108,34 @@
                                     </div>
                                     <div class="contactForm">
                                         <div class="input-and-errordiv">
-                                        <div class="inputContainer" id="inputContainer_name">
-                                            <input type="text" placeholder="Full Name" id="name_input" required onblur="checkField(`contact`, `name`, `name_input`,`name_error`, `createContactBtn`, `inputContainer_name`)">
+                                        <div class="inputContainer" id="addInputContainer_name">
+                                            <input type="text" placeholder="Full Name" id="name_input" required autocomplete="name" aria-describedby="name_error" oninput="handleContactFieldInput('add', 'name')" onblur="validateContactField('add', 'name')">
                                             <img src="./assets/img/add-contact-person-icon.svg" alt="person-icon">
                                         </div>
-                                        <span id="name_error"></span>
+                                        <span class="contact-field-error" id="name_error" aria-live="polite"></span>
                                         </div>
 
                                         <div class="input-and-errordiv">
-                                        <div class="inputContainer" id="inputContainer_email">
-                                            <input type="email" placeholder="test@hot.de" id="email_input" required onblur="checkField(`contact`, `email`, `email_input`,`email_error`, `createContactBtn`, `inputContainer_email`)">
+                                        <div class="inputContainer" id="addInputContainer_email">
+                                            <input type="email" placeholder="Email" id="email_input" required autocomplete="email" aria-describedby="email_error" oninput="handleContactFieldInput('add', 'email')" onblur="validateContactField('add', 'email')">
                                             <img src="./assets/img/add-contact-mail-icon.svg" alt="mail-icon">
                                         </div>
-                                        <span id="email_error"></span>
+                                        <span class="contact-field-error" id="email_error" aria-live="polite"></span>
                                         </div>
 
                                         <div class="input-and-errordiv">
-                                        <div class="inputContainer" id="inputContainer_phone">
-                                            <input type="tel" placeholder="+49 123 4567890" id="phone_input" required onblur="checkField(`contact`, `phone`, `phone_input`,`phone_error`, `createContactBtn`, `inputContainer_phone`)">
+                                        <div class="inputContainer" id="addInputContainer_phone">
+                                            <input type="tel" placeholder="+49 123 4567890" id="phone_input" required autocomplete="tel" aria-describedby="phone_error" oninput="handleContactFieldInput('add', 'phone')" onblur="validateContactField('add', 'phone')">
                                             <img src="./assets/img/add-contact-call-icon.svg" alt="call-icon">
                                         </div>
-                                        <Span id="phone_error"></Span>
+                                        <span class="contact-field-error" id="phone_error" aria-live="polite"></span>
                                         </div>
-                                        <div class="validationErrorMsg" id="validationErrorMsg"></div>
+                                        <div class="validationErrorMsg" id="validationErrorMsg" aria-live="polite" hidden></div>
                                         <div class="add-contact-buttons">
-                                            <button class="secondary-btn-default-icon" id="cancelBtn" onclick="">Cancel
+                                            <button class="secondary-btn-default-icon" id="cancelBtn" type="button" onclick="CloseAddDialog()">Cancel
                                                 <img src="" alt="">
                                             </button>
-                                            <button class="primary-btn-default-icon" id="createContactBtn" disabled onclick="addNewContact()">Create contact
+                                            <button class="primary-btn-default-icon" id="createContactBtn" type="button" disabled onclick="addNewContact()">Create contact
                                                 <img src="./assets/img/create-contact-check.svg" alt="">
                                             </button>
                                         </div>

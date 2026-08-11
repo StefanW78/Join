@@ -9,7 +9,7 @@ function contactListTemplate(contact) {
                                     </div>
                                     <div class="contactDetails">
                                         <h3 class="contactName">${contact.name}</h3>
-                                        <span class="contactEmail" title ="${contact.email}">${contact.email}</span>
+                                        <span class="contactEmail" title="${contact.email}">${contact.email}</span>
                                     </div>
                                 </div>
     
@@ -81,7 +81,7 @@ function renderEditTemplate(contact) {
     return`
                                     <div class="edit-contact-overlay slide-out" id="edit-contact-overlay">
                                     <div class="edit-contact-overview">
-                                    <div class="close-btn" onclick="CloseEditDialog()">
+                                        <div class="close-btn" onclick="CloseEditDialog()">
                                             <img src="./assets/img/add-contact-close-button.svg" alt="close-btn">
                                         </div>
                                         <div class="join-logo-contact">
@@ -100,33 +100,34 @@ function renderEditTemplate(contact) {
                                                 ${contact.initials}
                                             </div>
                                             <div class="contactForm">
-                                            <div class = "input-and-errordiv">
-                                                <div class="inputContainer" id = "editInputContainer_name">
-                                                    <input type="text" placeholder="name" id="nameInput" value="${contact.name}" onblur="checkField('contact', 'name', 'nameInput','editName_error', 'saveContact-btn', 'editInputContainer_name')">
+                                            <div class="input-and-errordiv">
+                                                <div class="inputContainer" id="editInputContainer_name">
+                                                    <input type="text" placeholder="Name" id="nameInput" value="${contact.name}" required autocomplete="name" aria-describedby="editName_error" oninput="handleContactFieldInput('edit', 'name')" onblur="validateContactField('edit', 'name')">
                                                     <img src="./assets/img/add-contact-person-icon.svg" alt="person-icon">
                                                 </div>
-                                                <span id = "editName_error"></span>
+                                                <span class="contact-field-error" id="editName_error" aria-live="polite"></span>
                                                 </div>
-                                                <div class = "input-and-errordiv">
-                                                <div class="inputContainer" id = "editInputContainer_email">
-                                                    <input type="email" placeholder="Email" id="emailInput" value="${contact.email}" onblur="checkField('contact', 'email', 'emailInput','editEmail_error', 'saveContact-btn', 'editInputContainer_email')">
+                                                <div class="input-and-errordiv">
+                                                <div class="inputContainer" id="editInputContainer_email">
+                                                    <input type="email" placeholder="Email" id="emailInput" value="${contact.email}" required autocomplete="email" aria-describedby="editEmail_error" oninput="handleContactFieldInput('edit', 'email')" onblur="validateContactField('edit', 'email')">
                                                     <img src="./assets/img/add-contact-mail-icon.svg" alt="mail-icon">
                                                 </div>
-                                                <span id = "editEmail_error"></span>
+                                                <span class="contact-field-error" id="editEmail_error" aria-live="polite"></span>
                                                 </div>
-                                                <div class = "input-and-errordiv">
-                                                <div class="inputContainer" id = "editInputContainer_phone">
-                                                    <input type="tel" placeholder="Phone" id="phoneInput" value="${contact.phone}" onblur="checkField('contact', 'phone', 'phoneInput','editPhone_error', 'saveContact-btn', 'editInputContainer_phone')">
+                                                <div class="input-and-errordiv">
+                                                <div class="inputContainer" id="editInputContainer_phone">
+                                                    <input type="tel" placeholder="Phone" id="phoneInput" value="${contact.phone}" required autocomplete="tel" aria-describedby="editPhone_error" oninput="handleContactFieldInput('edit', 'phone')" onblur="validateContactField('edit', 'phone')">
                                                     <img src="./assets/img/add-contact-call-icon.svg" alt="phone-icon">
                                                 </div>
-                                                <span id = "editPhone_error"></span>
+                                                <span class="contact-field-error" id="editPhone_error" aria-live="polite"></span>
                                                 </div>
+                                                <div class="validationErrorMsg" id="editValidationErrorMsg" aria-live="polite" hidden></div>
                                                 <div class="edit-contact-buttons">
-                                                    <button class="secondary-btn-default-icon" id="delete-btn" onclick="deleteContactFromEditOverlay(event)">
+                                                    <button class="secondary-btn-default-icon" id="delete-btn" type="button" onclick="deleteContactFromEditOverlay(event)">
                                                         Delete
                                                         <img src="" alt="">
                                                     </button>
-                                                    <button class="primary-btn-default-icon" id="saveContact-btn" onclick="saveEditedContact()">
+                                                    <button class="primary-btn-default-icon" id="saveContact-btn" type="button" disabled onclick="saveEditedContact()">
                                                         Save
                                                         <img src="./assets/img/create-contact-check.svg" alt="">
                                                     </button>
