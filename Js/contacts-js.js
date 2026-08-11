@@ -131,10 +131,14 @@ function popupMessage(message) {
   }, 2100);
 }
 
-function contactErrorMsg(message) {
-  const ErrorMsgBox = document.getElementById("validationErrorMsg");
-  ErrorMsgBox.style.visibility = "visible";
-  ErrorMsgBox.textContent = message;
+function contactErrorMsg(message, mode = "add") {
+  const errorId = mode === "edit"
+    ? "editValidationErrorMsg"
+    : "validationErrorMsg";
+  const errorMsgBox = document.getElementById(errorId);
+  if (!errorMsgBox) return;
+  errorMsgBox.hidden = false;
+  errorMsgBox.textContent = message;
 }
 
 
@@ -318,4 +322,3 @@ function MobileSwitchToContacts() {
   contactInfoSec.classList.add("d_none");
   contactListSec.classList.remove("d_none");
 }
-

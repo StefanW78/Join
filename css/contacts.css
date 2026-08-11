@@ -523,12 +523,42 @@ main{
     height: 100%;
 }
 
+.input-and-errordiv {
+    width: 100%;
+}
+
+.input-and-errordiv .inputContainer {
+    margin-bottom: 0;
+}
+
+.inputContainer.contact-input-invalid {
+    border-color: rgba(230, 0, 38, 1);
+}
+
+.contact-field-error {
+    display: block;
+    min-height: 22px;
+    padding: 4px 4px 2px;
+    color: rgba(230, 0, 38, 1);
+    font-size: 12px;
+    line-height: 16px;
+}
+
 .validationErrorMsg{
     color: rgba(230, 0, 38, 1);
     font-weight: 400;
     font-size: 16px;
-    margin: 20px 0;
-    visibility: hidden;
+    min-height: 20px;
+    margin: 4px 0;
+}
+
+.validationErrorMsg[hidden] {
+    display: none;
+}
+
+.primary-btn-default-icon:disabled {
+    opacity: 0.55;
+    cursor: not-allowed;
 }
 
 .add-contact-buttons{
@@ -808,5 +838,3 @@ main{
 .popup-message.slide-out{
     transform: translate(150%, -65%);
 }
-
-        

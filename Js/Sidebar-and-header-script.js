@@ -61,7 +61,18 @@ document.addEventListener("DOMContentLoaded", renderInitials);
 // mediaQuery.addEventListener("change", closeDropdown);
 
 function logout() {
-  localStorage.removeItem("userStatus")
-  localStorage.removeItem("username")
+  localStorage.removeItem("currentUser");
+  localStorage.removeItem("userStatus");
+  localStorage.removeItem("username");
+
   window.location.href = "./index.html";
+}
+
+const logoutBtn = document.getElementById("logoutBtn");
+
+if (logoutBtn) {
+  logoutBtn.addEventListener("click", (event) => {
+    event.preventDefault();
+    logout();
+  });
 }
