@@ -1,70 +1,74 @@
+function renderCardOverlay(id) {
+    const task = boardTasks.find((task) => task.id === taskId);
+    if (!card) return;
 
-function prepareOverlayData(card) {
+    const overlay = document.getElementById("cardOverlay");
+    const formContainer = document.getElementById("cardFormContainer");
+    if (!overlay || !formContainer) return;
 
-    const priority = getPriorityData(card.priority);
+    const priorityLabel = card.priorityClass.replace('prio-', '');
+    formContainer.innerHTML = `
+        <div id="openTaskOverlay" class="task-card">
+            <div class="task-card-header">
+                <span class="task-tag ${card.overlayTagClass}">${card.tag}</span>
+                <button class="task-close-btn" onclick="closeCardOverlay()">&times;</button>
+            </div>
+            <h3 class="task-title">${card.title}</h3>
+            <p class="task-description">${card.description}</p>
 
-    return {
-        ...card,
+            <div class="task-meta">
+                <div class="task-meta-item">
+                    <span class="task-meta-label">Due date:</span>
+                    <span class="task-meta-value">${card.dueDate}</span>
+                </div>
+                <div class="task-meta-item">
+                    <span class="task-meta-label">Priority:</span>
+                    <span class="task-meta-value">
+                        ${card.priorityText}
+                        <span class="priority-indicator ${priorityLabel}"></span>
+                    </span>
+                </div>
+            </div>
 
-        tag: card.category,
+            <div class="task-assigned">
+                <div class="task-assigned-label">Assigned To:</div>
+                <div class="task-assigned-list">
+                    ${card.avatars.map(av => `
+                        <div class="assigned-person">
+                            <div class="assigned-avatar ${av.overlayColor}">${av.initials}</div>
+                            <span class="assigned-name">${av.name}</span>
+                        </div>`).join('')}
+                </div>
+            </div>
 
-        overlayTagClass: getCategoryClass(card.category),
+            <div class="task-subtasks">
+                <div class="task-subtasks-label">Subtasks</div>
+                <div class="task-subtasks-list">
+                    ${card.subtasks.map(sub => `
+                        <label class="subtask-item">
+                            <input type="checkbox" ${sub.checked ? 'checked' : ''}>
+                            <span class="subtask-text">${sub.text}</span>
+                        </label>`).join('')}
+                </div>
+            </div>
 
-        priorityClass: `prio-${card.priority}`,
+            <div class="task-actions">
+                <button class="task-action-btn delete-btn">
+                    <img src="./assets/img/delete-contact.svg" alt="delete image">
+                    Delete
+                </button>
+                <button class="task-action-btn edit-btn">
+                    <img src="./assets/img/edit-contact.svg" alt="delete image">
+                    Edit
+                </button>
+            </div>
+        </div>`;
 
-        priorityText: priority.text,
+    overlay.style.display = "flex";
+    document.body.style.overflow = "hidden";
+    
+    overlay.onclick = eventClick;
 
-        priorityIcon: priority.icon,
-
-        avatarsHTML: createAssignedPersons(card.assignedTo || []),
-
-        subtasksHTML: createSubtasks(card.subtasks || [], card.id)
-    };
-}
-
-function createAssignedPersons(avatars) {
-    return avatars
-        .map(avatar => getAssignedPersonTemplate(avatar))
-        .join("");
-}
-
-function createSubtasks(subtasks, taskId) {
-    return subtasks
-        .map((subtask, index) => getSubtaskTemplate(subtask, taskId, index))
-        .join("");
-}
-
-function getPriorityData(priority) {
-
-    const priorities = {
-        urgent: {
-            text: "Urgent",
-            icon: getPriorityIcon("urgent")
-        },
-
-        medium: {
-            text: "Medium",
-            icon: getPriorityIcon("medium")
-        },
-
-        low: {
-            text: "Low",
-            icon: getPriorityIcon("low")
-        }
-    };
-
-
-    return priorities[priority] || priorities.medium;
-}
-
-function getCategoryClass(category) {
-
-    const categoryClassMap = {
-        "User Story": "tag-blue",
-        "Technical Task": "tag-teal"
-    };
-
-    return categoryClassMap[category] || "tag-default";
 }
 
   function closeCardOverlay() {
@@ -83,22 +87,3 @@ function getCategoryClass(category) {
       closeCardOverlay();
     }
   }
-
-function renderCardOverlay(id) {
-    const card = tasks.find(c => c.id === id);
-    if (!card) return;
-
-    const overlay = document.getElementById("cardOverlay");
-    const formContainer = document.getElementById("openTaskOverlay");
-
-    if (!overlay || !formContainer) return;
-
-    const preparedCard = prepareOverlayData(card);
-
-    formContainer.innerHTML = getCardOverlayTemplate(preparedCard);
-
-    overlay.style.display = "flex";
-    document.body.style.overflow = "hidden";
-
-    overlay.onclick = eventClick;
-}

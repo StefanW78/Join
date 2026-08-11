@@ -1,9 +1,9 @@
 window.addEventListener("load", function () {
-  const userStatus = localStorage.getItem("userStatus");
-  const UID = localStorage.getItem("userID");
+  const currentUser = localStorage.getItem("currentUser");
 
-  // Wenn der Benutzer nicht eingeloggt ist.
-  if (!userStatus || (userStatus !== "guest" && userStatus !== "loggedIn")) {
+  if (!currentUser) {
     window.location.href = "./index.html";
   }
 });
+
+

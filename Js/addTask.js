@@ -28,6 +28,8 @@ const clearSubtaskBtn = document.getElementById("clearSubtaskBtn");
 const moreSubtasksDropdown = document.getElementById("moreSubtasksDropdown");
 
 const taskAddedOverlay = document.getElementById("taskAddedOverlay");
+const assignedArrow = document.getElementById("assignedArrow");
+const categoryArrow = document.getElementById("categoryArrow");
 
 let selectedPriority = "medium";
 let selectedCategory = "";
@@ -41,7 +43,8 @@ initCategoryDropdown();
 initAssignedDropdown();
 initSubtasks();
 loadContacts();
-initAddTaskBlurValidation();
+initAddTaskBlurValidation()
+initTaskDate();
 
 clearTaskBtn.addEventListener("click", () => {
   resetFormState();
@@ -50,25 +53,14 @@ clearTaskBtn.addEventListener("click", () => {
 function validateTaskDate() {
   clearInputError(taskDate, taskDateError);
 
-  const dateValue = taskDate.value.trim();
+  const dateValue = taskDate.value;
 
   if (!dateValue) {
     setInputError(taskDate, taskDateError, "This field is required");
     return false;
   }
 
-  if (!isValidDateFormat(dateValue)) {
-    setInputError(taskDate, taskDateError, "Please use the format dd/mm/yyyy");
-    return false;
-  }
-
-  const selectedDate = parseDateFromInput(dateValue);
-  const today = new Date();
-
-  today.setHours(0, 0, 0, 0);
-  selectedDate.setHours(0, 0, 0, 0);
-
-  if (selectedDate < today) {
+  if (dateValue < getTodayISO()) {
     setInputError(
       taskDate,
       taskDateError,
@@ -80,30 +72,22 @@ function validateTaskDate() {
   return true;
 }
 
-function isValidDateFormat(dateValue) {
-  const dateRegex = /^(0[1-9]|[12][0-9]|3[01])\/(0[1-9]|1[0-2])\/\d{4}$/;
+function initTaskDate() {
+  taskDate.min = getTodayISO();
 
-  if (!dateRegex.test(dateValue)) {
-    return false;
-  }
+  taskDate.addEventListener("input", () => {
+    handleInputChange(taskDate, taskDateError);
+  });
 
-  const selectedDate = parseDateFromInput(dateValue);
-
-  const day = Number(dateValue.slice(0, 2));
-  const month = Number(dateValue.slice(3, 5));
-  const year = Number(dateValue.slice(6, 10));
-
-  return (
-    selectedDate.getFullYear() === year &&
-    selectedDate.getMonth() === month - 1 &&
-    selectedDate.getDate() === day
-  );
+  taskDate.addEventListener("blur", validateTaskDate);
 }
 
-function parseDateFromInput(dateValue) {
-  const [day, month, year] = dateValue.split("/");
+function getTodayISO() {
+  const today = new Date();
+  const timezoneOffset = today.getTimezoneOffset() * 60000;
+  const localDate = new Date(today.getTime() - timezoneOffset);
 
-  return new Date(Number(year), Number(month) - 1, Number(day));
+  return localDate.toISOString().split("T")[0];
 }
 
 taskForm.addEventListener("submit", handleTaskSubmit);
@@ -169,13 +153,21 @@ function getTaskFormValues() {
   return {
     title: taskTitle.value.trim(),
     description: taskDescription.value.trim(),
-    dueDate: taskDate.value,
-    dueDateISO: convertDateToISO(taskDate.value),
+    dueDate: formatDateForDisplay(taskDate.value),
+    dueDateISO: taskDate.value,
     category: selectedCategory,
     priority: selectedPriority,
     assignedTo: selectedContacts,
     subtasks,
   };
+}
+
+function formatDateForDisplay(dateValue) {
+  if (!dateValue) return "";
+
+  const [year, month, day] = dateValue.split("-");
+
+  return `${day}/${month}/${year}`;
 }
 
 function getTaskUserData() {
@@ -214,34 +206,8 @@ function redirectToBoardAfterDelay() {
   }, 1200);
 }
 
-function convertDateToISO(dateValue) {
-  const [day, month, year] = dateValue.split("/");
-  return `${year}-${month}-${day}`;
-}
-
 taskTitle.addEventListener("input", () => {
   handleInputChange(taskTitle, taskTitleError);
-});
-
-function formatDateInput() {
-  let value = taskDate.value.replace(/\D/g, "");
-
-  if (value.length > 8) {
-    value = value.slice(0, 8);
-  }
-
-  if (value.length >= 5) {
-    value = value.slice(0, 2) + "/" + value.slice(2, 4) + "/" + value.slice(4);
-  } else if (value.length >= 3) {
-    value = value.slice(0, 2) + "/" + value.slice(2);
-  }
-
-  taskDate.value = value;
-}
-
-taskDate.addEventListener("input", () => {
-  formatDateInput();
-  handleInputChange(taskDate, taskDateError);
 });
 
 taskDescription.addEventListener("input", () => {
@@ -296,6 +262,12 @@ function initPriorityButtons() {
 function initCategoryDropdown() {
   categoryButton.addEventListener("click", () => {
     categoryList.classList.toggle("d_none");
+
+      if (categoryList.classList.contains("d_none")) {
+    categoryArrow.src = "./assets/img/arrow_drop_down-icon.svg";
+  } else {
+    categoryArrow.src = "./assets/img/arrowUup.svg";
+  }
   });
 
   document.querySelectorAll("[data-category]").forEach((option) => {
@@ -303,6 +275,7 @@ function initCategoryDropdown() {
       selectedCategory = option.dataset.category;
       categoryButton.textContent = selectedCategory;
       categoryList.classList.add("d_none");
+      categoryArrow.src = "./assets/img/arrow_drop_down-icon.svg";
       clearInputError(categoryButton, categoryError);
 
       categoryButton.classList.add("inputFocus");
@@ -313,6 +286,7 @@ function initCategoryDropdown() {
 function initAssignedDropdown() {
   assignedInput.addEventListener("focus", () => {
     assignedList.classList.remove("d_none");
+    assignedArrow.src = "./assets/img/arrowUup.svg";
     renderContacts();
   });
 
@@ -329,6 +303,7 @@ function initAssignedDropdown() {
 
     if (!clickedInsideAssignedDropdown) {
       assignedList.classList.add("d_none");
+      assignedArrow.src = "./assets/img/arrow_drop_down-icon.svg";
     }
 
     if (!clickedInsideMoreContacts) {
@@ -733,4 +708,18 @@ function initAddTaskBlurValidation() {
       validateTaskCategory();
     }
   });
+}
+
+function getTaskDateISO(task) {
+  if (task.dueDateISO) {
+    return task.dueDateISO;
+  }
+
+  if (!task.dueDate || !task.dueDate.includes("/")) {
+    return task.dueDate || "";
+  }
+
+  const [day, month, year] = task.dueDate.split("/");
+
+  return `${year}-${month}-${day}`;
 }

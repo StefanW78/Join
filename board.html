@@ -1,147 +1,168 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Join</title>
-    <script src="./Js/auth-script.js"></script>
-    <link rel="stylesheet" href="./standart.css">
-    <link rel="stylesheet" href="./css/BoardCSS.css">
-    <link rel="stylesheet" href="./css/BoardResponsiv.css">
-    <link rel="stylesheet" href="./css/sidebar-and-header-css.css">
-    <link rel="stylesheet" href="./css/sidebar-and-header-responsiv.css">
-    <link rel="stylesheet" href="./css/overlay.css">
-    <link rel="stylesheet" href="./css/addTask.css">
-    <link rel="stylesheet" href="./css/addTaskMobile.css">
-    <link rel="shortcut icon" href="./assets/Favicon/favicon.ico" type="image/x-icon">
-</head>
-<body onload="Init()">
+<!doctype html>
+<html lang="de">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+   
+    <link rel="stylesheet" href="./css/standart.css" />
+    <link rel="stylesheet" href="./css/sidebar-and-header-css.css" />
+    <link rel="stylesheet" href="./css/sidebar-and-header-responsiv.css" />
+
+    <link rel="stylesheet" href="./css/board-styles.css" />
+    <link rel="stylesheet" href="./css/board-responsiv.css" />
+    <link rel="stylesheet" href="./css/addTask.css" />
+    <link rel="stylesheet" href="./css/addTaskMobile.css" />
+    <link rel="stylesheet" href="./css/overlay.css" />
+
+    <script type="module" src="./Js/auth-script.js"></script>
+
+    <title>JOIN-PROJEKT</title>
+  </head>
+  <body class="board-page">
     <div class="body-div">
-        <div class="sidebar-wraper">
-            <div class="sidebar">
-                <div class="sidebar-logo-div">
-                    <img src="./assets/img/join-logo.svg" alt="">
-                </div>
-                <div class="links-and-footer-div">
-                <div class="sidebar-links">
-                        <a  href="./summary.html"><img src="./assets/img/summary-icon.svg" alt="summary-logo"> Summary</a>
-                    
-                        <a href="./addTask.html"><img src="./assets/img/addTask-icon.svg" alt="add-task-logo"> Add-Task</a>
-                
-                        <a class="current-link" href="./board.html"><img src="./assets/img/board-icon.svg" alt="board-logo">Board</a>
-
-                        <a href="./contacts.html"><img src="./assets/img/contacts-icon.svg" alt="contacts-logo"> Contacts</a>
-                    
-                </div>
-                <footer>
-                    <a href="./privacy.html">Privacy Policy</a>
-                    <a href="./legalnotes.html">Legal notice</a>
-                </footer>
-                </div>
-            </div>
-            <div class="header-and-content-div">
-                <div class="header-div">
-                    <div class="header-content">
-                        <div class="header-img">
-                            <img src="./assets/img/Logo_for_Favicon_construction.png" alt="header-logo">
-                        </div>
-                        <div class="header-title">
-                            Kanban Project Management Tool
-                        </div>
-                        <div class="user-header">
-                            <a class="help" href="./help.html"><img src="./assets/img/help.svg" alt="help-logo"></a>
-                            <div class="user-icon">
-                                <button class="header-button" id="header-button">SM</button>
-                            </div>
-                            <div class="dropdown-menu d_none" id="dropdown-menu">
-                                <a class="help-switch hidden-on-desktop" id="help-switch" href="./help.html">Help</a>
-                                <a href="./legalnotes.html">Legal notice</a>
-                                <a href="./privacy.html">Privacy Policy</a>
-                                <a onclick="logout()">Log Out</a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <main class="main-container">
-                  <div class="board-content-div">
-<div class="board-header">
-        <div class="board-box">
-          <h1 class="board-title" >Board</h1>
-        </div>
-        <div class="search-box">
-          <input id="searchTasks" type="text" placeholder="Find Task" />
-          <img src="./assets/img/search.svg" alt="">
-        </div>
-          <button class="btn-add-task btn-add-plus openAddTaskBtn"> Add task &nbsp;+
-          </button> 
-        <button class="btn-add-task btn-add-plus plus-none openAddTaskBtn" ><img src="./assets/img/search-add.svg" alt=""> </button> 
-      </div>
- 
-
-      <div class="board-columns">
-
-        <div class="column" data-status="todo">
-          <div class="column-header">
-            <span>To do</span>
-            <button class="plus-box openAddTaskBtn">+</button>
-          </div>
-          <div class="task-list" id="toDo-list">
-          <div class="empty-card">No tasks To do</div>
-          </div>
-        </div>
-
-        <div class="column" data-status="inProgress">
-          <div class="column-header">
-            <span>In progress</span>
-           <button class="plus-box openAddTaskBtn">+</button>
-          </div>
-          <div class="task-list" id="inProgress-list">
-            <div class="empty-card">No tasks To do</div>
-          </div>
-        </div>
-
-        <div class="column" data-status="awaitFeedback">
-          <div class="column-header">
-            <span>Await feedback</span>
-            <button class="plus-box openAddTaskBtn">+</button>
+      <div class="sidebar-wraper">
+        <div class="sidebar">
+          <div class="sidebar-logo-div">
+            <img src="./assets/img/join-logo.svg" alt="Join logo" />
           </div>
 
-          <div class="task-list" id="awaitFeedback-list">
-            <div class="empty-card">No tasks To do</div>
-          </div>
-        </div>
- 
+          <div class="links-and-footer-div">
+            <div class="sidebar-links">
+              <a href="./summary.html">
+                <img src="./assets/img/summary-icon.svg" alt="summary-logo" />
+                Summary
+              </a>
 
-        <div class="column" data-status="done">
-          <div class="column-header">
-            <span>Done</span>
-          </div>
-          <div class="task-list" id="Done-list">
-              <div class="empty-card">No tasks To do</div>
-          </div>
-        </div>
- 
-      </div>
-                  </div>
-                </main>
+              <a href="./addTask.html">
+                <img src="./assets/img/addTask-icon.svg" alt="add-task-logo" />
+                Add-Task
+              </a>
+
+              <a class="current-link" href="./board.html">
+                <img src="./assets/img/board-icon.svg" alt="board-logo" />
+                Board
+              </a>
+
+              <a href="./contacts.html">
+                <img src="./assets/img/contacts-icon.svg" alt="contacts-logo" />
+                Contacts
+              </a>
             </div>
 
-            <div id="cardOverlay" class="card-overlay">
-              <div id="cardFormContainer" class="card-overlay-content">
-                <div id="openTaskOverlay" class="task-card">
-                  <div class="edit_content">
-                    <div class="task-card-header-edit">
-                <button class="task-close-btn" onclick="closeCardOverlay()">&times;</button>
-                    </div>
-                    <div class="edit-items-div">
-                      
-                    </div>
-                  </div>
+            <footer>
+              <a href="./privacy.html">Privacy Policy</a>
+              <a href="./legalnotes.html">Legal notice</a>
+            </footer>
+          </div>
+        </div>
+
+        <div class="header-and-content-div">
+          <div class="header-div">
+            <div class="header-content">
+              <div class="header-img">
+                <img
+                  src="./assets/img/Logo_for_Favicon_construction.png"
+                  alt="header-logo"
+                />
+              </div>
+
+              <div class="header-title">Kanban Project Management Tool</div>
+
+              <div class="user-header">
+                <a class="help" href="./help.html">
+                  <img src="./assets/img/help.svg" alt="help-logo" />
+                </a>
+
+                <div class="user-icon">
+                  <button class="header-button" id="header-button">SM</button>
+                </div>
+
+                <div class="dropdown-menu d_none" id="dropdown-menu">
+                  <a
+                    class="help-switch hidden-on-desktop"
+                    id="help-switch"
+                    href="./help.html"
+                  >
+                    Help
+                  </a>
+                  <a href="./legalnotes.html">Legal notice</a>
+                  <a href="./privacy.html">Privacy Policy</a>
+                  <a href="" onclick="logout()">Log Out</a>
                 </div>
               </div>
             </div>
+          </div>
 
- <div id="addTaskOverlay" class="add-task-overlay d_none">
+          <main class="main-container board-main">
+            <div class="board-header">
+              <div class="board-box">
+                <h1 class="board-title">Board</h1>
+              </div>
+
+              <div class="search-box">
+                <input
+                  id="boardSearch"
+                  name="boardSearch"
+                  type="text"
+                  placeholder="Find Task"
+                />
+                <img src="./assets/img/search.svg" alt="" />
+              </div>
+
+              <button class="btn-add-task btn-add-plus openAddTaskBtn">
+                Add task &nbsp;+
+              </button>
+
+              <button
+                class="btn-add-task btn-add-plus plus-none openAddTaskBtn"
+              >
+                <img src="./assets/img/search-add.svg" alt="" />
+              </button>
+            </div>
+
+            <div class="board-columns">
+              <div class="column" data-status="todo">
+                <div class="column-header">
+                  <span>To do</span>
+                  <button class="plus-box openAddTaskBtn">+</button>
+                </div>
+                <div class="task-column" id="todoTasks"></div>
+              </div>
+
+              <div class="column" data-status="inProgress">
+                <div class="column-header">
+                  <span>In progress</span>
+                  <button class="plus-box openAddTaskBtn">+</button>
+                </div>
+                <div class="task-column" id="inProgressTasks"></div>
+              </div>
+
+              <div class="column" data-status="awaitFeedback">
+                <div class="column-header">
+                  <span>Await feedback</span>
+                  <button class="plus-box openAddTaskBtn">+</button>
+                </div>
+                <div class="task-column" id="awaitFeedbackTasks"></div>
+              </div>
+
+              <div class="column" data-status="done">
+                <div class="column-header">
+                  <span>Done</span>
+                </div>
+                <div class="task-column" id="doneTasks"></div>
+              </div>
+            </div>
+          </main>
+        </div>
+      </div>
+    </div>
+
+    <!-- hier bleiben deine Overlays -->
+
+    <div id="cardOverlay" class="card-overlay">
+      <div id="cardFormContainer" class="card-overlay-content"></div>
+    </div>
+    <div id="addTaskOverlay" class="add-task-overlay d_none">
       <div class="add-task-modal">
         <button id="closeAddTaskOverlay" class="add-task-close">×</button>
         <section id="addTaskContentTemplate" class="addTaskContent">
@@ -177,14 +198,8 @@
                   <div class="inputWithIcon">
                     <input
                       id="taskDate"
-                      type="text"
-                      placeholder="dd/mm/yyyy"
-                      inputmode="numeric"
-                      maxlength="10"
-                    />
-                    <img
-                      src="./assets/img/calendar-icon.svg"
-                      alt="calendar icon"
+                      type="date"
+                      required
                     />
                   </div>
                   <p class="fieldError" id="taskDateError"></p>
@@ -270,6 +285,7 @@
                       </div>
                     </div>
                   </div>
+                  
 
                   <p class="fieldError" id="categoryError"></p>
                 </div>
@@ -285,9 +301,9 @@
                     />
 
                     <div class="subtaskActions">
-                      <button type="button" id="clearSubtaskBtn">×</button>
+                      <button type="button" id="clearSubtaskBtn"><img src="/assets/img/Subtasks cancel.svg" alt="clear Task Button"></button>
                       <div class="subtaskDivider"></div>
-                      <button type="button" id="addSubtaskBtn">✓</button>
+                      <button type="button" id="addSubtaskBtn"><img src="/assets/img/Subtasks accept.svg" style="color: black" alt="accept Task Button"></button>
                     </div>
                   </div>
 
@@ -309,10 +325,10 @@
 
               <div class="taskActions">
                 <button type="button" class="clearBtn" id="clearTaskBtn">
-                  Clear ✕
+                  Clear <img src="/assets/img/Subtasks cancel.svg" alt="clear Task Button">
                 </button>
                 <button type="submit" class="createTaskBtn">
-                  Create Task ✓
+                  Create Task <img src="/assets/img/create-contact-check.svg" style="color: white" alt="accept Task Button">
                 </button>
               </div>
             </div>
@@ -320,27 +336,17 @@
         </section>
       </div>
     </div>
-<div id="taskAddedOverlay" class="taskAddedOverlay d_none">
+    <div id="taskAddedOverlay" class="taskAddedOverlay d_none">
       <div class="taskAddedBox">
         <span>Task added to board</span>
         <img src="./assets/img/board-icon.svg" alt="Board icon" />
       </div>
     </div>
-        </div>
-    </div>
-    <div id="contextMessage" class="context-message">
-    <span id="contextMessageText"></span>
-</div>
-</body>
-<script src="./script.js"></script>
-<script src="./Js/Sidebar-and-header-script.js"></script>
-<script src="./Js/db.js"></script>
-<script src="./Js/boardScript.js"></script>
-<script src="./Js/boardDragNDrop.js"></script>
-<script src="./Js/add-Task-Edit.js"></script>
-<script src="./Js/add-Task-Edit-Validator.js"></script>
-<script src="./Js/template.js"></script>
-<script src="./Js/overlay.js"></script>
-<script type="module" src="./Js/addTask.js"></script>
-<script src="./Js/boardAddTaskOverlay.js"></script>
+    <script type="module" src="./Js/addTask.js"></script>
+    <script src="./Js/boardAddTaskOverlay.js"></script>
+    <script type="module" src="./Js/userBadge.js"></script>
+    <script src="./Js/boardTemplate.js"></script>
+    <script type="module" src="./Js/board.js"></script>
+    <script src="./Js/Sidebar-and-header-script.js"></script>
+  </body>
 </html>
