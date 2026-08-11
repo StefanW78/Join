@@ -126,6 +126,10 @@
     .summary-overview-boxes{
         gap: 15px;
     }
+
+    .summary-div{
+        gap: 35px;
+    }
 }
 
 @media (max-width: 400px){
@@ -143,6 +147,18 @@
 
         .summary-overview-boxes span{
             font-size: 35px;
+        }
+
+        .main-title{
+            font-size: 36px;
+        }
+
+        .summary-title{
+            gap: 5px;
+        }
+
+        .summary-div{
+            padding: 20px 10px 35px 10px;
         }
 }
 
