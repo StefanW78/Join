@@ -122,14 +122,12 @@ function getContactFieldError(fieldName, rawValue) {
   }
 
   if (fieldName === "email") {
-  if (value !== value.trim()) {
-    return "Please enter a valid email";
+    if (value !== value.trim()) {
+      return "Please enter a valid email";
+    }
+    const emailRegex = /^(?!.*\.\.)(?!.*@\.)[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    return emailRegex.test(value) ? "" : "Please enter a valid email";
   }
-
-  const emailRegex = /^(?!.*\.\.)(?!.*@\.)[^\s@]+@[^\s@]+\.[^\s@]+$/;
-  
-  return emailRegex.test(value) ? "" : "Please enter a valid email";
-}
 
   if (fieldName === "phone") {
     const phoneCharactersRegex = /^\+?[0-9\s()-]+$/;
