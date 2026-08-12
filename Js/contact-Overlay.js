@@ -125,6 +125,7 @@ function getContactFieldError(fieldName, rawValue) {
   if (value !== value.trim()) {
     return "Please enter a valid email";
   }
+
   const emailRegex = /^(?!.*\.\.)(?!.*@\.)[^\s@]+@[^\s@]+\.[^\s@]+$/;
   
   return emailRegex.test(value) ? "" : "Please enter a valid email";
