@@ -122,8 +122,8 @@ function getContactFieldError(fieldName, rawValue) {
   }
 
   if (fieldName === "email") {
-    if (value !== value.trim()) {
-      return "Please enter a valid email";
+    if (rawValue !== rawValue.trim()) {
+      return "Email address cannot contain leading or trailing spaces";
     }
     const emailRegex = /^(?!.*\.\.)(?!.*@\.)[^\s@]+@[^\s@]+\.[^\s@]+$/;
     return emailRegex.test(value) ? "" : "Please enter a valid email";
