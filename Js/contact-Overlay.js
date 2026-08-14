@@ -130,12 +130,16 @@ function getContactFieldError(fieldName, rawValue) {
   }
 
   if (fieldName === "phone") {
-    const phoneCharactersRegex = /^\+?[0-9\s()-]+$/;
-    const digitCount = value.replace(/\D/g, "").length;
-    return phoneCharactersRegex.test(value) && digitCount >= 7 && digitCount <= 15
-      ? ""
-      : "Please enter a valid phone number (7 to 15 digits)";
-  }
+  const phone = value.trim();
+  const phoneCharactersRegex = /^\+?[0-9\s()-]+$/;
+  const digitCount = phone.replace(/\D/g, "").length;
+
+  return phoneCharactersRegex.test(phone) &&
+    digitCount >= 7 &&
+    digitCount <= 15
+    ? ""
+    : "Please enter a valid phone number (7 to 15 digits)";
+}
 
   return "";
 }
