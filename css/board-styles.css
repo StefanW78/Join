@@ -157,6 +157,74 @@ main {
   border-radius: 10px;
 }
 
+@media (min-width: 991px) {
+  html,
+  body.board-page {
+    height: 100%;
+    overflow: hidden;
+  }
+
+  .board-page .body-div,
+  .board-page .sidebar-wraper {
+    height: 100vh;
+    min-height: 0;
+    overflow: hidden;
+  }
+
+  .board-page .sidebar {
+    width: 230px;
+    height: 100vh;
+    flex: 0 0 230px;
+  }
+
+  .board-page .header-and-content-div {
+    height: 100vh;
+    min-height: 0;
+    overflow: hidden;
+  }
+
+  .board-page .header-div {
+    height: 96px;
+    flex: 0 0 96px;
+  }
+
+  .board-page .board-main {
+    flex: 1;
+    min-height: 0;
+    overflow: hidden;
+  }
+
+  .board-page .board-header {
+    flex-shrink: 0;
+  }
+
+  .board-page .board-columns {
+    flex: 1;
+    min-height: 0;
+    flex-wrap: nowrap;
+    align-items: stretch;
+  }
+
+  .board-page .column {
+    min-width: 0;
+    min-height: 0;
+    overflow: hidden;
+  }
+
+  .board-page .column-header {
+    flex-shrink: 0;
+  }
+
+  .board-page .task-column {
+    flex: 1;
+    min-height: 0;
+    overflow-x: hidden;
+    overflow-y: auto;
+    scrollbar-gutter: stable;
+    padding-right: 4px;
+  }
+}
+
 .column-header {
   display: flex;
   align-items: center;
