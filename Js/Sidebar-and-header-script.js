@@ -50,6 +50,16 @@ function renderInitials() {
  
 document.addEventListener("DOMContentLoaded", renderInitials);
 
+function logout(event) {
+  if (event) event.preventDefault();
+
+  localStorage.removeItem("currentUser");
+  localStorage.removeItem("userStatus");
+  localStorage.removeItem("username");
+
+  window.location.href = "./index.html";
+}
+
 
 // Andere variante zum schließen
 // const closeDropdown = () => {

@@ -5,6 +5,10 @@
         display: flex !important;
     }
 
+    .dropdown-menu .help-switch.hidden-on-desktop {
+        display: flex !important;
+    }
+
 .sidebar-wraper{
     flex-direction: column;
     flex: 1;
