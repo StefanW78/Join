@@ -140,7 +140,6 @@ main{
     /* padding: 75px 50px 50px 75px; */
     display: flex;
     flex-direction: column;
-    max-width: 1440px;
     justify-content: flex-start;
     align-items: flex-start;
 
@@ -148,6 +147,7 @@ main{
 
 .summary-div{
     width: 100%;
+    max-width: 1440px;
     display: flex;
     flex-direction: column;
     gap: 50px;
