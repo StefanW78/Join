@@ -109,7 +109,7 @@
                                     <div class="contactForm">
                                         <div class="input-and-errordiv">
                                         <div class="inputContainer" id="addInputContainer_name">
-                                            <input type="text" placeholder="Full Name" id="name_input" required autocomplete="name" aria-describedby="name_error" oninput="handleContactFieldInput('add', 'name')" onblur="validateContactField('add', 'name')">
+                                            <input type="text" placeholder="Full Name" id="name_input" required autocomplete="name" aria-describedby="name_error" onblur="handleContactFieldInput('add', 'name')">
                                             <img src="./assets/img/add-contact-person-icon.svg" alt="person-icon">
                                         </div>
                                         <span class="contact-field-error" id="name_error" aria-live="polite"></span>
@@ -117,7 +117,7 @@
 
                                         <div class="input-and-errordiv">
                                         <div class="inputContainer" id="addInputContainer_email">
-                                            <input type="email" placeholder="Email" id="email_input" required autocomplete="email" aria-describedby="email_error" oninput="handleContactFieldInput('add', 'email')" onblur="validateContactField('add', 'email')">
+                                            <input type="email" placeholder="Email" id="email_input" required autocomplete="email" aria-describedby="email_error"  onblur="validateContactField('add', 'email')">
                                             <img src="./assets/img/add-contact-mail-icon.svg" alt="mail-icon">
                                         </div>
                                         <span class="contact-field-error" id="email_error" aria-live="polite"></span>
@@ -125,7 +125,7 @@
 
                                         <div class="input-and-errordiv">
                                         <div class="inputContainer" id="addInputContainer_phone">
-                                            <input type="tel" placeholder="+49 123 4567890" id="phone_input" required autocomplete="tel" aria-describedby="phone_error" onblur="validateContactField('add', 'phone')">
+                                            <input type="tel" placeholder="+49 123 4567890" id="phone_input" required autocomplete="tel" aria-describedby="phone_error" onblur="handleContactFieldInput('add', 'phone')">
                                             <img src="./assets/img/add-contact-call-icon.svg" alt="call-icon">
                                         </div>
                                         <span class="contact-field-error" id="phone_error" aria-live="polite"></span>
