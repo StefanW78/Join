@@ -38,12 +38,12 @@ async function renderSummary() {
 
 
   const formattedDeadline = nextDeadline
-    ? nextDeadline.toLocaleDateString("de-DE", {
-        day: "2-digit",
-        month: "2-digit",
-        year: "numeric"
-      })
-    : "No upcoming deadlines";
+  ? nextDeadline.toLocaleDateString("en-US", {
+      month: "long",
+      day: "numeric",
+      year: "numeric"
+    })
+  : "No upcoming deadlines";
 
   toDoNumbers.innerText = totalTodo;
   doneNumbers.innerText = totalDone;
@@ -77,7 +77,7 @@ function renderName() {
 
 
 function greetingGuest() {
-  const checkQueries = window.matchMedia("(max-width: 1092px)");
+  const checkQueries = window.matchMedia("(max-width: 1023px)");
   if (checkQueries.matches) {
     AnimationWelcomeAnimation()
   }

@@ -17,6 +17,65 @@ body{
     display: flex;
 }
 
+/* Test */
+html,
+body {
+    margin: 0;
+    height: 100%;
+}
+
+body {
+    background-color: #f6f7f8;
+    overflow: hidden;
+}
+
+.body-div {
+    height: 100dvh;
+    display: flex;
+    overflow: hidden;
+}
+
+.sidebar-wraper {
+    display: flex;
+    width: 100%;
+    height: 100%;
+    min-height: 0;
+}
+
+.header-and-content-div {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    min-width: 0;
+    min-height: 0;
+}
+
+main {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: flex-start;
+    flex: 1;
+    min-height: 0;
+    min-width: 0;
+}
+
+.summary-div {
+    width: 100%;
+    max-width: 1440px;
+    display: flex;
+    flex-direction: column;
+    gap: 50px;
+
+    overflow-y: auto;
+    overflow-x: hidden;
+
+    min-height: 0;
+    box-sizing: border-box;
+}
+/* Test */
+
 
 /*header css*/
 /*-------------*/
@@ -142,18 +201,19 @@ main{
     flex-direction: column;
     justify-content: flex-start;
     align-items: flex-start;
+    flex: 1;
 
 }
 
 .summary-div{
+    height: 100%;
     width: 100%;
     max-width: 1440px;
     display: flex;
     flex-direction: column;
     gap: 50px;
-    height: calc(100vh - 176px);
     overflow-y: auto;
-    padding: 70px 50px 50px 70px;
+    padding: 70px 50px 20px 70px;
 }
 
 .summary-title{
@@ -169,6 +229,10 @@ main{
     font-size: 60px;
     color: rgba(0, 0, 0, 1);
     font-weight: 700;
+}
+
+.urgency-date{
+    font-weight: 700 !important;
 }
 
 .seperator{
@@ -193,7 +257,7 @@ main{
 
 .summary-overview{
     width: 100%;
-    max-width: 800px;
+    max-width: 560px;
     display: flex;
     flex: 1.5;
     flex-direction: column;
@@ -207,55 +271,75 @@ main{
     display: flex;
     flex-direction: row;
     align-items: center;
-    gap: 25px;
+    justify-content: space-between;
     width: 100%;
+    gap: 30px;
 }
 
 .summary-overview-boxes span{
-    font-size: 42px;
+    font-size: 64px;
     font-weight: 600;
     color: rgba(0, 0, 0, 1);
 }
 
 .summary-overview-boxes h4 {
     text-align: center;
-    font-size: 18px;
+    font-size: 20px;
     font-weight: 400;
     color: rgba(42, 54, 71, 1);
 }
 
 .summary-overview-boxes h5 {
-    text-align: center;
-    font-size: 18px;
+    font-size: 20px;
     font-weight: 400;
     color: rgba(42, 54, 71, 1);
+}
+
+.tasks-text{
+    text-align: center;
+}
+
+.deadline{
+    font-size: 16px !important;
 }
 
 .overview-container-items{
     box-shadow: 0px 0px 4px 0px rgba(0, 0, 0, 0.4);
     display: flex;
     flex-direction: row;
-    justify-content: center;
+    justify-content: space-evenly;
     align-items: center;
     background-color: rgba(255, 255, 255, 1);
     border: none;
     border-radius: 30px;
     padding: 16px 32px;
-    gap: 24px;
     flex: 1;
     cursor: pointer;
     transition: all 125ms ease-in-out;
 }
 
-/* .overview-container-items.box-1, .overview-container-items.box-2{
+.overview-container-items.box-1, .overview-container-items.box-2{
     width: 100%;
     max-width: 264px;
-    height: 168px;
-} */
+    padding: 33.5px 50px;
+    gap: 18px;
+}
+
+.overview-container-items.box-3{
+    max-height: 146px;
+    padding: 28px 0px;
+    justify-content: space-evenly;
+}
+
+.overview-container-items.box-4, .overview-container-items.box-5, .overview-container-items.box-6{
+    width: 100%;
+    max-width: 155px;
+    max-height: 155px;
+    padding: 25px 0px;
+}
 
 .overview-container-items img {
-    width: 50px;
-    height: 50px;
+    width: 69px;
 }
 
 .task-number{
@@ -264,6 +348,7 @@ main{
     justify-content: center;
     align-items: center;
     gap: 0;
+    max-height: 95px;
 }
 
 .left-box{
@@ -316,15 +401,15 @@ main{
 }
 
 .welcome-message{
-    font-size: 34px;
+    font-size: 47px;
     font-weight: 500;
     color: rgba(42, 54, 71, 1);
 }
 
 .user-name{
-    color: #29abe2;
+    color: rgba(18, 70, 88, 1);
     font-weight: 700;
-    font-size: 42px;
+    font-size: 64px;
 }
 
 .overview-container-items.box-1:hover, .overview-container-items.box-2:hover{
