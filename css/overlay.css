@@ -629,26 +629,24 @@
 .edit-task-card {
   width: 100%;
   max-height: min(916px, calc(100dvh - 32px));
-  padding: 32px 24px 24px;
+  padding: 32px 16px 24px 26px;
   border-radius: 30px;
   gap: 20px;
   overflow-x: hidden;
-  overflow-y: auto;
+  overflow-y: hidden;
   overscroll-behavior: contain;
-  scrollbar-color: #a8a8a8 transparent;
-  scrollbar-width: thin;
 }
 
-.edit-task-card::-webkit-scrollbar {
+.edit-task-card .taskForm::-webkit-scrollbar {
   width: 8px;
 }
 
-.edit-task-card::-webkit-scrollbar-track {
-  margin: 112px 0 32px;
+.edit-task-card .taskForm::-webkit-scrollbar-track {
+  margin: 18px 0 8px;
   background: transparent;
 }
 
-.edit-task-card::-webkit-scrollbar-thumb {
+.edit-task-card .taskForm::-webkit-scrollbar-thumb {
   border-radius: 8px;
   background: #a8a8a8;
 }
@@ -656,6 +654,12 @@
 .edit-task-card-header {
   min-height: 30px;
   justify-content: flex-end;
+  flex-shrink: 0;
+}
+
+.edit-task-card-header .task-close-btn {
+  margin-right: 4px;
+  transform: translateY(4px);
 }
 
 .edit-task-title {
@@ -665,18 +669,33 @@
 }
 
 .edit-task-card .taskForm {
-  min-height: auto;
+  min-height: 0;
+  flex: 1 1 auto;
   gap: 24px;
+  overflow-x: hidden;
+  overflow-y: auto;
+  scrollbar-color: #a8a8a8 transparent;
+  scrollbar-width: thin;
 }
 
 .edit-task-card .editFormGrid {
   display: flex;
   flex-direction: column;
-  gap: 20px;
+  align-items: stretch;
+  gap: 13px;
 }
 
 .edit-task-card .formColumn {
-  gap: 20px;
+  gap: 26px;
+}
+
+.edit-task-card .priorityGroup {
+  width: 100%;
+  margin-top: 21px;
+}
+
+.edit-task-card .editFormGrid > .formGroup {
+  width: 100%;
 }
 
 .edit-task-card .formGroup label,
@@ -692,6 +711,13 @@
   font-size: 18px;
 }
 
+.edit-task-card #editTaskTitle,
+.edit-task-card #editTaskDate {
+  height: 42px;
+  padding-top: 8px;
+  padding-bottom: 8px;
+}
+
 .edit-task-card .fieldError:empty {
   display: none;
 }
@@ -704,6 +730,35 @@
 .edit-task-card .priorityButtons {
   width: 100%;
   gap: 12px;
+}
+
+.edit-task-card #editAssignedDropdown::after {
+  content: "";
+  position: absolute;
+  top: 50%;
+  right: 16px;
+  width: 8px;
+  height: 5px;
+  background: url("../assets/img/arrow_drop_down-icon.svg") center / contain no-repeat;
+  transform: translateY(-50%);
+  pointer-events: none;
+}
+
+.edit-task-card #editAssignedInput {
+  padding-right: 40px;
+}
+
+.edit-task-card .selectedContactsWrapper {
+  margin-top: 5px;
+}
+
+.edit-task-card .selectedContacts {
+  margin-top: 0;
+}
+
+.edit-task-card .selectedAvatar {
+  width: 40px;
+  height: 40px;
 }
 
 .edit-task-card .priorityBtn {
@@ -772,7 +827,7 @@
 }
 
 .edit-task-card .editSubtaskItem .subtaskItemActions {
-  display: none;
+  display: flex;
   align-items: center;
   gap: 8px;
   flex-shrink: 0;
@@ -793,6 +848,11 @@
   justify-content: center;
 }
 
+.edit-task-card .editSubtaskItem .deleteSubtaskBtn {
+  border-left: 1px solid #d1d1d1;
+  padding-left: 8px;
+}
+
 .edit-task-card .editSubtaskItem .editSubtaskBtn img,
 .edit-task-card .editSubtaskItem .deleteSubtaskBtn img {
   width: 20px;
@@ -807,14 +867,9 @@
 
   .edit-task-card {
     max-height: calc(100dvh - 24px);
-    padding: 24px 16px 20px;
+    padding: 24px 10px 20px 16px;
     border-radius: 24px;
     gap: 16px;
-  }
-
-  .edit-task-card .editFormGrid,
-  .edit-task-card .formColumn {
-    gap: 18px;
   }
 
   .edit-task-card .priorityButtons {

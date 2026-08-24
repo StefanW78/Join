@@ -13,8 +13,8 @@ function init() {
 }
 function CheckInUser() {
     const userStatus = localStorage.getItem("userStatus");
-
-    if (!userStatus || (userStatus !== "guest" && userStatus !== "loggedIn")) {
+  // loggedIn gegen user getauscht
+    if (!userStatus || (userStatus !== "guest" && userStatus !== "user")) {
     SummaryA.classList.add(`d_none`)
     addTaskA.classList.add(`d_none`)
     boardA.classList.add(`d_none`)

@@ -857,7 +857,7 @@ function validateEditTaskDate() {
     setEditInputError(
       editTaskDate,
       editTaskDateError,
-      "Please use the format dd/mm/yyyy",
+      "Please enter a valid date",
     );
     return false;
   }
@@ -919,6 +919,48 @@ function convertDateToISO(dateValue) {
 
   const [day, month, year] = dateValue.split("/");
   return `${year}-${month}-${day}`;
+}
+
+function getTodayISO() {
+  const today = new Date();
+  const timezoneOffset = today.getTimezoneOffset() * 60000;
+  const localDate = new Date(today.getTime() - timezoneOffset);
+
+  return localDate.toISOString().split("T")[0];
+}
+
+function formatDateForDisplay(dateValue) {
+  if (!dateValue || !dateValue.includes("-")) return dateValue || "";
+
+  const [year, month, day] = dateValue.split("-");
+  return `${day}/${month}/${year}`;
+}
+
+function isValidEditDateFormat(dateValue) {
+  if (!/^\d{4}-\d{2}-\d{2}$/.test(dateValue)) return false;
+
+  const [year, month, day] = dateValue.split("-").map(Number);
+  const date = new Date(Date.UTC(year, month - 1, day));
+
+  return (
+    date.getUTCFullYear() === year &&
+    date.getUTCMonth() === month - 1 &&
+    date.getUTCDate() === day
+  );
+}
+
+function validateEditDateIsNotPast(input, errorElement, dateValue) {
+  if (dateValue < getTodayISO()) {
+    setEditInputError(
+      input,
+      errorElement,
+      "The due date cannot be in the past",
+    );
+    return false;
+  }
+
+  clearEditInputError(input, errorElement);
+  return true;
 }
 
 function initEditPriorityButtons(onChange) {
@@ -1198,6 +1240,7 @@ function initEditSubtaskDeleteButtons(editSubtasks, onChange, onEdit) {
       button.addEventListener("click", () => {
         const index = Number(button.dataset.index);
 
+        editSubtasks.splice(index, 1);
         renderEditSubtasks(editSubtasks, onChange, onEdit);
         onChange(editSubtasks);
       });

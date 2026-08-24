@@ -23,7 +23,9 @@ function getEditTaskTemplate(task) {
           id="closeEditTaskOverlayBtn"
           type="button"
           aria-label="Close edit task"
-        >&times;</button>
+        >
+          <img src="./assets/img/close-icon.svg" alt="" />
+        </button>
       </div>
 
       <form id="editTaskForm" class="taskForm">
