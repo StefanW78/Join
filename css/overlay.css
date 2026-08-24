@@ -622,11 +622,40 @@
 }
 
 .card-overlay-content.edit-mode {
-  width: min(100%, 680px);
+  width: min(100%, 420px);
+  max-height: calc(100dvh - 32px);
 }
 
 .edit-task-card {
-  padding: 32px;
+  width: 100%;
+  max-height: min(916px, calc(100dvh - 32px));
+  padding: 32px 24px 24px;
+  border-radius: 30px;
+  gap: 20px;
+  overflow-x: hidden;
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  scrollbar-color: #a8a8a8 transparent;
+  scrollbar-width: thin;
+}
+
+.edit-task-card::-webkit-scrollbar {
+  width: 8px;
+}
+
+.edit-task-card::-webkit-scrollbar-track {
+  margin: 112px 0 32px;
+  background: transparent;
+}
+
+.edit-task-card::-webkit-scrollbar-thumb {
+  border-radius: 8px;
+  background: #a8a8a8;
+}
+
+.edit-task-card-header {
+  min-height: 30px;
+  justify-content: flex-end;
 }
 
 .edit-task-title {
@@ -643,15 +672,32 @@
 .edit-task-card .editFormGrid {
   display: flex;
   flex-direction: column;
-  gap: 24px;
+  gap: 20px;
 }
 
 .edit-task-card .formColumn {
   gap: 20px;
 }
 
+.edit-task-card .formGroup label,
+.edit-task-card .priorityGroup legend {
+  font-size: 18px;
+  color: #2a3647;
+}
+
+.edit-task-card .formGroup input,
+.edit-task-card .formGroup textarea {
+  border-color: #d1d1d1;
+  color: #000;
+  font-size: 18px;
+}
+
+.edit-task-card .fieldError:empty {
+  display: none;
+}
+
 .edit-task-card textarea {
-  min-height: 120px;
+  min-height: 92px;
   resize: none;
 }
 
@@ -663,14 +709,22 @@
 .edit-task-card .priorityBtn {
   flex: 1 1 0;
   min-width: 0;
-  height: 48px;
-  font-size: 18px;
+  height: 46px;
+  padding: 0 10px;
+  font-size: 16px;
 }
 
 .editTaskActions {
   display: flex;
   justify-content: flex-end;
-  gap: 16px;
+  padding-top: 2px;
+}
+
+.editTaskActions .createTaskBtn {
+  height: 56px;
+  padding: 0 16px;
+  font-size: 20px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.18);
 }
 
 .editInfoBox {
@@ -743,4 +797,33 @@
 .edit-task-card .editSubtaskItem .deleteSubtaskBtn img {
   width: 20px;
   height: 20px;
+}
+
+@media (max-width: 480px) {
+  .card-overlay-content.edit-mode {
+    width: min(100%, 420px);
+    max-height: calc(100dvh - 24px);
+  }
+
+  .edit-task-card {
+    max-height: calc(100dvh - 24px);
+    padding: 24px 16px 20px;
+    border-radius: 24px;
+    gap: 16px;
+  }
+
+  .edit-task-card .editFormGrid,
+  .edit-task-card .formColumn {
+    gap: 18px;
+  }
+
+  .edit-task-card .priorityButtons {
+    gap: 8px;
+  }
+
+  .edit-task-card .priorityBtn {
+    padding: 0 6px;
+    font-size: 14px;
+    gap: 5px;
+  }
 }

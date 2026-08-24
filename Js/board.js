@@ -694,10 +694,6 @@ function initEditTaskForm(task) {
     .getElementById("closeEditTaskOverlayBtn")
     .addEventListener("click", closeTaskDetailOverlay);
 
-  document.getElementById("cancelEditTaskBtn").addEventListener("click", () => {
-    openTaskDetailOverlay(task.id);
-  });
-
   initEditPriorityButtons((priority) => {
     selectedEditPriority = priority;
   });
