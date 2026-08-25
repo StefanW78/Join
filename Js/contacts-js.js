@@ -6,7 +6,7 @@ let contactListSec = document.getElementById(`contacts-list-sec`)
 let contactSymbol = document.getElementById(`contact-symbol`)
 let editTool = document.getElementById(`edit`)
 let contactDetailDiv = document.getElementById(`contacts-infos`)
-const mediaQueryForD_none = window.matchMedia("(max-width: 1092px)")
+const mediaQueryForD_none = window.matchMedia("(max-width: 1023px)")
 const createMessage = document.getElementById(`createMessage`)
 
 let fetchedData;
@@ -301,14 +301,14 @@ function handleEditToolClick(event) {
   event.stopPropagation();
   const editToolEls = document.getElementById("contact-edit-tools");
   if (!editToolEls) return;
-  const checkquery = window.matchMedia("(max-width: 1092px)");
+  const checkquery = window.matchMedia("(max-width: 1023px)");
   if (checkquery.matches) {
     OpenMobileDialogForDetails();
   }
 }
 
 function setInitialView() {
-  if (window.innerWidth <= 1092) {
+  if (window.innerWidth <= 1023) {
     // Mobile
     contactListSec.classList.remove("d_none");
     contactInfoSec.classList.add("d_none");
@@ -320,7 +320,7 @@ function setInitialView() {
 }
 
 function openContactDetails() {
-  if (window.innerWidth <= 1092) {
+  if (window.innerWidth <= 1023) {
     contactListSec.classList.add("d_none");
     contactInfoSec.classList.remove("d_none");
   }
@@ -330,7 +330,7 @@ function MobileSwitchToContacts() {
     contactInfoSec.classList.add("d_none");
     contactListSec.classList.remove("d_none");
 
-    if (window.innerWidth <= 1092) {
+    if (window.innerWidth <= 1023) {
         document.querySelectorAll(".contact-container")
             .forEach(contact => {
                 contact.classList.remove("active-contact");
