@@ -28,7 +28,7 @@ main{
     justify-content: flex-start;
     gap: 28px;
     align-items: flex-start;
-    padding: 0 30px 0 0;
+    padding: 0 20px 0 0;
     flex: 1;
 
 }
@@ -92,7 +92,7 @@ main{
 }
 
 .contacts-infos{
-
+width: 100%;
 }
 
 
@@ -105,8 +105,9 @@ main{
 }
 
 .contact-baged{
-    width: 100px;
-    height: 100px;
+    min-width: 119px;
+    width: 120px;
+    height: 120px;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -114,7 +115,7 @@ main{
     border: 3px solid rgba(255, 255, 255, 1);
     border-radius: 50%;
     color: rgba(255, 255, 255, 1);
-    font-size: 40px;
+    font-size: 47px;
     font-weight: 500;
 }
 
@@ -128,7 +129,7 @@ main{
 
 
 .contact-name{
-    font-size: 32px;
+    font-size: 47px;
     font-weight: 500;
     color: rgba(0, 0, 0, 1);
 }
@@ -348,6 +349,7 @@ main{
 
 
 .contact-container .contact-badge {
+    min-width: 41px;
     width: 42px;
     height: 42px;
     display: flex;
