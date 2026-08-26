@@ -115,6 +115,10 @@ function getContactFieldError(fieldName, rawValue) {
   }
 
   if (fieldName === "name") {
+    if (rawValue !== value) {
+      return "Name cannot contain leading or trailing spaces";
+    }
+
     const nameRegex = /^[\p{L}\p{M}]+(?:[\s'’-][\p{L}\p{M}]+)*$/u;
     return nameRegex.test(value)
       ? ""
