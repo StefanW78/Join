@@ -102,21 +102,21 @@ function renderEditTemplate(contact) {
                                             <div class="contactForm">
                                             <div class="input-and-errordiv">
                                                 <div class="inputContainer" id="editInputContainer_name">
-                                                    <input type="text" placeholder="Name" id="nameInput" value="${contact.name}" required autocomplete="name" aria-describedby="editName_error" oninput="handleContactFieldInput('edit', 'name')" onblur="validateContactField('edit', 'name')">
+                                                    <input type="text" placeholder="Name" id="nameInput" value="${contact.name}" required autocomplete="name" aria-describedby="editName_error" onblur="validateContactField('edit', 'name')">
                                                     <img src="./assets/img/add-contact-person-icon.svg" alt="person-icon">
                                                 </div>
                                                 <span class="contact-field-error" id="editName_error" aria-live="polite"></span>
                                                 </div>
                                                 <div class="input-and-errordiv">
                                                 <div class="inputContainer" id="editInputContainer_email">
-                                                    <input type="email" placeholder="Email" id="emailInput" value="${contact.email}" required autocomplete="email" aria-describedby="editEmail_error" oninput="handleContactFieldInput('edit', 'email')" onblur="validateContactField('edit', 'email')">
+                                                    <input type="email" placeholder="Email" id="emailInput" value="${contact.email}" required autocomplete="email" aria-describedby="editEmail_error" onblur="validateContactField('edit', 'email')">
                                                     <img src="./assets/img/add-contact-mail-icon.svg" alt="mail-icon">
                                                 </div>
                                                 <span class="contact-field-error" id="editEmail_error" aria-live="polite"></span>
                                                 </div>
                                                 <div class="input-and-errordiv">
                                                 <div class="inputContainer" id="editInputContainer_phone">
-                                                    <input type="tel" placeholder="Phone" id="phoneInput" value="${contact.phone}" required autocomplete="tel" aria-describedby="editPhone_error" oninput="handleContactFieldInput('edit', 'phone')" onblur="validateContactField('edit', 'phone')">
+                                                    <input type="tel" placeholder="Phone" id="phoneInput" value="${contact.phone}" required autocomplete="tel" aria-describedby="editPhone_error" onblur="validateContactField('edit', 'phone')">
                                                     <img src="./assets/img/add-contact-call-icon.svg" alt="phone-icon">
                                                 </div>
                                                 <span class="contact-field-error" id="editPhone_error" aria-live="polite"></span>
