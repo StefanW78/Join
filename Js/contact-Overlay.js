@@ -271,32 +271,37 @@ function getContactFormData() {
 }
 
 function checkDuplicateContact(data, mode, excludedContactId = null) {
-    const contacts = Object.entries(fetchedData)
-      .filter(([id]) => id !== excludedContactId)
-      .map(([, contact]) => contact);
-    const normalizedName = data.name.toLowerCase().replace(/\s+/g, " ");
-    const normalizedEmail = data.email.toLowerCase();
-    const nameExists = contacts.some((contact) =>
-      contact.name?.toLowerCase().replace(/\s+/g, " ") === normalizedName
-    );
-    const emailExists = contacts.some((contact) =>
-      contact.email?.toLowerCase() === normalizedEmail
-    );
+  const contacts = Object.entries(fetchedData)
+    .filter(([id]) => id !== excludedContactId)
+    .map(([, contact]) => contact);
 
-    if (nameExists) {
-      contactFieldTouched[mode].name = true;
-      contactFormState[mode].name = false;
-      setContactFieldError(mode, "name", "A contact with this name already exists");
-    }
+  const nameExists = contacts.some(c =>
+    c.name?.toLowerCase().replace(/\s+/g, " ") ===
+    data.name.toLowerCase().replace(/\s+/g, " ")
+  );
 
-    if (emailExists) {
-      contactFieldTouched[mode].email = true;
-      contactFormState[mode].email = false;
-      setContactFieldError(mode, "email", "A contact with this email already exists");
-    }
+  const emailExists = contacts.some(c =>
+    c.email?.toLowerCase() === data.email.toLowerCase()
+  );
 
-    updateContactSubmitButton(mode);
-    return !nameExists && !emailExists;
+  setDuplicateError(mode, "name", nameExists);
+  setDuplicateError(mode, "email", emailExists);
+  updateContactSubmitButton(mode);
+
+  return !nameExists && !emailExists;
+}
+
+function setDuplicateError(mode, field, exists) {
+  if (!exists) return;
+
+  contactFieldTouched[mode][field] = true;
+  contactFormState[mode][field] = false;
+
+  const message = field === "name"
+    ? "A contact with this name already exists"
+    : "A contact with this email already exists";
+
+  setContactFieldError(mode, field, message);
 }
 
 //Neue Version vom saveEditContact
