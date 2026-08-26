@@ -110,42 +110,41 @@ function initializeContactForm(mode, clearValues = false) {
 function getContactFieldError(fieldName, rawValue) {
   const value = rawValue.trim();
 
-  if (!value) {
-    return `${fieldName.charAt(0).toUpperCase() + fieldName.slice(1)} is required`;
-  }
+  if (!value)
+    return `${fieldName[0].toUpperCase() + fieldName.slice(1)} is required`;
 
-  if (fieldName === "name") {
-    if (rawValue !== value) {
-      return "Name cannot contain leading or trailing spaces";
-    }
-
-    const nameRegex = /^[\p{L}\p{M}]+(?:[\s'’-][\p{L}\p{M}]+)*$/u;
-    return nameRegex.test(value)
-      ? ""
-      : "Only letters, spaces, apostrophes and hyphens are allowed";
-  }
-
-  if (fieldName === "email") {
-    if (rawValue !== rawValue.trim()) {
-      return "Email address cannot contain leading or trailing spaces";
-    }
-    const emailRegex = /^(?!.*\.\.)(?!.*@\.)[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    return emailRegex.test(value) ? "" : "Please enter a valid email";
-  }
-
-  if (fieldName === "phone") {
-  const phone = value.trim();
-  const phoneCharactersRegex = /^\+?[0-9\s()-]+$/;
-  const digitCount = phone.replace(/\D/g, "").length;
-
-  return phoneCharactersRegex.test(phone) &&
-    digitCount >= 7 &&
-    digitCount <= 15
-    ? ""
-    : "Please enter a valid phone number (7 to 15 digits)";
-}
+  if (fieldName === "name") return validateName(rawValue, value);
+  if (fieldName === "email") return validateEmail(rawValue, value);
+  if (fieldName === "phone") return validatePhone(value);
 
   return "";
+}
+
+function validateName(rawValue, value) {
+  if (rawValue !== value)
+    return "Name cannot contain leading or trailing spaces";
+
+  const regex = /^[\p{L}\p{M}]+(?:[\s'’-][\p{L}\p{M}]+)*$/u;
+  return regex.test(value)
+    ? ""
+    : "Only letters, spaces, apostrophes and hyphens are allowed";
+}
+
+function validateEmail(rawValue, value) {
+  if (rawValue !== value)
+    return "Email address cannot contain leading or trailing spaces";
+
+  const regex = /^(?!.*\.\.)(?!.*@\.)[^\s@]+@[^\s@]+\.[^\s@]+$/;
+  return regex.test(value) ? "" : "Please enter a valid email";
+}
+
+function validatePhone(value) {
+  const regex = /^\+?[0-9\s()-]+$/;
+  const digits = value.replace(/\D/g, "").length;
+
+  return regex.test(value) && digits >= 7 && digits <= 15
+    ? ""
+    : "Please enter a valid phone number (7 to 15 digits)";
 }
 
 function setContactFieldError(mode, fieldName, message) {
