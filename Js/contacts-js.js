@@ -1,13 +1,3 @@
-// all Global Variablen
-
-let contactListDiv = document.getElementById(`contact-list`)
-let contactInfoSec = document.getElementById(`contacts-info-sec`)
-let contactListSec = document.getElementById(`contacts-list-sec`)
-let contactSymbol = document.getElementById(`contact-symbol`)
-let editTool = document.getElementById(`edit`)
-let contactDetailDiv = document.getElementById(`contacts-infos`)
-const mediaQueryForD_none = window.matchMedia("(max-width: 1023px)")
-const createMessage = document.getElementById(`createMessage`)
 
 let fetchedData;
 let currentContactId = null;
