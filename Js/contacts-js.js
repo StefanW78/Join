@@ -11,31 +11,34 @@ async function init() {
 }
 
 async function renderContactList() {
+    const contacts = getContactArray();
+    const html = createContactListHTML(contacts);
 
-        const contacts = getContactArray();
+    contactListDiv.innerHTML = html;
+}
 
+function createContactListHTML(contacts) {
     let html = "";
     let lastLetter = "";
 
     contacts.forEach(contact => {
-
         const firstLetter = contact.name.charAt(0).toUpperCase();
         const showHeader = firstLetter !== lastLetter;
 
         if (showHeader) lastLetter = firstLetter;
-
-        html += `
-            <div class="contact-list-items">
-
-                ${showHeader ? contactHeaderTemplate(firstLetter) : ""}
-
-                ${contactListTemplate(contact)}
-
-            </div>
-        `;
+        html += createContactListItem(contact, firstLetter, showHeader);
     });
 
-    contactListDiv.innerHTML = html;
+    return html;
+}
+
+function createContactListItem(contact, firstLetter, showHeader) {
+    return `
+        <div class="contact-list-items">
+            ${showHeader ? contactHeaderTemplate(firstLetter) : ""}
+            ${contactListTemplate(contact)}
+        </div>
+    `;
 }
 
 function getContactArray() {
@@ -51,18 +54,14 @@ function openContact(event) {
     const clickedContact = event.target.closest(".contact-container");
 
     if (!clickedContact) return;
-
     document.querySelectorAll(".contact-container")
         .forEach(contact => {
             contact.classList.remove("active-contact");
         });
 
     clickedContact.classList.add("active-contact");
-
     const id = clickedContact.dataset.id;
-
     currentContactId = id;
-
     const contact = fetchedData[id];
 
     renderContactDetails(contact);
@@ -74,26 +73,6 @@ function renderContactDetails(contact) {
     openContactDetails();
     checkQueriesForEditTools();
 
-}
-
-
-function getContactDataFromDOM(event) {
-  const clicked = event.target.closest(".contact-container");
-  if (!clicked) {
-    console.warn("No contact-container found");
-    return null;
-  }
-  const badge = clicked.querySelector(".contact-badge");
-  const contactColor = badge ? badge.style.backgroundColor : null;
-  const nameElement = clicked.querySelector(".contactName");
-  const emailElement = clicked.querySelector(".contactEmail");
-  const contactName = nameElement ? nameElement.textContent.trim() : "";
-  const contactEmail = emailElement ? emailElement.textContent.trim() : "";
-  if (!contactName || !contactEmail) {
-    console.error("Contact data missing");
-    return null;
-  }
-  return { contactName, contactEmail, contactColor };
 }
 
 function findContact(contactName, contactEmail) {
@@ -158,27 +137,37 @@ function getInitials(fullName) {
 async function deleteContactFromEditOverlay(event) {
   const contactData = foundContactUndIdEditOverlay();
   if (!contactData) return;
+
   const { foundContact, foundId, contactName, contactEmail } = contactData;
   if (!foundContact) {
-    console.error(
-      "Contact not found for deletion - Name:",
-      contactName,
-      "Email:",
-      contactEmail,
-    );
-    alert("Error: Contact could not be found");
+    handleContactDeleteError(contactName, contactEmail);
     return;
   }
+
   try {
     await deleteContactAction(foundId);
-    await loadDataBase();
-    renderContactList();
-    CloseEditDialog();
-    MobileSwitchToContacts();
-    popupMessage("Contact successfully deleted!");
+    await finishContactDeletion();
   } catch (error) {
     console.error("Error deleting contact:", error);
   }
+}
+
+function handleContactDeleteError(contactName, contactEmail) {
+  console.error(
+    "Contact not found for deletion - Name:",
+    contactName,
+    "Email:",
+    contactEmail,
+  );
+  alert("Error: Contact could not be found");
+}
+
+async function finishContactDeletion() {
+  await loadDataBase();
+  renderContactList();
+  CloseEditDialog();
+  MobileSwitchToContacts();
+  popupMessage("Contact successfully deleted!");
 }
 
 function foundContactUndIdEditOverlay() {
