@@ -140,4 +140,94 @@ let contactDetailDiv = document.getElementById(`contacts-infos`)
 const createMessage = document.getElementById(`createMessage`)
 
 
+/**
+ * Sets the initial contact view based on the current viewport width.
+ * On mobile devices, only the contact list is displayed.
+ * On desktop devices, both the contact list and contact details are displayed.
+ *
+ * @returns {void}
+ */
+function setInitialView() {
+  if (window.innerWidth <= 1023) {
+    // Mobile
+    contactListSec.classList.remove("d_none");
+    contactInfoSec.classList.add("d_none");
+  } else {
+    // Desktop
+    contactListSec.classList.remove("d_none");
+    contactInfoSec.classList.remove("d_none");
+  }
+}
+
+/**
+ * Opens the contact details section on mobile devices.
+ * Hides the contact list and displays the contact information section
+ * when the viewport width is 1023px or less.
+ *
+ * @returns {void}
+ */
+function openContactDetails() {
+  if (window.innerWidth <= 1023) {
+    contactListSec.classList.add("d_none");
+    contactInfoSec.classList.remove("d_none");
+  }
+}
+
+/**
+ * Switches back to the contact list view on mobile devices.
+ * Hides the contact details section and displays the contact list.
+ * Also removes the active state from all contacts on mobile devices.
+ *
+ * @returns {void}
+ */
+function MobileSwitchToContacts() {
+    contactInfoSec.classList.add("d_none");
+    contactListSec.classList.remove("d_none");
+
+    if (window.innerWidth <= 1023) {
+        document.querySelectorAll(".contact-container")
+            .forEach(contact => {
+                contact.classList.remove("active-contact");
+            });
+    }
+}
+
+/**
+ * Displays a temporary popup message with a slide-in and slide-out animation.
+ *
+ * @param {string} message - The message to display.
+ * @returns {void}
+ */
+function popupMessage(message) {
+  createMessage.textContent = `${message}`;
+  createMessage.classList.remove("d_none");
+  createMessage.offsetHeight;
+  createMessage.classList.add("slide-in");
+  setTimeout(() => {
+    createMessage.classList.remove("slide-in");
+    createMessage.classList.add("slide-out");
+    setTimeout(() => {
+      createMessage.classList.add("d_none");
+      createMessage.classList.remove("slide-out");
+    }, 510);
+  }, 2100);
+}
+
+/**
+ * Displays a validation error message for adding or editing a contact.
+ *
+ * @param {string} message - The validation error message to display.
+ * @param {string} [mode="add"] - Determines whether the error belongs to the add or edit form.
+ * @returns {void}
+ */
+function contactErrorMsg(message, mode = "add") {
+  const errorId = mode === "edit"
+    ? "editValidationErrorMsg"
+    : "validationErrorMsg";
+  const errorMsgBox = document.getElementById(errorId);
+  if (!errorMsgBox) return;
+  errorMsgBox.hidden = false;
+  errorMsgBox.textContent = message;
+}
+
 //main ContactsJS
