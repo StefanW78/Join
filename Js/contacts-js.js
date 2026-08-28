@@ -224,12 +224,9 @@ function findDataFromEditOverlayToDelete() {
 
 //neue Version um zu löschen von contacte. danach später weiter schauen wegen der anderen Lösch contact durch mobile Ver.
 async function deleteContactAction(contactId) {
-
     const contact = getDeleteTarget(contactId);
 
     if (!contact) return;
-
-
 
     try {
 
@@ -246,7 +243,6 @@ async function deleteContactAction(contactId) {
 }
 
 function getDeleteTarget(contactId) {
-
     if (!contactId) {
         console.error("No contactId provided");
         return null;

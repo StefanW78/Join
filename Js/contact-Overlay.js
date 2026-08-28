@@ -216,11 +216,9 @@ function clearContactFormMessage(mode) {
 }
 
 async function addNewContact() {
-
     const data = getContactFormData();
 
     if (!validateContactForm("add")) return;
-
     if (!checkDuplicateContact(data, "add")) return;
 
     const newContact = {
@@ -231,27 +229,28 @@ async function addNewContact() {
     };
 
     try {
-
         const result = await saveData("contacts", newContact);
-
         const id = result.name;
 
-        fetchedData[id] = {
-            id,
-            ...newContact,
-        };
-
-        renderContactList();
-        CloseAddContactDialog()
-        popupMessage("Contact created!");
-
+        saveContactLocally(id, newContact);
+        updateContactList();
     } catch (error) {
-
         console.error("Error creating contact:", error);
         contactErrorMsg("Failed to create contact");
-
     }
+}
 
+function saveContactLocally(id, newContact) {
+    fetchedData[id] = {
+        id,
+        ...newContact,
+    };
+}
+
+function updateContactList() {
+    renderContactList();
+    CloseAddContactDialog();
+    popupMessage("Contact created!");
 }
 
 function randomColor() {
@@ -304,38 +303,37 @@ function setDuplicateError(mode, field, exists) {
   setContactFieldError(mode, field, message);
 }
 
-//Neue Version vom saveEditContact
 async function saveEditedContact() {
     const id = currentContactId;
-
     if (!id) return;
 
     const updatedData = getEditedContactFormData();
-
     if (!validateContactForm("edit")) return;
-
     if (!checkDuplicateContact(updatedData, "edit", id)) return;
 
     try {
-        // 🔥 1. Firebase wird geändert
         await updateData("contacts", id, updatedData);
-
-        // 🔥 2. Lokaler Cache wird aktualisiert
-        fetchedData[id] = {
-            ...fetchedData[id],
-            ...updatedData,
-            initials: getInitials(updatedData.name),
-        };
-
-        // 🔥 3. UI aktualisieren
-        renderContactList();
-        renderContactDetails(fetchedData[id]);
-        CloseEditDialog();
-        popupMessage("Contact updated!");
+        updateLocalContact(id, updatedData);
+        updateContactUI(id);
     } catch (error) {
         console.error("Update failed:", error);
         contactErrorMsg("Failed to update contact", "edit");
     }
+}
+
+function updateLocalContact(id, updatedData) {
+    fetchedData[id] = {
+        ...fetchedData[id],
+        ...updatedData,
+        initials: getInitials(updatedData.name),
+    };
+}
+
+function updateContactUI(id) {
+    renderContactList();
+    renderContactDetails(fetchedData[id]);
+    CloseEditDialog();
+    popupMessage("Contact updated!");
 }
 
 function getEditedContactFormData() {
