@@ -1,5 +1,10 @@
 
-
+/**
+ * Generates the HTML template for a single contact in the contact list.
+ *
+ * @param {Object} contact - The contact data used to generate the template.
+ * @returns {string} The generated HTML markup for the contact.
+ */
 function contactListTemplate(contact) {
 
     return`
@@ -16,6 +21,12 @@ function contactListTemplate(contact) {
     `
 }
 
+/**
+ * Generates the HTML template for a contact list section header.
+ *
+ * @param {string} letter - The letter displayed as the section header.
+ * @returns {string} The generated HTML markup for the section header.
+ */
 function contactHeaderTemplate(letter) {
 
     return `
@@ -24,14 +35,24 @@ function contactHeaderTemplate(letter) {
     `;
 }
 
-
-
+/**
+ * Generates the HTML template displayed when no contacts are available.
+ *
+ * @returns {string} The generated HTML markup for the empty contact list message.
+ */
 function NoContacts() {
     return`
     <div class="no-contacts" style="padding: 20px; text-align: center; color: #888;">No contacts available</div>
     `
 }
 
+/**
+ * Generates the HTML template for displaying the details of a contact.
+ * Includes the contact's name, initials, email, phone number, and edit/delete actions.
+ *
+ * @param {Object} contact - The contact data used to generate the details template.
+ * @returns {string} The generated HTML markup for the contact details.
+ */
 function contactDetailsTemplate(contact) {
     return`
     <div class="contact-header" id="contact-header">
@@ -77,6 +98,14 @@ function contactDetailsTemplate(contact) {
     `
 }
 
+/**
+ * Generates the HTML template for the contact edit overlay.
+ * Pre-fills the form with the contact's current name, email, and phone number
+ * and provides controls for editing, deleting, and saving the contact.
+ *
+ * @param {Object} contact - The contact data used to populate the edit form.
+ * @returns {string} The generated HTML markup for the edit overlay.
+ */
 function renderEditTemplate(contact) {
     return`
                                     <div class="edit-contact-overlay slide-out" id="edit-contact-overlay">
