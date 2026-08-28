@@ -1,4 +1,4 @@
-
+const mediaQueryForD_none = window.matchMedia("(max-width: 1023px)")
 let fetchedData;
 let currentContactId = null;
 
