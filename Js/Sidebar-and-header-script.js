@@ -1,3 +1,7 @@
+
+/**
+ * References to HTML elements used for displaying the Sidebar and Header data.
+ */
 let DropDowncontain = document.getElementById(`dropdown-menu`)
 let dropdownButton = document.getElementById(`header-button`)
 const mediaQuery = window.matchMedia("(max-width: 1023px)");
@@ -7,6 +11,11 @@ const mediaQuery = window.matchMedia("(max-width: 1023px)");
 
 DropDowncontain.classList.add("d_none");
 
+/**
+ * Handles media query changes and hides the dropdown container.
+ *
+ * @param {MediaQueryList} mediaQuery - The media query being monitored.
+ */
 mediaQuery.addEventListener("change", (e) => {
   if (e.matches) {
     // Mobile
@@ -17,15 +26,28 @@ mediaQuery.addEventListener("change", (e) => {
   }
 });
 
+/**
+ * Toggles the visibility of the dropdown container when the button is clicked.
+ */
 dropdownButton.addEventListener("click", (e) => {
   DropDowncontain.classList.toggle("d_none");
   e.stopPropagation(); // verhindert, dass der Klick weiter hoch bubbelt
 });
 
+/**
+ * Closes the dropdown container when the document is clicked.
+ */
 document.addEventListener("click", () => {
   DropDowncontain.classList.add("d_none");
 });
 
+/**
+ * Retrieves the username and displays the user's initials in the dropdown button.
+ *
+ * @function renderInitials
+ * @returns {string|undefined} The user's initials, a question mark, or undefined
+ * if the dropdown button does not exist.
+ */
 function renderInitials() {
   const user = localStorage.getItem("username");
 
@@ -35,21 +57,29 @@ function renderInitials() {
     dropdownButton.innerText = "?";
     return "?";
   }
-
   const initials = user
     .split(" ")
     .map(w => w[0]?.toUpperCase() || "")
     .join("");
 
   const finalInitials = initials || "?";
-
   dropdownButton.innerText = finalInitials;
 
   return finalInitials;
 }
- 
+
+/**
+ * Renders the user's initials when the DOM has finished loading.
+ */
 document.addEventListener("DOMContentLoaded", renderInitials);
 
+/**
+ * Logs out the current user and redirects to the login page.
+ *
+ * @function logout
+ * @param {Event} [event] - Optional event used to prevent the default action.
+ * @returns {void}
+ */
 function logout(event) {
   if (event) event.preventDefault();
 

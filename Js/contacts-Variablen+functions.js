@@ -1,4 +1,9 @@
-//for Overlay
+
+/**
+ * References to HTML elements used for displaying the Contcats data.
+ */
+
+//Contact Overlay
 let contactPopUpAdd = document.getElementById("contact-pop-add");
 let addContactOverlay = document.getElementById("add-contact-overlay");
 let editContactPopup = document.getElementById("edit-contact-popup");
@@ -35,11 +40,11 @@ const contactFieldTouched = {
 };
 
 /**
-
-Opens the add contact dialog and initializes the contact form.
-Adds the slide-in animation after a short delay.
-@returns {void}
-*/
+ * Opens the dialog for adding a new contact and starts the slide-in animation.
+ *
+ * @function OpenAddDialog
+ * @returns {void}
+ */
 function OpenAddDialog() {
   initializeContactForm("add", true);
   contactPopUpAdd.classList.remove("d_none");
@@ -52,13 +57,12 @@ function OpenAddDialog() {
 }
 
 /**
-
-Closes the add contact dialog with a slide-out animation.
-
-Hides the dialog and resets the contact form after the animation.
-
-@returns {void}
-*/
+ * Closes the add contact dialog and starts the slide-out animation.
+ * Resets the contact form after the animation is finished.
+ *
+ * @function CloseAddDialog
+ * @returns {void}
+ */
 function CloseAddDialog() {
   setTimeout(() =>{
   addContactOverlay.classList.remove(`slide-in`)
@@ -72,20 +76,21 @@ function CloseAddDialog() {
 }
 
 /**
-
-Closes the add contact dialog.
-@returns {void}
-*/
+ * Closes the add contact dialog.
+ *
+ * @function CloseAddContactDialog
+ * @returns {void}
+ */
 function CloseAddContactDialog() {
   CloseAddDialog();
 }
 
 /**
-
-Opens the edit contact dialog with a slide-in animation.
-Makes the edit popup visible before starting the animation.
-@returns {void}
-*/
+ * Opens the edit contact dialog and starts the slide-in animation.
+ *
+ * @function OpenEditDialog
+ * @returns {void}
+ */
 function OpenEditDialog() {
   editContactPopup.classList.remove("d_none");
   let editContactOverlayD = document.getElementById(`edit-contact-overlay`)
@@ -98,11 +103,11 @@ function OpenEditDialog() {
 }
 
 /**
-
-Closes the edit contact dialog with a slide-out animation.
-Hides the popup after the animation is completed.
-@returns {void}
-*/
+ * Closes the edit contact dialog and starts the slide-out animation.
+ *
+ * @function CloseEditDialog
+ * @returns {void}
+ */
 function CloseEditDialog() {
   let editContactOverlayD = document.getElementById(`edit-contact-overlay`)
   setTimeout(() =>{
@@ -117,14 +122,13 @@ function CloseEditDialog() {
 }
 
 /**
-
-Returns a random color from the available colors.
-@returns {string} A randomly selected color.
-*/
+ * Returns a random color from the colors array.
+ *
+ * @function randomColor
+ * @returns {string} A randomly selected color.
+ */
 function randomColor() {
-
     return colors[Math.floor(Math.random() * colors.length)];
-
 }
 
 //for Overlay
