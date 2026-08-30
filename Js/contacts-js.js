@@ -1,9 +1,23 @@
+/**
+ * Stores the media query and the contact data used on the contact page.
+ */
 const mediaQueryForD_none = window.matchMedia("(max-width: 1023px)")
 let fetchedData;
 let currentContactId = null;
 
+/**
+ * Updates the initial view when the media query changes.
+ */
 mediaQueryForD_none.addEventListener("change", setInitialView);
 
+/**
+ * Initializes the contact page by loading the contacts
+ * and rendering the contact list.
+ *
+ * @async
+ * @function init
+ * @returns {Promise<void>} A promise that resolves after the contacts are loaded.
+ */
 async function init() {
   setInitialView()
   fetchedData = await loadDataBase("contacts");
