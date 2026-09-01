@@ -1,40 +1,54 @@
+@font-face {
+  font-family: "Inter";
+  src: url("../assets/fonts/Inter/Inter-VariableFont_opsz,wght.ttf") format("truetype");
+  font-style: normal;
+  font-weight: 100 900;
+  font-display: swap;
+}
+
+.board-page {
+  font-family: "Inter", Arial, Helvetica, sans-serif;
+  color: #2a3647;
+}
+
 .icon-btn:hover {
   background: #f0f4f7;
 }
 
-main {
-    width: 100%;
-    padding: 75px 50px 50px 75px;
-    display: flex;
-    flex-direction: column;
-    max-width: 1092px;
-    margin-top: 6px;
+.board-page .board-main {
+  width: 100%;
+  max-width: none;
+  margin: 0;
+  padding: 78px 48px 48px;
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  max-width: 1440px;
 }
 
 .board-header {
   display: flex;
   align-items: center;
-  gap: 16px;
-  margin-bottom: 28px;
-  flex-wrap: wrap;
+  gap: 24px;
+  width: 100%;
+  margin-bottom: 36px;
+  flex-wrap: nowrap;
 }
 .board-title {
-  font-size: 40px;
-  font-weight: 800;
-  color: #1e2c3d;
+  font-size: 52px;
+  line-height: 1.15;
+  font-weight: 700;
+  color: #000;
   flex: 1;
 }
 .board-box {
   display: flex;
   align-items: center;
-  justify-content: center;
-  width: 120px;
+  justify-content: flex-start;
+  width: auto;
   height: 60px;
-
-  color: #fff;
-  font-size: 18px;
-  font-weight: 700;
-  flex: 1 0 50%;
+  flex: 1;
+  min-width: 0;
 }
 
 .board-page .header-and-content-div {
@@ -46,8 +60,8 @@ main {
 
 .board-page .header-div {
   width: 100%;
-  height: 96px;
-  padding: 20px 80px;
+  height: 84px;
+  padding: 14px 76px;
   background-color: #ffffff;
   box-shadow: 0 4px 4px rgba(0, 0, 0, 0.1);
 
@@ -67,38 +81,48 @@ main {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  gap: 8px;
+  gap: 12px;
+  width: 262px;
+  height: 42px;
   background: #fff;
-  border: 1.5px solid #c8d2db;
-  border-radius: 8px;
-  padding: 8px 14px;
+  border: 1px solid #a8a8a8;
+  border-radius: 10px;
+  padding: 8px 12px 8px 14px;
 }
 .search-box input {
+  flex: 1;
+  min-width: 0;
+  width: 100%;
   border: none;
   outline: none;
-  font-size: 14px;
+  font-family: inherit;
+  font-size: 16px;
   color: #1e2c3d;
-  width: 180px;
 }
-.search-box svg {
-  width: 16px;
-  height: 16px;
-  stroke: #8898a8;
-  fill: none;
+.search-box img {
+  width: 32px;
+  height: 24px;
+  padding-left: 12px;
+  border-left: 1px solid #d1d1d1;
+  object-fit: contain;
   flex-shrink: 0;
 }
 
 .btn-add-task {
   display: flex;
   align-items: center;
-  gap: 8px;
+  justify-content: center;
+  width: 136px;
+  height: 42px;
+  gap: 10px;
   background: #1e2c3d;
   color: #fff;
   border: none;
-  border-radius: 8px;
-  padding: 10px 20px;
-  font-size: 15px;
-  font-weight: 600;
+  border-radius: 10px;
+  padding: 0 14px;
+  font-family: inherit;
+  font-size: 16px;
+  font-weight: 700;
   cursor: pointer;
 }
 .btn-add-task:hover {
@@ -140,15 +164,17 @@ main {
 
 .board-columns {
   display: flex;
+  width: 100%;
   gap: 20px;
   align-items: flex-start;
-  flex-wrap: wrap;
+  flex-wrap: nowrap;
 }
 .column {
   display: flex;
   flex-direction: column;
   flex: 1;
-  gap: 12px;
+  min-width: 0;
+  gap: 8px;
 }
 
 .column.is-drag-over {
@@ -157,7 +183,7 @@ main {
   border-radius: 10px;
 }
 
-@media (min-width: 991px) {
+@media (min-width: 1024px) {
   html,
   body.board-page {
     height: 100%;
@@ -172,9 +198,25 @@ main {
   }
 
   .board-page .sidebar {
-    width: 230px;
+    width: 232px;
     height: 100vh;
-    flex: 0 0 230px;
+    flex: 0 0 200px;
+  }
+
+  .board-page .sidebar-logo-div {
+    justify-content: center;
+    padding: 64px 49px;
+  }
+
+  .board-page .sidebar-links a,
+  .board-page footer a {
+    padding-right: 48px;
+    padding-left: 48px;
+  }
+
+  .board-page .user-icon {
+    width: 48px;
+    height: 48px;
   }
 
   .board-page .header-and-content-div {
@@ -185,7 +227,7 @@ main {
 
   .board-page .header-div {
     height: 96px;
-    flex: 0 0 96px;
+    flex: 0 0 84px;
   }
 
   .board-page .board-main {
@@ -220,8 +262,8 @@ main {
     min-height: 0;
     overflow-x: hidden;
     overflow-y: auto;
-    scrollbar-gutter: stable;
-    padding-right: 4px;
+    scrollbar-width: thin;
+    scrollbar-color: #d1d1d1 transparent;
   }
 }
 
@@ -229,29 +271,33 @@ main {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  font-size: 15px;
-  font-weight: 600;
-  color: #1e2c3d;
+  min-height: 24px;
+  font-size: 16px;
+  font-weight: 700;
+  color: #42526e;
 }
 .column-header button {
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 26px;
-  height: 26px;
-  border: 1.5px solid #c8d2db;
-  border-radius: 6px;
+  width: 22px;
+  height: 22px;
+  border: 2px solid #2a3647;
+  border-radius: 7px;
   background: none;
   cursor: pointer;
+  font-family: inherit;
   font-size: 18px;
-  color: #5a6a78;
+  font-weight: 500;
+  color: #2a3647;
   line-height: 1;
 }
 
 .empty-card {
-  background: #e4e8ed;
+  background: #e7e7e7;
+  border: 1px dashed #a8a8a8;
   border-radius: 10px;
-  padding: 18px;
+  padding: 14px;
   text-align: center;
   color: #8898a8;
   font-size: 13px;
@@ -259,25 +305,26 @@ main {
 
 .card {
   background: #fff;
-  border-radius: 12px;
-  padding: 16px;
+  border-radius: 20px;
+  padding: 14px;
   display: flex;
   flex-direction: column;
-  gap: 10px;
-  margin-bottom: 10px;
-  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.06);
+  gap: 8px;
+  margin-bottom: 12px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.08);
   cursor: pointer;
   transition: transform 125ms ease-in-out, opacity 125ms ease-in-out;
 }
 
 .tag {
   display: inline-block;
-  border-radius: 6px;
+  border-radius: 7px;
   padding: 4px 12px;
   font-size: 12px;
   font-weight: 600;
   color: #fff;
   width: fit-content;
+  margin-bottom: 12px;
 }
 
 .tag-blue {
@@ -290,28 +337,39 @@ main {
 .card-title {
   font-size: 14px;
   font-weight: 700;
+  line-height: 1.25;
   color: #1e2c3d;
 }
 .card-desc {
   font-size: 12px;
-  color: #8898a8;
-  line-height: 1.5;
+  color: #a8a8a8;
+  line-height: 1.35;
+  display: -webkit-box;
+  overflow: hidden;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
 }
 
 .card-footer {
   display: flex;
   align-items: center;
   justify-content: space-between;
+  margin-top: 8px;
 }
 
 .subtasks {
   display: flex;
-  flex-direction: column;
-  gap: 4px;
+  flex-direction: row;
+  align-items: center;
+  gap: 8px;
   font-size: 12px;
-  color: #5a6a78;
+  color: #000;
+  white-space: nowrap;
+  margin-top: 12px;
 }
 .progress-bar {
+  flex: 1;
+  min-width: 0;
   height: 6px;
   background: #e4e8ed;
   border-radius: 4px;
@@ -326,14 +384,14 @@ main {
   display: flex;
 }
 .av {
-  width: 30px;
-  height: 30px;
+  width: 26px;
+  height: 26px;
   border-radius: 50%;
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 11px;
-  font-weight: 700;
+  font-size: 10px;
+  font-weight: 400;
   color: #fff;
   border: 2px solid #fff;
   margin-left: -8px;

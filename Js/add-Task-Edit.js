@@ -563,15 +563,3 @@ function renderEditAssignedContacts(selectedEditContacts) {
         });
 }
 
-// editTaskForm.addEventListener("submit", handleTaskSubmit);
-
-// async function handleTaskSubmit(event) {
-//   event.preventDefault();
-
-//   if (!isTaskFormValid()) return;
-
-//   addCurrentSubtaskInput();
-
-//   const task = createTaskFromForm();
-//   await saveTask(task);
-// }

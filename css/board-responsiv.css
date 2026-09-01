@@ -1,4 +1,4 @@
-@media (max-width: 990px) {
+@media (max-width: 1023px) {
   .body-div {
     min-height: 100vh;
   }
@@ -12,7 +12,7 @@
     min-height: 0;
   }
 
-  .header-div {
+  .board-page .header-div {
     height: 80px;
     padding: 20px 16px;
   }
@@ -38,12 +38,13 @@
     align-items: center;
     gap: 16px;
     margin-bottom: 0;
+    flex-wrap: wrap;
   }
 
   .board-box {
     width: auto;
     height: auto;
-    flex: 1 0 100%;
+    flex: 1;
     justify-content: flex-start;
   }
 

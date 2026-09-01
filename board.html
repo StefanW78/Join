@@ -124,7 +124,7 @@
               <div class="column" data-status="todo">
                 <div class="column-header">
                   <span>To do</span>
-                  <button class="plus-box openAddTaskBtn">+</button>
+                  <button class="plus-box openAddTaskBtn" aria-label="Add task to To do">+</button>
                 </div>
                 <div class="task-column" id="todoTasks"></div>
               </div>
@@ -132,7 +132,7 @@
               <div class="column" data-status="inProgress">
                 <div class="column-header">
                   <span>In progress</span>
-                  <button class="plus-box openAddTaskBtn">+</button>
+                  <button class="plus-box openAddTaskBtn" aria-label="Add task to In progress">+</button>
                 </div>
                 <div class="task-column" id="inProgressTasks"></div>
               </div>
@@ -140,7 +140,7 @@
               <div class="column" data-status="awaitFeedback">
                 <div class="column-header">
                   <span>Await feedback</span>
-                  <button class="plus-box openAddTaskBtn">+</button>
+                  <button class="plus-box openAddTaskBtn" aria-label="Add task to Await feedback">+</button>
                 </div>
                 <div class="task-column" id="awaitFeedbackTasks"></div>
               </div>
@@ -148,6 +148,7 @@
               <div class="column" data-status="done">
                 <div class="column-header">
                   <span>Done</span>
+                  <button class="plus-box openAddTaskBtn" aria-label="Add task to Done">+</button>
                 </div>
                 <div class="task-column" id="doneTasks"></div>
               </div>
@@ -247,6 +248,13 @@
                       autocomplete="off"
                     />
 
+                    <img
+                      id="assignedArrow"
+                      class="dropdownArrow"
+                      src="./assets/img/arrow_drop_down-icon.svg"
+                      alt=""
+                    />
+
                     <div class="dropdownList d_none" id="assignedList"></div>
                   </div>
 
@@ -272,6 +280,13 @@
                     >
                       Select task category
                     </button>
+
+                    <img
+                      id="categoryArrow"
+                      class="dropdownArrow"
+                      src="./assets/img/arrow_drop_down-icon.svg"
+                      alt=""
+                    />
 
                     <div class="dropdownList d_none" id="categoryList">
                       <div
