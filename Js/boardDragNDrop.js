@@ -40,26 +40,28 @@ function setupDragEnd(board, getCard, setCard) {
 }
 
 function setupDropZones(columns, getCard) {
-    columns.forEach(column => {
-        const taskList = column.querySelector(".task-list");
+    columns.forEach((column) => setupDropZone(column, getCard));
+}
 
-        let dragCounter = 0;
+function setupDropZone(column, getCard) {
+    const taskList = column.querySelector(".task-list");
+    let dragCounter = 0;
+    column.addEventListener("dragenter", () => {
+        dragCounter = handleDragEnter(column, dragCounter);
+    });
+    column.addEventListener("dragleave", () => {
+        dragCounter = handleDragLeave(column, dragCounter);
+    });
+    setupDropZoneMoveEvents(column, taskList, getCard, () => dragCounter = 0);
+}
 
-        column.addEventListener("dragenter", () => {
-            dragCounter = handleDragEnter(column, dragCounter);
-        });
-
-        column.addEventListener("dragleave", () => {
-            dragCounter = handleDragLeave(column, dragCounter);
-        });
-
-        column.addEventListener("dragover", (event) => {
-            handleDragOver(event, taskList, getCard);
-        });
-
-        column.addEventListener("drop", (event) => {
-            dragCounter = handleDropZone(event, column, getCard);
-        });
+function setupDropZoneMoveEvents(column, taskList, getCard, resetCounter) {
+    column.addEventListener("dragover", (event) => {
+        handleDragOver(event, taskList, getCard);
+    });
+    column.addEventListener("drop", (event) => {
+        handleDropZone(event, column, getCard);
+        resetCounter();
     });
 }
 
@@ -124,20 +126,16 @@ async function handleDrop(e, column, getCard) {
 }
 
 function getDragAfterElement(container, mouseY) {
-
     const elements = [...container.querySelectorAll(".card:not(.is-dragging)")];
-
     return elements.reduce((closest, child) => {
-
-        const box = child.getBoundingClientRect();
-        const offset = mouseY - box.top - box.height / 2;
-
-        if (offset < 0 && offset > closest.offset) {
-            return { offset, element: child };
-        }
-
-        return closest;
-
+        return getCloserDragElement(closest, child, mouseY);
     }, { offset: Number.NEGATIVE_INFINITY }).element;
+}
 
+function getCloserDragElement(closest, child, mouseY) {
+    const box = child.getBoundingClientRect();
+    const offset = mouseY - box.top - box.height / 2;
+    return offset < 0 && offset > closest.offset
+        ? { offset, element: child }
+        : closest;
 }

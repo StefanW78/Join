@@ -52,24 +52,17 @@ clearTaskBtn.addEventListener("click", () => {
 
 function validateTaskDate() {
   clearInputError(taskDate, taskDateError);
-
   const dateValue = taskDate.value;
-
-  if (!dateValue) {
-    setInputError(taskDate, taskDateError, "This field is required");
-    return false;
-  }
-
+  if (!dateValue) return rejectTaskDate("This field is required");
   if (dateValue < getTodayISO()) {
-    setInputError(
-      taskDate,
-      taskDateError,
-      "The due date cannot be in the past.",
-    );
-    return false;
+    return rejectTaskDate("The due date cannot be in the past.");
   }
-
   return true;
+}
+
+function rejectTaskDate(message) {
+  setInputError(taskDate, taskDateError, message);
+  return false;
 }
 
 function initTaskDate() {
@@ -234,171 +227,161 @@ function addCurrentSubtaskInput() {
 
 function initPriorityButtons() {
   const priorityButtons = document.querySelectorAll(".priorityBtn");
-
   priorityButtons.forEach((button) => {
-    button.addEventListener("click", () => {
-      priorityButtons.forEach((btn) => {
-        btn.classList.remove("activeUrgent", "activeMedium", "activeLow");
-      });
-
-      if (button.classList.contains("urgentBtn")) {
-        selectedPriority = "urgent";
-        button.classList.add("activeUrgent");
-      }
-
-      if (button.classList.contains("mediumBtn")) {
-        selectedPriority = "medium";
-        button.classList.add("activeMedium");
-      }
-
-      if (button.classList.contains("lowBtn")) {
-        selectedPriority = "low";
-        button.classList.add("activeLow");
-      }
-    });
+    button.addEventListener("click", () => selectPriority(button, priorityButtons));
   });
+}
+
+function selectPriority(button, priorityButtons) {
+  clearPrioritySelection(priorityButtons);
+  const priority = getButtonPriority(button);
+  if (!priority) return;
+  selectedPriority = priority;
+  button.classList.add(`active${capitalize(priority)}`);
+}
+
+function clearPrioritySelection(priorityButtons) {
+  priorityButtons.forEach((button) => {
+    button.classList.remove("activeUrgent", "activeMedium", "activeLow");
+  });
+}
+
+function getButtonPriority(button) {
+  if (button.classList.contains("urgentBtn")) return "urgent";
+  if (button.classList.contains("mediumBtn")) return "medium";
+  if (button.classList.contains("lowBtn")) return "low";
+  return "";
+}
+
+function capitalize(value) {
+  return value.charAt(0).toUpperCase() + value.slice(1);
 }
 
 function initCategoryDropdown() {
-  categoryButton.addEventListener("click", () => {
-    categoryList.classList.toggle("d_none");
-
-      if (categoryList.classList.contains("d_none")) {
-    categoryArrow.src = "./assets/img/arrow_drop_down-icon.svg";
-  } else {
-    categoryArrow.src = "./assets/img/arrowUup.svg";
-  }
-  });
-
+  categoryButton.addEventListener("click", toggleCategoryDropdown);
   document.querySelectorAll("[data-category]").forEach((option) => {
-    option.addEventListener("click", () => {
-      selectedCategory = option.dataset.category;
-      categoryButton.textContent = selectedCategory;
-      categoryList.classList.add("d_none");
-      categoryArrow.src = "./assets/img/arrow_drop_down-icon.svg";
-      clearInputError(categoryButton, categoryError);
-
-      categoryButton.classList.add("inputFocus");
-    });
+    option.addEventListener("click", () => selectCategory(option));
   });
 }
 
+function toggleCategoryDropdown() {
+  categoryList.classList.toggle("d_none");
+  const isClosed = categoryList.classList.contains("d_none");
+  categoryArrow.src = isClosed
+    ? "./assets/img/arrow_drop_down-icon.svg"
+    : "./assets/img/arrowUup.svg";
+}
+
+function selectCategory(option) {
+  selectedCategory = option.dataset.category;
+  categoryButton.textContent = selectedCategory;
+  categoryList.classList.add("d_none");
+  categoryArrow.src = "./assets/img/arrow_drop_down-icon.svg";
+  clearInputError(categoryButton, categoryError);
+  categoryButton.classList.add("inputFocus");
+}
+
 function initAssignedDropdown() {
-  assignedInput.addEventListener("focus", () => {
-    assignedList.classList.remove("d_none");
-    assignedArrow.src = "./assets/img/arrowUup.svg";
-    renderContacts();
-  });
+  assignedInput.addEventListener("focus", openAssignedDropdown);
+  assignedInput.addEventListener("input", renderContacts);
+  document.addEventListener("click", handleAssignedOutsideClick);
+}
 
-  assignedInput.addEventListener("input", () => {
-    renderContacts();
-  });
+function openAssignedDropdown() {
+  assignedList.classList.remove("d_none");
+  assignedArrow.src = "./assets/img/arrowUup.svg";
+  renderContacts();
+}
 
-  document.addEventListener("click", (event) => {
-    const clickedInsideAssignedDropdown =
-      event.target.closest("#assignedDropdown");
-    const clickedInsideMoreContacts = event.target.closest(
-      ".selectedContactsWrapper",
-    );
+function handleAssignedOutsideClick(event) {
+  if (!event.target.closest("#assignedDropdown")) closeAssignedDropdown();
+  if (!event.target.closest(".selectedContactsWrapper")) {
+    moreContactsDropdown.classList.add("d_none");
+  }
+}
 
-    if (!clickedInsideAssignedDropdown) {
-      assignedList.classList.add("d_none");
-      assignedArrow.src = "./assets/img/arrow_drop_down-icon.svg";
-    }
-
-    if (!clickedInsideMoreContacts) {
-      moreContactsDropdown.classList.add("d_none");
-    }
-  });
+function closeAssignedDropdown() {
+  assignedList.classList.add("d_none");
+  assignedArrow.src = "./assets/img/arrow_drop_down-icon.svg";
 }
 
 async function loadContacts() {
   try {
     const usersObject = (await loadData("users")) || {};
-    const userEntries = Object.entries(usersObject);
-
-    contacts = await Promise.all(
-      userEntries.map(async ([id, user], index) => {
-        let color = user.color;
-
-        if (!color) {
-          color = getAvatarColor(index);
-          await patchData(`users/${id}`, { color });
-        }
-
-        return {
-          id,
-          name: user.name,
-          email: user.email,
-          initials: user.initials,
-          color,
-        };
-      }),
-    );
-
-    renderContacts();
+    contacts = await Promise.all(Object.entries(usersObject).map(createContact));
   } catch (error) {
     console.error("Fehler beim Laden der User:", error);
     contacts = [];
-    renderContacts();
   }
+  renderContacts();
+}
+
+async function createContact([id, user], index) {
+  const color = await getOrCreateContactColor(id, user.color, index);
+  return {
+    id,
+    name: user.name,
+    email: user.email,
+    initials: user.initials,
+    color,
+  };
+}
+
+async function getOrCreateContactColor(id, color, index) {
+  if (color) return color;
+  const generatedColor = getAvatarColor(index);
+  await patchData(`users/${id}`, { color: generatedColor });
+  return generatedColor;
 }
 
 function renderContacts() {
   assignedList.innerHTML = "";
-
   const searchText = assignedInput.value.trim().toLowerCase();
+  contacts.filter((contact) => matchesContact(contact, searchText))
+    .forEach(renderContactOption);
+  initContactOptionEvents();
+}
 
-  const filteredContacts = contacts.filter((contact) => {
-    return contact.name.toLowerCase().includes(searchText);
-  });
+function matchesContact(contact, searchText) {
+  return contact.name.toLowerCase().includes(searchText);
+}
 
-  filteredContacts.forEach((contact) => {
-    const isSelected = selectedContacts.some((item) => item.id === contact.id);
-
-    assignedList.innerHTML += `
-      <div class="contactOption ${isSelected ? "selectedContactOption" : ""}" data-contact-id="${contact.id}">
-        <div class="contactAvatar" style="background:${contact.color}">
-          ${contact.initials || getInitials(contact.name)}
-        </div>
-
-        <span>${contact.name}</span>
-
-        <input
-          class="contactCheckbox"
-          type="checkbox"
-          aria-label="Select ${contact.name}"
-          ${isSelected ? "checked" : ""}
-        >
+function renderContactOption(contact) {
+  const isSelected = selectedContacts.some((item) => item.id === contact.id);
+  assignedList.innerHTML += `
+    <div class="contactOption ${isSelected ? "selectedContactOption" : ""}"
+      data-contact-id="${contact.id}">
+      <div class="contactAvatar" style="background:${contact.color}">
+        ${contact.initials || getInitials(contact.name)}
       </div>
-    `;
-  });
+      <span>${contact.name}</span>
+      <input class="contactCheckbox" type="checkbox"
+        aria-label="Select ${contact.name}" ${isSelected ? "checked" : ""}>
+    </div>`;
+}
 
+function initContactOptionEvents() {
   document.querySelectorAll(".contactOption").forEach((option) => {
-    option.addEventListener("click", (event) => {
-      event.stopPropagation();
-
-      toggleContact(option.dataset.contactId);
-      assignedInput.value = "";
-      assignedInput.focus();
-      assignedList.classList.remove("d_none");
-      renderContacts();
-    });
+    option.addEventListener("click", (event) => selectContactOption(event, option));
   });
+}
+
+function selectContactOption(event, option) {
+  event.stopPropagation();
+  toggleContact(option.dataset.contactId);
+  assignedInput.value = "";
+  assignedInput.focus();
+  assignedList.classList.remove("d_none");
+  renderContacts();
 }
 
 function toggleContact(contactId) {
   const contact = contacts.find((item) => item.id === contactId);
   if (!contact) return;
-
   const isSelected = selectedContacts.some((item) => item.id === contactId);
-
-  if (isSelected) {
-    selectedContacts = selectedContacts.filter((item) => item.id !== contactId);
-  } else {
-    selectedContacts.push(contact);
-  }
-
+  selectedContacts = isSelected
+    ? selectedContacts.filter((item) => item.id !== contactId)
+    : [...selectedContacts, contact];
   renderContacts();
   renderSelectedContacts();
 }
@@ -407,27 +390,33 @@ function renderSelectedContacts() {
   selectedContactsContainer.innerHTML = "";
   moreContactsDropdown.innerHTML = "";
   moreContactsDropdown.classList.add("d_none");
-
   const visibleContacts = selectedContacts.slice(0, 3);
   const hiddenContacts = selectedContacts.slice(3);
+  visibleContacts.forEach(renderSelectedAvatar);
+  if (hiddenContacts.length) renderHiddenContacts(hiddenContacts);
+}
 
-  visibleContacts.forEach((contact, index) => {
-    selectedContactsContainer.innerHTML += `
+function renderSelectedAvatar(contact) {
+  selectedContactsContainer.innerHTML += `
       <div class="selectedAvatar" style="background:${contact.color}" title="${contact.name}">
         ${contact.initials || getInitials(contact.name)}
       </div>
     `;
-  });
+}
 
-  if (hiddenContacts.length > 0) {
-    selectedContactsContainer.innerHTML += `
+function renderHiddenContacts(hiddenContacts) {
+  selectedContactsContainer.innerHTML += `
       <button type="button" class="moreContactsBtn" id="moreContactsBtn">
         +${hiddenContacts.length}
       </button>
     `;
+  hiddenContacts.forEach(renderHiddenContact);
+  document.getElementById("moreContactsBtn")
+    .addEventListener("click", toggleMoreContacts);
+}
 
-    hiddenContacts.forEach((contact, index) => {
-      moreContactsDropdown.innerHTML += `
+function renderHiddenContact(contact) {
+  moreContactsDropdown.innerHTML += `
         <div class="moreContactItem">
           <div class="selectedAvatar" style="background:${contact.color}">
             ${contact.initials || getInitials(contact.name)}
@@ -435,122 +424,106 @@ function renderSelectedContacts() {
           <span>${contact.name}</span>
         </div>
       `;
-    });
+}
 
-    const moreContactsBtn = document.getElementById("moreContactsBtn");
-
-    moreContactsBtn.addEventListener("click", (event) => {
-      event.stopPropagation();
-      moreContactsDropdown.classList.toggle("d_none");
-    });
-  }
+function toggleMoreContacts(event) {
+  event.stopPropagation();
+  moreContactsDropdown.classList.toggle("d_none");
 }
 
 function initSubtasks() {
-  subtaskInput.addEventListener("keydown", (event) => {
-    if (event.key !== "Enter") return;
+  subtaskInput.addEventListener("keydown", handleSubtaskEnter);
+  addSubtaskBtn.addEventListener("click", addCurrentSubtaskInput);
+  clearSubtaskBtn.addEventListener("click", clearSubtaskInput);
+  document.addEventListener("click", closeSubtasksOnOutsideClick);
+}
 
-    event.preventDefault();
-    addCurrentSubtaskInput();
-  });
+function handleSubtaskEnter(event) {
+  if (event.key !== "Enter") return;
+  event.preventDefault();
+  addCurrentSubtaskInput();
+}
 
-  addSubtaskBtn.addEventListener("click", () => {
-    addCurrentSubtaskInput();
-  });
+function clearSubtaskInput() {
+  subtaskInput.value = "";
+  subtaskInput.focus();
+  toggleInputFocus(subtaskInput);
+}
 
-  clearSubtaskBtn.addEventListener("click", () => {
-    subtaskInput.value = "";
-    subtaskInput.focus();
-    toggleInputFocus(subtaskInput);
-  });
-
-  document.addEventListener("click", (event) => {
-    const clickedInsideSubtasks = event.target.closest(".subtasksWrapper");
-
-    if (!clickedInsideSubtasks) {
-      moreSubtasksDropdown.classList.add("d_none");
-    }
-  });
+function closeSubtasksOnOutsideClick(event) {
+  if (!event.target.closest(".subtasksWrapper")) {
+    moreSubtasksDropdown.classList.add("d_none");
+  }
 }
 
 function renderSubtasks() {
   subtaskList.innerHTML = "";
   moreSubtasksDropdown.innerHTML = "";
   moreSubtasksDropdown.classList.add("d_none");
-
   const visibleSubtasks = subtasks.slice(0, 4);
   const hiddenSubtasks = subtasks.slice(4);
+  visibleSubtasks.forEach(renderVisibleSubtask);
+  if (hiddenSubtasks.length) renderHiddenSubtasks(hiddenSubtasks);
+  initSubtaskItemButtons();
+}
 
-  visibleSubtasks.forEach((subtask, index) => {
-    subtaskList.innerHTML += `
+function renderVisibleSubtask(subtask, index) {
+  subtaskList.innerHTML += `
     <li class="subtaskItem">
       <span class="subtaskText">• ${subtask.title}</span>
-
-      <div class="subtaskItemActions">
-        <button type="button" class="editSubtaskBtn" data-index="${index}">
-          <img src="./assets/img/Subtasks change.svg" alt="Edit subtask" />
-        </button>
-
-        <button type="button" class="deleteSubtaskBtn" data-index="${index}">
-          <img src="./assets/img/SubTask delete.svg" alt="Delete subtask" />
-        </button>
-      </div>
+      ${getSubtaskActionsTemplate(index)}
     </li>
   `;
-  });
+}
 
-  if (hiddenSubtasks.length > 0) {
-    subtaskList.innerHTML += `
+function renderHiddenSubtasks(hiddenSubtasks) {
+  subtaskList.innerHTML += `
       <li>
         <button type="button" class="moreSubtasksBtn" id="moreSubtasksBtn">
           +${hiddenSubtasks.length}
         </button>
       </li>
     `;
+  hiddenSubtasks.forEach(renderHiddenSubtask);
+  document.getElementById("moreSubtasksBtn")
+    .addEventListener("click", toggleMoreSubtasks);
+}
 
-    hiddenSubtasks.forEach((subtask, index) => {
-      const realIndex = index + 4;
-
-      moreSubtasksDropdown.innerHTML += `
+function renderHiddenSubtask(subtask, index) {
+  const realIndex = index + 4;
+  moreSubtasksDropdown.innerHTML += `
     <div class="moreSubtaskItem">
       <span class="moreSubtaskText">• ${subtask.title}</span>
-
-      <div class="subtaskItemActions">
-        <button type="button" class="editSubtaskBtn" data-index="${realIndex}">
-          <img src="./assets/img/Subtasks change.svg" alt="Edit subtask" />
-        </button>
-
-        <button type="button" class="deleteSubtaskBtn" data-index="${realIndex}">
-          <img src="./assets/img/SubTask delete.svg" alt="Delete subtask" />
-        </button>
-      </div>
+      ${getSubtaskActionsTemplate(realIndex)}
     </div>
   `;
-    });
+}
 
-    const moreSubtasksBtn = document.getElementById("moreSubtasksBtn");
+function getSubtaskActionsTemplate(index) {
+  return `
+    <div class="subtaskItemActions">
+      <button type="button" class="editSubtaskBtn" data-index="${index}">
+        <img src="./assets/img/Subtasks change.svg" alt="Edit subtask" />
+      </button>
+      <button type="button" class="deleteSubtaskBtn" data-index="${index}">
+        <img src="./assets/img/SubTask delete.svg" alt="Delete subtask" />
+      </button>
+    </div>`;
+}
 
-    moreSubtasksBtn.addEventListener("click", (event) => {
-      event.stopPropagation();
-      moreSubtasksDropdown.classList.toggle("d_none");
-    });
-  }
-  initSubtaskItemButtons();
+function toggleMoreSubtasks(event) {
+  event.stopPropagation();
+  moreSubtasksDropdown.classList.toggle("d_none");
 }
 
 function initSubtaskItemButtons() {
-  document.querySelectorAll(".deleteSubtaskBtn").forEach((button) => {
-    button.addEventListener("click", () => {
-      const index = Number(button.dataset.index);
-      deleteSubtask(index);
-    });
-  });
+  initIndexedButtons(".deleteSubtaskBtn", deleteSubtask);
+  initIndexedButtons(".editSubtaskBtn", editSubtask);
+}
 
-  document.querySelectorAll(".editSubtaskBtn").forEach((button) => {
-    button.addEventListener("click", () => {
-      const index = Number(button.dataset.index);
-      editSubtask(index);
-    });
+function initIndexedButtons(selector, handler) {
+  document.querySelectorAll(selector).forEach((button) => {
+    button.addEventListener("click", () => handler(Number(button.dataset.index)));
   });
 }
 
@@ -683,18 +656,13 @@ function clearAllErrors() {
 
 function showTaskAddedOverlay() {
   taskAddedOverlay.classList.remove("d_none");
+  scheduleOverlayClass("show", "add", 10);
+  scheduleOverlayClass("show", "remove", 1200);
+  scheduleOverlayClass("d_none", "add", 1500);
+}
 
-  setTimeout(() => {
-    taskAddedOverlay.classList.add("show");
-  }, 10);
-
-  setTimeout(() => {
-    taskAddedOverlay.classList.remove("show");
-  }, 1200);
-
-  setTimeout(() => {
-    taskAddedOverlay.classList.add("d_none");
-  }, 1500);
+function scheduleOverlayClass(className, action, delay) {
+  setTimeout(() => taskAddedOverlay.classList[action](className), delay);
 }
 
 function initAddTaskBlurValidation() {
