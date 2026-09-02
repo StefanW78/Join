@@ -1,47 +1,17 @@
 
 /**
- * References the HTML elements used to display summary data.
+ * References to HTML elements used for displaying the summary data.
  */
 let toDoNumbers = document.getElementById(`toDoNumbers`)
-/**
- * References the DOM element with the ID `doneNumbers`.
- */
 let doneNumbers = document.getElementById(`doneNumbers`)
-/**
- * References the DOM element with the ID `urgentNumbers`.
- */
 let urgentNumbers = document.getElementById(`urgentNumbers`)
-/**
- * References the DOM element with the ID `dueDate`.
- */
 let dueDate = document.getElementById(`dueDate`)
-/**
- * References the DOM element with the ID `totalTasksNumbers`.
- */
 let totalTasksNumbers = document.getElementById(`totalTasksNumbers`)
-/**
- * References the DOM element with the ID `inProgressNumber`.
- */
 let inProgressNumber = document.getElementById(`inProgressNumber`)
-/**
- * References the DOM element with the ID `awaitingFeedbackNumber`.
- */
 let awaitingFeedbackNumber = document.getElementById(`awaitingFeedbackNumber`)
-/**
- * References the DOM element with the ID `userName`.
- */
 let SummaryName = document.getElementById(`userName`)
-/**
- * References the DOM element with the ID `summary-div`.
- */
 let SummaryDiv = document.getElementById(`summary-div`)
-/**
- * References the DOM element with the ID `anima-welcom-page`.
- */
 let AnimationWelcomePage = document.getElementById(`anima-welcom-page`)
-/**
- * References the DOM element with the ID `signedUser`.
- */
 const SignedUserName = document.getElementById("signedUser");
 
 

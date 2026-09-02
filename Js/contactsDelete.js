@@ -1,10 +1,3 @@
-/**
- * Finds and deletes the contact currently shown in the edit overlay.
- *
- * @async
- * @param {Event} event - The event that triggered the operation.
- * @returns {Promise<void>} A promise that resolves when the operation is complete.
- */
 async function deleteContactFromEditOverlay(event) {
   const contactData = foundContactUndIdEditOverlay();
   if (!contactData) return;

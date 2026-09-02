@@ -1,9 +1,3 @@
-/**
- * Validates and saves a new contact from the add contact form.
- *
- * @async
- * @returns {Promise<void>} A promise that resolves when the operation is complete.
- */
 async function addNewContact() {
     const data = getContactFormData();
 
@@ -210,6 +204,5 @@ function openEdit(contactId) {
     OpenEditDialog();
 
 }
-
 
 
