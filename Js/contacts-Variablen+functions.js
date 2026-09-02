@@ -1,13 +1,25 @@
 
 /**
- * References to HTML elements used for displaying the Contcats data.
+ * References the HTML elements used to display contact data.
  */
 
 //Contact Overlay
+/**
+ * References the DOM element with the ID `contact-pop-add`.
+ */
 let contactPopUpAdd = document.getElementById("contact-pop-add");
+/**
+ * References the DOM element with the ID `add-contact-overlay`.
+ */
 let addContactOverlay = document.getElementById("add-contact-overlay");
+/**
+ * References the DOM element with the ID `edit-contact-popup`.
+ */
 let editContactPopup = document.getElementById("edit-contact-popup");
 
+/**
+ * Defines the input and error elements for each contact form mode.
+ */
 const contactFormConfig = {
   add: {
     buttonId: "createContactBtn",
@@ -29,11 +41,17 @@ const contactFormConfig = {
   },
 };
 
+/**
+ * Stores validation state for the contact forms.
+ */
 const contactFormState = {
   add: { name: false, email: false, phone: false },
   edit: { name: false, email: false, phone: false },
 };
 
+/**
+ * Tracks which fields in each contact form have been touched.
+ */
 const contactFieldTouched = {
   add: { name: false, email: false, phone: false },
   edit: { name: false, email: false, phone: false },
@@ -135,12 +153,33 @@ function randomColor() {
 
 //main ConctactsJs
 
+/**
+ * References the DOM element with the ID `contact-list`.
+ */
 let contactListDiv = document.getElementById(`contact-list`)
+/**
+ * References the DOM element with the ID `contacts-info-sec`.
+ */
 let contactInfoSec = document.getElementById(`contacts-info-sec`)
+/**
+ * References the DOM element with the ID `contacts-list-sec`.
+ */
 let contactListSec = document.getElementById(`contacts-list-sec`)
+/**
+ * References the DOM element with the ID `contact-symbol`.
+ */
 let contactSymbol = document.getElementById(`contact-symbol`)
+/**
+ * References the DOM element with the ID `edit`.
+ */
 let editTool = document.getElementById(`edit`)
+/**
+ * References the DOM element with the ID `contacts-infos`.
+ */
 let contactDetailDiv = document.getElementById(`contacts-infos`)
+/**
+ * References the DOM element with the ID `createMessage`.
+ */
 const createMessage = document.getElementById(`createMessage`)
 
 

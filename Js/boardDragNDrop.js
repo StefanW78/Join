@@ -1,4 +1,7 @@
 
+/**
+ * Stores the task card currently being dragged.
+ */
 let draggedCard = null;
 
 // Verbesserte Version vom DragnDrop

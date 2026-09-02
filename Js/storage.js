@@ -1,6 +1,16 @@
+/**
+ * Stores the base URL of the Firebase Realtime Database.
+ */
 const BASE_URL =
   "https://test-2651c-default-rtdb.europe-west1.firebasedatabase.app/";
 
+/**
+ * Loads data from the configured Firebase path.
+ *
+ * @async
+ * @param {string} path - The database path to access.
+ * @returns {Promise<Object>} A promise that resolves with the database response.
+ */
 export async function loadData(path = "") {
   const response = await fetch(`${BASE_URL}${path}.json`);
 
@@ -11,6 +21,14 @@ export async function loadData(path = "") {
   return (await response.json()) || {};
 }
 
+/**
+ * Creates a new entry at the configured Firebase path.
+ *
+ * @async
+ * @param {string} path - The database path to access.
+ * @param {Object} data - The data to save.
+ * @returns {Promise<Object>} A promise that resolves with the database response.
+ */
 export async function postData(path = "", data = {}) {
   const response = await fetch(`${BASE_URL}${path}.json`, {
     method: "POST",
@@ -27,6 +45,14 @@ export async function postData(path = "", data = {}) {
   return await response.json();
 }
 
+/**
+ * Updates data at the configured Firebase path.
+ *
+ * @async
+ * @param {string} path - The database path to access.
+ * @param {Object} data - The data to save.
+ * @returns {Promise<Object>} A promise that resolves with the database response.
+ */
 export async function patchData(path = "", data = {}) {
   const response = await fetch(`${BASE_URL}${path}.json`, {
     method: "PATCH",
@@ -43,6 +69,13 @@ export async function patchData(path = "", data = {}) {
   return await response.json();
 }
 
+/**
+ * Deletes data at the configured Firebase path.
+ *
+ * @async
+ * @param {string} path - The database path to access.
+ * @returns {Promise<boolean>} A promise that resolves with true after deletion.
+ */
 export async function deleteData(path = "") {
   const response = await fetch(`${BASE_URL}${path}.json`, {
     method: "DELETE",

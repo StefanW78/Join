@@ -1,3 +1,6 @@
+/**
+ * Stores the static sample data used to render task cards.
+ */
 const cardsData = [
     {
         id: 0,
@@ -67,4 +70,3 @@ const cardsData = [
         ]
     }
 ];
-

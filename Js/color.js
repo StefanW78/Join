@@ -1,3 +1,6 @@
+/**
+ * Stores the color palette used for contact avatars.
+ */
 const colors = ["rgba(255, 122, 0, 1)", 
   "rgba(255, 94, 179, 1)", 
   "rgba(110, 82, 255, 1)", 

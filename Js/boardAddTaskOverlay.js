@@ -1,5 +1,14 @@
+/**
+ * References the DOM element with the ID `addTaskOverlay`.
+ */
 const addTaskOverlay = document.getElementById("addTaskOverlay");
+/**
+ * References the DOM element with the ID `closeAddTaskOverlay`.
+ */
 const closeAddTaskOverlayBtn = document.getElementById("closeAddTaskOverlay");
+/**
+ * References all DOM elements matching `.openAddTaskBtn`.
+ */
 const openAddTaskButtons = document.querySelectorAll(".openAddTaskBtn");
 
 openAddTaskButtons.forEach((button) => {

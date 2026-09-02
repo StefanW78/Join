@@ -1,3 +1,6 @@
+/**
+ * Stores the base URL of the Firebase Realtime Database.
+ */
 const BASE_URL = "https://test-2651c-default-rtdb.europe-west1.firebasedatabase.app/";
 
 

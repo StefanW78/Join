@@ -1,3 +1,9 @@
+/**
+ * Returns a task's due date in ISO format.
+ *
+ * @param {Object} task - The task to process.
+ * @returns {string} The task due date in ISO format.
+ */
 function getTaskDateISO(task) {
   if (task.dueDateISO) {
     return task.dueDateISO;
@@ -14,6 +20,12 @@ function getTaskDateISO(task) {
   return `${year}-${month}-${day}`;
 }
 
+/**
+ * Creates the complete HTML markup for the board task edit form.
+ *
+ * @param {Object} task - The task to process.
+ * @returns {string} The generated HTML markup for the task edit form.
+ */
 function getEditTaskTemplate(task) {
   return `
     <div class="task-card edit-task-card">

@@ -1,17 +1,53 @@
 import { loadData, postData } from "./storage.js";
 
+/**
+ * References the DOM element with the ID `signupForm`.
+ */
 const signupForm = document.getElementById("signupForm");
+/**
+ * References the DOM element with the ID `signupName`.
+ */
 const signupName = document.getElementById("signupName");
+/**
+ * References the DOM element with the ID `signupEmail`.
+ */
 const signupEmail = document.getElementById("signupEmail");
+/**
+ * References the DOM element with the ID `signupPassword`.
+ */
 const signupPassword = document.getElementById("signupPassword");
+/**
+ * References the DOM element with the ID `signupConfirmPassword`.
+ */
 const signupConfirmPassword = document.getElementById("signupConfirmPassword");
+/**
+ * References the DOM element with the ID `signupPrivacy`.
+ */
 const signupPrivacy = document.getElementById("signupPrivacy");
+/**
+ * References the DOM element with the ID `signupError`.
+ */
 const signupError = document.getElementById("signupError");
+/**
+ * References the DOM element with the ID `signupSuccess`.
+ */
 const signupSuccess = document.getElementById("signupSuccess");
 
+/**
+ * References the DOM element with the ID `nameError`.
+ */
 const nameError = document.getElementById("nameError");
+/**
+ * References the DOM element with the ID `emailError`.
+ */
 const emailError = document.getElementById("emailError");
+/**
+ * References the DOM element with the ID `passwordError`.
+ */
 const passwordError = document.getElementById("passwordError");
+/**
+ * References the DOM element with the ID `confirmPasswordError`.
+ */
 const confirmPasswordError = document.getElementById("confirmPasswordError");
 
 signupForm.addEventListener("submit", async (event) => {

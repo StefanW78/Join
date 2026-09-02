@@ -1,16 +1,46 @@
 import { loadData } from "./storage.js";
 
+/**
+ * References the DOM element with the ID `loginEmailError`.
+ */
 const loginEmailError = document.getElementById("loginEmailError");
+/**
+ * References the DOM element with the ID `loginPasswordError`.
+ */
 const loginPasswordError = document.getElementById("loginPasswordError");
 
+/**
+ * References the DOM element with the ID `splashScreen`.
+ */
 const splashScreen = document.getElementById("splashScreen");
+/**
+ * References the DOM element with the ID `splashLogo`.
+ */
 const splashLogo = document.getElementById("splashLogo");
+/**
+ * References the first DOM element matching `.authLogo`.
+ */
 const authLogo = document.querySelector(".authLogo");
+/**
+ * References the DOM element with the ID `splashBackground`.
+ */
 const splashBackground = document.getElementById("splashBackground");
 
+/**
+ * References the DOM element with the ID `loginForm`.
+ */
 const loginForm = document.getElementById("loginForm");
+/**
+ * References the DOM element with the ID `loginEmail`.
+ */
 const loginEmail = document.getElementById("loginEmail");
+/**
+ * References the DOM element with the ID `loginPassword`.
+ */
 const loginPassword = document.getElementById("loginPassword");
+/**
+ * References the DOM element with the ID `guestLoginBtn`.
+ */
 const guestLoginBtn = document.getElementById("guestLoginBtn");
 
 window.addEventListener("load", () => {

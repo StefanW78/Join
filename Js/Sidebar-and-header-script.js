@@ -1,9 +1,15 @@
 
 /**
- * References to HTML elements used for displaying the Sidebar and Header data.
+ * References the HTML elements used to display sidebar and header data.
  */
 let DropDowncontain = document.getElementById(`dropdown-menu`)
+/**
+ * References the DOM element with the ID `header-button`.
+ */
 let dropdownButton = document.getElementById(`header-button`)
+/**
+ * Stores the media query for `(max-width: 1023px)`.
+ */
 const mediaQuery = window.matchMedia("(max-width: 1023px)");
 //später entfernen
 // localStorage.setItem("username", "Dennis Kollak");
