@@ -14,6 +14,11 @@ addTaskOverlay.addEventListener("click", (event) => {
   }
 });
 
+/**
+ * Opens the add task overlay.
+ *
+ * @returns {void}
+ */
 function openAddTaskOverlay() {
   addTaskOverlay.classList.remove("d_none");
 
@@ -22,6 +27,11 @@ function openAddTaskOverlay() {
   }, 10);
 }
 
+/**
+ * Closes the add task overlay.
+ *
+ * @returns {void}
+ */
 function closeAddTaskOverlay() {
   addTaskOverlay.classList.remove("show");
 

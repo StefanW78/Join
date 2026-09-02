@@ -23,6 +23,12 @@ const STATUS = {
     DONE: "done"
 };
 
+/**
+ * Initializes the board by loading tasks and registering its interactions.
+ *
+ * @async
+ * @returns {Promise<void>} A promise that resolves when the operation is complete.
+ */
 async function Init() {
     await loadTasks()
     renderTasks()
@@ -31,10 +37,21 @@ async function Init() {
     document.addEventListener("click", handleBoardClick);
 }
 
+/**
+ * Loads the tasks.
+ *
+ * @async
+ * @returns {Promise<void>} A promise that resolves when the operation is complete.
+ */
 async function loadTasks() {
   tasks = Object.values(await loadDataBase("tasks"));
 }
 
+/**
+ * Renders the tasks.
+ *
+ * @returns {void}
+ */
 function renderTasks() {
     const html = {};
 
@@ -51,6 +68,11 @@ function renderTasks() {
     }
 }
 
+/**
+ * Renders the filtered tasks.
+ *
+ * @returns {void}
+ */
 function renderFilteredTasks() {
     const filteredTasks = filterTasks();
     const html = {};
@@ -73,6 +95,11 @@ function renderFilteredTasks() {
 
 }
 
+/**
+ * Initializes the board search.
+ *
+ * @returns {void}
+ */
 function initBoardSearch() {
     const searchInput = document.getElementById("searchTasks");
 
@@ -86,6 +113,11 @@ function initBoardSearch() {
     });
 }
 
+/**
+ * Filters the loaded tasks using the current board search text.
+ *
+ * @returns {Object[]} The matching items.
+ */
 function filterTasks() {
     if (!SearchText) return tasks;
     return tasks.filter(task => {
@@ -99,6 +131,14 @@ function filterTasks() {
     });
 }
 
+/**
+ * Renders the move menu.
+ *
+ * @param {HTMLElement} menu - The move menu to populate.
+ * @param {string} currentStatus - The task's current status.
+ * @param {string} taskId - The ID of the task.
+ * @returns {void}
+ */
 function renderMoveMenu(menu, currentStatus, taskId) {
     const container = menu.querySelector(".movingto-Div");
     const statusNames = {
@@ -121,6 +161,12 @@ function renderMoveMenu(menu, currentStatus, taskId) {
     });
 }
 
+/**
+ * Renders the edit overlay.
+ *
+ * @param {string} taskId - The ID of the task.
+ * @returns {void}
+ */
 function renderEditOverlay(taskId) {
     const task = tasks.find(t => t.id === taskId);
 
@@ -139,6 +185,12 @@ function renderEditOverlay(taskId) {
     }, 50);
 }
 
+/**
+ * Handles the board click.
+ *
+ * @param {Event} event - The event that triggered the operation.
+ * @returns {void}
+ */
 function handleBoardClick(event) {
 
     const moveButton = event.target.closest(".swap-horiz-div");
@@ -160,6 +212,12 @@ function handleBoardClick(event) {
     closeAllMoveMenus();
 }
 
+/**
+ * Toggles the move menu.
+ *
+ * @param {HTMLElement} button - The button involved in the operation.
+ * @returns {void}
+ */
 function toggleMoveMenu(button) {
     const card = button.closest(".card");
     const menu = card.querySelector(".move-menu");
@@ -175,6 +233,13 @@ function toggleMoveMenu(button) {
     openMoveMenu(card, menu);
 }
 
+/**
+ * Opens the move menu.
+ *
+ * @param {HTMLElement} card - The task card element.
+ * @param {HTMLElement} menu - The move menu to open.
+ * @returns {void}
+ */
 function openMoveMenu(card, menu) {
     const currentStatus = card.closest(".column").dataset.status;
     const taskId = card.dataset.id;
@@ -185,6 +250,13 @@ function openMoveMenu(card, menu) {
     scrollMenuIntoView(card, menu);
 }
 
+/**
+ * Scrolls the menu into view.
+ *
+ * @param {HTMLElement} card - The task card element.
+ * @param {HTMLElement} menu - The move menu that should remain visible.
+ * @returns {void}
+ */
 function scrollMenuIntoView(card, menu) {
     requestAnimationFrame(() => {
         const taskList = card.closest(".task-list");
@@ -201,6 +273,14 @@ function scrollMenuIntoView(card, menu) {
     });
 }
 
+/**
+ * Moves the task.
+ *
+ * @async
+ * @param {string} taskId - The ID of the task.
+ * @param {string} newStatus - The status to assign to the task.
+ * @returns {Promise<void>} A promise that resolves when the operation is complete.
+ */
 async function moveTask(taskId, newStatus) {
     const task = tasks.find(t => t.id === taskId);
     if (!task) return;
@@ -218,6 +298,15 @@ async function moveTask(taskId, newStatus) {
     }
 }
 
+/**
+ * Moves a task to the status selected in its move menu.
+ *
+ * @async
+ * @param {Event} event - The event that triggered the operation.
+ * @param {string} taskId - The ID of the task.
+ * @param {string} newStatus - The status to assign to the task.
+ * @returns {Promise<void>} A promise that resolves when the operation is complete.
+ */
 async function moveTaskFromMenu(event, taskId, newStatus) {
     event.stopPropagation();
 
@@ -226,10 +315,22 @@ async function moveTaskFromMenu(event, taskId, newStatus) {
     closeAllMoveMenus()
 }
 
+/**
+ * Returns the statuses to which a task may move from its current status.
+ *
+ * @param {string} currentStatus - The task's current status.
+ * @returns {string[]} The allowed destination statuses.
+ */
 function getAllowedMoves(currentStatus) {
     return moveRules[currentStatus] || [];
 }
 
+/**
+ * Adds generated display values to a task before it is rendered.
+ *
+ * @param {Object} task - The task to process.
+ * @returns {Object} The generated data object.
+ */
 function prepareTaskData(task) {
     return {
         ...task,
@@ -239,6 +340,12 @@ function prepareTaskData(task) {
     };
 }
 
+/**
+ * Creates the avatar markup for contacts assigned to a task.
+ *
+ * @param {Object[]} assignedTo - The contacts assigned to the task.
+ * @returns {string} The generated value or HTML markup.
+ */
 function createAvatarsHTML(assignedTo) {
     const maxVisible = 4;
     const visibleAvatars = assignedTo.slice(0, maxVisible);
@@ -251,6 +358,12 @@ function createAvatarsHTML(assignedTo) {
     return avatars + createExtraAvatar(extraCount);
 }
 
+/**
+ * Creates the progress markup for a task's subtasks.
+ *
+ * @param {Object[]} subtasks - The subtasks to process.
+ * @returns {string} The generated value or HTML markup.
+ */
 function createSubtasksHTML(subtasks) {
     if (!subtasks.length) return "";
 
@@ -260,14 +373,32 @@ function createSubtasksHTML(subtasks) {
     return progressTemplate(progress, done, subtasks.length);
 }
 
+/**
+ * Calculates the completion percentage for a list of subtasks.
+ *
+ * @param {Object[]} subtasks - The subtasks to process.
+ * @returns {number} The calculated numeric result.
+ */
 function calculateProgress(subtasks) {
     return (getDoneSubtasks(subtasks) / subtasks.length) * 100;
 }
 
+/**
+ * Counts the completed subtasks in a list.
+ *
+ * @param {Object[]} subtasks - The subtasks to process.
+ * @returns {number} The calculated numeric result.
+ */
 function getDoneSubtasks(subtasks) {
     return subtasks.filter(subtask => subtask.done).length;
 }
 
+/**
+ * Retrieves the category class.
+ *
+ * @param {string} category - The task category.
+ * @returns {string} The generated value or HTML markup.
+ */
 function getCategoryClass(category) {
     const categoryClassMap = {
         "User Story": "tag-blue",
@@ -277,12 +408,23 @@ function getCategoryClass(category) {
     return categoryClassMap[category] || "tag-default";
 }
 
+/**
+ * Closes all open task move menus.
+ *
+ * @returns {void}
+ */
 function closeAllMoveMenus() {
     document.querySelectorAll(".move-menu").forEach(menu => {
         menu.classList.add("d_none");
     });
 }
 
+/**
+ * Creates the avatar markup for a list of assigned users.
+ *
+ * @param {Object[]} assignees - The users assigned to the task.
+ * @returns {string} The generated value or HTML markup.
+ */
 function renderAssignees(assignees = []) {
 
     if (!assignees.length) return "";
@@ -296,6 +438,12 @@ function renderAssignees(assignees = []) {
         .join("");
 }
 
+/**
+ * Calculates the total, completed count, and progress for a list of subtasks.
+ *
+ * @param {Object[]} subtasks - The subtasks to process.
+ * @returns {Object} The generated data object.
+ */
 function getSubtaskStats(subtasks = []) {
     const total = subtasks.length;
     const done = subtasks.filter(s => s.checked).length;
@@ -307,6 +455,12 @@ function getSubtaskStats(subtasks = []) {
     };
 }
 
+/**
+ * Creates progress bar markup for a list of subtasks.
+ *
+ * @param {Object[]} subtasks - The subtasks to process.
+ * @returns {string} The generated value or HTML markup.
+ */
 function getProgressHTML(subtasks = []) {
     const { total, done, progress } = getSubtaskStats(subtasks);
 
@@ -335,6 +489,13 @@ document.addEventListener("click", (event) => {
 
 document.addEventListener("change", handleSubtaskChange);
 
+/**
+ * Saves a changed subtask checkbox and refreshes its task overlay.
+ *
+ * @async
+ * @param {Event} event - The event that triggered the operation.
+ * @returns {Promise<void>} A promise that resolves when the operation is complete.
+ */
 async function handleSubtaskChange(event) {
     const checkbox = event.target.closest(".subtask-checkbox");
     if (!checkbox) return;
@@ -348,17 +509,37 @@ async function handleSubtaskChange(event) {
     await saveSubtasks(task);
 }
 
+/**
+ * Refreshes a task on both the board and its detail overlay.
+ *
+ * @param {string} taskId - The ID of the task.
+ * @returns {void}
+ */
 function refreshTask(taskId) {
     renderTasks();
     renderCardOverlay(taskId);
 }
 
+/**
+ * Saves the subtasks.
+ *
+ * @async
+ * @param {Object} task - The task to process.
+ * @returns {Promise<void>} A promise that resolves when the operation is complete.
+ */
 async function saveSubtasks(task) {
     await updateData("tasks", task.id, {
         subtasks: task.subtasks,
     });
 }
 
+/**
+ * Deletes the card.
+ *
+ * @async
+ * @param {string} taskId - The ID of the task.
+ * @returns {Promise<void>} A promise that resolves when the operation is complete.
+ */
 async function deleteCard(taskId) {
     const oldTasks = [...tasks];
 
@@ -377,6 +558,12 @@ async function deleteCard(taskId) {
     }
 }
 
+/**
+ * Displays the context message.
+ *
+ * @param {string} message - The message to display.
+ * @returns {void}
+ */
 function showContextMessage(message) {
     const box = document.getElementById("contextMessage");
     const text = document.getElementById("contextMessageText");
@@ -391,4 +578,3 @@ function showContextMessage(message) {
         box.classList.remove("show");
     }, 3000);
 }
-

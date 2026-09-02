@@ -1,3 +1,9 @@
+/**
+ * Renders and opens the detail overlay for the selected task card.
+ *
+ * @param {string} id - The relevant database ID.
+ * @returns {void}
+ */
 function renderCardOverlay(id) {
     const task = boardTasks.find((task) => task.id === taskId);
     if (!card) return;
@@ -71,6 +77,11 @@ function renderCardOverlay(id) {
 
 }
 
+  /**
+   * Closes the card overlay.
+   *
+   * @returns {void}
+   */
   function closeCardOverlay() {
     const overlay = document.getElementById("cardOverlay");
 
@@ -82,6 +93,12 @@ function renderCardOverlay(id) {
     document.body.style.overflow = "auto";
   }
 
+  /**
+   * Closes the card overlay when its background is clicked.
+   *
+   * @param {Event} event - The event that triggered the operation.
+   * @returns {void}
+   */
   function eventClick(event) {
     if (event.target.id === "cardOverlay") {
       closeCardOverlay();

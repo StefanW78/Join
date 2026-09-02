@@ -2,6 +2,11 @@
 let draggedCard = null;
 
 // Verbesserte Version vom DragnDrop
+/**
+ * Initializes drag-and-drop behavior for all task cards and board columns.
+ *
+ * @returns {void}
+ */
 function initSimpleDragAndDrop() {
     const board = document.querySelector(".board-columns");
     const columns = document.querySelectorAll(".column");
@@ -14,6 +19,14 @@ function initSimpleDragAndDrop() {
 
 }
 
+/**
+ * Registers the drag-start handler for task cards on the board.
+ *
+ * @param {HTMLElement} board - The board element receiving drag events.
+ * @param {Function} getCard - The callback that returns the currently dragged card.
+ * @param {Function} setCard - The callback that changes the currently dragged card.
+ * @returns {void}
+ */
 function setupDragStart(board, getCard, setCard) {
     board.addEventListener("dragstart", (e) => {
 
@@ -26,6 +39,14 @@ function setupDragStart(board, getCard, setCard) {
     });
 }
 
+/**
+ * Registers the drag-end handler and clears the active card state.
+ *
+ * @param {HTMLElement} board - The board element receiving drag events.
+ * @param {Function} getCard - The callback that returns the currently dragged card.
+ * @param {Function} setCard - The callback that changes the currently dragged card.
+ * @returns {void}
+ */
 function setupDragEnd(board, getCard, setCard) {
 
     board.addEventListener("dragend", () => {
@@ -39,10 +60,24 @@ function setupDragEnd(board, getCard, setCard) {
 
 }
 
+/**
+ * Initializes every board column as a drop zone.
+ *
+ * @param {NodeListOf<HTMLElement>} columns - The board columns to initialize.
+ * @param {Function} getCard - The callback that returns the currently dragged card.
+ * @returns {void}
+ */
 function setupDropZones(columns, getCard) {
     columns.forEach((column) => setupDropZone(column, getCard));
 }
 
+/**
+ * Initializes drag counters and drop events for one board column.
+ *
+ * @param {HTMLElement} column - The board column element.
+ * @param {Function} getCard - The callback that returns the currently dragged card.
+ * @returns {void}
+ */
 function setupDropZone(column, getCard) {
     const taskList = column.querySelector(".task-list");
     let dragCounter = 0;
@@ -55,6 +90,15 @@ function setupDropZone(column, getCard) {
     setupDropZoneMoveEvents(column, taskList, getCard, () => dragCounter = 0);
 }
 
+/**
+ * Registers drag-over and drop handlers for a board column.
+ *
+ * @param {HTMLElement} column - The board column element.
+ * @param {HTMLElement} taskList - The task list containing the draggable cards.
+ * @param {Function} getCard - The callback that returns the currently dragged card.
+ * @param {Function} resetCounter - The callback used to reset the drag counter.
+ * @returns {void}
+ */
 function setupDropZoneMoveEvents(column, taskList, getCard, resetCounter) {
     column.addEventListener("dragover", (event) => {
         handleDragOver(event, taskList, getCard);
@@ -65,12 +109,26 @@ function setupDropZoneMoveEvents(column, taskList, getCard, resetCounter) {
     });
 }
 
+/**
+ * Highlights a column and increments its nested drag counter.
+ *
+ * @param {HTMLElement} column - The board column element.
+ * @param {number} dragCounter - The column's current nested drag counter.
+ * @returns {number} The updated drag counter.
+ */
 function handleDragEnter(column, dragCounter) {
     dragCounter++;
     column.classList.add("is-drag-over");
     return dragCounter;
 }
 
+/**
+ * Decrements a column's drag counter and removes its highlight when appropriate.
+ *
+ * @param {HTMLElement} column - The board column element.
+ * @param {number} dragCounter - The column's current nested drag counter.
+ * @returns {number} The updated drag counter.
+ */
 function handleDragLeave(column, dragCounter) {
     dragCounter--;
 
@@ -81,6 +139,14 @@ function handleDragLeave(column, dragCounter) {
     return dragCounter;
 }
 
+/**
+ * Repositions the dragged card while it moves over a task list.
+ *
+ * @param {Event} event - The event that triggered the operation.
+ * @param {HTMLElement} taskList - The task list containing the draggable cards.
+ * @param {Function} getCard - The callback that returns the currently dragged card.
+ * @returns {void}
+ */
 function handleDragOver(event, taskList, getCard) {
     event.preventDefault();
 
@@ -90,6 +156,14 @@ function handleDragOver(event, taskList, getCard) {
     moveCard(taskList, card, event);
 }
 
+/**
+ * Removes a column's highlight and completes the card drop.
+ *
+ * @param {Event} event - The event that triggered the operation.
+ * @param {HTMLElement} column - The board column element.
+ * @param {Function} getCard - The callback that returns the currently dragged card.
+ * @returns {number} The reset drag counter value.
+ */
 function handleDropZone(event, column, getCard) {
     column.classList.remove("is-drag-over");
     handleDrop(event, column, getCard);
@@ -98,6 +172,14 @@ function handleDropZone(event, column, getCard) {
 
 //Test
 
+/**
+ * Inserts the dragged card at the position nearest to the pointer.
+ *
+ * @param {HTMLElement} taskList - The task list containing the draggable cards.
+ * @param {HTMLElement} card - The task card element.
+ * @param {Event} e - The event that triggered the operation.
+ * @returns {void}
+ */
 function moveCard(taskList, card, e) {
 
     const afterElement = getDragAfterElement(taskList, e.clientY);
@@ -110,6 +192,15 @@ function moveCard(taskList, card, e) {
 
 }
 
+/**
+ * Persists the new task status after a card is dropped into a column.
+ *
+ * @async
+ * @param {Event} e - The event that triggered the operation.
+ * @param {HTMLElement} column - The board column element.
+ * @param {Function} getCard - The callback that returns the currently dragged card.
+ * @returns {Promise<void>} A promise that resolves when the operation is complete.
+ */
 async function handleDrop(e, column, getCard) {
 
     e.preventDefault();
@@ -125,6 +216,13 @@ async function handleDrop(e, column, getCard) {
     await moveTask(taskId, newStatus);
 }
 
+/**
+ * Finds the card that should follow the dragged card at the current pointer position.
+ *
+ * @param {HTMLElement} container - The task list containing possible insertion targets.
+ * @param {number} mouseY - The vertical pointer position.
+ * @returns {HTMLElement|undefined} The card after the insertion point, or undefined.
+ */
 function getDragAfterElement(container, mouseY) {
     const elements = [...container.querySelectorAll(".card:not(.is-dragging)")];
     return elements.reduce((closest, child) => {
@@ -132,6 +230,14 @@ function getDragAfterElement(container, mouseY) {
     }, { offset: Number.NEGATIVE_INFINITY }).element;
 }
 
+/**
+ * Returns the closer eligible card while calculating a drag insertion position.
+ *
+ * @param {Object} closest - The closest insertion candidate found so far.
+ * @param {HTMLElement} child - The card currently being compared.
+ * @param {number} mouseY - The vertical pointer position.
+ * @returns {Object} The closest insertion candidate and its offset.
+ */
 function getCloserDragElement(closest, child, mouseY) {
     const box = child.getBoundingClientRect();
     const offset = mouseY - box.top - box.height / 2;

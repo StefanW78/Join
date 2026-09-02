@@ -1,3 +1,8 @@
+/**
+ * Checks whether all required fields in the edit task form are valid.
+ *
+ * @returns {boolean} Whether the validation or comparison succeeds.
+ */
 function isEditTaskFormValid() {
     clearEditErrors();
 
@@ -9,6 +14,11 @@ function isEditTaskFormValid() {
 }
 
 
+/**
+ * Clears all validation errors from the edit task form.
+ *
+ * @returns {void}
+ */
 function clearEditErrors() {
     clearInputError(
         document.getElementById("editTaskTitle"),
@@ -26,6 +36,13 @@ function clearEditErrors() {
     );
 }
 
+/**
+ * Removes the error state and message from an input.
+ *
+ * @param {HTMLElement} input - The input element to process.
+ * @param {HTMLElement} errorElement - The element used to display an error.
+ * @returns {void}
+ */
 function clearInputError(input, errorElement) {
     if (!input || !errorElement) return;
 
@@ -33,6 +50,14 @@ function clearInputError(input, errorElement) {
     errorElement.textContent = "";
 }
 
+/**
+ * Marks an input as invalid and displays its error message.
+ *
+ * @param {HTMLElement} input - The input element to process.
+ * @param {HTMLElement} errorElement - The element used to display an error.
+ * @param {string} message - The message to display.
+ * @returns {void}
+ */
 function setInputError(input, errorElement, message) {
     if (!input || !errorElement) return;
 
@@ -41,6 +66,11 @@ function setInputError(input, errorElement, message) {
     errorElement.textContent = message;
 }
 
+/**
+ * Validates the edit task title.
+ *
+ * @returns {boolean} Whether the validation or comparison succeeds.
+ */
 function validateEditTaskTitle() {
     const input = document.getElementById("editTaskTitle");
     const error = document.getElementById("editTaskTitleError");
@@ -53,6 +83,11 @@ function validateEditTaskTitle() {
     return false;
 }
 
+/**
+ * Validates the edit task category.
+ *
+ * @returns {boolean} Whether the validation or comparison succeeds.
+ */
 function validateEditTaskCategory() {
     const select = document.getElementById("editTaskCategory");
     const error = document.getElementById("editTaskCategoryError");
@@ -65,6 +100,11 @@ function validateEditTaskCategory() {
     return false;
 }
 
+/**
+ * Validates the edit task date.
+ *
+ * @returns {boolean} Whether the validation or comparison succeeds.
+ */
 function validateEditTaskDate() {
     const input = document.getElementById("editTaskDate");
     const error = document.getElementById("editTaskDateError");
@@ -116,6 +156,12 @@ function validateEditTaskDate() {
 
 
 
+/**
+ * Checks whether a date uses the expected format and represents a real date.
+ *
+ * @param {string} dateValue - The date value to process.
+ * @returns {boolean} Whether the validation or comparison succeeds.
+ */
 function isValidDateFormat(dateValue) {
 
     const dateRegex =
@@ -142,6 +188,12 @@ function isValidDateFormat(dateValue) {
 
 
 
+/**
+ * Parses a displayed date value into a Date object.
+ *
+ * @param {string} dateValue - The date value to process.
+ * @returns {Date} The parsed date.
+ */
 function parseDateFromInput(dateValue) {
 
     const [day, month, year] = dateValue.split("/");
@@ -154,6 +206,11 @@ function parseDateFromInput(dateValue) {
     );
 }
 
+/**
+ * Initializes the edit validation events.
+ *
+ * @returns {void}
+ */
 function initEditValidationEvents() {
   const editTaskTitle = document.getElementById("editTaskTitle");
   const editTaskDate = document.getElementById("editTaskDate");
@@ -193,4 +250,3 @@ function initEditValidationEvents() {
     validateEditTaskCategory();
   });
 }
-

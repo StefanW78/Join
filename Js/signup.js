@@ -80,6 +80,11 @@ signupForm.addEventListener("submit", async (event) => {
   }
 });
 
+/**
+ * Validates the username.
+ *
+ * @returns {boolean} Whether the validation or comparison succeeds.
+ */
 function validateUsername() {
   const name = signupName.value.trim();
   const nameParts = name.split(" ").filter(Boolean);
@@ -98,6 +103,11 @@ function validateUsername() {
   return true;
 }
 
+/**
+ * Validates the email.
+ *
+ * @returns {boolean} Whether the validation or comparison succeeds.
+ */
 function validateEmail() {
   const email = signupEmail.value.trim();
 
@@ -115,6 +125,11 @@ function validateEmail() {
   return true;
 }
 
+/**
+ * Validates the password.
+ *
+ * @returns {boolean} Whether the validation or comparison succeeds.
+ */
 function validatePassword() {
   const password = signupPassword.value.trim();
 
@@ -132,6 +147,11 @@ function validatePassword() {
   return true;
 }
 
+/**
+ * Validates that the confirmation password is present and matches.
+ *
+ * @returns {boolean} Whether the validation or comparison succeeds.
+ */
 function validateConfirmPassword() {
   const password = signupPassword.value.trim();
   const confirmPassword = signupConfirmPassword.value.trim();
@@ -192,16 +212,36 @@ signupConfirmPassword.addEventListener("input", () => {
   );
 });
 
+/**
+ * Marks an input as invalid and displays its error message.
+ *
+ * @param {HTMLElement} input - The input element to process.
+ * @param {HTMLElement} errorElement - The element used to display an error.
+ * @param {string} message - The message to display.
+ * @returns {void}
+ */
 function setInputError(input, errorElement, message) {
   input.classList.add("inputError");
   errorElement.textContent = message;
 }
 
+/**
+ * Removes the error state and message from an input.
+ *
+ * @param {HTMLElement} input - The input element to process.
+ * @param {HTMLElement} errorElement - The element used to display an error.
+ * @returns {void}
+ */
 function clearInputError(input, errorElement) {
   input.classList.remove("inputError");
   errorElement.textContent = "";
 }
 
+/**
+ * Clears all validation errors from the current form.
+ *
+ * @returns {void}
+ */
 function clearAllErrors() {
   signupError.textContent = "";
   signupSuccess.textContent = "";
@@ -212,10 +252,22 @@ function clearAllErrors() {
   clearInputError(signupConfirmPassword, confirmPasswordError);
 }
 
+/**
+ * Checks whether an email address contains the required basic characters.
+ *
+ * @param {string} email - The email address to validate.
+ * @returns {boolean} Whether the validation or comparison succeeds.
+ */
 function isValidEmail(email) {
   return email.includes("@") && email.includes(".");
 }
 
+/**
+ * Generates uppercase initials from the first two parts of a name.
+ *
+ * @param {string} name - The name used to generate the initials.
+ * @returns {string} The generated value or HTML markup.
+ */
 function getInitials(name = "") {
   return name
     .trim()
@@ -226,6 +278,11 @@ function getInitials(name = "") {
     .join("");
 }
 
+/**
+ * Displays the signup success overlay.
+ *
+ * @returns {void}
+ */
 function showSignupSuccessOverlay() {
   const overlay = document.getElementById("signupSuccessOverlay");
 
@@ -236,6 +293,12 @@ function showSignupSuccessOverlay() {
   }, 10);
 }
 
+/**
+ * Selects an avatar color based on an item's position.
+ *
+ * @param {number} index - The item's position in its list.
+ * @returns {string} The generated value or HTML markup.
+ */
 function getAvatarColor(index) {
   const colors = [
     "#9327ff",
@@ -251,6 +314,11 @@ function getAvatarColor(index) {
 
 signupPrivacy.addEventListener("change", validatePrivacy);
 
+/**
+ * Validates that the privacy policy checkbox has been accepted.
+ *
+ * @returns {boolean} Whether the validation or comparison succeeds.
+ */
 function validatePrivacy() {
   signupError.textContent = "";
 
