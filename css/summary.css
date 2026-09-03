@@ -409,7 +409,7 @@ main{
 .user-name{
     color: rgba(18, 70, 88, 1);
     font-weight: 700;
-    font-size: 64px;
+    font-size: 60px;
 }
 
 .overview-container-items.box-1:hover, .overview-container-items.box-2:hover{

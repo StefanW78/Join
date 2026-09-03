@@ -10,7 +10,7 @@
 
 @media (max-width: 1290px){
     .overview-container-items.box-1, .overview-container-items.box-2{
-        padding: 33.5px 45px;
+        padding: 33.5px 35px;
     }
 
     .welcome-message{
@@ -32,7 +32,7 @@
     }
 
     .overview-container-items.box-1, .overview-container-items.box-2{
-        padding: 33.5px 30px;
+        padding: 33.5px 20px;
     }
 
     .summary-div{
@@ -45,7 +45,7 @@
     }
 }
 
-@media (max-width: 1070px) {
+@media (max-width: 1090px) {
     .summary-div{
         padding: 50px 35px 20px 50px;
     }
