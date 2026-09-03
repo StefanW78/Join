@@ -1,3 +1,10 @@
+
+/**
+ * Creates a new contact after validating the form data.
+ * Saves the contact to the database and updates the local contact list.
+ *
+ * @returns {Promise<void>} A promise that resolves when the contact is created.
+ */
 async function addNewContact() {
     const data = getContactFormData();
 
