@@ -196,7 +196,6 @@ main {
 
 main{
     width: 100%;
-    /* padding: 75px 50px 50px 75px; */
     display: flex;
     flex-direction: column;
     justify-content: flex-start;
@@ -213,7 +212,7 @@ main{
     flex-direction: column;
     gap: 50px;
     overflow-y: auto;
-    padding: 70px 50px 20px 70px;
+    padding: 70px 40px 20px 96px;
 }
 
 .summary-title{
@@ -253,6 +252,7 @@ main{
     justify-content: space-between;
     align-items: center;
     gap: 70px;
+    max-width: 1025px;
 }
 
 .summary-overview{
@@ -397,7 +397,7 @@ main{
     flex-direction: column;
     justify-content: flex-start;
     align-items: flex-start;
-    flex: 1 1 0%;
+    /* flex: 1 1 0%; */
 }
 
 .welcome-message{
