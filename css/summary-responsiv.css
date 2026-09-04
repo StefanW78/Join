@@ -1,11 +1,11 @@
 @media (max-width: 1307px){
-.summary-div{
+/* .summary-div{
     padding: 70px 30px 20px 70px;
 }
 
 .header-div{
     padding: 20px 50px 20px 80px;
-}
+} */
 }
 
 @media (max-width: 1290px){
@@ -18,7 +18,7 @@
     }
 
     .user-name{
-        font-size: 56px;
+        font-size: 50px;
     }
 }
 
@@ -39,6 +39,10 @@
         padding: 70px 30px 20px 60px;
     }
 
+    .header-div{
+        padding: 20px 40px 20px 60px;
+    }
+
     .summary-overview-boxes span{
             font-size: 60px;
 
@@ -47,12 +51,12 @@
 
 @media (max-width: 1090px) {
     .summary-div{
-        padding: 50px 35px 20px 50px;
+        padding: 50px 40px 20px 50px;
     }
     
  /* header */
     .header-div{
-        padding: 20px 60px;;
+        padding: 20px 40px 20px 50px;
     }
 
     .welcome-message{
@@ -60,7 +64,7 @@
     }
 
     .user-name{
-        font-size: 50px;
+        font-size: 45px;
     }
 
     .summary-main-board{
