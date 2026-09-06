@@ -212,7 +212,7 @@ main{
     flex-direction: column;
     gap: 50px;
     overflow-y: auto;
-    padding: 70px 40px 20px 96px;
+    padding: 50px 40px 10px 96px;
 }
 
 .summary-title{
@@ -397,7 +397,7 @@ main{
     flex-direction: column;
     justify-content: flex-start;
     align-items: flex-start;
-    /* flex: 1 1 0%; */
+    flex: 1 1 0%; 
 }
 
 .welcome-message{
