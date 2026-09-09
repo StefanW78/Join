@@ -34,7 +34,7 @@ body {
 main{
     flex: 1;
     width: 100%;
-    padding: 70px 50px 50px 75px;
+    padding: 70px 50px 50px 95px;
     display: flex;
     flex-direction: column;
     min-height: 0;
