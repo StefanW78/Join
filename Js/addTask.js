@@ -1,10 +1,10 @@
-import { loadData, postData, patchData } from "./storage.js";
+import { postData } from "./storage.js";
 import {
   initPriorityButtons, initCategoryDropdown, initAssignedDropdown, loadContacts,
 } from "./addTaskContacts.js";
-import { initSubtasks, renderSubtasks } from "./addTaskSubtasks.js";
+import { initSubtasks, addCurrentSubtaskInput } from "./addTaskSubtasks.js";
 import {
-  resetFormState, clearInputError, handleInputChange, toggleInputFocus,
+  resetFormState, setInputError, clearInputError, handleInputChange, toggleInputFocus,
   clearAllErrors, showTaskAddedOverlay, initAddTaskBlurValidation,
 } from "./addTaskForm.js";
 
@@ -310,22 +310,3 @@ taskDescription.addEventListener("input", () => {
 subtaskInput.addEventListener("input", () => {
   toggleInputFocus(subtaskInput);
 });
-
-/**
- * Adds the current subtask input value to the task when it is not empty.
- *
- * @returns {void}
- */
-function addCurrentSubtaskInput() {
-  const subtaskText = subtaskInput.value.trim();
-
-  if (!subtaskText) return;
-
-  subtasks.push({
-    title: subtaskText,
-    done: false,
-  });
-
-  subtaskInput.value = "";
-  renderSubtasks();
-}

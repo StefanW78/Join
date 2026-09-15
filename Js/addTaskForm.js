@@ -112,7 +112,7 @@ function resetPriorityButtons() {
  * @param {string} message - The message to display.
  * @returns {void}
  */
-function setInputError(input, errorElement, message) {
+export function setInputError(input, errorElement, message) {
   input.classList.remove("inputFocus");
   input.classList.add("inputError");
   errorElement.textContent = message;

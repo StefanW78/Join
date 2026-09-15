@@ -1,6 +1,25 @@
 import { toggleInputFocus } from "./addTaskForm.js";
 
 /**
+ * Adds the current subtask input value to the task when it is not empty.
+ *
+ * @returns {void}
+ */
+export function addCurrentSubtaskInput() {
+  const subtaskText = subtaskInput.value.trim();
+
+  if (!subtaskText) return;
+
+  subtasks.push({
+    title: subtaskText,
+    done: false,
+  });
+
+  subtaskInput.value = "";
+  renderSubtasks();
+}
+
+/**
  * Initializes the controls and events used to manage subtasks.
  *
  * @returns {void}
