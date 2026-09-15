@@ -154,7 +154,7 @@ footer a:hover{
     display: flex;
     justify-content: center;
     align-items: center;
-    border: 1.5px solid black;
+    border: 4px solid black;
     border-radius: 60%;
 }
 
@@ -171,6 +171,7 @@ footer a:hover{
     text-align: center;
     color: #29abe2;
     background-color: transparent;
+    border: none;
 }
 
 .header-button:hover{
