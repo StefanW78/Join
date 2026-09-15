@@ -310,9 +310,9 @@ padding: 25px 20px 25px 0px;
     }
 }
 
-@media (max-width: 400px){
+@media (max-width: 420px){
 .contacts-list-sec{
-    padding: 24px 0px;
+    padding: 24px 15px;
 }
 }
 
