@@ -154,7 +154,7 @@ footer a:hover{
     display: flex;
     justify-content: center;
     align-items: center;
-    border: 4px solid black;
+    border: 3px solid rgba(42, 54, 71, 1);
     border-radius: 60%;
 }
 
@@ -169,7 +169,7 @@ footer a:hover{
     font-size: large;
     font-weight: bold;
     text-align: center;
-    color: #29abe2;
+    color: rgba(18, 70, 88, 1);
     background-color: transparent;
     border: none;
 }
