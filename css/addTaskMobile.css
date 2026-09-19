@@ -1,11 +1,3 @@
-@media (min-width: 1440px){
-  .priorityBtn {
-  
-  min-width: 230px;
-  
-}
-}
-
 @media (max-width: 1092px) {
 
    .add-task-page .body-div {

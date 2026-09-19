@@ -877,3 +877,72 @@ body {
 #categoryButton {
   padding-right: 48px;
 }
+
+/* Page-specific desktop layout, independent of the board overlay. */
+@font-face {
+  font-family: "Add Task Inter";
+  src: url("../assets/fonts/Inter/Inter-VariableFont_opsz,wght.ttf") format("truetype");
+  font-weight: 100 900;
+  font-display: swap;
+}
+
+@media (min-width: 1093px) {
+  .add-task-page { font-family: "Add Task Inter", Arial, sans-serif; }
+  .add-task-page button,
+  .add-task-page input,
+  .add-task-page textarea { font-family: inherit; }
+  .add-task-page .sidebar { flex: 0 0 230px; }
+  .add-task-page .sidebar-logo-div { padding: 62px 64px 120px; }
+  .add-task-page .sidebar-links { gap: 15px; }
+  .add-task-page .sidebar-links a { padding: 8px 54px; white-space: nowrap; }
+  .add-task-page footer { margin-bottom: 64px; }
+  .add-task-page footer a { padding: 10px 57px; white-space: nowrap; }
+  .add-task-page .header-div {
+    flex: 0 0 96px;
+    padding-left: clamp(48px, 8.2vw, 118px);
+  }
+  .add-task-page .user-icon { border: 3px solid #2a3647; border-radius: 50%; }
+  .add-task-page .header-button { color: #0c4a60; }
+  .add-task-page .main-container {
+    padding: 123px clamp(32px, 7.78vw, 112px) 80px clamp(48px, 8.2vw, 118px);
+  }
+  .add-task-page .addTaskContent {
+    max-width: 980px;
+    display: flex;
+    flex-direction: column;
+  }
+  .add-task-page .taskForm { flex: 1; min-height: 0; }
+  .add-task-page .formGrid {
+    grid-template-columns: minmax(0, 1fr) 1px minmax(0, 1fr);
+    gap: 48px;
+  }
+  .add-task-page .formColumn,
+  .add-task-page .priorityGroup { min-width: 0; }
+  .add-task-page .formDivider { min-height: 426px; background-color: #808080; }
+  .add-task-page .formGroup label,
+  .add-task-page .priorityGroup legend { line-height: 24px; }
+  .add-task-page .priorityGroup legend { color: #000; }
+  .add-task-page .priorityBtn {
+    flex: 1 1 0;
+    min-width: 0;
+    font-size: 20px;
+    box-shadow: 0 0 3px #00000030;
+  }
+  .add-task-page .activeMedium,
+  .add-task-page .activeUrgent,
+  .add-task-page .activeLow { border-color: transparent; box-shadow: none; }
+  .add-task-page .formGroup input:not(.contactCheckbox),
+  .add-task-page .formGroup textarea,
+  .add-task-page #assignedInput,
+  .add-task-page #subtasks,
+  .add-task-page #categoryButton { border-color: #808080; }
+  .add-task-page .formGroup input::placeholder,
+  .add-task-page .formGroup textarea::placeholder { color: #737373; }
+  .add-task-page #assignedInput::placeholder { color: #000; }
+  .add-task-page .fieldError:empty { display: none; }
+  .add-task-page .formColumn:first-child { gap: 32px; }
+  .add-task-page .selectedContactsWrapper:not(:has(.selectedAvatar)) { display: none; }
+  .add-task-page .taskFooter { padding-top: 48px; }
+  .add-task-page .clearBtn,
+  .add-task-page .createTaskBtn { padding: 0 16px; gap: 8px; }
+}
