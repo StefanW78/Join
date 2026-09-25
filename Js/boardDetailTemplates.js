@@ -178,7 +178,7 @@ function getSubtasksOverlayTemplate(subtasks) {
  */
 function getOverlaySubtaskTemplate(subtask, index) {
   return `<label class="subtask-item">
-    <input type="checkbox" class="detailSubtaskCheckbox"
+    <input type="checkbox" class="detailSubtaskCheckbox subtaskCheckbox"
       data-index="${index}" ${subtask.done ? "checked" : ""}>
     <span class="subtask-text">${subtask.title || ""}</span>
   </label>`;

@@ -4,6 +4,46 @@
   cursor: pointer;
 }
 
+.subtaskCheckboxLabel {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  min-width: 0;
+  cursor: pointer;
+}
+
+:root input.subtaskCheckbox[type="checkbox"] {
+  appearance: none;
+  -webkit-appearance: none;
+  flex: 0 0 24px;
+  width: 24px;
+  height: 24px;
+  min-width: 24px;
+  padding: 0;
+  margin: 0;
+  border: 0;
+  border-radius: 3px;
+  background: url("../assets/img/checkbox.svg") center / 24px 24px no-repeat;
+  cursor: pointer;
+}
+
+:root input.subtaskCheckbox[type="checkbox"]:checked {
+  background-image: url("../assets/img/checkboxChecked.svg");
+}
+
+:root input.subtaskCheckbox[type="checkbox"]:hover {
+  background-image: url("../assets/img/checkboxHover.svg");
+}
+
+:root input.subtaskCheckbox[type="checkbox"]:checked:hover {
+  background-image: url("../assets/img/checkboxCheckedHover.svg");
+}
+
+:root input.subtaskCheckbox[type="checkbox"]:focus-visible {
+  outline: 2px solid #29abe2;
+  outline-offset: 2px;
+}
+
 .subtasksWrapper{
   max-height: 120px;
   overflow-y: auto;

@@ -1,7 +1,9 @@
 import { toggleInputFocus } from "./addTaskForm.js";
 
+let editingSubtask = null;
+
 /**
- * Adds the current subtask input value to the task when it is not empty.
+ * Adds a subtask or updates the edited subtask without changing its position.
  *
  * @returns {void}
  */
@@ -10,11 +12,13 @@ export function addCurrentSubtaskInput() {
 
   if (!subtaskText) return;
 
-  subtasks.push({
-    title: subtaskText,
-    done: false,
-  });
+  if (editingSubtask && subtasks.includes(editingSubtask)) {
+    editingSubtask.title = subtaskText;
+  } else {
+    subtasks.push({ title: subtaskText, done: false });
+  }
 
+  editingSubtask = null;
   subtaskInput.value = "";
   renderSubtasks();
 }
@@ -49,6 +53,7 @@ function handleSubtaskEnter(event) {
  * @returns {void}
  */
 function clearSubtaskInput() {
+  editingSubtask = null;
   subtaskInput.value = "";
   subtaskInput.focus();
   toggleInputFocus(subtaskInput);
@@ -72,6 +77,10 @@ function closeSubtasksOnOutsideClick(event) {
  * @returns {void}
  */
 export function renderSubtasks() {
+  if (editingSubtask && !subtasks.includes(editingSubtask)) {
+    editingSubtask = null;
+    subtaskInput.value = "";
+  }
   subtaskList.innerHTML = "";
   moreSubtasksDropdown.innerHTML = "";
   moreSubtasksDropdown.classList.add("d_none");
@@ -92,7 +101,10 @@ export function renderSubtasks() {
 function renderVisibleSubtask(subtask, index) {
   subtaskList.innerHTML += `
     <li class="subtaskItem">
-      <span class="subtaskText">• ${subtask.title}</span>
+      <label class="subtaskCheckboxLabel">
+        <input type="checkbox" class="subtaskCheckbox addSubtaskCheckbox" data-index="${index}" ${subtask.done ? "checked" : ""}>
+        <span class="subtaskText">${subtask.title}</span>
+      </label>
       ${getSubtaskActionsTemplate(index)}
     </li>
   `;
@@ -128,7 +140,10 @@ function renderHiddenSubtask(subtask, index) {
   const realIndex = index + 4;
   moreSubtasksDropdown.innerHTML += `
     <div class="moreSubtaskItem">
-      <span class="moreSubtaskText">• ${subtask.title}</span>
+      <label class="subtaskCheckboxLabel">
+        <input type="checkbox" class="subtaskCheckbox addSubtaskCheckbox" data-index="${realIndex}" ${subtask.done ? "checked" : ""}>
+        <span class="moreSubtaskText">${subtask.title}</span>
+      </label>
       ${getSubtaskActionsTemplate(realIndex)}
     </div>
   `;
@@ -169,6 +184,11 @@ function toggleMoreSubtasks(event) {
  * @returns {void}
  */
 function initSubtaskItemButtons() {
+  document.querySelectorAll(".addSubtaskCheckbox").forEach((checkbox) => {
+    checkbox.addEventListener("change", () => {
+      subtasks[Number(checkbox.dataset.index)].done = checkbox.checked;
+    });
+  });
   initIndexedButtons(".deleteSubtaskBtn", deleteSubtask);
   initIndexedButtons(".editSubtaskBtn", editSubtask);
 }
@@ -198,14 +218,14 @@ function deleteSubtask(index) {
 }
 
 /**
- * Moves a subtask into the input so it can be edited.
+ * Loads a subtask into the input while keeping its position and completion state.
  *
  * @param {number} index - The item's position in its list.
  * @returns {void}
  */
 function editSubtask(index) {
-  subtaskInput.value = subtasks[index].title;
-  subtasks.splice(index, 1);
+  editingSubtask = subtasks[index];
+  subtaskInput.value = editingSubtask.title;
   renderSubtasks();
   subtaskInput.focus();
   toggleInputFocus(subtaskInput);

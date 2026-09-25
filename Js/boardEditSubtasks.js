@@ -140,7 +140,10 @@ function renderEditSubtasks(editSubtasks, onChange, onEdit) {
  */
 function getEditSubtaskItemTemplate(subtask, index) {
   return `<li class="subtaskItem editSubtaskItem">
-    <span class="subtaskText">• ${subtask.title}</span>
+    <label class="subtaskCheckboxLabel">
+      <input type="checkbox" class="subtaskCheckbox editSubtaskCheckbox" data-index="${index}" ${subtask.done ? "checked" : ""}>
+      <span class="subtaskText">${subtask.title}</span>
+    </label>
     <div class="subtaskItemActions">
       <button type="button" class="editSubtaskBtn" data-index="${index}">
         <img src="./assets/img/Subtasks change.svg" alt="Edit subtask"></button>
@@ -159,6 +162,12 @@ function getEditSubtaskItemTemplate(subtask, index) {
  * @returns {void}
  */
 function initEditSubtaskButtons(editSubtasks, onChange, onEdit) {
+  document.querySelectorAll("#editSubtaskList .editSubtaskCheckbox").forEach((checkbox) => {
+    checkbox.addEventListener("change", () => {
+      editSubtasks[Number(checkbox.dataset.index)].done = checkbox.checked;
+      onChange(editSubtasks);
+    });
+  });
   initEditSubtaskDeleteButtons(editSubtasks, onChange, onEdit);
   initEditSubtaskEditButtons(editSubtasks, onEdit);
 }
