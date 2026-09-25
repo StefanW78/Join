@@ -317,32 +317,32 @@
     width: 100%;
     max-height: calc(100dvh - 32px);
   }
+}
 
-  .task-card {
-    padding: 24px;
-    border-radius: 18px;
-    gap: 18px;
-  }
+/* Keep the compact layout as the base for proportional desktop scaling. */
+.task-card {
+  padding: 24px;
+  border-radius: 18px;
+  gap: 18px;
+}
 
-  .task-tag,
-  .task-description,
-  .task-meta-item,
-  .task-meta-label,
-  .task-assigned-label,
-  .task-subtasks-label,
-  .assigned-person,
-  .subtask-item {
-    font-size: 16px;
-  }
+.task-tag,
+.task-description,
+.task-meta-item,
+.task-meta-label,
+.task-assigned-label,
+.task-subtasks-label,
+.assigned-person,
+.subtask-item {
+  font-size: 16px;
+}
 
-  .task-title {
-    font-size: 28px;
-  }
+.task-title {
+  font-size: 28px;
+}
 
-  .task-meta-label {
-    min-width: 90px;
-  }
-
+.task-meta-label {
+  min-width: 90px;
 }
 
 @media (max-width: 480px) {
@@ -669,31 +669,27 @@
 }
 
 .card-overlay-content.edit-mode {
-  width: min(100%, 420px);
   max-height: calc(100dvh - 32px);
 }
 
 .edit-task-card {
   width: 100%;
   max-height: min(916px, calc(100dvh - 32px));
-  padding: 32px 16px 24px 26px;
-  border-radius: 30px;
-  gap: 20px;
   overflow-x: hidden;
   overflow-y: hidden;
   overscroll-behavior: contain;
 }
 
-.edit-task-card .taskForm::-webkit-scrollbar {
+.edit-task-card .editFormGrid::-webkit-scrollbar {
   width: 8px;
 }
 
-.edit-task-card .taskForm::-webkit-scrollbar-track {
+.edit-task-card .editFormGrid::-webkit-scrollbar-track {
   margin: 18px 0 8px;
   background: transparent;
 }
 
-.edit-task-card .taskForm::-webkit-scrollbar-thumb {
+.edit-task-card .editFormGrid::-webkit-scrollbar-thumb {
   border-radius: 8px;
   background: #a8a8a8;
 }
@@ -730,6 +726,22 @@
   flex-direction: column;
   align-items: stretch;
   gap: 13px;
+  flex: 1 1 0;
+  min-height: 0;
+  overflow-y: auto;
+  overflow-x: hidden;
+  padding-right: 8px;
+  scrollbar-color: #a8a8a8 transparent;
+  scrollbar-width: thin;
+}
+
+.edit-task-card .editFormGrid > * {
+  flex-shrink: 0;
+}
+
+.edit-task-card .subtasksWrapper {
+  max-height: none;
+  overflow: visible;
 }
 
 .edit-task-card .formColumn {
@@ -820,6 +832,7 @@
   display: flex;
   justify-content: flex-end;
   padding-top: 2px;
+  flex-shrink: 0;
 }
 
 .editTaskActions .createTaskBtn {
@@ -908,15 +921,11 @@
 
 @media (max-width: 480px) {
   .card-overlay-content.edit-mode {
-    width: min(100%, 420px);
     max-height: calc(100dvh - 24px);
   }
 
   .edit-task-card {
     max-height: calc(100dvh - 24px);
-    padding: 24px 10px 20px 16px;
-    border-radius: 24px;
-    gap: 16px;
   }
 
   .edit-task-card .priorityButtons {
@@ -930,7 +939,7 @@
   }
 }
 
-/* Preserve the detail card's proportions; below 600px scroll the overlay. */
+/* Preserve detail and edit card proportions; below 600px scroll the overlay. */
 #cardOverlay.detail-card-view {
   padding-top: 16px;
   padding-bottom: 16px;
@@ -941,10 +950,14 @@
 
 #cardOverlay.detail-card-view #cardFormContainer {
   flex-shrink: 0;
+  max-width: none;
   max-height: none;
   margin-block: auto;
   overflow: clip;
   overflow-clip-margin: 32px;
+}
+
+#cardOverlay.detail-card-view #cardFormContainer:not(.edit-mode) {
   animation: detail-card-slide-in 300ms ease-in-out;
 }
 
@@ -957,12 +970,22 @@
   }
 }
 
-#cardOverlay.detail-card-view #openTaskOverlay {
+#cardOverlay.detail-card-view #cardFormContainer > .task-card {
   max-height: 768px;
   overflow-y: auto;
-  transform-origin: top center;
+  transform-origin: top left;
 }
 
-#cardOverlay.detail-card-view #openTaskOverlay > * {
+#cardOverlay.detail-card-view #cardFormContainer > .task-card > * {
   flex-shrink: 0;
+}
+
+#cardOverlay.detail-card-view #cardFormContainer > .edit-task-card {
+  overflow: hidden;
+}
+
+#cardOverlay.detail-card-view #cardFormContainer > .edit-task-card > .taskForm {
+  flex: 1 1 0;
+  min-height: 0;
+  overflow: hidden;
 }

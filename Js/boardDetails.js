@@ -10,20 +10,32 @@ import { isBoardDragging } from "./boardDrag.js";
 let boardDetailsContext = null;
 let detailCardResizeObserver = null;
 
-/** Scales the detail card uniformly, stopping at the size used at 600px. */
+/** Grows cards with viewport width while fitting the available height. */
 function resizeDetailCard() {
-  const card = document.getElementById("openTaskOverlay");
+  const card = document.querySelector("#cardFormContainer > .task-card");
   const container = document.getElementById("cardFormContainer");
   if (!card || !container) return;
   const viewportHeight = document.documentElement.clientHeight;
-  const scale = (Math.min(800, Math.max(600, viewportHeight)) - 32) / 768;
+  const viewportWidth = document.documentElement.clientWidth;
+  const sidePadding = viewportWidth <= 480 ? 24 : viewportWidth <= 768 ? 32 : 48;
+  const availableWidth = Math.max(1, viewportWidth - sidePadding);
+  const baseWidth = Math.min(viewportWidth <= 480 ? 360 : 524, availableWidth);
+  card.style.width = `${baseWidth}px`;
+  const heightScale = (Math.min(800, Math.max(600, viewportHeight)) - 32) / 768;
+  const widthScale = Math.max(1, viewportWidth / 768);
+  const scale = Math.min(
+    widthScale * heightScale,
+    availableWidth / baseWidth,
+    (Math.max(600, viewportHeight) - 32) / card.offsetHeight,
+  );
+  container.style.width = `${baseWidth * scale}px`;
   container.style.height = `${card.offsetHeight * scale}px`;
   card.style.transform = `scale(${scale})`;
 }
 
 /** Keeps the scale current when the viewport or card content changes. */
 function startDetailCardSizing() {
-  const card = document.getElementById("openTaskOverlay");
+  const card = document.querySelector("#cardFormContainer > .task-card");
   stopDetailCardSizing();
   document.getElementById("cardOverlay").classList.add("detail-card-view");
   detailCardResizeObserver = new ResizeObserver(resizeDetailCard);
@@ -32,13 +44,14 @@ function startDetailCardSizing() {
   resizeDetailCard();
 }
 
-/** Removes detail-only sizing before closing or opening the edit form. */
+/** Removes card sizing before closing or replacing the form. */
 function stopDetailCardSizing() {
   detailCardResizeObserver?.disconnect();
   detailCardResizeObserver = null;
   window.removeEventListener("resize", resizeDetailCard);
   document.getElementById("cardOverlay")?.classList.remove("detail-card-view");
   document.getElementById("cardFormContainer")?.style.removeProperty("height");
+  document.getElementById("cardFormContainer")?.style.removeProperty("width");
 }
 
 /**
@@ -291,13 +304,17 @@ function openEditTaskOverlay(taskId) {
 
   if (!task) return;
 
-  stopDetailCardSizing();
   const formContainer = document.getElementById("cardFormContainer");
+  const detailCard = formContainer.querySelector(".task-card");
+  const detailHeight = detailCard.offsetHeight;
+  stopDetailCardSizing();
 
   formContainer.classList.add("edit-mode");
   formContainer.innerHTML = getEditTaskTemplate(task);
+  formContainer.querySelector(".task-card").style.height = `${detailHeight}px`;
 
   initEditTaskForm(task, getBoardEditContext());
+  startDetailCardSizing();
 }
 
 /**
