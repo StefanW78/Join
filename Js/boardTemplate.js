@@ -135,9 +135,18 @@ function getEditTaskTemplate(task) {
               />
 
               <div class="subtaskActions">
-                <button type="button" id="editClearSubtaskBtn" aria-label="Clear subtask">×</button>
+                <button type="button" id="editClearSubtaskBtn" aria-label="Clear subtask">
+                       <img
+                              src="/assets/img/Subtasks cancel.svg"
+                              alt="subtask cancel"
+                            />
+                      </button>
                 <div class="subtaskDivider"></div>
-                <button type="button" id="editAddSubtaskBtn" aria-label="Add subtask">✓</button>
+                <button type="button" id="editAddSubtaskBtn" aria-label="Add subtask">
+                          <img
+                              src="/assets/img/Subtasks accept.svg"
+                              alt="subtask cancel"
+                            /></button>
               </div>
             </div>
 

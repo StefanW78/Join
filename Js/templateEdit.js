@@ -5,7 +5,7 @@
  * @returns {string} The generated value or HTML markup.
  */
 function getEditOverlayTemplate(task) {
-    return `
+  return `
         <div class="task-card-header">
             <h3 class="edit-task-title">Edit Task</h3>
 
@@ -187,7 +187,10 @@ function getEditOverlayTemplate(task) {
                                 <button
                                     type="button"
                                     id="editClearSubtaskBtn">
-                                    &times;
+                                   <img
+                              src="/assets/img/Subtasks cancel.svg"
+                              alt="subtask cancel"
+                            />
                                 </button>
 
                                 <div class="subtaskDivider"></div>
@@ -195,7 +198,10 @@ function getEditOverlayTemplate(task) {
                                 <button
                                     type="button"
                                     id="editAddSubtaskBtn">
-                                    ✓
+                                    <img
+                              src="/assets/img/Subtasks accept.svg"
+                              alt="subtask cancel"
+                            />
                                 </button>
 
                             </div>
@@ -242,7 +248,6 @@ function getEditOverlayTemplate(task) {
 
 //Test
 
-
 /**
  * Creates avatar markup for a selected edit contact.
  *
@@ -250,8 +255,7 @@ function getEditOverlayTemplate(task) {
  * @returns {string} The generated value or HTML markup.
  */
 function getEditAssignedContactTemplate(contact) {
-
-    return `
+  return `
         <div
             class="selectedAvatar"
             style="background:${contact.color}"
@@ -263,7 +267,6 @@ function getEditAssignedContactTemplate(contact) {
     `;
 }
 
-
 /**
  * Creates markup for an additional selected edit contact.
  *
@@ -271,8 +274,7 @@ function getEditAssignedContactTemplate(contact) {
  * @returns {string} The generated value or HTML markup.
  */
 function getEditMoreContactTemplate(contact) {
-
-    return `
+  return `
         <div class="moreContactItem">
 
             <div
@@ -298,7 +300,7 @@ function getEditMoreContactTemplate(contact) {
  * @returns {string} The generated value or HTML markup.
  */
 function createAvatarTemplate(contact) {
-    return `
+  return `
         <div class="av" style="background-color:${contact.color}">
             ${contact.initials}
         </div>
@@ -312,8 +314,8 @@ function createAvatarTemplate(contact) {
  * @returns {string} The generated value or HTML markup.
  */
 function createExtraAvatar(extraCount) {
-    if (extraCount <= 0) return "";
-    return `<div class="av-more">+${extraCount}</div>`;
+  if (extraCount <= 0) return "";
+  return `<div class="av-more">+${extraCount}</div>`;
 }
 
 /**
@@ -325,7 +327,7 @@ function createExtraAvatar(extraCount) {
  * @returns {string} The generated value or HTML markup.
  */
 function progressTemplate(progress, done, total) {
-    return `
+  return `
         <div class="progress-bar">
             <div class="progress-fill" style="width:${progress}%"></div>
         </div>
@@ -343,8 +345,8 @@ function progressTemplate(progress, done, total) {
  * @returns {string} The generated value or HTML markup.
  */
 function moveOptionTemplate(index, taskId, status, statusName) {
-    return `
-        <div class="${index === 0 ? 'moving-top' : 'moving-down'} move-option"
+  return `
+        <div class="${index === 0 ? "moving-top" : "moving-down"} move-option"
              data-task-id="${taskId}"
              data-status="${status}">
 
@@ -363,11 +365,9 @@ function moveOptionTemplate(index, taskId, status, statusName) {
  * @returns {string} The generated value or HTML markup.
  */
 function createContactOptionTemplate(contact, selectedContacts) {
-    const isSelected = selectedContacts.some(
-        item => item.id === contact.id
-    );
+  const isSelected = selectedContacts.some((item) => item.id === contact.id);
 
-    return `
+  return `
         <div class="contactOption ${isSelected ? "selectedContactOption" : ""}" 
              data-contact-id="${contact.id}">
 
@@ -395,7 +395,7 @@ function createContactOptionTemplate(contact, selectedContacts) {
  * @returns {string} The generated value or HTML markup.
  */
 function editSubtaskTemplate(subtask, index) {
-    return `
+  return `
         <li class="subtaskItem editSubtaskItem">
 
             <span class="subtaskText">
