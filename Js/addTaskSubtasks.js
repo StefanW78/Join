@@ -101,10 +101,7 @@ export function renderSubtasks() {
 function renderVisibleSubtask(subtask, index) {
   subtaskList.innerHTML += `
     <li class="subtaskItem">
-      <label class="subtaskCheckboxLabel">
-        <input type="checkbox" class="subtaskCheckbox addSubtaskCheckbox" data-index="${index}" ${subtask.done ? "checked" : ""}>
-        <span class="subtaskText">${subtask.title}</span>
-      </label>
+      <span class="subtaskText">• ${subtask.title}</span>
       ${getSubtaskActionsTemplate(index)}
     </li>
   `;
@@ -140,10 +137,7 @@ function renderHiddenSubtask(subtask, index) {
   const realIndex = index + 4;
   moreSubtasksDropdown.innerHTML += `
     <div class="moreSubtaskItem">
-      <label class="subtaskCheckboxLabel">
-        <input type="checkbox" class="subtaskCheckbox addSubtaskCheckbox" data-index="${realIndex}" ${subtask.done ? "checked" : ""}>
-        <span class="moreSubtaskText">${subtask.title}</span>
-      </label>
+      <span class="moreSubtaskText">• ${subtask.title}</span>
       ${getSubtaskActionsTemplate(realIndex)}
     </div>
   `;
@@ -184,11 +178,6 @@ function toggleMoreSubtasks(event) {
  * @returns {void}
  */
 function initSubtaskItemButtons() {
-  document.querySelectorAll(".addSubtaskCheckbox").forEach((checkbox) => {
-    checkbox.addEventListener("change", () => {
-      subtasks[Number(checkbox.dataset.index)].done = checkbox.checked;
-    });
-  });
   initIndexedButtons(".deleteSubtaskBtn", deleteSubtask);
   initIndexedButtons(".editSubtaskBtn", editSubtask);
 }

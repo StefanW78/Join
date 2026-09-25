@@ -8,6 +8,38 @@ import { isBoardDragging } from "./boardDrag.js";
  * Stores the shared board data and callbacks used by task details.
  */
 let boardDetailsContext = null;
+let detailCardResizeObserver = null;
+
+/** Scales the detail card uniformly, stopping at the size used at 600px. */
+function resizeDetailCard() {
+  const card = document.getElementById("openTaskOverlay");
+  const container = document.getElementById("cardFormContainer");
+  if (!card || !container) return;
+  const viewportHeight = document.documentElement.clientHeight;
+  const scale = (Math.min(800, Math.max(600, viewportHeight)) - 32) / 768;
+  container.style.height = `${card.offsetHeight * scale}px`;
+  card.style.transform = `scale(${scale})`;
+}
+
+/** Keeps the scale current when the viewport or card content changes. */
+function startDetailCardSizing() {
+  const card = document.getElementById("openTaskOverlay");
+  stopDetailCardSizing();
+  document.getElementById("cardOverlay").classList.add("detail-card-view");
+  detailCardResizeObserver = new ResizeObserver(resizeDetailCard);
+  detailCardResizeObserver.observe(card);
+  window.addEventListener("resize", resizeDetailCard);
+  resizeDetailCard();
+}
+
+/** Removes detail-only sizing before closing or opening the edit form. */
+function stopDetailCardSizing() {
+  detailCardResizeObserver?.disconnect();
+  detailCardResizeObserver = null;
+  window.removeEventListener("resize", resizeDetailCard);
+  document.getElementById("cardOverlay")?.classList.remove("detail-card-view");
+  document.getElementById("cardFormContainer")?.style.removeProperty("height");
+}
 
 /**
  * Initializes task card clicks and stores the shared board context.
@@ -42,6 +74,7 @@ function openTaskDetailOverlay(taskId) {
   renderTaskDetailOverlay(task, elements.formContainer);
   initTaskDetailOverlayEvents(task, elements.overlay);
   showTaskDetailOverlay(elements.overlay);
+  startDetailCardSizing();
 }
 
 /**
@@ -196,6 +229,7 @@ function closeTaskDetailOverlay() {
  * @returns {void}
  */
 function resetTaskDetailOverlay(overlay, formContainer) {
+  stopDetailCardSizing();
   overlay.style.display = "none";
   document.body.style.overflow = "auto";
   formContainer.innerHTML = "";
@@ -257,6 +291,7 @@ function openEditTaskOverlay(taskId) {
 
   if (!task) return;
 
+  stopDetailCardSizing();
   const formContainer = document.getElementById("cardFormContainer");
 
   formContainer.classList.add("edit-mode");

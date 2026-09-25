@@ -48,7 +48,7 @@ function getTaskMetaTemplate(task) {
       <span class="task-meta-value">${task.dueDate || ""}</span></div>
     <div class="task-meta-item"><span class="task-meta-label">Priority:</span>
       <span class="task-meta-value">${getPriorityText(task.priority)}
-        <span class="priority-indicator ${task.priority || "medium"}"></span>
+        <img class="task-priority-icon" src="./assets/img/${getPriorityIconFile(task.priority)}" alt="">
       </span></div>
   </div>`;
 }
@@ -124,8 +124,19 @@ function getOverlayCategoryClass(category) {
  * @returns {string} The human-readable priority label.
  */
 function getPriorityText(priority) {
-  const labels = { urgent: "Urgent", medium: "Medium", low: "Low" };
+  const labels = { urgent: "Urgent", high: "High", medium: "Medium", low: "Low" };
   return labels[priority] || labels.medium;
+}
+
+/** Returns the colored icon filename for a task priority. */
+function getPriorityIconFile(priority) {
+  const icons = {
+    urgent: "PrioUP-icon.svg",
+    high: "PrioUP-icon.svg",
+    medium: "PrioMedium-icon.svg",
+    low: "PrioDown-icon.svg",
+  };
+  return icons[priority] || icons.medium;
 }
 
 /**

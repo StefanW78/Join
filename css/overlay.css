@@ -223,6 +223,13 @@
   color: #42526b;
 }
 
+.task-priority-icon {
+  width: 20px;
+  height: 20px;
+  object-fit: contain;
+  flex-shrink: 0;
+}
+
 .priority-indicator {
   display: inline-block;
   width: 18px;
@@ -290,7 +297,7 @@
   background: transparent;
   color: #2a3647;
   font-size: 16px;
-  font-weight: 600;
+  font-weight: 400;
   cursor: pointer;
   padding: 6px 10px;
   border-radius: 8px;
@@ -594,7 +601,7 @@
   margin-top: 48px;
 }
 
-@media (max-width: 1092px) {
+@media (width < 1123px) {
   .add-task-overlay {
     padding: 24px;
     align-items: center;
@@ -921,4 +928,41 @@
     font-size: 14px;
     gap: 5px;
   }
+}
+
+/* Preserve the detail card's proportions; below 600px scroll the overlay. */
+#cardOverlay.detail-card-view {
+  padding-top: 16px;
+  padding-bottom: 16px;
+  align-items: flex-start;
+  overflow-y: auto;
+  overflow-x: hidden;
+}
+
+#cardOverlay.detail-card-view #cardFormContainer {
+  flex-shrink: 0;
+  max-height: none;
+  margin-block: auto;
+  overflow: clip;
+  overflow-clip-margin: 32px;
+  animation: detail-card-slide-in 300ms ease-in-out;
+}
+
+@keyframes detail-card-slide-in {
+  from {
+    transform: translateX(100vw);
+  }
+  to {
+    transform: translateX(0);
+  }
+}
+
+#cardOverlay.detail-card-view #openTaskOverlay {
+  max-height: 768px;
+  overflow-y: auto;
+  transform-origin: top center;
+}
+
+#cardOverlay.detail-card-view #openTaskOverlay > * {
+  flex-shrink: 0;
 }

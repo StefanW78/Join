@@ -151,8 +151,10 @@ body {
   color: #d1d1d1;
 }
 
-#assignedInput::placeholder {
-  color: #000;
+#assignedInput::placeholder,
+#editAssignedInput::placeholder {
+  color: #2a3647;
+  font-weight: 400;
   opacity: 1;
 }
 
@@ -938,7 +940,7 @@ body {
   .add-task-page #categoryButton { border-color: #808080; }
   .add-task-page .formGroup input::placeholder,
   .add-task-page .formGroup textarea::placeholder { color: #737373; }
-  .add-task-page #assignedInput::placeholder { color: #000; }
+  .add-task-page #assignedInput::placeholder { color: #2a3647; }
   .add-task-page .fieldError:empty { display: none; }
   .add-task-page .formColumn:first-child { gap: 32px; }
   .add-task-page .selectedContactsWrapper:not(:has(.selectedAvatar)) { display: none; }
