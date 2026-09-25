@@ -1,5 +1,5 @@
 /* Summary-style shell: keep navigation visible while the board scrolls. */
-@media (max-width: 1023px) {
+@media (max-width: 1120px) {
   .board-page {
     overflow: hidden;
   }
@@ -146,5 +146,62 @@
     padding: 14px;
     font-size: 16px;
     color: #707070;
+  }
+}
+
+/* Extend the shared mobile sidebar and header through 1120px. */
+@media (min-width: 1024px) and (max-width: 1120px) {
+  .board-page .hidden-on-desktop {
+    display: flex !important;
+  }
+
+  .board-page .dropdown-menu .help-switch.hidden-on-desktop {
+    display: flex !important;
+  }
+
+  .board-page .sidebar-wraper {
+    flex-direction: column;
+    flex: 1;
+  }
+  .board-page .sidebar {
+    order: 1;
+    width: 100%;
+    height: 80px;
+  }
+
+  .board-page .sidebar-logo-div {
+    display: none !important;
+  }
+  .board-page .links-and-footer-div footer {
+    display: none;
+  }
+
+  .board-page .sidebar-links {
+    flex-direction: row;
+    height: 100%;
+    justify-content: space-around;
+  }
+
+  .board-page .sidebar-links a {
+    padding: 0;
+    width: 120px;
+    justify-content: center;
+    flex-direction: column;
+    border-radius: 20px;
+  }
+
+  .board-page .header-img {
+    display: flex;
+  }
+  .board-page .header-title {
+    display: none !important;
+  }
+
+  .board-page .dropdown-menu {
+    top: 277px;
+  }
+
+  .board-page .help {
+    display: none;
   }
 }
