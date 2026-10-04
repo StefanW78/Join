@@ -96,7 +96,7 @@
             <section class="addTaskContent">
               <h1 class="addTaskTitle">Add Task</h1>
 
-              <form class="taskForm" id="taskForm">
+              <form class="taskForm" id="taskForm" novalidate>
                 <div class="formGrid">
                   <div class="formColumn">
                     <div class="formGroup">
@@ -128,10 +128,11 @@
                           id="taskDate"
                           class="addTaskDate"
                           type="date"
+                          aria-describedby="taskDateError"
                           required
                         />
                       </div>
-                      <p class="fieldError" id="taskDateError"></p>
+                      <p class="fieldError" id="taskDateError" aria-live="polite"></p>
                     </div>
                   </div>
 

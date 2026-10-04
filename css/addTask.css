@@ -121,6 +121,20 @@ body {
   min-height: 16px;
 }
 
+/* Reserve two lines for validation messages, including on narrow screens. */
+.add-task-page .fieldError {
+  min-height: 32px;
+  line-height: 16px;
+}
+
+.add-task-page #taskDate.inputError {
+  border-color: #ff001f !important;
+}
+
+.add-task-page #taskDateError {
+  color: #ff001f;
+}
+
 .formGroup label {
   font-size: 20px;
   font-weight: 400;
@@ -941,7 +955,6 @@ body {
   .add-task-page .formGroup input::placeholder,
   .add-task-page .formGroup textarea::placeholder { color: #737373; }
   .add-task-page #assignedInput::placeholder { color: #2a3647; }
-  .add-task-page .fieldError:empty { display: none; }
   .add-task-page .formColumn:first-child { gap: 32px; }
   .add-task-page .selectedContactsWrapper:not(:has(.selectedAvatar)) { display: none; }
   .add-task-page .taskFooter { padding-top: 48px; }

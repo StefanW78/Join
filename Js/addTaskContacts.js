@@ -71,6 +71,7 @@ function capitalize(value) {
  */
 export function initCategoryDropdown() {
   categoryButton.addEventListener("click", toggleCategoryDropdown);
+  document.addEventListener("click", handleCategoryOutsideClick);
   document.querySelectorAll("[data-category]").forEach((option) => {
     option.addEventListener("click", () => selectCategory(option));
   });
@@ -98,10 +99,29 @@ function toggleCategoryDropdown() {
 function selectCategory(option) {
   selectedCategory = option.dataset.category;
   categoryButton.textContent = selectedCategory;
-  categoryList.classList.add("d_none");
-  categoryArrow.src = "./assets/img/arrow_drop_down-icon.svg";
+  closeCategoryDropdown();
   clearInputError(categoryButton, categoryError);
   categoryButton.classList.add("inputFocus");
+}
+
+/**
+ * Closes the category dropdown when a click occurs outside it.
+ *
+ * @param {Event} event - The event that triggered the operation.
+ * @returns {void}
+ */
+function handleCategoryOutsideClick(event) {
+  if (!event.target.closest("#categoryDropdown")) closeCategoryDropdown();
+}
+
+/**
+ * Closes the category dropdown.
+ *
+ * @returns {void}
+ */
+function closeCategoryDropdown() {
+  categoryList.classList.add("d_none");
+  categoryArrow.src = "./assets/img/arrow_drop_down-icon.svg";
 }
 
 /**

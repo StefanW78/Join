@@ -162,6 +162,10 @@
   border-color: #29abe2;
 }
 
+.plus-box:hover img {
+  filter: brightness(0) saturate(100%) invert(58%) sepia(87%) saturate(1063%) hue-rotate(165deg) brightness(93%) contrast(90%);
+}
+
 .board-columns {
   display: flex;
   width: 100%;
@@ -280,9 +284,11 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 22px;
-  height: 22px;
-  border: 2px solid #2a3647;
+  width: 24px;
+  height: 24px;
+  flex-shrink: 0;
+  padding: 0;
+  border: none;
   border-radius: 7px;
   background: none;
   cursor: pointer;
@@ -293,6 +299,12 @@
   line-height: 1;
 }
 
+.column-header button img {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
 .empty-card {
   background: #e7e7e7;
   border: 1px dashed #a8a8a8;
@@ -300,13 +312,15 @@
   padding: 14px;
   text-align: center;
   color: #8898a8;
-  font-size: 13px;
+  font-size: 16px;
 }
 
 .card {
+  font-size: 16px;
+  overflow-wrap: anywhere;
   background: #fff;
-  border-radius: 20px;
-  padding: 14px;
+  border-radius: 24px;
+  padding: 16px;
   display: flex;
   flex-direction: column;
   gap: 8px;
@@ -320,8 +334,8 @@
   display: inline-block;
   border-radius: 7px;
   padding: 4px 12px;
-  font-size: 12px;
-  font-weight: 600;
+  font-size: 16px;
+  font-weight: 400;
   color: #fff;
   width: fit-content;
   margin-bottom: 12px;
@@ -335,14 +349,14 @@
 }
 
 .card-title {
-  font-size: 14px;
+  font-size: 16px;
   font-weight: 700;
   line-height: 1.25;
   color: #1e2c3d;
 }
 .card-desc {
-  font-size: 12px;
-  color: #a8a8a8;
+  font-size: 16px;
+  color: #707070;
   line-height: 1.35;
   display: -webkit-box;
   overflow: hidden;
@@ -362,7 +376,7 @@
   flex-direction: row;
   align-items: center;
   gap: 8px;
-  font-size: 12px;
+  font-size: 16px;
   color: #000;
   white-space: nowrap;
   margin-top: 12px;
@@ -384,13 +398,14 @@
   display: flex;
 }
 .av {
-  width: 26px;
-  height: 26px;
+  width: 32px;
+  height: 32px;
+  flex-shrink: 0;
   border-radius: 50%;
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 10px;
+  font-size: 16px;
   font-weight: 400;
   color: #fff;
   border: 2px solid #fff;

@@ -259,7 +259,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 14px;
+  font-size: 16px;
   font-weight: 700;
   color: #fff;
 }
@@ -319,7 +319,7 @@
   }
 }
 
-/* Keep the compact layout as the base for proportional desktop scaling. */
+/* Compact fallback for small screens. */
 .task-card {
   padding: 24px;
   border-radius: 18px;
@@ -397,7 +397,7 @@
   .task-subtasks-label,
   .assigned-person,
   .subtask-item {
-    font-size: 14px;
+    font-size: 16px;
   }
 
   .task-tag {
@@ -427,7 +427,7 @@
   .assigned-avatar {
     width: 34px;
     height: 34px;
-    font-size: 12px;
+    font-size: 16px;
     flex-shrink: 0;
   }
 
@@ -847,7 +847,7 @@
   border-radius: 10px;
   background-color: #f0f2f5;
   color: #42526b;
-  font-size: 15px;
+  font-size: 16px;
 }
 
 .edit-task-card .subtaskItem:hover .subtaskItemActions {
@@ -934,7 +934,7 @@
 
   .edit-task-card .priorityBtn {
     padding: 0 6px;
-    font-size: 14px;
+    font-size: 16px;
     gap: 5px;
   }
 }
@@ -988,4 +988,139 @@
   flex: 1 1 0;
   min-height: 0;
   overflow: hidden;
+}
+
+/* Keep auxiliary edit text readable without changing the Add Task page. */
+.edit-task-card .fieldError,
+.edit-task-card .selectedAvatar,
+.edit-task-card .contactAvatar,
+.edit-task-card .moreContactsBtn,
+.edit-task-card .moreSubtasksBtn,
+.edit-task-card select,
+.edit-task-card .subtaskEditInput {
+  font-size: 16px;
+}
+
+.edit-task-card .fieldError {
+  min-height: 20px;
+  line-height: 1.25;
+}
+
+/* Board dialog proportions from the desktop reference (1440 x 1024). */
+#cardOverlay.detail-card-view {
+  padding: 32px 16px;
+  background: rgba(0, 0, 0, 0.25);
+}
+
+#cardOverlay.detail-card-view #cardFormContainer {
+  width: min(524px, 100%);
+  overflow: visible;
+}
+
+#cardOverlay.detail-card-view #cardFormContainer > .task-card {
+  width: 100%;
+  max-height: calc(100dvh - 64px);
+  padding: 48px 40px;
+  border-radius: 30px;
+  gap: 24px;
+  color: #000;
+  box-shadow: 0 0 4px rgba(0, 0, 0, 0.15);
+}
+
+.detail-card-view .task-title {
+  font-size: 61px;
+  line-height: 1.2;
+}
+
+.detail-card-view .task-tag { font-size: 23px; }
+
+.detail-card-view .task-description,
+.detail-card-view .task-meta-item,
+.detail-card-view .task-meta-label,
+.detail-card-view .task-assigned-label,
+.detail-card-view .task-subtasks-label,
+.detail-card-view .assigned-person {
+  font-size: 20px;
+  line-height: 1.2;
+}
+
+.detail-card-view .task-description,
+.detail-card-view .task-meta-value { color: #000; }
+.detail-card-view .task-meta { gap: 24px; }
+.detail-card-view .task-meta-label { min-width: 90px; }
+.detail-card-view .task-assigned-list,
+.detail-card-view .task-subtasks-list {
+  max-height: none;
+  overflow: visible;
+  padding-left: 16px;
+}
+.detail-card-view .assigned-avatar {
+  width: 42px;
+  height: 42px;
+  flex-shrink: 0;
+  font-weight: 400;
+}
+
+#cardOverlay.detail-card-view #cardFormContainer > .edit-task-card {
+  height: min(931px, calc(100dvh - 64px));
+  overflow: hidden;
+}
+
+.detail-card-view .edit-task-card .editFormGrid { gap: 24px; }
+.detail-card-view .edit-task-card .formGroup label,
+.detail-card-view .edit-task-card .priorityGroup legend,
+.detail-card-view .edit-task-card .formGroup input,
+.detail-card-view .edit-task-card .formGroup textarea,
+.detail-card-view .edit-task-card .priorityBtn { font-size: 20px; }
+.detail-card-view .edit-task-card #editTaskTitle,
+.detail-card-view .edit-task-card #editTaskDate { height: 48px; }
+.detail-card-view .edit-task-card textarea { min-height: 120px; }
+.detail-card-view .edit-task-card .priorityGroup { margin-top: 0; }
+.detail-card-view .edit-task-card .priorityBtn { height: 56px; }
+
+#addTaskOverlay .add-task-modal {
+  width: min(1116px, 100%);
+  max-height: calc(100dvh - 64px);
+  padding: 64px 72px;
+}
+#addTaskOverlay .taskForm {
+  min-height: 0;
+  flex: 1;
+}
+#addTaskOverlay .addTaskContent {
+  display: flex;
+  flex-direction: column;
+  min-height: min(740px, calc(100dvh - 192px));
+}
+#addTaskOverlay .formGrid {
+  grid-template-columns: minmax(0, 1fr) 1px minmax(0, 1fr);
+}
+#addTaskOverlay .formColumn { min-width: 0; }
+#addTaskOverlay .priorityBtn { min-width: 0; flex: 1; }
+#addTaskOverlay .taskFooter { margin-top: auto; padding-top: 40px; }
+
+@media (max-width: 1122px) {
+  #addTaskOverlay .add-task-modal { padding: 40px 32px; }
+  #addTaskOverlay .addTaskContent { min-height: 0; }
+  #addTaskOverlay .taskFooter { margin-top: 24px; padding-top: 0; }
+}
+
+@media (max-width: 600px) {
+  #cardOverlay.detail-card-view { padding: 16px; }
+  #cardOverlay.detail-card-view #cardFormContainer > .task-card {
+    padding: 24px;
+    max-height: calc(100dvh - 32px);
+    border-radius: 24px;
+  }
+  #cardOverlay.detail-card-view #cardFormContainer > .edit-task-card {
+    height: calc(100dvh - 32px);
+  }
+  .detail-card-view .task-title { font-size: 36px; }
+  .detail-card-view .edit-task-card .priorityBtn { font-size: 16px; }
+  #addTaskOverlay { padding: 16px; }
+  #addTaskOverlay .add-task-modal {
+    padding: 32px 20px;
+    max-height: calc(100dvh - 32px);
+  }
+  #addTaskOverlay .add-task-close { top: 24px; right: 24px; }
 }
