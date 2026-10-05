@@ -1125,6 +1125,13 @@
   #addTaskOverlay .add-task-close { top: 24px; right: 24px; }
 }
 
+@media (width < 325px) {
+  #addTaskOverlay #assignedInput,
+  #addTaskOverlay #categoryButton {
+    padding-left: 6px;
+  }
+}
+
 @media (max-width: 430px) {
   #addTaskOverlay .priorityButtons {
     gap: clamp(6px, calc(5.455vw - 11.455px), 12px);
