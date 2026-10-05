@@ -1124,3 +1124,25 @@
   }
   #addTaskOverlay .add-task-close { top: 24px; right: 24px; }
 }
+
+@media (max-width: 430px) {
+  #addTaskOverlay .priorityButtons {
+    gap: clamp(6px, calc(5.455vw - 11.455px), 12px);
+  }
+
+  #addTaskOverlay .priorityBtn {
+    flex: 1 1 0;
+    min-width: 0;
+    height: clamp(40px, calc(7.273vw + 16.727px), 48px);
+    padding: 0 2px;
+    font-size: clamp(12px, calc(5.455vw - 5.455px), 18px);
+    gap: clamp(3px, calc(4.545vw - 11.545px), 8px);
+    white-space: nowrap;
+  }
+
+  #addTaskOverlay .priorityBtn img {
+    width: clamp(14px, calc(5.455vw - 3.455px), 20px);
+    height: clamp(14px, calc(5.455vw - 3.455px), 20px);
+    flex-shrink: 0;
+  }
+}
