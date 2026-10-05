@@ -32,7 +32,7 @@ body {
   width: 100%;
   flex: 1;
   min-height: 0;
-  padding: 75px 50px 50px 75px;
+  padding: 20px 50px 50px 75px;
 
   display: flex;
   flex-direction: column;
@@ -533,7 +533,7 @@ body {
 }
 
 #assignedInput {
-  cursor: text;
+  cursor: pointer;
 }
 
 #assignedDropdown:focus-within #assignedInput {
@@ -920,7 +920,7 @@ body {
   .add-task-page .user-icon { border: 3px solid #2a3647; border-radius: 50%; }
   .add-task-page .header-button { color: #0c4a60; }
   .add-task-page .main-container {
-    padding: 123px clamp(32px, 7.78vw, 112px) 80px clamp(48px, 8.2vw, 118px);
+    padding: 32px clamp(32px, 7.78vw, 112px) 60px clamp(48px, 8.2vw, 118px);
   }
   .add-task-page .addTaskContent {
     max-width: 980px;
@@ -961,3 +961,5 @@ body {
   .add-task-page .clearBtn,
   .add-task-page .createTaskBtn { padding: 0 16px; gap: 8px; }
 }
+
+.add-task-page .main-container

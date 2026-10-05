@@ -130,9 +130,22 @@ function closeCategoryDropdown() {
  * @returns {void}
  */
 export function initAssignedDropdown() {
-  assignedInput.addEventListener("focus", openAssignedDropdown);
-  assignedInput.addEventListener("input", renderContacts);
+  assignedInput.addEventListener("click", toggleAssignedDropdown);
+  assignedInput.addEventListener("input", openAssignedDropdown);
   document.addEventListener("click", handleAssignedOutsideClick);
+}
+
+/**
+ * Toggles the assigned dropdown when its input is clicked.
+ *
+ * @returns {void}
+ */
+function toggleAssignedDropdown() {
+  if (assignedList.classList.contains("d_none")) {
+    openAssignedDropdown();
+  } else {
+    closeAssignedDropdown();
+  }
 }
 
 /**
