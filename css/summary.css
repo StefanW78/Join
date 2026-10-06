@@ -17,7 +17,6 @@ body{
     display: flex;
 }
 
-/* Test */
 html,
 body {
     margin: 0;
@@ -74,11 +73,6 @@ main {
     min-height: 0;
     box-sizing: border-box;
 }
-/* Test */
-
-
-/*header css*/
-/*-------------*/
 
 .header-and-content-div{
     flex: 1;
@@ -94,13 +88,9 @@ main {
     justify-content: space-between;
     align-items: center;
     padding: 20px 80px;
-    /* z-index: 1;
-    position: sticky;
-    top: 0; */ /*Für später vllt*/
     background-color: #fff;
 
 }
-
 
 .header-title{
     font-size: 20px;
@@ -170,7 +160,6 @@ main {
     justify-content: center;
     align-items: flex-start;
     padding: 8px;
-    /* z-index: 1001; */ /*für später vllt*/
 }
 
 .dropdown-menu a{
@@ -182,17 +171,12 @@ main {
     display: flex;
     align-items: center;
     justify-content: center;
-    /* z-index: 1001; *//*Später vllt nötig*/
 }
 
 .dropdown-menu a:hover {
     background-color: #2a3d59;
     border-radius: 12px;
 }
-
-
-/* Main Container */
-/* ----------------------- */
 
 main{
     width: 100%;
@@ -366,10 +350,6 @@ main{
     align-items: center;
     gap: 0px;
 }
-
-/* .urgent-img{
-
-} */
 
 .box-seprator{
     width: 2px;

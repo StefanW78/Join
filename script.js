@@ -349,7 +349,6 @@ function checkField(formKey, type, inputId, errorId, buttonId, inputOrDivId) {
 
     updateButton(buttonId, formKey);
 }
-//<input oninput="checkField('contact','name','edit_name_input','edit_name_error','editContactBtn')">
 
 /**
  * 
@@ -371,6 +370,4 @@ function resetForm(formKey, buttonId, fields) {
 
     updateButton(buttonId, formKey);
 }
-//Beispiel 
-//resetForm("contact", "createContactBtn", ["name", "email", "phone"]);
-//Wird dann in Beispiel in addnewContact unter popUpMassage gepackt
+

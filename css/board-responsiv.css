@@ -1,5 +1,5 @@
 /* Summary-style shell: keep navigation visible while the board scrolls. */
-@media (max-width: 1300px) {
+@media (max-width: 1120px) {
   .board-page {
     overflow: hidden;
   }
@@ -37,7 +37,6 @@
   }
 }
 
-/* Stack statuses below 768px; swipe cards sideways within each status. */
 @media (max-width: 767px) {
   .board-page .board-main {
     padding: 48px 16px 32px;
@@ -149,8 +148,8 @@
   }
 }
 
-/* Extend the shared mobile sidebar and header through 1300px. */
-@media (min-width: 1024px) and (max-width: 1300px) {
+/* Extend the shared mobile sidebar and header through 1120px. */
+@media (min-width: 1024px) and (max-width: 1120px) {
   .board-page .hidden-on-desktop {
     display: flex !important;
   }

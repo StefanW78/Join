@@ -1,9 +1,8 @@
 body {
     margin: 0;
-    overflow: hidden; /* verhindert Seiten-Scroll */
+    overflow: hidden;
 }
 
-/* für die sidebar eigentlich */
 .sidebar-wraper{
     height: 100vh;
 }
@@ -11,8 +10,6 @@ body {
 .header-and-content-div{
     min-height: 0;
 }
-/* für die sidebar eigentlich */
-
 
 .body-div{
     min-height: 100vh;
@@ -85,10 +82,6 @@ main{
 
 .mobile-view-linkandfooter{
     display: none;
-}
-
-footer a:hover{
-    /* background-color: #2a3d59; */
 }
 
 ul{

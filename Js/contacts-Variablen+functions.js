@@ -292,5 +292,3 @@ function contactErrorMsg(message, mode = "add") {
   errorMsgBox.hidden = false;
   errorMsgBox.textContent = message;
 }
-
-//main ContactsJS

@@ -94,7 +94,6 @@ body {
   color: white;
 }
 
-/* RECHTER BEREICH */
 .mainContentArea {
   flex: 1;
   display: flex;
@@ -102,7 +101,6 @@ body {
   min-width: 0;
 }
 
-/* HEADER */
 .header {
   height: 96px;
   background-color: white;
@@ -131,7 +129,6 @@ body {
   object-fit: contain;
 }
 
-/* CONTENT */
 .content {
   flex: 1;
   overflow-y: auto;

@@ -10,7 +10,7 @@ main{
 }
 
 .contact-name{
-    font-size: 40px;
+    font-size: 25px;
 }
 
 .contact-baged{
@@ -28,8 +28,8 @@ main{
     }
 
     main{
-        padding: 0 20px 0 0;
-        gap: 15px;
+        padding: 0 10px 0 0;
+        gap: 10px;
     }
 }
 
@@ -71,7 +71,6 @@ main{
     justify-content: center; 
 } 
 
-/*New*/
 main{
     padding: 0;
 }
@@ -92,7 +91,6 @@ main{
 .contacts-info-sec{
     display: flex;
     padding: 55px 20px 0 20px;
-    /* flex: 1; */
     overflow-y: auto;
     width: 100%;
     height: calc(100vh - 176px);
@@ -164,7 +162,6 @@ padding: 25px 20px 25px 0px;
     background-color: #29abe2;
 }
 
-/* Area pop-up Add */
 .add-contact-overlay ,.edit-contact-overlay{
     flex-direction: column;
     height: 760px;
@@ -223,20 +220,11 @@ padding: 25px 20px 25px 0px;
     width: 30px;
 }
 
-/* Area pop-up Add */
-
-/* Area pop-up edit */
-
-
-
 .edit-contact-form .contact-badge{
     position: absolute;
     top: -60px;
     margin-bottom: 0;
 }
-
-
-/* Area pop-up edit */
 
 .contacts #add-contact:hover {
         background-color: #29abe2;
