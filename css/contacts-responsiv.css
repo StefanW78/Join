@@ -10,7 +10,7 @@ main{
 }
 
 .contact-name{
-    font-size: 40px;
+    font-size: 25px;
 }
 
 .contact-baged{
@@ -28,8 +28,8 @@ main{
     }
 
     main{
-        padding: 0 20px 0 0;
-        gap: 15px;
+        padding: 0 10px 0 0;
+        gap: 10px;
     }
 }
 
