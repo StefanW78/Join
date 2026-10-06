@@ -46,13 +46,23 @@ globalThis.selectedContacts = [];
 globalThis.subtasks = [];
 globalThis.categoryWasTouched = false;
 
-initPriorityButtons();
-initCategoryDropdown();
-initAssignedDropdown();
-initSubtasks();
-loadContacts();
-initAddTaskBlurValidation()
-initTaskDate();
+window.addEventListener("load", initAddTask, { once: true });
+
+/**
+ * Initializes the add task controls and loads contacts after the page loads.
+ * Used by both the AddTask page and the Board's AddTask overlay.
+ *
+ * @returns {void}
+ */
+function initAddTask() {
+  initPriorityButtons();
+  initCategoryDropdown();
+  initAssignedDropdown();
+  initSubtasks();
+  loadContacts();
+  initAddTaskBlurValidation();
+  initTaskDate();
+}
 
 clearTaskBtn.addEventListener("click", () => {
   resetFormState();
