@@ -1,16 +1,18 @@
 import { boardEditState } from "./boardEditState.js";
+import { initSubtaskValidation, validateSubtaskInput } from "./subtaskValidation.js";
 
 /**
  * Initializes editable subtasks and their controls.
  *
  * @param {Object[]} editSubtasks - The editable subtasks to initialize.
  * @param {Function} onChange - The callback invoked after the value changes.
- * @returns {void}
+ * @returns {Function} Commits the pending subtask input before saving the form.
  */
 export function initEditSubtasks(editSubtasks, onChange) {
   const state = createEditSubtaskState(editSubtasks, onChange);
   renderEditSubtaskState(state);
   bindEditSubtaskStateEvents(state);
+  return () => saveEditSubtaskState(state);
 }
 
 /**
@@ -47,6 +49,7 @@ function renderEditSubtaskState(state) {
  * @returns {void}
  */
 function bindEditSubtaskStateEvents(state) {
+  initSubtaskValidation(state.input);
   state.input.addEventListener("keydown", event => {
     if (event.key !== "Enter") return;
     event.preventDefault();
@@ -63,9 +66,12 @@ function bindEditSubtaskStateEvents(state) {
  * @returns {void}
  */
 function saveEditSubtaskState(state) {
+  if (!validateSubtaskInput(state.input)) return false;
+  if (!state.input.value.trim()) return true;
   state.editingIndex = addOrUpdateEditSubtask(state.subtasks, state.editingIndex);
   renderEditSubtaskState(state);
   state.onChange(state.subtasks);
+  return true;
 }
 
 /**
@@ -76,6 +82,7 @@ function saveEditSubtaskState(state) {
  */
 function resetEditSubtaskState(state) {
   state.input.value = "";
+  validateSubtaskInput(state.input);
   state.editingIndex = null;
   state.input.focus();
 }
@@ -221,6 +228,7 @@ function editSelectedSubtask(button, editSubtasks, onEdit) {
   const index = Number(button.dataset.index);
   const input = document.getElementById("editSubtaskInput");
   input.value = editSubtasks[index].title;
+  validateSubtaskInput(input);
   input.focus();
   onEdit(index);
 }

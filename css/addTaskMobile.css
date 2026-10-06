@@ -353,7 +353,7 @@
 }
 
 /* Extend the shared mobile sidebar and header through 1120px. */
-@media (min-width: 1024px) and (max-width: 1120px) {
+@media (min-width: 1024px) and (max-width: 1300px) {
   .add-task-page .hidden-on-desktop {
     display: flex !important;
   }

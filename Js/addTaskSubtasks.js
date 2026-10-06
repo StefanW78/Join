@@ -1,4 +1,5 @@
 import { toggleInputFocus } from "./addTaskForm.js";
+import { initSubtaskValidation, validateSubtaskInput } from "./subtaskValidation.js";
 
 let editingSubtask = null;
 
@@ -8,6 +9,7 @@ let editingSubtask = null;
  * @returns {void}
  */
 export function addCurrentSubtaskInput() {
+  if (!validateSubtaskInput(subtaskInput)) return false;
   const subtaskText = subtaskInput.value.trim();
 
   if (!subtaskText) return;
@@ -29,6 +31,7 @@ export function addCurrentSubtaskInput() {
  * @returns {void}
  */
 export function initSubtasks() {
+  initSubtaskValidation(subtaskInput);
   subtaskInput.addEventListener("keydown", handleSubtaskEnter);
   addSubtaskBtn.addEventListener("click", addCurrentSubtaskInput);
   clearSubtaskBtn.addEventListener("click", clearSubtaskInput);
@@ -55,6 +58,7 @@ function handleSubtaskEnter(event) {
 function clearSubtaskInput() {
   editingSubtask = null;
   subtaskInput.value = "";
+  validateSubtaskInput(subtaskInput);
   subtaskInput.focus();
   toggleInputFocus(subtaskInput);
 }
@@ -77,6 +81,7 @@ function closeSubtasksOnOutsideClick(event) {
  * @returns {void}
  */
 export function renderSubtasks() {
+  validateSubtaskInput(subtaskInput);
   if (editingSubtask && !subtasks.includes(editingSubtask)) {
     editingSubtask = null;
     subtaskInput.value = "";
@@ -215,6 +220,7 @@ function deleteSubtask(index) {
 function editSubtask(index) {
   editingSubtask = subtasks[index];
   subtaskInput.value = editingSubtask.title;
+  validateSubtaskInput(subtaskInput);
   renderSubtasks();
   subtaskInput.focus();
   toggleInputFocus(subtaskInput);

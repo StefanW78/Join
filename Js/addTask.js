@@ -126,7 +126,7 @@ async function handleTaskSubmit(event) {
 
   if (!isTaskFormValid()) return;
 
-  addCurrentSubtaskInput();
+  if (addCurrentSubtaskInput() === false) return;
 
   const task = createTaskFromForm();
   await saveTask(task);

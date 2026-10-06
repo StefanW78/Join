@@ -4,6 +4,7 @@ import {
   initEditPriorityButtons, initEditAssignedContacts,
 } from "./boardEditContacts.js";
 import { initEditSubtasks } from "./boardEditSubtasks.js";
+import { validateSubtaskInput } from "./subtaskValidation.js";
 
 /**
  * Initializes the edit task form.
@@ -49,7 +50,7 @@ function initEditFormControls(state) {
   initEditAssignedContacts(state.contacts, (contacts) => {
     state.contacts = contacts;
   });
-  initEditSubtasks(state.subtasks, (subtasks) => {
+  state.commitSubtask = initEditSubtasks(state.subtasks, (subtasks) => {
     state.subtasks = subtasks;
   });
 }
@@ -64,7 +65,7 @@ function initEditFormControls(state) {
 function bindEditFormSubmit(taskId, state) {
   document.getElementById("editTaskForm").addEventListener("submit", (event) => {
     event.preventDefault();
-    saveEditedTask(taskId, state.priority, state.contacts, state.subtasks);
+    saveEditedTask(taskId, state.priority, state.contacts, state.subtasks, state.commitSubtask);
   });
 }
 
@@ -133,10 +134,13 @@ function bindEditCategoryValidation(input, error) {
  * @param {string} priority - The selected task priority.
  * @param {Object[]} selectedContacts - The currently selected contacts.
  * @param {Object[]} subtasks - The subtasks to process.
+ * @param {Function} commitSubtask - Commits the pending subtask input.
  * @returns {Promise<void>} A promise that resolves when the operation is complete.
  */
-async function saveEditedTask(taskId, priority, selectedContacts, subtasks) {
+async function saveEditedTask(taskId, priority, selectedContacts, subtasks, commitSubtask) {
+  if (!validateSubtaskInput(document.getElementById("editSubtaskInput"))) return;
   if (!isEditTaskFormValid()) return;
+  if (!commitSubtask()) return;
   const updatedTask = getEditedTaskData(priority, selectedContacts, subtasks);
   try {
     await patchData(`tasks/${taskId}`, updatedTask);
