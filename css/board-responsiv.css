@@ -1,5 +1,5 @@
 /* Summary-style shell: keep navigation visible while the board scrolls. */
-@media (max-width: 1120px) {
+@media (max-width: 1300px) {
   .board-page {
     overflow: hidden;
   }
@@ -148,8 +148,8 @@
   }
 }
 
-/* Extend the shared mobile sidebar and header through 1120px. */
-@media (min-width: 1024px) and (max-width: 1120px) {
+/* Extend the shared mobile sidebar and header through 1300px. */
+@media (min-width: 1024px) and (max-width: 1300px) {
   .board-page .hidden-on-desktop {
     display: flex !important;
   }
