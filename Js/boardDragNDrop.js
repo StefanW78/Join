@@ -173,8 +173,6 @@ function handleDropZone(event, column, getCard) {
     return 0;
 }
 
-//Test
-
 /**
  * Inserts the dragged card at the position nearest to the pointer.
  *

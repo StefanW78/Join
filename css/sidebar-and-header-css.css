@@ -94,9 +94,6 @@ footer a:hover{
     color: #29abe2;
 }
 
-/*header css*/
-/*-------------*/
-
 .header-and-content-div{
     flex: 1;
     display: flex;
@@ -204,7 +201,6 @@ footer a:hover{
     display: flex;
     align-items: center;
     justify-content: center;
-    /* z-index: 1001; *//*Später vllt nötig*/
 }
 
 .dropdown-menu a:hover {

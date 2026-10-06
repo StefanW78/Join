@@ -16,12 +16,7 @@ body{
     display: flex;
 }
 
-
-/* Main Container */
-/* ----------------------- */
-
 main{
-    /* padding: 75px 50px 50px 75px; */
     max-width: 1440px;
     display: flex;
     flex-direction: row;
@@ -43,7 +38,6 @@ main{
     align-items: flex-start;
     margin-right: 24px;
     height: calc(100vh - 96px);
-    /* background-color: #ffffff; */
     box-shadow: 4px 0 6px 0 rgba(0, 0, 0, 0.08);
     padding: 24px 26px;
     overflow-y: auto;
@@ -52,13 +46,10 @@ main{
 }
 
 .contacts-info-sec{
-    /* flex: 1; */
-    /* padding: 75px 0px 0px 60px; */
     display: flex;
     flex-direction: column;
     justify-content: flex-start;
     align-items: flex-start;
-    /* gap: 40px; */
     padding: 80px 0 0 0;
     overflow: hidden;
 }
@@ -220,8 +211,6 @@ main{
     font-size: 18px;
 }
 
-/* Contacs list */
-
 .primary-btn-default-icon{
     border: 1px solid #2a3647;
     border-radius: 10px;
@@ -323,7 +312,6 @@ main{
     padding: 15px 24px;
     justify-content: flex-start;
     align-items: center;
-    /* gap: clamp(20px, 3vw, 35px); */
     gap: 28px;
     border-radius: 10px;
     cursor: pointer;
@@ -395,8 +383,6 @@ main{
 }
 
 
-/* PopUp Event CSS */
-
 .add-contact-popup, .edit-contact-popup{
     position: fixed;
     top: 0;
@@ -410,7 +396,6 @@ main{
     z-index: 1000;
 }
 
-/* Test */
 .add-contact-overlay,
 .edit-contact-overlay {
     width: 1212px;
@@ -434,8 +419,6 @@ main{
     transform: translate(-50%, -50%);
 }
 
-/* Test */
-
 .add-contact-overlay.slide-out {
     transform: translate(100%, -50%);
 }
@@ -451,12 +434,6 @@ main{
     padding: 66px 48px;
     border-radius: 30px 0 0 30px;
 }
-
-/* .join-logo-contact{
-    width: 55px;
-    height: 65px;
-    margin-bottom: 12px;
-} */
 
 .add-contact-text, .edit-contact-text{
     display: flex;
@@ -642,10 +619,6 @@ main{
 .edit-contact-overlay.slide-out {
     transform: translate(100%, -50%);
 }
-
-/* .edit-contact-overlay.slide-in {
-    transform: translate(0, -50%);
-} */
 
 .join-logo-contact {
       width: 55px;

@@ -255,7 +255,6 @@ function rollbackTask(task, backupTask) {
     renderTasks();
 
 }
-//save functions
 
 
 

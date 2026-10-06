@@ -90,12 +90,3 @@ function logout(event) {
   window.location.href = "./index.html";
 }
 
-
-// Andere variante zum schließen
-// const closeDropdown = () => {
-//   DropDowncontain.classList.add("d_none");
-// };
-
-// closeDropdown(); // beim Laden
-
-// mediaQuery.addEventListener("change", closeDropdown);

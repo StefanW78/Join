@@ -5,7 +5,7 @@
   margin: 0;
   padding: 0;
 }
-/* Versuchen es von contacts.css zu übernehmen */
+
 .d_none{
     display: none !important;
 }
@@ -47,9 +47,6 @@ body{
 .context-message.show {
     right: 40px;
 }
-
-/* Main Container */
-/* ----------------------- */
 
 main{
     padding: 75px 50px 50px 75px; 
@@ -212,8 +209,6 @@ transform: rotate(-180deg);
   cursor: pointer;
   border-radius: 5px;
 }
-
-/* Versuchen es von contacts.css zu übernehmen */
 
 .logo-area {
   display: flex;
@@ -687,7 +682,7 @@ transform: rotate(-180deg);
 .prio-urgent {
   color: #e74c3c;
 }
-/* Add-task-Edit */
+
 .editFormGrid{
    display: flex !important;
   flex-direction: column;

@@ -121,7 +121,6 @@ body {
   min-height: 16px;
 }
 
-/* Reserve two lines for validation messages, including on narrow screens. */
 .add-task-page .fieldError {
   min-height: 32px;
   line-height: 16px;
@@ -424,22 +423,18 @@ body {
   color: #000;
 }
 
-/* Hover bei nicht ausgewählten Kontakten */
 .contactOption:hover:not(.selectedContactOption) {
   background-color: #eeeeee;
 }
 
-/* Ausgewählter Kontakt */
 .contactOption.selectedContactOption {
   background-color: #2a3647;
 }
 
-/* Name bei ausgewähltem Kontakt weiß */
 .contactOption.selectedContactOption span {
   color: white;
 }
 
-/* optional etwas dunkler beim Hover auf ausgewähltem User */
 .contactOption.selectedContactOption:hover {
   background-color: #091931;
 }
@@ -894,7 +889,6 @@ body {
   padding-right: 48px;
 }
 
-/* Page-specific desktop layout, independent of the board overlay. */
 @font-face {
   font-family: "Add Task Inter";
   src: url("../assets/fonts/Inter/Inter-VariableFont_opsz,wght.ttf") format("truetype");
