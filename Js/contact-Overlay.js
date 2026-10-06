@@ -59,6 +59,9 @@ function validateName(rawValue, value) {
   if (rawValue !== value)
     return "Name cannot contain leading or trailing spaces";
 
+  if (value.length > 30)
+    return "Name is too long";
+
   const regex = /^[\p{L}\p{M}]+(?:[\s'’-][\p{L}\p{M}]+)*$/u;
   return regex.test(value)
     ? ""
