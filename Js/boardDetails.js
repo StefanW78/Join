@@ -227,21 +227,36 @@ function closeTaskOverlayOnBackgroundClick(event) {
 }
 
 /**
- * Requests confirmation and deletes a task from the database.
+ * Deletes a task from the database and shows the deletion message.
  *
  * @async
  * @param {string} taskId - The ID of the task to delete.
  * @returns {Promise<void>} A promise that resolves after the deletion attempt is complete.
  */
 async function deleteTask(taskId) {
-  const shouldDelete = confirm("Do you really want to delete this task?");
-  if (!shouldDelete) return;
   try {
     await deleteData(`tasks/${taskId}`);
     removeDeletedTask(taskId);
+    showTaskDeletedMessage();
   } catch (error) {
     console.error("Fehler beim Löschen des Tasks:", error);
   }
+}
+
+let taskDeletedMessageTimeout;
+
+/** Shows the animated deletion confirmation after a task was removed. */
+function showTaskDeletedMessage() {
+  const message = document.getElementById("taskDeletedMessage");
+  clearTimeout(taskDeletedMessageTimeout);
+  message.classList.remove("is-visible");
+  void message.offsetWidth;
+  message.textContent = "Task deleted";
+  message.classList.add("is-visible");
+  taskDeletedMessageTimeout = setTimeout(() => {
+    message.classList.remove("is-visible");
+    message.textContent = "";
+  }, 2610);
 }
 
 /**

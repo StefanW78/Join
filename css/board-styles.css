@@ -472,3 +472,32 @@
   outline-offset: 6px;
   border-radius: 10px;
 }
+.task-deleted-message {
+  position: fixed;
+  top: 80%;
+  right: 0;
+  width: 326px;
+  max-width: 90vw;
+  height: 74px;
+  padding: 24px;
+  border-radius: 20px;
+  background-color: #2a3647;
+  box-shadow: 0 0 4px rgba(0, 0, 0, 0.15);
+  color: #fff;
+  font-size: 20px;
+  font-weight: 400;
+  visibility: hidden;
+  pointer-events: none;
+  z-index: 1000;
+}
+
+.task-deleted-message.is-visible {
+  visibility: visible;
+  animation: task-deleted-slide 2610ms both;
+}
+
+@keyframes task-deleted-slide {
+  0% { transform: translate(150%, -40%); animation-timing-function: ease-in-out; }
+  15.33%, 80.46% { transform: translate(-5%, -65%); animation-timing-function: ease-in-out; }
+  95.79%, 100% { transform: translate(150%, -65%); }
+}
