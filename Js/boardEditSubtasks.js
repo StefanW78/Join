@@ -112,22 +112,6 @@ function addOrUpdateEditSubtask(editSubtasks, editingIndex) {
   return null;
 }
 
-/**
- * Adds the edit subtask.
- *
- * @param {Object[]} editSubtasks - The edit form subtasks to process.
- * @param {Function} onChange - The callback invoked after the value changes.
- * @returns {void}
- */
-function addEditSubtask(editSubtasks, onChange) {
-  const editSubtaskInput = document.getElementById("editSubtaskInput");
-  const subtaskText = editSubtaskInput.value.trim();
-  if (!subtaskText) return;
-  editSubtasks.push({ title: subtaskText, done: false });
-  editSubtaskInput.value = "";
-  renderEditSubtasks(editSubtasks, onChange);
-  onChange(editSubtasks);
-}
 
 /**
  * Renders the edit subtasks.

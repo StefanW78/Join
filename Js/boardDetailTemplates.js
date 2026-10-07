@@ -1,4 +1,4 @@
-import { getInitials } from "./boardCards.js";
+import { getInitials } from "./avatarUtils.js";
 
 /**
  * Creates the complete HTML markup for a task detail overlay.

@@ -1,6 +1,7 @@
+import { getInitials } from "./avatarUtils.js";
 import { patchData, deleteData } from "./storage.js";
 import { initEditTaskForm } from "./boardEdit.js";
-import { enrichAssignedContacts, getAvatarColor, getInitials } from "./boardCards.js";
+import { enrichAssignedContacts, getAvatarColor } from "./boardCards.js";
 import { getTaskDetailOverlayTemplate } from "./boardDetailTemplates.js";
 import { isBoardDragging } from "./boardDrag.js";
 

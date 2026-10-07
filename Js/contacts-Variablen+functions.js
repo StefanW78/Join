@@ -183,14 +183,6 @@ let contactInfoSec = document.getElementById(`contacts-info-sec`)
  */
 let contactListSec = document.getElementById(`contacts-list-sec`)
 /**
- * References the DOM element with the ID `contact-symbol`.
- */
-let contactSymbol = document.getElementById(`contact-symbol`)
-/**
- * References the DOM element with the ID `edit`.
- */
-let editTool = document.getElementById(`edit`)
-/**
  * References the DOM element with the ID `contacts-infos`.
  */
 let contactDetailDiv = document.getElementById(`contacts-infos`)

@@ -35,16 +35,6 @@ function contactHeaderTemplate(letter) {
     `;
 }
 
-/**
- * Generates the HTML template displayed when no contacts are available.
- *
- * @returns {string} The generated HTML markup for the empty contact list message.
- */
-function NoContacts() {
-    return`
-    <div class="no-contacts" style="padding: 20px; text-align: center; color: #888;">No contacts available</div>
-    `
-}
 
 /**
  * Generates the HTML template for displaying the details of a contact.

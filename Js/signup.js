@@ -1,3 +1,6 @@
+import { setInputError, clearInputError, isValidEmail } from "./formUtils.js";
+import { getAvatarColor } from "./avatarUtils.js";
+import { getInitials } from "./avatarUtils.js";
 import { loadData, postData } from "./storage.js";
 
 /**
@@ -248,30 +251,7 @@ signupConfirmPassword.addEventListener("input", () => {
   );
 });
 
-/**
- * Marks an input as invalid and displays its error message.
- *
- * @param {HTMLElement} input - The input element to process.
- * @param {HTMLElement} errorElement - The element used to display an error.
- * @param {string} message - The message to display.
- * @returns {void}
- */
-function setInputError(input, errorElement, message) {
-  input.classList.add("inputError");
-  errorElement.textContent = message;
-}
 
-/**
- * Removes the error state and message from an input.
- *
- * @param {HTMLElement} input - The input element to process.
- * @param {HTMLElement} errorElement - The element used to display an error.
- * @returns {void}
- */
-function clearInputError(input, errorElement) {
-  input.classList.remove("inputError");
-  errorElement.textContent = "";
-}
 
 /**
  * Clears all validation errors from the current form.
@@ -288,31 +268,7 @@ function clearAllErrors() {
   clearInputError(signupConfirmPassword, confirmPasswordError);
 }
 
-/**
- * Checks whether an email address contains the required basic characters.
- *
- * @param {string} email - The email address to validate.
- * @returns {boolean} Whether the validation or comparison succeeds.
- */
-function isValidEmail(email) {
-  return email.includes("@") && email.includes(".");
-}
 
-/**
- * Generates uppercase initials from the first two parts of a name.
- *
- * @param {string} name - The name used to generate the initials.
- * @returns {string} The generated value or HTML markup.
- */
-function getInitials(name = "") {
-  return name
-    .trim()
-    .split(" ")
-    .filter(Boolean)
-    .slice(0, 2)
-    .map((part) => part[0].toUpperCase())
-    .join("");
-}
 
 /**
  * Displays the signup success overlay.
@@ -329,24 +285,6 @@ function showSignupSuccessOverlay() {
   }, 10);
 }
 
-/**
- * Selects an avatar color based on an item's position.
- *
- * @param {number} index - The item's position in its list.
- * @returns {string} The generated value or HTML markup.
- */
-function getAvatarColor(index) {
-  const colors = [
-    "#9327ff",
-    "#ff7a00",
-    "#fc71ff",
-    "#6e52ff",
-    "#1fd7c1",
-    "#ffbb2b",
-  ];
-
-  return colors[index % colors.length];
-}
 
 signupPrivacy.addEventListener("change", validatePrivacy);
 

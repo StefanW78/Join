@@ -1,3 +1,4 @@
+import { clearInputError } from "./formUtils.js";
 import { validateTaskTitle, validateTaskDate, validateTaskCategory } from "./addTask.js";
 import { renderContacts, renderSelectedContacts } from "./addTaskContacts.js";
 import { renderSubtasks } from "./addTaskSubtasks.js";
@@ -118,17 +119,6 @@ export function setInputError(input, errorElement, message) {
   errorElement.textContent = message;
 }
 
-/**
- * Removes the error state and message from an input.
- *
- * @param {HTMLElement} input - The input element to process.
- * @param {HTMLElement} errorElement - The element used to display an error.
- * @returns {void}
- */
-export function clearInputError(input, errorElement) {
-  input.classList.remove("inputError");
-  errorElement.textContent = "";
-}
 
 /**
  * Handles the input change.
@@ -207,24 +197,4 @@ export function initAddTaskBlurValidation() {
       validateTaskCategory();
     }
   });
-}
-
-/**
- * Returns a task's due date in ISO format.
- *
- * @param {Object} task - The task to process.
- * @returns {string} The generated value or HTML markup.
- */
-function getTaskDateISO(task) {
-  if (task.dueDateISO) {
-    return task.dueDateISO;
-  }
-
-  if (!task.dueDate || !task.dueDate.includes("/")) {
-    return task.dueDate || "";
-  }
-
-  const [day, month, year] = task.dueDate.split("/");
-
-  return `${year}-${month}-${day}`;
 }

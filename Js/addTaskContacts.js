@@ -1,6 +1,6 @@
 import { loadData, patchData } from "./storage.js";
-import { clearInputError } from "./addTaskForm.js";
-import { getInitials, getAvatarColor } from "./addTaskSubtasks.js";
+import { clearInputError } from "./formUtils.js";
+import { getInitials, getAvatarColor } from "./avatarUtils.js";
 
 /**
  * Initializes the priority buttons in the add task form.

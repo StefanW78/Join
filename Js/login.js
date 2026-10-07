@@ -1,3 +1,4 @@
+import { setInputError, clearInputError, isValidEmail } from "./formUtils.js";
 import { loadData } from "./storage.js";
 
 /**
@@ -154,30 +155,7 @@ loginPassword.addEventListener("input", () => {
   clearInputError(loginPassword, loginPasswordError);
 });
 
-/**
- * Marks an input as invalid and displays its error message.
- *
- * @param {HTMLElement} input - The input element to process.
- * @param {HTMLElement} errorElement - The element used to display an error.
- * @param {string} message - The message to display.
- * @returns {void}
- */
-function setInputError(input, errorElement, message) {
-  input.classList.add("inputError");
-  errorElement.textContent = message;
-}
 
-/**
- * Removes the error state and message from an input.
- *
- * @param {HTMLElement} input - The input element to process.
- * @param {HTMLElement} errorElement - The element used to display an error.
- * @returns {void}
- */
-function clearInputError(input, errorElement) {
-  input.classList.remove("inputError");
-  errorElement.textContent = "";
-}
 
 /**
  * Clears all validation errors from the current form.
@@ -189,15 +167,6 @@ function clearAllErrors() {
   clearInputError(loginPassword, loginPasswordError);
 }
 
-/**
- * Checks whether an email address contains the required basic characters.
- *
- * @param {string} email - The email address to validate.
- * @returns {boolean} Whether the validation or comparison succeeds.
- */
-function isValidEmail(email) {
-  return email.includes("@") && email.includes(".");
-}
 
 /**
  * Displays the login success overlay.

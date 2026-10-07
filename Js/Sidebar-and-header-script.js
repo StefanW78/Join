@@ -14,12 +14,8 @@ DropDowncontain.classList.add("d_none");
  *
  * @param {MediaQueryList} mediaQuery - The media query being monitored.
  */
-mediaQuery.addEventListener("change", (e) => {
-  if (e.matches) {
-    DropDowncontain.classList.add("d_none");
-  } else {
-    DropDowncontain.classList.add("d_none");
-  }
+mediaQuery.addEventListener("change", () => {
+  DropDowncontain.classList.add("d_none");
 });
 
 /**
@@ -85,4 +81,3 @@ function logout(event) {
 
   window.location.href = "./index.html";
 }
-

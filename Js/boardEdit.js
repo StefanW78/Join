@@ -1,3 +1,4 @@
+import { getTodayISO } from "./dateUtils.js";
 import { patchData } from "./storage.js";
 import { boardEditState } from "./boardEditState.js";
 import {
@@ -315,33 +316,7 @@ function clearEditErrors() {
   });
 }
 
-/**
- * Converts a displayed date value into ISO format.
- *
- * @param {string} dateValue - The date value to process.
- * @returns {string} The generated value or HTML markup.
- */
-function convertDateToISO(dateValue) {
-  if (!dateValue.includes("/")) {
-    return dateValue;
-  }
 
-  const [day, month, year] = dateValue.split("/");
-  return `${year}-${month}-${day}`;
-}
-
-/**
- * Returns today's local date in ISO format.
- *
- * @returns {string} The generated value or HTML markup.
- */
-function getTodayISO() {
-  const today = new Date();
-  const timezoneOffset = today.getTimezoneOffset() * 60000;
-  const localDate = new Date(today.getTime() - timezoneOffset);
-
-  return localDate.toISOString().split("T")[0];
-}
 
 /**
  * Converts an ISO date into the date format used for display.

@@ -145,29 +145,6 @@ function validateContactField(mode, fieldName) {
   return !message;
 }
 
-/**
- * Validates a contact field while the user enters data.
- * Updates the field state and displays errors for touched fields.
- *
- * @param {string} mode - The form mode, such as "add" or "edit".
- * @param {string} fieldName - The name of the field being updated.
- * @returns {void}
- */
-function handleContactFieldInput(mode, fieldName) {
-  const inputId = contactFormConfig[mode]?.fields[fieldName]?.[0];
-  const input = document.getElementById(inputId);
-  if (!input) return;
-
-  const message = getContactFieldError(fieldName, input.value);
-  contactFormState[mode][fieldName] = !message;
-
-  if (contactFieldTouched[mode][fieldName]) {
-    setContactFieldError(mode, fieldName, message);
-  }
-
-  clearContactFormMessage(mode);
-  updateContactSubmitButton(mode);
-}
 
 /**
  * Validates all fields of the contact form.

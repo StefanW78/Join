@@ -1,10 +1,12 @@
+import { clearInputError } from "./formUtils.js";
+import { getTodayISO } from "./dateUtils.js";
 import { postData } from "./storage.js";
 import {
   initPriorityButtons, initCategoryDropdown, initAssignedDropdown, loadContacts,
 } from "./addTaskContacts.js";
 import { initSubtasks, addCurrentSubtaskInput } from "./addTaskSubtasks.js";
 import {
-  resetFormState, setInputError, clearInputError, handleInputChange, toggleInputFocus,
+  resetFormState, setInputError, handleInputChange, toggleInputFocus,
   clearAllErrors, showTaskAddedOverlay, initAddTaskBlurValidation,
 } from "./addTaskForm.js";
 
@@ -109,18 +111,6 @@ function initTaskDate() {
   taskDate.addEventListener("blur", validateTaskDate);
 }
 
-/**
- * Returns today's local date in ISO format.
- *
- * @returns {string} The generated value or HTML markup.
- */
-function getTodayISO() {
-  const today = new Date();
-  const timezoneOffset = today.getTimezoneOffset() * 60000;
-  const localDate = new Date(today.getTime() - timezoneOffset);
-
-  return localDate.toISOString().split("T")[0];
-}
 
 taskForm.addEventListener("submit", handleTaskSubmit);
 

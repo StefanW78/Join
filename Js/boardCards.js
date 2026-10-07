@@ -1,3 +1,4 @@
+import { getInitials } from "./avatarUtils.js";
 /**
  * Creates the complete HTML markup for a board task card.
  *
@@ -137,21 +138,6 @@ function getAssignedAvatarsTemplate(assignedContacts) {
     .join("");
 }
 
-/**
- * Generates initials from the first two parts of a name.
- *
- * @param {string} name - The name used to generate the initials.
- * @returns {string} The generated uppercase initials.
- */
-export function getInitials(name = "") {
-  return name
-    .trim()
-    .split(" ")
-    .filter(Boolean)
-    .slice(0, 2)
-    .map((part) => part[0].toUpperCase())
-    .join("");
-}
 
 /**
  * Selects a fallback avatar color based on an item's position.

@@ -131,37 +131,7 @@ function renderContactDetails(contact) {
 
 }
 
-/**
- * Finds a contact by matching its name and email address.
- *
- * @param {string} contactName - The name of the contact to find.
- * @param {string} contactEmail - The email address of the contact to find.
- * @returns {Object|null} The matching contact, or null if no contact is found.
- */
-function findContact(contactName, contactEmail) {
-  if (!fetchedData || typeof fetchedData !== "object") return null;
-  for (const [id, data] of Object.entries(fetchedData)) {
-    if (data.name === contactName && data.email === contactEmail) {
-      return data;
-    }
-  }
-  return null;
-}
 
-/**
- * Renders the details of a found contact inside the contact detail container.
- * Opens the contact details view and initializes the edit tools.
- *
- * @param {Object} foundContact - The contact whose details should be displayed.
- * @returns {void}
- */
-function renderFloatingCard(foundContact) {
-  contactDetailDiv.innerHTML = contactDetailsTemplate(
-    foundContact.name,foundContact.email,foundContact.phone,foundContact.color,foundContact.initials,);
-    openContactDetails();
-
-    checkQueriesForEditTools()
-}
 
 /**
  * Generates initials from a full name.
@@ -183,4 +153,3 @@ function getInitials(fullName) {
     : "";
   return firstInitial + lastInitial;
 }
-
