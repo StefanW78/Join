@@ -5,8 +5,6 @@
 let DropDowncontain = document.getElementById(`dropdown-menu`)
 let dropdownButton = document.getElementById(`header-button`)
 const mediaQuery = window.matchMedia("(max-width: 1023px)");
-//später entfernen
-// localStorage.setItem("username", "Dennis Kollak");
 
 
 DropDowncontain.classList.add("d_none");
@@ -18,10 +16,8 @@ DropDowncontain.classList.add("d_none");
  */
 mediaQuery.addEventListener("change", (e) => {
   if (e.matches) {
-    // Mobile
     DropDowncontain.classList.add("d_none");
   } else {
-    // Desktop
     DropDowncontain.classList.add("d_none");
   }
 });
@@ -31,7 +27,7 @@ mediaQuery.addEventListener("change", (e) => {
  */
 dropdownButton.addEventListener("click", (e) => {
   DropDowncontain.classList.toggle("d_none");
-  e.stopPropagation(); // verhindert, dass der Klick weiter hoch bubbelt
+  e.stopPropagation();
 });
 
 /**

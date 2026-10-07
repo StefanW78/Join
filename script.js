@@ -26,17 +26,7 @@ async function loadDataBase(collection) {
 
     const responseToJson = await response.json();
 
-    // Firebase returns object with IDs as keys:
-    // {
-    //   "-NxAbc": { name, email },
-    //   "-NxDef": { name, email }
-    // }
 
-    // Convert to:
-    // {
-    //   "-NxAbc": { id: "-NxAbc", name, email },
-    //   "-NxDef": { id: "-NxDef", name, email }
-    // }
 
     if (responseToJson && typeof responseToJson === "object") {
 

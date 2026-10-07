@@ -3,7 +3,6 @@
  * References the HTML elements used to display contact data.
  */
 
-//Contact Overlay
 /**
  * References the DOM element with the ID `contact-pop-add`.
  */
@@ -169,9 +168,7 @@ function randomColor() {
     return colors[Math.floor(Math.random() * colors.length)];
 }
 
-//for Overlay
 
-//main ConctactsJs
 
 /**
  * References the DOM element with the ID `contact-list`.
@@ -212,11 +209,9 @@ const createMessage = document.getElementById(`createMessage`)
  */
 function setInitialView() {
   if (window.innerWidth <= 1023) {
-    // Mobile
     contactListSec.classList.remove("d_none");
     contactInfoSec.classList.add("d_none");
   } else {
-    // Desktop
     contactListSec.classList.remove("d_none");
     contactInfoSec.classList.remove("d_none");
   }

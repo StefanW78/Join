@@ -38,6 +38,11 @@ function createEditSubtaskState(editSubtasks, onChange) {
  * @returns {void}
  */
 function renderEditSubtaskState(state) {
+  /**
+   * Stores the index of the subtask being edited.
+   * @param {number} index - The subtask index.
+   * @returns {number} The stored index.
+   */
   const setEditing = index => state.editingIndex = index;
   renderEditSubtasks(state.subtasks, state.onChange, setEditing);
 }

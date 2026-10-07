@@ -301,6 +301,11 @@ function openEditTaskOverlay(taskId) {
 function getBoardEditContext() {
   return {
     contacts: boardDetailsContext.getContacts(),
+    /**
+     * Enriches assigned contacts using the current board contact collection.
+     * @param {Object[]} assigned - The assigned contacts to enrich.
+     * @returns {Object[]} The enriched assigned contacts.
+     */
     enrichAssignedContacts: assigned => enrichAssignedContacts(
       assigned, boardDetailsContext.getContacts()),
     closeTaskDetailOverlay,

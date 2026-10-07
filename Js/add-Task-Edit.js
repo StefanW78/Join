@@ -107,7 +107,6 @@ function handleEditSubmit(event, taskId, state) {
     saveEditedTask(taskId, state.priority, state.contacts, state.subtasks);
 }
 
-//save functions
 /**
  * Saves the edited task.
  *
@@ -375,6 +374,10 @@ function initEditAssignedContacts(selectedContacts, onChange) {
 function registerAssignedInputEvents(
     input, list, selectedContacts, onChange
 ) {
+    /**
+     * Renders contact options using the current selection and change callback.
+     * @returns {void}
+     */
     const renderOptions = () =>
         renderEditContactOptions(selectedContacts, onChange);
     input.addEventListener("focus", () => openEditAssignedList(list, renderOptions));

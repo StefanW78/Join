@@ -4,7 +4,6 @@
  */
 let draggedCard = null;
 
-// Verbesserte Version vom DragnDrop
 /**
  * Initializes drag-and-drop behavior for all task cards and board columns.
  *

@@ -8,9 +8,17 @@ let userHeader = document.getElementById(`user-header`)
 let mobileViewLinkandFooter = document.getElementById(`mobile-view-linkandfooter`)
 
 
+/**
+ * Initializes the privacy page navigation for the stored user status.
+ * @returns {void}
+ */
 function init() {
     CheckInUser()
 }
+/**
+ * Adjusts navigation, login link, and footer visibility for guests and users.
+ * @returns {void}
+ */
 function CheckInUser() {
     const userStatus = localStorage.getItem("userStatus");
     if (!userStatus || (userStatus !== "guest" && userStatus !== "user")) {

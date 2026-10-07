@@ -495,7 +495,6 @@ transform: rotate(-180deg);
   display: flex;
   gap: 20px;
   align-items: flex-start;
-  /* flex-wrap: wrap; */
   width: 100%;
   height: calc(100% - 90px);
 }
@@ -503,7 +502,6 @@ transform: rotate(-180deg);
 .column {
   display: flex;
   flex-direction: column;
-  /* flex: 1; */
   gap: 12px;
   height: 100%;
   width: 100%;
@@ -590,7 +588,7 @@ transform: rotate(-180deg);
   color: #8898a8;
   line-height: 1.5;
   display: -webkit-box;
-  -webkit-line-clamp: 2; /* Anzahl Zeilen */
+  -webkit-line-clamp: 2;
   -webkit-box-orient: vertical;
   overflow: hidden;
   line-clamp: 2;

@@ -162,10 +162,23 @@ function getTargetColumn(status) {
  */
 function getBoardContext() {
   return {
+    /**
+     * Returns the current board task collection.
+     * @returns {Object[]} The board tasks.
+     */
     getTasks: () => boardTasks,
+    /**
+     * Returns the current board contact collection.
+     * @returns {Object[]} The board contacts.
+     */
     getContacts: () => contacts,
     updateFilteredTasks,
     renderBoardTasks,
+    /**
+     * Removes a task from the local board collection.
+     * @param {string} taskId - The ID of the task to remove.
+     * @returns {Object[]} The remaining board tasks.
+     */
     removeTask: taskId => boardTasks = boardTasks.filter(task => task.id !== taskId),
     updateTaskInBoardTasks,
   };

@@ -981,7 +981,6 @@
   overflow: hidden;
 }
 
-/* Keep auxiliary edit text readable without changing the Add Task page. */
 .edit-task-card .fieldError,
 .edit-task-card .selectedAvatar,
 .edit-task-card .contactAvatar,

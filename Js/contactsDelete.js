@@ -180,7 +180,7 @@ async function deleteContactFromFirebase(contactId) {
 document.addEventListener("click", (event) => {
   const editDialogBox = document.getElementById("edit-menu-dialog");
 
-  if (!editDialogBox) return; // Element noch nicht da → nix machen
+  if (!editDialogBox) return;
    editDialogBox.classList.add("d_none");
 });
 

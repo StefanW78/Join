@@ -246,7 +246,6 @@ function getEditOverlayTemplate(task) {
     `;
 }
 
-//Test
 
 /**
  * Creates avatar markup for a selected edit contact.

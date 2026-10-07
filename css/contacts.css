@@ -339,7 +339,6 @@ main{
     display: flex;
     align-items: center;
     justify-content: center;
-    /* background-color: rgba(255, 122, 0, 1); */
     border: 2px solid rgba(255, 255, 255, 1);
     border-radius: 50%;
     color: rgba(255, 255, 255, 1);
