@@ -1184,3 +1184,29 @@
     flex-shrink: 0;
   }
 }
+
+@media (width < 360px) {
+  .detail-card-view .edit-task-card .priorityGroup {
+    min-width: 0;
+  }
+
+  .detail-card-view .edit-task-card .priorityButtons {
+    gap: clamp(4px, calc(10vw - 28px), 8px);
+  }
+
+  .detail-card-view .edit-task-card .priorityBtn {
+    flex: 1 1 0;
+    min-width: 0;
+    height: clamp(44px, calc(30vw - 52px), 56px);
+    padding: 0 2px;
+    font-size: clamp(12px, calc(10vw - 20px), 16px);
+    gap: clamp(2px, calc(7.5vw - 22px), 5px);
+    white-space: nowrap;
+  }
+
+  .detail-card-view .edit-task-card .priorityBtn img {
+    width: clamp(14px, calc(15vw - 34px), 20px);
+    height: clamp(14px, calc(15vw - 34px), 20px);
+    flex-shrink: 0;
+  }
+}
