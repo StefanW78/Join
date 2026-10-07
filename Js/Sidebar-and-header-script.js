@@ -1,11 +1,9 @@
-
 /**
  * References to HTML elements used for displaying the Sidebar and Header data.
  */
-let DropDowncontain = document.getElementById(`dropdown-menu`)
-let dropdownButton = document.getElementById(`header-button`)
+let DropDowncontain = document.getElementById(`dropdown-menu`);
+let dropdownButton = document.getElementById(`header-button`);
 const mediaQuery = window.matchMedia("(max-width: 1023px)");
-
 
 DropDowncontain.classList.add("d_none");
 
@@ -51,7 +49,7 @@ function renderInitials() {
   }
   const initials = user
     .split(" ")
-    .map(w => w[0]?.toUpperCase() || "")
+    .map((w) => w[0]?.toUpperCase() || "")
     .join("");
 
   const finalInitials = initials || "?";

@@ -1,19 +1,17 @@
-
 /**
  * References to HTML elements used for displaying the summary data.
  */
-let toDoNumbers = document.getElementById(`toDoNumbers`)
-let doneNumbers = document.getElementById(`doneNumbers`)
-let urgentNumbers = document.getElementById(`urgentNumbers`)
-let dueDate = document.getElementById(`dueDate`)
-let totalTasksNumbers = document.getElementById(`totalTasksNumbers`)
-let inProgressNumber = document.getElementById(`inProgressNumber`)
-let awaitingFeedbackNumber = document.getElementById(`awaitingFeedbackNumber`)
-let SummaryName = document.getElementById(`userName`)
-let SummaryDiv = document.getElementById(`summary-div`)
-let AnimationWelcomePage = document.getElementById(`anima-welcom-page`)
+let toDoNumbers = document.getElementById(`toDoNumbers`);
+let doneNumbers = document.getElementById(`doneNumbers`);
+let urgentNumbers = document.getElementById(`urgentNumbers`);
+let dueDate = document.getElementById(`dueDate`);
+let totalTasksNumbers = document.getElementById(`totalTasksNumbers`);
+let inProgressNumber = document.getElementById(`inProgressNumber`);
+let awaitingFeedbackNumber = document.getElementById(`awaitingFeedbackNumber`);
+let SummaryName = document.getElementById(`userName`);
+let SummaryDiv = document.getElementById(`summary-div`);
+let AnimationWelcomePage = document.getElementById(`anima-welcom-page`);
 const SignedUserName = document.getElementById("signedUser");
-
 
 /**
  * Initializes the application by displaying the greeting,
@@ -23,7 +21,7 @@ const SignedUserName = document.getElementById("signedUser");
  * @returns {void}
  */
 function init() {
-  greetingGuest()
+  greetingGuest();
   renderSummary();
   renderInitials();
 }
@@ -57,11 +55,11 @@ async function renderSummary() {
 function getTodoNumbers(todos) {
   return {
     totalTodos: todos.length,
-    totalDone: todos.filter(t => t.status === "done").length,
-    totalTodo: todos.filter(t => t.status === "todo").length,
-    totalInProgress: todos.filter(t => t.status === "inProgress").length,
-    totalFeedback: todos.filter(t => t.status === "awaitFeedback").length,
-    totalUrgent: todos.filter(t => t.priority === "urgent").length
+    totalDone: todos.filter((t) => t.status === "done").length,
+    totalTodo: todos.filter((t) => t.status === "todo").length,
+    totalInProgress: todos.filter((t) => t.status === "inProgress").length,
+    totalFeedback: todos.filter((t) => t.status === "awaitFeedback").length,
+    totalUrgent: todos.filter((t) => t.priority === "urgent").length,
   };
 }
 
@@ -82,7 +80,7 @@ function formatDeadline(todos) {
   return nextDeadline.toLocaleDateString("en-US", {
     month: "long",
     day: "numeric",
-    year: "numeric"
+    year: "numeric",
   });
 }
 
@@ -115,9 +113,9 @@ function getUpcomingDeadline(todos) {
   const now = new Date();
 
   const upcoming = todos
-    .filter(t => t.dueDate)
-    .map(t => new Date(t.dueDate))
-    .filter(dueDate => dueDate >= now)
+    .filter((t) => t.dueDate)
+    .map((t) => new Date(t.dueDate))
+    .filter((dueDate) => dueDate >= now)
     .sort((a, b) => a - b);
 
   return upcoming.length > 0 ? upcoming[0] : null;
@@ -130,12 +128,12 @@ function getUpcomingDeadline(todos) {
  * @returns {void}
  */
 function renderName() {
-  let name = localStorage.getItem("username")
+  let name = localStorage.getItem("username");
 
   if (!name) return;
 
-  SummaryName.innerText = name
-  SignedUserName.innerText = name
+  SummaryName.innerText = name;
+  SignedUserName.innerText = name;
 }
 
 /**
@@ -147,7 +145,7 @@ function renderName() {
 function greetingGuest() {
   const checkQueries = window.matchMedia("(max-width: 1023px)");
   if (checkQueries.matches) {
-    AnimationWelcomeAnimation()
+    AnimationWelcomeAnimation();
   }
 }
 
@@ -163,7 +161,7 @@ function AnimationWelcomeAnimation() {
   SummaryDiv.style.display = "none";
   AnimationWelcomePage.classList.add("welcome-animation");
   welcomeMsg.textContent = `Good morning!`;
-  AnimationWelcomePage.classList.remove("d_none")
+  AnimationWelcomePage.classList.remove("d_none");
   AnimationWelcomePage.style.display = "block";
   setTimeout(() => {
     AnimationWelcomePage.classList.remove("welcome-animation");

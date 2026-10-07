@@ -1,263 +1,258 @@
+@media (max-width: 1290px) {
+  .overview-container-items.box-1,
+  .overview-container-items.box-2 {
+    padding: 33.5px 35px;
+  }
 
-@media (max-width: 1290px){
-    .overview-container-items.box-1, .overview-container-items.box-2{
-        padding: 33.5px 35px;
-    }
+  .welcome-message {
+    font-size: 40px;
+  }
 
-    .welcome-message{
-        font-size: 40px;
-    }
-
-    .user-name{
-        font-size: 50px;
-    }
+  .user-name {
+    font-size: 50px;
+  }
 }
 
 @media (max-width: 1190px) {
-    .overview-container-items{
-        padding: 16px 20px;
-    }
+  .overview-container-items {
+    padding: 16px 20px;
+  }
 
-        .overview-container-items img{
-        width: 55px;
-    }
+  .overview-container-items img {
+    width: 55px;
+  }
 
-    .overview-container-items.box-1, .overview-container-items.box-2{
-        padding: 33.5px 20px;
-    }
+  .overview-container-items.box-1,
+  .overview-container-items.box-2 {
+    padding: 33.5px 20px;
+  }
 
-    .summary-div{
-        padding: 70px 30px 20px 60px;
-    }
+  .summary-div {
+    padding: 70px 30px 20px 60px;
+  }
 
-    .header-div{
-        padding: 20px 40px 20px 60px;
-    }
+  .header-div {
+    padding: 20px 40px 20px 60px;
+  }
 
-    .summary-overview-boxes span{
-            font-size: 60px;
-
-    }
+  .summary-overview-boxes span {
+    font-size: 60px;
+  }
 }
 
 @media (max-width: 1090px) {
-    .summary-div{
-        padding: 50px 40px 20px 50px;
-    }
-    
-    .header-div{
-        padding: 20px 40px 20px 50px;
-    }
+  .summary-div {
+    padding: 50px 40px 20px 50px;
+  }
 
-    .welcome-message{
-        font-size: 37px;
-    }
+  .header-div {
+    padding: 20px 40px 20px 50px;
+  }
 
-    .user-name{
-        font-size: 45px;
-    }
+  .welcome-message {
+    font-size: 37px;
+  }
 
-    .summary-main-board{
-        gap: 49px;
-    }
+  .user-name {
+    font-size: 45px;
+  }
+
+  .summary-main-board {
+    gap: 49px;
+  }
 }
 
 @media (max-width: 1023px) {
+  .anima-welcom-page {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+  }
 
-    .anima-welcom-page {
-        position: absolute;
-        top: 50%;
-        left: 50%;
-        transform: translate(-50%, -50%);
-    }
-
-    .welcome-animation {
-        justify-content: center;
-        align-items: center;
-        text-align: center;
-        width: 100%;
-        animation: fadeIn 2s ease-in;
+  .welcome-animation {
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    width: 100%;
+    animation: fadeIn 2s ease-in;
   }
 
   .welcomeMsg {
-        font-size: 42px;
-        font-weight: 400;
-        margin-bottom: 15px;
+    font-size: 42px;
+    font-weight: 400;
+    margin-bottom: 15px;
   }
 
   .signedUser {
-        font-size: 48px;
-        text-transform: capitalize;
-        font-weight: 700;
-        color: rgba(18, 70, 88, 1);
+    font-size: 48px;
+    text-transform: capitalize;
+    font-weight: 700;
+    color: rgba(18, 70, 88, 1);
   }
 
+  .welcome-user {
+    display: none !important;
+  }
 
-    .welcome-user{
-        display: none !important;
-    }
+  .summary-div {
+    padding: 20px 15px 20px 15px;
+  }
 
-    .summary-div{
-        padding: 20px 15px 20px 15px;
-    }
+  .header-div {
+    padding: 20px 15px;
+  }
 
-    .header-div{
-        padding: 20px 15px;
-    }
+  .summary-div {
+    gap: 40px;
+  }
 
+  .summary-title {
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: center;
+    gap: 10px;
+  }
 
-    .summary-div{
-        gap: 40px;
-    }
+  .seperator {
+    height: 3px;
+    width: 90px;
+    order: 2;
+  }
 
-    .summary-title{
-        flex-direction: column;
-        align-items: flex-start;
-        justify-content: center;
-        gap: 10px;
-    }
+  .summary-main-board {
+    justify-content: center;
+  }
 
-    .seperator{
-        height: 3px;
-        width: 90px;
-        order: 2;
-    }
-
-    .summary-main-board{
-        justify-content: center;
-    }
-
-    .overview-container-items.box-1, .overview-container-items.box-2{
+  .overview-container-items.box-1,
+  .overview-container-items.box-2 {
     max-height: 110px;
-}
+  }
 
-.overview-container-items.box-3{
+  .overview-container-items.box-3 {
     height: 110px;
-}
+  }
 
-.overview-container-items.box-4, .overview-container-items.box-5, .overview-container-items.box-6{
+  .overview-container-items.box-4,
+  .overview-container-items.box-5,
+  .overview-container-items.box-6 {
     max-height: 116px;
+  }
 }
 
+@media (max-width: 864px) {
+  .main-title {
+    font-size: 47px;
+  }
+
+  .second-title {
+    font-size: 20px;
+  }
+
+  .overview-container-items.box-1:hover,
+  .overview-container-items.box-2:hover {
+    transform: scale(1.05);
+  }
+
+  .overview-container-items.box-3:hover {
+    transform: scale(1.02);
+  }
+
+  .overview-container-items.box-4:hover,
+  .overview-container-items.box-5:hover,
+  .overview-container-items.box-6:hover {
+    transform: scale(1.05);
+  }
+
+  .summary-overview-boxes h4 {
+    font-size: 16px;
+  }
+
+  .summary-overview-boxes h5 {
+    font-size: 16px;
+  }
 }
 
-@media (max-width: 864px){
+@media (max-width: 470px) {
+  .overview-container-items {
+    padding: 16px 16px;
+  }
 
-    .main-title{
-        font-size: 47px;
+  .main-title {
+    font-size: 45px;
+  }
 
-    }
+  .second-title {
+    font-size: 18px;
+  }
 
-    .second-title{
-        font-size: 20px;
-    }
+  .summary-overview-boxes {
+    gap: 15px;
+  }
 
-    .overview-container-items.box-1:hover,
-     .overview-container-items.box-2:hover{
-        transform: scale(1.05);
-     }
-    
-    .overview-container-items.box-3:hover{
-        transform: scale(1.02);
-    }
-
-    .overview-container-items.box-4:hover,
-     .overview-container-items.box-5:hover,
-      .overview-container-items.box-6:hover{
-        transform: scale(1.05);
-      }
-
-    .summary-overview-boxes h4 {
-        font-size: 16px;
-    }
-
-    .summary-overview-boxes h5 {
-        font-size: 16px;
-    }
+  .summary-div {
+    gap: 35px;
+  }
 }
 
-@media (max-width: 470px){
-    .overview-container-items{
-        padding: 16px 16px;
-    }
+@media (max-width: 429px) {
+  .overview-container-items.box-1,
+  .overview-container-items.box-2 {
+    padding: 38px 19px;
+  }
 
-    .main-title{
-        font-size: 45px;
-    }
-    
-    .second-title{
-        font-size: 18px;
-    }
+  .overview-container-items {
+    padding: 16px 5px;
+    gap: 15px;
+  }
 
-    .summary-overview-boxes{
-        gap: 15px;
-    }
+  .overview-container-items img {
+    width: 40px;
+  }
 
-    .summary-div{
-        gap: 35px;
-    }
+  .summary-overview-boxes h4 {
+    font-size: 16px;
+  }
+
+  .task-number {
+    height: 75px;
+  }
+
+  .summary-overview-boxes span {
+    font-size: 47px;
+  }
+
+  .main-title {
+    font-size: 36px;
+  }
+
+  .summary-title {
+    gap: 5px;
+  }
+
+  .summary-div {
+    padding: 20px 10px 20px 10px;
+  }
+
+  .welcomeMsg {
+    font-size: 36px;
+  }
+
+  .signedUser {
+    font-size: 47px;
+  }
 }
 
-@media (max-width: 429px){
-    
-    .overview-container-items.box-1, .overview-container-items.box-2{
-        padding: 38px 19px;
-    
-    }
+@media (max-width: 400px) {
+  .welcomeMsg {
+    font-size: 35px;
+  }
 
-        .overview-container-items{
-            padding: 16px 5px;
-            gap: 15px;
-        }
+  .signedUser {
+    font-size: 38px;
+  }
 
-        .overview-container-items img{
-            width: 40px;
-        }
-
-        .summary-overview-boxes h4{
-            font-size: 16px;
-        }
-
-        .task-number{
-            height: 75px;
-        }
-
-        .summary-overview-boxes span{
-            font-size: 47px;
-        }
-
-        .main-title{
-            font-size: 36px;
-        }
-
-        .summary-title{
-            gap: 5px;
-        }
-
-        .summary-div{
-            padding: 20px 10px 20px 10px;
-        }
-
-        .welcomeMsg{
-            font-size: 36px;
-        }
-
-        .signedUser{
-            font-size: 47px;
-        }
-
-}
-
-@media (max-width: 400px){
-    .welcomeMsg{
-        font-size: 35px;
-    }
-
-    .signedUser{
-        font-size: 38px;
-    }
-
-    .overview-container-items.box-3{
-        gap: 0px;
-    }
+  .overview-container-items.box-3 {
+    gap: 0px;
+  }
 }

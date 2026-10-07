@@ -11,9 +11,9 @@ body {
   font-family: "Segoe UI", Arial, sans-serif;
   font-size: 14px;
   overflow: hidden;
-} 
+}
 
- .sidebar {
+.sidebar {
   display: flex;
   flex-direction: column;
   width: 232px;
@@ -21,7 +21,6 @@ body {
   background: #2b3a4e;
   color: #fff;
 }
-
 
 .logo-area {
   display: flex;

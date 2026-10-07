@@ -1,4 +1,3 @@
-
 /**
  * Deletes the selected contact from the edit overlay.
  * Finds the contact, performs the deletion, and finalizes the deletion process.
@@ -115,22 +114,21 @@ function findDataFromEditOverlayToDelete() {
  * @returns {Promise<void>} A promise that resolves when the deletion process is completed.
  */
 async function deleteContactAction(contactId) {
-    const contact = getDeleteTarget(contactId);
+  const contact = getDeleteTarget(contactId);
 
-    if (!contact) return;
+  if (!contact) return;
 
-    try {
+  try {
+    await deleteContactFromFirebase(contactId);
 
-        await deleteContactFromFirebase(contactId);
-
-        renderContactList();
-        if (currentContactId === contactId) {
-            contactDetailDiv.innerHTML = "";
-        }
-        popupMessage("Contact deleted!");
-    } catch (error) {
-        console.error("Delete failed:", error);
+    renderContactList();
+    if (currentContactId === contactId) {
+      contactDetailDiv.innerHTML = "";
     }
+    popupMessage("Contact deleted!");
+  } catch (error) {
+    console.error("Delete failed:", error);
+  }
 }
 
 /**
@@ -140,20 +138,19 @@ async function deleteContactAction(contactId) {
  * @returns {Object|null} The matching contact, or null if no contact is found.
  */
 function getDeleteTarget(contactId) {
-    if (!contactId) {
-        console.error("No contactId provided");
-        return null;
-    }
+  if (!contactId) {
+    console.error("No contactId provided");
+    return null;
+  }
 
-    const contact = fetchedData[contactId];
+  const contact = fetchedData[contactId];
 
-    if (!contact) {
-        console.error("Contact not found in local data");
-        return null;
-    }
+  if (!contact) {
+    console.error("Contact not found in local data");
+    return null;
+  }
 
-    return contact;
-
+  return contact;
 }
 
 /**
@@ -164,11 +161,9 @@ function getDeleteTarget(contactId) {
  * @returns {Promise<void>} A promise that resolves when the contact has been deleted.
  */
 async function deleteContactFromFirebase(contactId) {
+  await deleteData("contacts", contactId);
 
-    await deleteData("contacts", contactId);
-
-    delete fetchedData[contactId];
-
+  delete fetchedData[contactId];
 }
 
 /**
@@ -181,7 +176,7 @@ document.addEventListener("click", (event) => {
   const editDialogBox = document.getElementById("edit-menu-dialog");
 
   if (!editDialogBox) return;
-   editDialogBox.classList.add("d_none");
+  editDialogBox.classList.add("d_none");
 });
 
 /**
@@ -212,7 +207,6 @@ function checkQueriesForEditTools() {
   if (!editToolEls) return;
   editToolEls.removeEventListener("click", handleEditToolClick);
   editToolEls.addEventListener("click", handleEditToolClick);
-
 }
 
 /**

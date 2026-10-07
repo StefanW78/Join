@@ -114,8 +114,7 @@ signupForm.addEventListener("submit", async (event) => {
     }, 1000);
   } catch (error) {
     console.error(error);
-    signupError.textContent =
-      "Something went wrong. Registration failed.";
+    signupError.textContent = "Something went wrong. Registration failed.";
   }
 });
 
@@ -131,11 +130,7 @@ function validateUsername() {
   clearInputError(signupName, nameError);
 
   if (nameParts.length < 2) {
-    setInputError(
-      signupName,
-      nameError,
-      "Bitte Vor- und Nachname eintragen."
-    );
+    setInputError(signupName, nameError, "Bitte Vor- und Nachname eintragen.");
     return false;
   }
 
@@ -153,11 +148,7 @@ function validateEmail() {
   clearInputError(signupEmail, emailError);
 
   if (!isValidEmail(email)) {
-    setInputError(
-      signupEmail,
-      emailError,
-      "Please enter a valid email.",
-    );
+    setInputError(signupEmail, emailError, "Please enter a valid email.");
     return false;
   }
 
@@ -221,10 +212,7 @@ function validateConfirmPassword() {
 signupName.addEventListener("blur", validateUsername);
 signupEmail.addEventListener("blur", validateEmail);
 signupPassword.addEventListener("blur", validatePassword);
-signupConfirmPassword.addEventListener(
-  "blur",
-  validateConfirmPassword,
-);
+signupConfirmPassword.addEventListener("blur", validateConfirmPassword);
 
 signupPrivacy.addEventListener("change", validatePrivacy);
 
@@ -245,13 +233,8 @@ signupPassword.addEventListener("input", () => {
 });
 
 signupConfirmPassword.addEventListener("input", () => {
-  clearInputError(
-    signupConfirmPassword,
-    confirmPasswordError,
-  );
+  clearInputError(signupConfirmPassword, confirmPasswordError);
 });
-
-
 
 /**
  * Clears all validation errors from the current form.
@@ -268,8 +251,6 @@ function clearAllErrors() {
   clearInputError(signupConfirmPassword, confirmPasswordError);
 }
 
-
-
 /**
  * Displays the signup success overlay.
  *
@@ -284,7 +265,6 @@ function showSignupSuccessOverlay() {
     overlay.classList.add("show");
   }, 10);
 }
-
 
 signupPrivacy.addEventListener("change", validatePrivacy);
 

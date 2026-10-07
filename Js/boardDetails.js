@@ -88,7 +88,9 @@ function getTaskDetailOverlayElements() {
  */
 function renderTaskDetailOverlay(task, formContainer) {
   const assigned = enrichAssignedContacts(
-    task.assignedTo || [], boardDetailsContext.getContacts());
+    task.assignedTo || [],
+    boardDetailsContext.getContacts(),
+  );
   formContainer.innerHTML = getTaskDetailOverlayTemplate(task, assigned);
   initDetailSubtaskCheckboxes(task);
 }
@@ -161,7 +163,9 @@ function showTaskDetailOverlay(overlay) {
  */
 function initDetailSubtaskCheckboxes(task) {
   document.querySelectorAll(".detailSubtaskCheckbox").forEach((checkbox) => {
-    checkbox.addEventListener("change", () => updateDetailSubtask(task, checkbox));
+    checkbox.addEventListener("change", () =>
+      updateDetailSubtask(task, checkbox),
+    );
   });
 }
 
@@ -280,7 +284,9 @@ function removeDeletedTask(taskId) {
  * @returns {void}
  */
 function openEditTaskOverlay(taskId) {
-  const task = boardDetailsContext.getTasks().find((task) => task.id === taskId);
+  const task = boardDetailsContext
+    .getTasks()
+    .find((task) => task.id === taskId);
 
   if (!task) return;
 
@@ -307,8 +313,8 @@ function getBoardEditContext() {
      * @param {Object[]} assigned - The assigned contacts to enrich.
      * @returns {Object[]} The enriched assigned contacts.
      */
-    enrichAssignedContacts: assigned => enrichAssignedContacts(
-      assigned, boardDetailsContext.getContacts()),
+    enrichAssignedContacts: (assigned) =>
+      enrichAssignedContacts(assigned, boardDetailsContext.getContacts()),
     closeTaskDetailOverlay,
     updateTaskInBoardTasks: boardDetailsContext.updateTaskInBoardTasks,
     updateFilteredTasks: boardDetailsContext.updateFilteredTasks,

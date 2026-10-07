@@ -155,8 +155,6 @@ loginPassword.addEventListener("input", () => {
   clearInputError(loginPassword, loginPasswordError);
 });
 
-
-
 /**
  * Clears all validation errors from the current form.
  *
@@ -166,7 +164,6 @@ function clearAllErrors() {
   clearInputError(loginEmail, loginEmailError);
   clearInputError(loginPassword, loginPasswordError);
 }
-
 
 /**
  * Displays the login success overlay.

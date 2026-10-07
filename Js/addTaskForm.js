@@ -1,5 +1,9 @@
 import { clearInputError } from "./formUtils.js";
-import { validateTaskTitle, validateTaskDate, validateTaskCategory } from "./addTask.js";
+import {
+  validateTaskTitle,
+  validateTaskDate,
+  validateTaskCategory,
+} from "./addTask.js";
 import { renderContacts, renderSelectedContacts } from "./addTaskContacts.js";
 import { renderSubtasks } from "./addTaskSubtasks.js";
 
@@ -118,7 +122,6 @@ export function setInputError(input, errorElement, message) {
   input.classList.add("inputError");
   errorElement.textContent = message;
 }
-
 
 /**
  * Handles the input change.

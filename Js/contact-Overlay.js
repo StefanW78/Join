@@ -59,8 +59,7 @@ function validateName(rawValue, value) {
   if (rawValue !== value)
     return "Name cannot contain leading or trailing spaces";
 
-  if (value.length > 15)
-    return "Name cannot be longer than 15 characters";
+  if (value.length > 15) return "Name cannot be longer than 15 characters";
 
   const regex = /^[\p{L}\p{M}]+(?:[\s'’-][\p{L}\p{M}]+)*$/u;
   return regex.test(value)
@@ -144,7 +143,6 @@ function validateContactField(mode, fieldName) {
   updateContactSubmitButton(mode);
   return !message;
 }
-
 
 /**
  * Validates all fields of the contact form.

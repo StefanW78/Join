@@ -2,12 +2,20 @@ import { clearInputError } from "./formUtils.js";
 import { getTodayISO } from "./dateUtils.js";
 import { postData } from "./storage.js";
 import {
-  initPriorityButtons, initCategoryDropdown, initAssignedDropdown, loadContacts,
+  initPriorityButtons,
+  initCategoryDropdown,
+  initAssignedDropdown,
+  loadContacts,
 } from "./addTaskContacts.js";
 import { initSubtasks, addCurrentSubtaskInput } from "./addTaskSubtasks.js";
 import {
-  resetFormState, setInputError, handleInputChange, toggleInputFocus,
-  clearAllErrors, showTaskAddedOverlay, initAddTaskBlurValidation,
+  resetFormState,
+  setInputError,
+  handleInputChange,
+  toggleInputFocus,
+  clearAllErrors,
+  showTaskAddedOverlay,
+  initAddTaskBlurValidation,
 } from "./addTaskForm.js";
 
 globalThis.taskDate = document.getElementById("taskDate");
@@ -25,8 +33,11 @@ globalThis.clearTaskBtn = document.getElementById("clearTaskBtn");
 
 globalThis.assignedInput = document.getElementById("assignedInput");
 globalThis.assignedList = document.getElementById("assignedList");
-globalThis.selectedContactsContainer = document.getElementById("selectedContacts");
-globalThis.moreContactsDropdown = document.getElementById("moreContactsDropdown");
+globalThis.selectedContactsContainer =
+  document.getElementById("selectedContacts");
+globalThis.moreContactsDropdown = document.getElementById(
+  "moreContactsDropdown",
+);
 
 globalThis.categoryButton = document.getElementById("categoryButton");
 globalThis.categoryList = document.getElementById("categoryList");
@@ -35,7 +46,9 @@ globalThis.subtaskInput = document.getElementById("subtasks");
 globalThis.subtaskList = document.getElementById("subtaskList");
 globalThis.addSubtaskBtn = document.getElementById("addSubtaskBtn");
 globalThis.clearSubtaskBtn = document.getElementById("clearSubtaskBtn");
-globalThis.moreSubtasksDropdown = document.getElementById("moreSubtasksDropdown");
+globalThis.moreSubtasksDropdown = document.getElementById(
+  "moreSubtasksDropdown",
+);
 
 globalThis.taskAddedOverlay = document.getElementById("taskAddedOverlay");
 globalThis.assignedArrow = document.getElementById("assignedArrow");
@@ -110,7 +123,6 @@ function initTaskDate() {
 
   taskDate.addEventListener("blur", validateTaskDate);
 }
-
 
 taskForm.addEventListener("submit", handleTaskSubmit);
 

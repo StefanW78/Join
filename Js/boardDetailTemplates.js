@@ -124,7 +124,12 @@ function getOverlayCategoryClass(category) {
  * @returns {string} The human-readable priority label.
  */
 function getPriorityText(priority) {
-  const labels = { urgent: "Urgent", high: "High", medium: "Medium", low: "Low" };
+  const labels = {
+    urgent: "Urgent",
+    high: "High",
+    medium: "Medium",
+    low: "Low",
+  };
   return labels[priority] || labels.medium;
 }
 

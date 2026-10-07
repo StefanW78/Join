@@ -1,4 +1,3 @@
-
 /**
  * Generates the HTML template for a single contact in the contact list.
  *
@@ -6,8 +5,7 @@
  * @returns {string} The generated HTML markup for the contact.
  */
 function contactListTemplate(contact) {
-
-    return`
+  return `
                                 <div class="contact-container" onclick="openContact(event)" data-id="${contact.id}">
                                     <div class="contact-badge" id="contact-badge" style="background-color: ${contact.color}">
                                         ${contact.initials}
@@ -18,7 +16,7 @@ function contactListTemplate(contact) {
                                     </div>
                                 </div>
     
-    `
+    `;
 }
 
 /**
@@ -28,13 +26,11 @@ function contactListTemplate(contact) {
  * @returns {string} The generated HTML markup for the section header.
  */
 function contactHeaderTemplate(letter) {
-
-    return `
+  return `
         <h3 class="contact-alphabet">${letter}</h3>
         <div class="contact-seperator"></div>
     `;
 }
-
 
 /**
  * Generates the HTML template for displaying the details of a contact.
@@ -44,7 +40,7 @@ function contactHeaderTemplate(letter) {
  * @returns {string} The generated HTML markup for the contact details.
  */
 function contactDetailsTemplate(contact) {
-    return`
+  return `
     <div class="contact-header" id="contact-header">
                                 <div class="contact-baged" id="contact-symbol" style="background-color: ${contact.color}">
                                     ${contact.initials}
@@ -85,7 +81,7 @@ function contactDetailsTemplate(contact) {
                                 <h4 class="contact-phone" id="contact-phone">Phone</h4>
                                 <span class="span-phone" id="span-phone">${contact.phone}</span>
                             </div>
-    `
+    `;
 }
 
 /**
@@ -97,7 +93,7 @@ function contactDetailsTemplate(contact) {
  * @returns {string} The generated HTML markup for the edit overlay.
  */
 function renderEditTemplate(contact) {
-    return`
+  return `
                                     <div class="edit-contact-overlay slide-out" id="edit-contact-overlay">
                                     <div class="edit-contact-overview">
                                         <div class="close-btn" onclick="CloseEditDialog()">
@@ -155,5 +151,5 @@ function renderEditTemplate(contact) {
                                         </div>
                                     </div>
                                 </div>
-    `
+    `;
 }

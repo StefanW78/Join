@@ -1,5 +1,8 @@
 import { toggleInputFocus } from "./addTaskForm.js";
-import { initSubtaskValidation, validateSubtaskInput } from "./subtaskValidation.js";
+import {
+  initSubtaskValidation,
+  validateSubtaskInput,
+} from "./subtaskValidation.js";
 
 let editingSubtask = null;
 
@@ -127,7 +130,8 @@ function renderHiddenSubtasks(hiddenSubtasks) {
       </li>
     `;
   hiddenSubtasks.forEach(renderHiddenSubtask);
-  document.getElementById("moreSubtasksBtn")
+  document
+    .getElementById("moreSubtasksBtn")
     .addEventListener("click", toggleMoreSubtasks);
 }
 
@@ -196,7 +200,9 @@ function initSubtaskItemButtons() {
  */
 function initIndexedButtons(selector, handler) {
   document.querySelectorAll(selector).forEach((button) => {
-    button.addEventListener("click", () => handler(Number(button.dataset.index)));
+    button.addEventListener("click", () =>
+      handler(Number(button.dataset.index)),
+    );
   });
 }
 

@@ -1,4 +1,3 @@
-
 /**
  * References the HTML elements used to display contact data.
  */
@@ -59,21 +58,22 @@ const contactFieldTouched = {
 /**
  * Stores the color palette used for contact avatars.
  */
-const colors = ["rgba(255, 122, 0, 1)", 
-  "rgba(255, 94, 179, 1)", 
-  "rgba(110, 82, 255, 1)", 
-  "rgba(147, 39, 255, 1)", 
-  "rgba(0, 190, 232, 1)", 
-  "rgba(31, 215, 193, 1)", 
-  "rgba(255, 116, 94, 1)", 
-  "rgba(255, 163, 94, 1)", 
-  "rgba(252, 113, 255, 1)", 
-  "rgba(255, 199, 1, 1)", 
-  "rgba(0, 56, 255, 1)", 
-  "rgba(195, 255, 43, 1)", 
-  "rgba(255, 230, 43, 1)", 
-  "rgba(255, 70, 70, 1)", 
-  "rgba(255, 187, 43, 1)"
+const colors = [
+  "rgba(255, 122, 0, 1)",
+  "rgba(255, 94, 179, 1)",
+  "rgba(110, 82, 255, 1)",
+  "rgba(147, 39, 255, 1)",
+  "rgba(0, 190, 232, 1)",
+  "rgba(31, 215, 193, 1)",
+  "rgba(255, 116, 94, 1)",
+  "rgba(255, 163, 94, 1)",
+  "rgba(252, 113, 255, 1)",
+  "rgba(255, 199, 1, 1)",
+  "rgba(0, 56, 255, 1)",
+  "rgba(195, 255, 43, 1)",
+  "rgba(255, 230, 43, 1)",
+  "rgba(255, 70, 70, 1)",
+  "rgba(255, 187, 43, 1)",
 ];
 
 /**
@@ -86,11 +86,10 @@ function OpenAddDialog() {
   initializeContactForm("add", true);
   contactPopUpAdd.classList.remove("d_none");
 
-  setTimeout(() =>{
-  addContactOverlay.classList.remove(`slide-out`)
-  addContactOverlay.classList.add(`slide-in`)
-  }, 200)
- 
+  setTimeout(() => {
+    addContactOverlay.classList.remove(`slide-out`);
+    addContactOverlay.classList.add(`slide-in`);
+  }, 200);
 }
 
 /**
@@ -101,15 +100,14 @@ function OpenAddDialog() {
  * @returns {void}
  */
 function CloseAddDialog() {
-  setTimeout(() =>{
-  addContactOverlay.classList.remove(`slide-in`)
-  addContactOverlay.classList.add(`slide-out`)
   setTimeout(() => {
-    contactPopUpAdd.classList.add("d_none");
-    initializeContactForm("add", true);
-  }, 460)
-  }, 200)
- 
+    addContactOverlay.classList.remove(`slide-in`);
+    addContactOverlay.classList.add(`slide-out`);
+    setTimeout(() => {
+      contactPopUpAdd.classList.add("d_none");
+      initializeContactForm("add", true);
+    }, 460);
+  }, 200);
 }
 
 /**
@@ -130,13 +128,12 @@ function CloseAddContactDialog() {
  */
 function OpenEditDialog() {
   editContactPopup.classList.remove("d_none");
-  let editContactOverlayD = document.getElementById(`edit-contact-overlay`)
+  let editContactOverlayD = document.getElementById(`edit-contact-overlay`);
 
-  setTimeout(() =>{
-  editContactOverlayD.classList.remove(`slide-out`)
-  editContactOverlayD.classList.add(`slide-in`)
-  }, 200)
- 
+  setTimeout(() => {
+    editContactOverlayD.classList.remove(`slide-out`);
+    editContactOverlayD.classList.add(`slide-in`);
+  }, 200);
 }
 
 /**
@@ -146,16 +143,14 @@ function OpenEditDialog() {
  * @returns {void}
  */
 function CloseEditDialog() {
-  let editContactOverlayD = document.getElementById(`edit-contact-overlay`)
-  setTimeout(() =>{
-  editContactOverlayD.classList.remove(`slide-in`)
-  editContactOverlayD.classList.add(`slide-out`)
+  let editContactOverlayD = document.getElementById(`edit-contact-overlay`);
   setTimeout(() => {
-    editContactPopup.classList.add("d_none");
-
-  }, 460)
-  }, 200)
- 
+    editContactOverlayD.classList.remove(`slide-in`);
+    editContactOverlayD.classList.add(`slide-out`);
+    setTimeout(() => {
+      editContactPopup.classList.add("d_none");
+    }, 460);
+  }, 200);
 }
 
 /**
@@ -165,32 +160,29 @@ function CloseEditDialog() {
  * @returns {string} A randomly selected color.
  */
 function randomColor() {
-    return colors[Math.floor(Math.random() * colors.length)];
+  return colors[Math.floor(Math.random() * colors.length)];
 }
-
-
 
 /**
  * References the DOM element with the ID `contact-list`.
  */
-let contactListDiv = document.getElementById(`contact-list`)
+let contactListDiv = document.getElementById(`contact-list`);
 /**
  * References the DOM element with the ID `contacts-info-sec`.
  */
-let contactInfoSec = document.getElementById(`contacts-info-sec`)
+let contactInfoSec = document.getElementById(`contacts-info-sec`);
 /**
  * References the DOM element with the ID `contacts-list-sec`.
  */
-let contactListSec = document.getElementById(`contacts-list-sec`)
+let contactListSec = document.getElementById(`contacts-list-sec`);
 /**
  * References the DOM element with the ID `contacts-infos`.
  */
-let contactDetailDiv = document.getElementById(`contacts-infos`)
+let contactDetailDiv = document.getElementById(`contacts-infos`);
 /**
  * References the DOM element with the ID `createMessage`.
  */
-const createMessage = document.getElementById(`createMessage`)
-
+const createMessage = document.getElementById(`createMessage`);
 
 /**
  * Sets the initial contact view based on the current viewport width.
@@ -231,15 +223,14 @@ function openContactDetails() {
  * @returns {void}
  */
 function MobileSwitchToContacts() {
-    contactInfoSec.classList.add("d_none");
-    contactListSec.classList.remove("d_none");
+  contactInfoSec.classList.add("d_none");
+  contactListSec.classList.remove("d_none");
 
-    if (window.innerWidth <= 1023) {
-        document.querySelectorAll(".contact-container")
-            .forEach(contact => {
-                contact.classList.remove("active-contact");
-            });
-    }
+  if (window.innerWidth <= 1023) {
+    document.querySelectorAll(".contact-container").forEach((contact) => {
+      contact.classList.remove("active-contact");
+    });
+  }
 }
 
 /**
@@ -271,9 +262,8 @@ function popupMessage(message) {
  * @returns {void}
  */
 function contactErrorMsg(message, mode = "add") {
-  const errorId = mode === "edit"
-    ? "editValidationErrorMsg"
-    : "validationErrorMsg";
+  const errorId =
+    mode === "edit" ? "editValidationErrorMsg" : "validationErrorMsg";
   const errorMsgBox = document.getElementById(errorId);
   if (!errorMsgBox) return;
   errorMsgBox.hidden = false;

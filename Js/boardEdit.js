@@ -2,7 +2,8 @@ import { getTodayISO } from "./dateUtils.js";
 import { patchData } from "./storage.js";
 import { boardEditState } from "./boardEditState.js";
 import {
-  initEditPriorityButtons, initEditAssignedContacts,
+  initEditPriorityButtons,
+  initEditAssignedContacts,
 } from "./boardEditContacts.js";
 import { initEditSubtasks } from "./boardEditSubtasks.js";
 import { validateSubtaskInput } from "./subtaskValidation.js";
@@ -31,7 +32,9 @@ export function initEditTaskForm(task, context) {
 function createEditFormState(task) {
   return {
     priority: task.priority || "medium",
-    contacts: boardEditState.context.enrichAssignedContacts(task.assignedTo || []),
+    contacts: boardEditState.context.enrichAssignedContacts(
+      task.assignedTo || [],
+    ),
     subtasks: [...(task.subtasks || [])],
   };
 }
@@ -43,7 +46,8 @@ function createEditFormState(task) {
  * @returns {void}
  */
 function initEditFormControls(state) {
-  document.getElementById("closeEditTaskOverlayBtn")
+  document
+    .getElementById("closeEditTaskOverlayBtn")
     .addEventListener("click", boardEditState.context.closeTaskDetailOverlay);
   initEditPriorityButtons((priority) => {
     state.priority = priority;
@@ -64,10 +68,18 @@ function initEditFormControls(state) {
  * @returns {void}
  */
 function bindEditFormSubmit(taskId, state) {
-  document.getElementById("editTaskForm").addEventListener("submit", (event) => {
-    event.preventDefault();
-    saveEditedTask(taskId, state.priority, state.contacts, state.subtasks, state.commitSubtask);
-  });
+  document
+    .getElementById("editTaskForm")
+    .addEventListener("submit", (event) => {
+      event.preventDefault();
+      saveEditedTask(
+        taskId,
+        state.priority,
+        state.contacts,
+        state.subtasks,
+        state.commitSubtask,
+      );
+    });
 }
 
 /**
@@ -78,7 +90,11 @@ function bindEditFormSubmit(taskId, state) {
 function initEditValidationEvents() {
   const elements = getEditValidationElements();
   elements.date.min = getTodayISO();
-  bindEditValidation(elements.title, elements.titleError, validateEditTaskTitle);
+  bindEditValidation(
+    elements.title,
+    elements.titleError,
+    validateEditTaskTitle,
+  );
   bindEditValidation(elements.date, elements.dateError, validateEditTaskDate);
   bindEditCategoryValidation(elements.category, elements.categoryError);
 }
@@ -138,8 +154,15 @@ function bindEditCategoryValidation(input, error) {
  * @param {Function} commitSubtask - Commits the pending subtask input.
  * @returns {Promise<void>} A promise that resolves when the operation is complete.
  */
-async function saveEditedTask(taskId, priority, selectedContacts, subtasks, commitSubtask) {
-  if (!validateSubtaskInput(document.getElementById("editSubtaskInput"))) return;
+async function saveEditedTask(
+  taskId,
+  priority,
+  selectedContacts,
+  subtasks,
+  commitSubtask,
+) {
+  if (!validateSubtaskInput(document.getElementById("editSubtaskInput")))
+    return;
   if (!isEditTaskFormValid()) return;
   if (!commitSubtask()) return;
   const updatedTask = getEditedTaskData(priority, selectedContacts, subtasks);
@@ -164,9 +187,12 @@ function getEditedTaskData(priority, assignedTo, subtasks) {
   return {
     title: document.getElementById("editTaskTitle").value.trim(),
     description: document.getElementById("editTaskDescription").value.trim(),
-    dueDate: formatDateForDisplay(date), dueDateISO: date,
+    dueDate: formatDateForDisplay(date),
+    dueDateISO: date,
     category: document.getElementById("editTaskCategory").value,
-    priority, assignedTo, subtasks,
+    priority,
+    assignedTo,
+    subtasks,
   };
 }
 
@@ -224,7 +250,9 @@ function validateEditTaskTitle() {
  */
 function validateEditTaskCategory() {
   const editTaskCategory = document.getElementById("editTaskCategory");
-  const editTaskCategoryError = document.getElementById("editTaskCategoryError");
+  const editTaskCategoryError = document.getElementById(
+    "editTaskCategoryError",
+  );
 
   if (editTaskCategory.value) return true;
 
@@ -245,11 +273,18 @@ function validateEditTaskDate() {
   const editTaskDate = document.getElementById("editTaskDate");
   const editTaskDateError = document.getElementById("editTaskDateError");
   const dateValue = editTaskDate.value.trim();
-  if (!dateValue) return rejectEditDate(editTaskDate, editTaskDateError,
-    "This field is required");
+  if (!dateValue)
+    return rejectEditDate(
+      editTaskDate,
+      editTaskDateError,
+      "This field is required",
+    );
   if (!isValidEditDateFormat(dateValue)) {
-    return rejectEditDate(editTaskDate, editTaskDateError,
-      "Please enter a valid date");
+    return rejectEditDate(
+      editTaskDate,
+      editTaskDateError,
+      "Please enter a valid date",
+    );
   }
   return validateEditDateIsNotPast(editTaskDate, editTaskDateError, dateValue);
 }
@@ -311,12 +346,12 @@ function clearEditErrors() {
     ["editTaskCategory", "editTaskCategoryError"],
   ];
   fieldIds.forEach(([inputId, errorId]) => {
-    clearEditInputError(document.getElementById(inputId),
-      document.getElementById(errorId));
+    clearEditInputError(
+      document.getElementById(inputId),
+      document.getElementById(errorId),
+    );
   });
 }
-
-
 
 /**
  * Converts an ISO date into the date format used for display.

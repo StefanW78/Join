@@ -107,7 +107,11 @@ function getSubtaskProgress(completedSubtasks, totalSubtasks) {
  * @param {number} progress - The completion percentage to display.
  * @returns {string} The generated progress markup, or an empty string when no subtasks exist.
  */
-function getSubtaskProgressTemplate(completedSubtasks, totalSubtasks, progress) {
+function getSubtaskProgressTemplate(
+  completedSubtasks,
+  totalSubtasks,
+  progress,
+) {
   if (totalSubtasks === 0) return "";
   return `
     <div class="subtasks">
@@ -138,7 +142,6 @@ function getAssignedAvatarsTemplate(assignedContacts) {
     .join("");
 }
 
-
 /**
  * Selects a fallback avatar color based on an item's position.
  *
@@ -157,7 +160,9 @@ export function getAvatarColor(index) {
  * @returns {Object[]} The enriched assigned contacts.
  */
 export function enrichAssignedContacts(assignedContacts = [], contacts = []) {
-  return assignedContacts.map(contact => enrichAssignedContact(contact, contacts));
+  return assignedContacts.map((contact) =>
+    enrichAssignedContact(contact, contacts),
+  );
 }
 
 /**
@@ -167,11 +172,18 @@ export function enrichAssignedContacts(assignedContacts = [], contacts = []) {
  * @returns {Object} The enriched contact, or the original reference when no match is found.
  */
 function enrichAssignedContact(assignedContact, contacts) {
-  const user = contacts.find((contact) => matchesAssignedContact(contact, assignedContact));
+  const user = contacts.find((contact) =>
+    matchesAssignedContact(contact, assignedContact),
+  );
   if (!user) return assignedContact;
-  return { ...assignedContact, id: user.id, name: user.name,
-    email: user.email, initials: user.initials || getInitials(user.name),
-    color: user.color };
+  return {
+    ...assignedContact,
+    id: user.id,
+    name: user.name,
+    email: user.email,
+    initials: user.initials || getInitials(user.name),
+    color: user.color,
+  };
 }
 
 /**
@@ -183,9 +195,11 @@ function enrichAssignedContact(assignedContact, contacts) {
  * @returns {boolean} Whether the contacts match.
  */
 function matchesAssignedContact(contact, assignedContact) {
-  return contact.id === assignedContact.id ||
+  return (
+    contact.id === assignedContact.id ||
     contact.email === assignedContact.email ||
-    contact.name === assignedContact.name;
+    contact.name === assignedContact.name
+  );
 }
 
 /**

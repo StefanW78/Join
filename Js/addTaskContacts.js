@@ -10,7 +10,9 @@ import { getInitials, getAvatarColor } from "./avatarUtils.js";
 export function initPriorityButtons() {
   const priorityButtons = document.querySelectorAll(".priorityBtn");
   priorityButtons.forEach((button) => {
-    button.addEventListener("click", () => selectPriority(button, priorityButtons));
+    button.addEventListener("click", () =>
+      selectPriority(button, priorityButtons),
+    );
   });
 }
 
@@ -191,7 +193,9 @@ function closeAssignedDropdown() {
 export async function loadContacts() {
   try {
     const usersObject = (await loadData("users")) || {};
-    contacts = await Promise.all(Object.entries(usersObject).map(createContact));
+    contacts = await Promise.all(
+      Object.entries(usersObject).map(createContact),
+    );
   } catch (error) {
     console.error("Fehler beim Laden der User:", error);
     contacts = [];
@@ -242,7 +246,8 @@ async function getOrCreateContactColor(id, color, index) {
 export function renderContacts() {
   assignedList.innerHTML = "";
   const searchText = assignedInput.value.trim().toLowerCase();
-  contacts.filter((contact) => matchesContact(contact, searchText))
+  contacts
+    .filter((contact) => matchesContact(contact, searchText))
     .forEach(renderContactOption);
   initContactOptionEvents();
 }
@@ -285,7 +290,9 @@ function renderContactOption(contact) {
  */
 function initContactOptionEvents() {
   document.querySelectorAll(".contactOption").forEach((option) => {
-    option.addEventListener("click", (event) => selectContactOption(event, option));
+    option.addEventListener("click", (event) =>
+      selectContactOption(event, option),
+    );
   });
 }
 
@@ -364,7 +371,8 @@ function renderHiddenContacts(hiddenContacts) {
       </button>
     `;
   hiddenContacts.forEach(renderHiddenContact);
-  document.getElementById("moreContactsBtn")
+  document
+    .getElementById("moreContactsBtn")
     .addEventListener("click", toggleMoreContacts);
 }
 

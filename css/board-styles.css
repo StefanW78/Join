@@ -1,6 +1,7 @@
 @font-face {
   font-family: "Inter";
-  src: url("../assets/fonts/Inter/Inter-VariableFont_opsz,wght.ttf") format("truetype");
+  src: url("../assets/fonts/Inter/Inter-VariableFont_opsz,wght.ttf")
+    format("truetype");
   font-style: normal;
   font-weight: 100 900;
   font-display: swap;
@@ -163,7 +164,8 @@
 }
 
 .plus-box:hover img {
-  filter: brightness(0) saturate(100%) invert(58%) sepia(87%) saturate(1063%) hue-rotate(165deg) brightness(93%) contrast(90%);
+  filter: brightness(0) saturate(100%) invert(58%) sepia(87%) saturate(1063%)
+    hue-rotate(165deg) brightness(93%) contrast(90%);
 }
 
 .board-columns {
@@ -327,7 +329,9 @@
   margin-bottom: 12px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.08);
   cursor: pointer;
-  transition: transform 125ms ease-in-out, opacity 125ms ease-in-out;
+  transition:
+    transform 125ms ease-in-out,
+    opacity 125ms ease-in-out;
 }
 
 .tag {
@@ -497,7 +501,17 @@
 }
 
 @keyframes task-deleted-slide {
-  0% { transform: translate(150%, -40%); animation-timing-function: ease-in-out; }
-  15.33%, 80.46% { transform: translate(-5%, -65%); animation-timing-function: ease-in-out; }
-  95.79%, 100% { transform: translate(150%, -65%); }
+  0% {
+    transform: translate(150%, -40%);
+    animation-timing-function: ease-in-out;
+  }
+  15.33%,
+  80.46% {
+    transform: translate(-5%, -65%);
+    animation-timing-function: ease-in-out;
+  }
+  95.79%,
+  100% {
+    transform: translate(150%, -65%);
+  }
 }

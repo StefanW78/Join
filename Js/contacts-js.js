@@ -1,7 +1,7 @@
 /**
  * Stores the media query and the contact data used on the contact page.
  */
-const mediaQueryForD_none = window.matchMedia("(max-width: 1023px)")
+const mediaQueryForD_none = window.matchMedia("(max-width: 1023px)");
 let fetchedData;
 let currentContactId = null;
 
@@ -19,7 +19,7 @@ mediaQueryForD_none.addEventListener("change", setInitialView);
  * @returns {Promise<void>} A promise that resolves after the contacts are loaded.
  */
 async function init() {
-  setInitialView()
+  setInitialView();
   fetchedData = await loadDataBase("contacts");
   renderContactList();
 }
@@ -32,10 +32,10 @@ async function init() {
  * @returns {Promise<void>} A promise that resolves when the contact list has been rendered.
  */
 async function renderContactList() {
-    const contacts = getContactArray();
-    const html = createContactListHTML(contacts);
+  const contacts = getContactArray();
+  const html = createContactListHTML(contacts);
 
-    contactListDiv.innerHTML = html;
+  contactListDiv.innerHTML = html;
 }
 
 /**
@@ -46,18 +46,18 @@ async function renderContactList() {
  * @returns {string} The generated HTML markup for the contact list.
  */
 function createContactListHTML(contacts) {
-    let html = "";
-    let lastLetter = "";
+  let html = "";
+  let lastLetter = "";
 
-    contacts.forEach(contact => {
-        const firstLetter = contact.name.charAt(0).toUpperCase();
-        const showHeader = firstLetter !== lastLetter;
+  contacts.forEach((contact) => {
+    const firstLetter = contact.name.charAt(0).toUpperCase();
+    const showHeader = firstLetter !== lastLetter;
 
-        if (showHeader) lastLetter = firstLetter;
-        html += createContactListItem(contact, firstLetter, showHeader);
-    });
+    if (showHeader) lastLetter = firstLetter;
+    html += createContactListItem(contact, firstLetter, showHeader);
+  });
 
-    return html;
+  return html;
 }
 
 /**
@@ -70,7 +70,7 @@ function createContactListHTML(contacts) {
  * @returns {string} The generated HTML markup for the contact list item.
  */
 function createContactListItem(contact, firstLetter, showHeader) {
-    return `
+  return `
         <div class="contact-list-items">
             ${showHeader ? contactHeaderTemplate(firstLetter) : ""}
             ${contactListTemplate(contact)}
@@ -85,11 +85,9 @@ function createContactListItem(contact, firstLetter, showHeader) {
  * @returns {Object[]} An array of valid contacts sorted alphabetically by name.
  */
 function getContactArray() {
-
-    return Object.values(fetchedData)
-        .filter(c => c.name && c.email)
-        .sort((a, b) => a.name.localeCompare(b.name));
-
+  return Object.values(fetchedData)
+    .filter((c) => c.name && c.email)
+    .sort((a, b) => a.name.localeCompare(b.name));
 }
 
 /**
@@ -100,20 +98,19 @@ function getContactArray() {
  * @returns {void}
  */
 function openContact(event) {
-    const clickedContact = event.target.closest(".contact-container");
+  const clickedContact = event.target.closest(".contact-container");
 
-    if (!clickedContact) return;
-    document.querySelectorAll(".contact-container")
-        .forEach(contact => {
-            contact.classList.remove("active-contact");
-        });
+  if (!clickedContact) return;
+  document.querySelectorAll(".contact-container").forEach((contact) => {
+    contact.classList.remove("active-contact");
+  });
 
-    clickedContact.classList.add("active-contact");
-    const id = clickedContact.dataset.id;
-    currentContactId = id;
-    const contact = fetchedData[id];
+  clickedContact.classList.add("active-contact");
+  const id = clickedContact.dataset.id;
+  currentContactId = id;
+  const contact = fetchedData[id];
 
-    renderContactDetails(contact);
+  renderContactDetails(contact);
 }
 
 /**
@@ -125,13 +122,10 @@ function openContact(event) {
  * @returns {void}
  */
 function renderContactDetails(contact) {
-    contactDetailDiv.innerHTML = contactDetailsTemplate(contact);
-    openContactDetails();
-    checkQueriesForEditTools();
-
+  contactDetailDiv.innerHTML = contactDetailsTemplate(contact);
+  openContactDetails();
+  checkQueriesForEditTools();
 }
-
-
 
 /**
  * Generates initials from a full name.

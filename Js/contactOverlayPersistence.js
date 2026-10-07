@@ -1,4 +1,3 @@
-
 /**
  * Creates a new contact after validating the form data.
  * Saves the contact to the database and updates the local contact list.
@@ -6,28 +5,28 @@
  * @returns {Promise<void>} A promise that resolves when the contact is created.
  */
 async function addNewContact() {
-    const data = getContactFormData();
+  const data = getContactFormData();
 
-    if (!validateContactForm("add")) return;
-    if (!checkDuplicateContact(data, "add")) return;
+  if (!validateContactForm("add")) return;
+  if (!checkDuplicateContact(data, "add")) return;
 
-    const newContact = {
-        ...data,
-        initials: getInitials(data.name),
-        color: randomColor(),
-        checked: false,
-    };
+  const newContact = {
+    ...data,
+    initials: getInitials(data.name),
+    color: randomColor(),
+    checked: false,
+  };
 
-    try {
-        const result = await saveData("contacts", newContact);
-        const id = result.name;
+  try {
+    const result = await saveData("contacts", newContact);
+    const id = result.name;
 
-        saveContactLocally(id, newContact);
-        updateContactList();
-    } catch (error) {
-        console.error("Error creating contact:", error);
-        contactErrorMsg("Failed to create contact");
-    }
+    saveContactLocally(id, newContact);
+    updateContactList();
+  } catch (error) {
+    console.error("Error creating contact:", error);
+    contactErrorMsg("Failed to create contact");
+  }
 }
 
 /**
@@ -38,10 +37,10 @@ async function addNewContact() {
  * @returns {void}
  */
 function saveContactLocally(id, newContact) {
-    fetchedData[id] = {
-        id,
-        ...newContact,
-    };
+  fetchedData[id] = {
+    id,
+    ...newContact,
+  };
 }
 
 /**
@@ -51,11 +50,10 @@ function saveContactLocally(id, newContact) {
  * @returns {void}
  */
 function updateContactList() {
-    renderContactList();
-    CloseAddContactDialog();
-    popupMessage("Contact created!");
+  renderContactList();
+  CloseAddContactDialog();
+  popupMessage("Contact created!");
 }
-
 
 /**
  * Collects and trims the contact form input values.
@@ -63,13 +61,11 @@ function updateContactList() {
  * @returns {Object} An object containing the name, email, and phone values.
  */
 function getContactFormData() {
-
-    return {
-        name: document.getElementById("name_input").value.trim(),
-        email: document.getElementById("email_input").value.trim(),
-        phone: document.getElementById("phone_input").value.trim(),
-    };
-
+  return {
+    name: document.getElementById("name_input").value.trim(),
+    email: document.getElementById("email_input").value.trim(),
+    phone: document.getElementById("phone_input").value.trim(),
+  };
 }
 
 /**
@@ -86,13 +82,14 @@ function checkDuplicateContact(data, mode, excludedContactId = null) {
     .filter(([id]) => id !== excludedContactId)
     .map(([, contact]) => contact);
 
-  const nameExists = contacts.some(c =>
-    c.name?.toLowerCase().replace(/\s+/g, " ") ===
-    data.name.toLowerCase().replace(/\s+/g, " ")
+  const nameExists = contacts.some(
+    (c) =>
+      c.name?.toLowerCase().replace(/\s+/g, " ") ===
+      data.name.toLowerCase().replace(/\s+/g, " "),
   );
 
-  const emailExists = contacts.some(c =>
-    c.email?.toLowerCase() === data.email.toLowerCase()
+  const emailExists = contacts.some(
+    (c) => c.email?.toLowerCase() === data.email.toLowerCase(),
   );
 
   setDuplicateError(mode, "name", nameExists);
@@ -117,9 +114,10 @@ function setDuplicateError(mode, field, exists) {
   contactFieldTouched[mode][field] = true;
   contactFormState[mode][field] = false;
 
-  const message = field === "name"
-    ? "A contact with this name already exists"
-    : "A contact with this email already exists";
+  const message =
+    field === "name"
+      ? "A contact with this name already exists"
+      : "A contact with this email already exists";
 
   setContactFieldError(mode, field, message);
 }
@@ -131,21 +129,21 @@ function setDuplicateError(mode, field, exists) {
  * @returns {Promise<void>} A promise that resolves when the contact is updated.
  */
 async function saveEditedContact() {
-    const id = currentContactId;
-    if (!id) return;
+  const id = currentContactId;
+  if (!id) return;
 
-    const updatedData = getEditedContactFormData();
-    if (!validateContactForm("edit")) return;
-    if (!checkDuplicateContact(updatedData, "edit", id)) return;
+  const updatedData = getEditedContactFormData();
+  if (!validateContactForm("edit")) return;
+  if (!checkDuplicateContact(updatedData, "edit", id)) return;
 
-    try {
-        await updateData("contacts", id, updatedData);
-        updateLocalContact(id, updatedData);
-        updateContactUI(id);
-    } catch (error) {
-        console.error("Update failed:", error);
-        contactErrorMsg("Failed to update contact", "edit");
-    }
+  try {
+    await updateData("contacts", id, updatedData);
+    updateLocalContact(id, updatedData);
+    updateContactUI(id);
+  } catch (error) {
+    console.error("Update failed:", error);
+    contactErrorMsg("Failed to update contact", "edit");
+  }
 }
 
 /**
@@ -157,11 +155,11 @@ async function saveEditedContact() {
  * @returns {void}
  */
 function updateLocalContact(id, updatedData) {
-    fetchedData[id] = {
-        ...fetchedData[id],
-        ...updatedData,
-        initials: getInitials(updatedData.name),
-    };
+  fetchedData[id] = {
+    ...fetchedData[id],
+    ...updatedData,
+    initials: getInitials(updatedData.name),
+  };
 }
 
 /**
@@ -172,10 +170,10 @@ function updateLocalContact(id, updatedData) {
  * @returns {void}
  */
 function updateContactUI(id) {
-    renderContactList();
-    renderContactDetails(fetchedData[id]);
-    CloseEditDialog();
-    popupMessage("Contact updated!");
+  renderContactList();
+  renderContactDetails(fetchedData[id]);
+  CloseEditDialog();
+  popupMessage("Contact updated!");
 }
 
 /**
@@ -199,17 +197,13 @@ function getEditedContactFormData() {
  * @returns {void}
  */
 function openEdit(contactId) {
+  const contact = fetchedData[contactId];
 
-    const contact = fetchedData[contactId];
+  if (!contact) return;
 
-    if (!contact) return;
+  currentContactId = contactId;
 
-    currentContactId = contactId;
-
-    editContactPopup.innerHTML = renderEditTemplate(contact);
-    initializeContactForm("edit");
-    OpenEditDialog();
-
+  editContactPopup.innerHTML = renderEditTemplate(contact);
+  initializeContactForm("edit");
+  OpenEditDialog();
 }
-
-

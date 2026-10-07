@@ -1,5 +1,8 @@
 import { boardEditState } from "./boardEditState.js";
-import { initSubtaskValidation, validateSubtaskInput } from "./subtaskValidation.js";
+import {
+  initSubtaskValidation,
+  validateSubtaskInput,
+} from "./subtaskValidation.js";
 
 /**
  * Initializes editable subtasks and their controls.
@@ -24,7 +27,9 @@ export function initEditSubtasks(editSubtasks, onChange) {
  */
 function createEditSubtaskState(editSubtasks, onChange) {
   return {
-    subtasks: editSubtasks, onChange, editingIndex: null,
+    subtasks: editSubtasks,
+    onChange,
+    editingIndex: null,
     input: document.getElementById("editSubtaskInput"),
     addButton: document.getElementById("editAddSubtaskBtn"),
     clearButton: document.getElementById("editClearSubtaskBtn"),
@@ -43,7 +48,7 @@ function renderEditSubtaskState(state) {
    * @param {number} index - The subtask index.
    * @returns {number} The stored index.
    */
-  const setEditing = index => state.editingIndex = index;
+  const setEditing = (index) => (state.editingIndex = index);
   renderEditSubtasks(state.subtasks, state.onChange, setEditing);
 }
 
@@ -55,13 +60,15 @@ function renderEditSubtaskState(state) {
  */
 function bindEditSubtaskStateEvents(state) {
   initSubtaskValidation(state.input);
-  state.input.addEventListener("keydown", event => {
+  state.input.addEventListener("keydown", (event) => {
     if (event.key !== "Enter") return;
     event.preventDefault();
     saveEditSubtaskState(state);
   });
   state.addButton.addEventListener("click", () => saveEditSubtaskState(state));
-  state.clearButton.addEventListener("click", () => resetEditSubtaskState(state));
+  state.clearButton.addEventListener("click", () =>
+    resetEditSubtaskState(state),
+  );
 }
 
 /**
@@ -73,7 +80,10 @@ function bindEditSubtaskStateEvents(state) {
 function saveEditSubtaskState(state) {
   if (!validateSubtaskInput(state.input)) return false;
   if (!state.input.value.trim()) return true;
-  state.editingIndex = addOrUpdateEditSubtask(state.subtasks, state.editingIndex);
+  state.editingIndex = addOrUpdateEditSubtask(
+    state.subtasks,
+    state.editingIndex,
+  );
   renderEditSubtaskState(state);
   state.onChange(state.subtasks);
   return true;
@@ -112,7 +122,6 @@ function addOrUpdateEditSubtask(editSubtasks, editingIndex) {
   return null;
 }
 
-
 /**
  * Renders the edit subtasks.
  *
@@ -123,7 +132,9 @@ function addOrUpdateEditSubtask(editSubtasks, editingIndex) {
  */
 function renderEditSubtasks(editSubtasks, onChange, onEdit) {
   const editSubtaskList = document.getElementById("editSubtaskList");
-  editSubtaskList.innerHTML = editSubtasks.map(getEditSubtaskItemTemplate).join("");
+  editSubtaskList.innerHTML = editSubtasks
+    .map(getEditSubtaskItemTemplate)
+    .join("");
   initEditSubtaskButtons(editSubtasks, onChange, onEdit);
 }
 
@@ -158,12 +169,14 @@ function getEditSubtaskItemTemplate(subtask, index) {
  * @returns {void}
  */
 function initEditSubtaskButtons(editSubtasks, onChange, onEdit) {
-  document.querySelectorAll("#editSubtaskList .editSubtaskCheckbox").forEach((checkbox) => {
-    checkbox.addEventListener("change", () => {
-      editSubtasks[Number(checkbox.dataset.index)].done = checkbox.checked;
-      onChange(editSubtasks);
+  document
+    .querySelectorAll("#editSubtaskList .editSubtaskCheckbox")
+    .forEach((checkbox) => {
+      checkbox.addEventListener("change", () => {
+        editSubtasks[Number(checkbox.dataset.index)].done = checkbox.checked;
+        onChange(editSubtasks);
+      });
     });
-  });
   initEditSubtaskDeleteButtons(editSubtasks, onChange, onEdit);
   initEditSubtaskEditButtons(editSubtasks, onEdit);
 }
@@ -198,10 +211,12 @@ function initEditSubtaskDeleteButtons(editSubtasks, onChange, onEdit) {
  * @returns {void}
  */
 function initEditSubtaskEditButtons(editSubtasks, onEdit) {
-  document.querySelectorAll("#editSubtaskList .editSubtaskBtn")
-    .forEach(button => {
-      button.addEventListener("click", () => editSelectedSubtask(button,
-        editSubtasks, onEdit));
+  document
+    .querySelectorAll("#editSubtaskList .editSubtaskBtn")
+    .forEach((button) => {
+      button.addEventListener("click", () =>
+        editSelectedSubtask(button, editSubtasks, onEdit),
+      );
     });
 }
 
@@ -233,7 +248,10 @@ export function renderEditAssignedContacts(selectedEditContacts) {
   if (!elements) return;
 
   resetEditAssignedContacts(elements);
-  renderVisibleEditContacts(selectedEditContacts, elements.editSelectedContacts);
+  renderVisibleEditContacts(
+    selectedEditContacts,
+    elements.editSelectedContacts,
+  );
   renderHiddenEditContacts(selectedEditContacts, elements);
 }
 
@@ -293,7 +311,8 @@ function renderVisibleEditContacts(selectedEditContacts, editSelectedContacts) {
 function getVisibleEditContactTemplate(contact, index) {
   const color = contact.color || boardEditState.context.getAvatarColor(index);
   const name = contact.name || "";
-  const initials = contact.initials || boardEditState.context.getInitials(contact.name);
+  const initials =
+    contact.initials || boardEditState.context.getInitials(contact.name);
 
   return `
     <div class="selectedAvatar" style="background:${color}" title="${name}">
@@ -358,7 +377,8 @@ function renderEditMoreContactsDropdown(hiddenContacts, dropdown) {
  */
 function getEditMoreContactTemplate(contact) {
   const color = contact.color || "#2a3647";
-  const initials = contact.initials || boardEditState.context.getInitials(contact.name);
+  const initials =
+    contact.initials || boardEditState.context.getInitials(contact.name);
   const name = contact.name || "";
 
   return `

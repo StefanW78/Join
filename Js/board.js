@@ -1,6 +1,8 @@
 import { loadData } from "./storage.js";
 import {
-  getTaskCardTemplate, getAvatarColor, renderEmptyMessages,
+  getTaskCardTemplate,
+  getAvatarColor,
+  renderEmptyMessages,
 } from "./boardCards.js";
 import { initDragAndDrop } from "./boardDrag.js";
 import { initTaskCardClicks } from "./boardDetails.js";
@@ -48,8 +50,13 @@ async function initBoard() {
  * @returns {Object} The normalized board contact.
  */
 function createBoardContact([id, user], index) {
-  return { id, name: user.name, email: user.email,
-    initials: user.initials, color: user.color || getAvatarColor(index) };
+  return {
+    id,
+    name: user.name,
+    email: user.email,
+    initials: user.initials,
+    color: user.color || getAvatarColor(index),
+  };
 }
 
 /**
@@ -62,8 +69,6 @@ function createBoardContact([id, user], index) {
 function createBoardTask([id, task]) {
   return { id, ...task };
 }
-
-
 
 /**
  * Renders all filtered tasks in their corresponding board columns.
@@ -88,7 +93,8 @@ function renderBoardTasks() {
  */
 function renderTaskIntoColumn(task) {
   const targetColumn = getTargetColumn(task.status);
-  if (targetColumn) targetColumn.innerHTML += getTaskCardTemplate(task, contacts);
+  if (targetColumn)
+    targetColumn.innerHTML += getTaskCardTemplate(task, contacts);
 }
 
 /**
@@ -179,7 +185,8 @@ function getBoardContext() {
      * @param {string} taskId - The ID of the task to remove.
      * @returns {Object[]} The remaining board tasks.
      */
-    removeTask: taskId => boardTasks = boardTasks.filter(task => task.id !== taskId),
+    removeTask: (taskId) =>
+      (boardTasks = boardTasks.filter((task) => task.id !== taskId)),
     updateTaskInBoardTasks,
   };
 }
@@ -192,8 +199,9 @@ function getBoardContext() {
  * @returns {void}
  */
 function updateTaskInBoardTasks(taskId, updatedTask) {
-  boardTasks = boardTasks.map(task =>
-    task.id === taskId ? { ...task, ...updatedTask } : task);
+  boardTasks = boardTasks.map((task) =>
+    task.id === taskId ? { ...task, ...updatedTask } : task,
+  );
 }
 
 initBoard();

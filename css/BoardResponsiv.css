@@ -1,5 +1,4 @@
-@media (max-width: 1132px){
-
+@media (max-width: 1132px) {
 }
 
 @media (max-width: 1092px) {
@@ -16,32 +15,32 @@
 }
 
 @media (max-width: 1092px) {
-main{
-  padding: 20px 80px 0px 80px;
-  margin-bottom: 15px;
-}
+  main {
+    padding: 20px 80px 0px 80px;
+    margin-bottom: 15px;
+  }
 
-.board-columns{
-flex-direction: column;
-}
+  .board-columns {
+    flex-direction: column;
+  }
 
-.task-list{
-  flex-direction: row;
-}
+  .task-list {
+    flex-direction: row;
+  }
 
-.column{
-  width: 100%;
-}
+  .column {
+    width: 100%;
+  }
 
-.board-header{
-  margin-bottom: 15px;
-}
+  .board-header {
+    margin-bottom: 15px;
+  }
 
-.card{
-  min-width: 250px;
-}
+  .card {
+    min-width: 250px;
+  }
 
- .btn-add-task {
+  .btn-add-task {
     align-items: center;
     justify-content: center;
     font-size: 14px;
@@ -55,7 +54,7 @@ flex-direction: column;
     display: none;
   }
 
-  .swap-horiz-div{
+  .swap-horiz-div {
     display: flex;
   }
 
@@ -101,8 +100,8 @@ flex-direction: column;
   }
 }
 
-@media (max-width: 864px){
-  main{
+@media (max-width: 864px) {
+  main {
     padding: 20px 20px 35px 20px;
   }
 }
@@ -127,8 +126,8 @@ flex-direction: column;
   }
 }
 
-@media (max-width: 400px){
-  main{
+@media (max-width: 400px) {
+  main {
     padding: 20px 15px 35px 15px;
   }
 }
