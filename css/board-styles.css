@@ -419,6 +419,11 @@
 .avatars .av:first-child {
   margin-left: 0;
 }
+
+.avatars .av-more {
+  background-color: #2a3647;
+  font-weight: 700;
+}
 .av-orange {
   background: #ff7a00;
 }

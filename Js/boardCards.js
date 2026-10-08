@@ -123,15 +123,16 @@ function getSubtaskProgressTemplate(
 }
 
 /**
- * Creates avatar markup for up to three contacts assigned to a task.
+ * Creates up to three contact avatars and a count of additional assigned contacts.
  *
  * @param {Object[]} assignedContacts - The contacts assigned to the task.
- * @returns {string} The generated HTML markup for the visible avatars.
+ * @returns {string} The avatar markup including an optional additional-contact count.
  */
 function getAssignedAvatarsTemplate(assignedContacts) {
   const visibleContacts = assignedContacts.slice(0, 3);
+  const additionalCount = assignedContacts.length - visibleContacts.length;
 
-  return visibleContacts
+  const avatars = visibleContacts
     .map((contact) => {
       return `
         <div class="av" style="background:${contact.color || "#2a3647"}">
@@ -140,6 +141,10 @@ function getAssignedAvatarsTemplate(assignedContacts) {
       `;
     })
     .join("");
+
+  return additionalCount > 0
+    ? `${avatars}<div class="av av-more" role="img" aria-label="${additionalCount} more assigned contacts" title="${additionalCount} more assigned contacts">+${additionalCount}</div>`
+    : avatars;
 }
 
 /**

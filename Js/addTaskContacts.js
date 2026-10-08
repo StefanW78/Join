@@ -204,7 +204,7 @@ export async function loadContacts() {
 }
 
 /**
- * Creates a normalized contact and ensures that it has an avatar color.
+ * Creates a contact with uppercase initials and ensures that it has an avatar color.
  *
  * @async
  * @param {[string, Object]} contactEntry - The database ID and associated data.
@@ -217,7 +217,7 @@ async function createContact([id, user], index) {
     id,
     name: user.name,
     email: user.email,
-    initials: user.initials,
+    initials: (user.initials?.trim() || getInitials(user.name)).toUpperCase(),
     color,
   };
 }
