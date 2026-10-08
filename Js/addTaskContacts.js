@@ -17,7 +17,7 @@ export function initPriorityButtons() {
 }
 
 /**
- * Selects the priority.
+ * Updates the selected priority and highlights its button.
  *
  * @param {HTMLElement} button - The button involved in the operation.
  * @param {NodeListOf<HTMLElement>} priorityButtons - The available task priority buttons.
@@ -44,10 +44,10 @@ function clearPrioritySelection(priorityButtons) {
 }
 
 /**
- * Retrieves the button priority.
+ * Determines the priority from the button classes.
  *
  * @param {HTMLElement} button - The button involved in the operation.
- * @returns {string} The generated value or HTML markup.
+ * @returns {"urgent"|"medium"|"low"|""} The priority, or an empty string for an unknown button.
  */
 function getButtonPriority(button) {
   if (button.classList.contains("urgentBtn")) return "urgent";
@@ -60,7 +60,7 @@ function getButtonPriority(button) {
  * Capitalizes the first character of a string.
  *
  * @param {string} value - The value to capitalize.
- * @returns {string} The generated value or HTML markup.
+ * @returns {string} The input with its first character converted to uppercase.
  */
 function capitalize(value) {
   return value.charAt(0).toUpperCase() + value.slice(1);
@@ -93,7 +93,7 @@ function toggleCategoryDropdown() {
 }
 
 /**
- * Selects the category.
+ * Stores the selected category, updates its label, and clears its validation error.
  *
  * @param {HTMLElement} option - The selected option element.
  * @returns {void}
@@ -151,7 +151,7 @@ function toggleAssignedDropdown() {
 }
 
 /**
- * Opens the assigned dropdown.
+ * Opens the assigned dropdown and renders contacts matching the current search.
  *
  * @returns {void}
  */
@@ -185,7 +185,8 @@ function closeAssignedDropdown() {
 }
 
 /**
- * Loads the contacts.
+ * Loads users as assignable contacts, normalizes their avatars, and renders the list.
+ * Logs loading failures and renders an empty list when loading fails.
  *
  * @async
  * @returns {Promise<void>} A promise that resolves when the operation is complete.
@@ -204,7 +205,9 @@ export async function loadContacts() {
 }
 
 /**
- * Creates a contact with uppercase initials and ensures that it has an avatar color.
+ * Creates a contact with trimmed uppercase initials and an avatar color.
+ * Generates initials from the name when they are missing or blank.
+ * Saves a fallback color to the user record when no color is stored.
  *
  * @async
  * @param {[string, Object]} contactEntry - The database ID and associated data.
@@ -239,7 +242,7 @@ async function getOrCreateContactColor(id, color, index) {
 }
 
 /**
- * Renders the contacts.
+ * Rebuilds the assigned dropdown using a case-insensitive name search and binds selection events.
  *
  * @returns {void}
  */
@@ -257,14 +260,14 @@ export function renderContacts() {
  *
  * @param {Object} contact - The contact to process.
  * @param {string} searchText - The normalized search text.
- * @returns {boolean} Whether the validation or comparison succeeds.
+ * @returns {boolean} Whether the lowercase name contains the normalized search text.
  */
 function matchesContact(contact, searchText) {
   return contact.name.toLowerCase().includes(searchText);
 }
 
 /**
- * Renders the contact option.
+ * Appends a contact option with its avatar, name, and current selection state.
  *
  * @param {Object} contact - The contact to process.
  * @returns {void}
@@ -297,7 +300,7 @@ function initContactOptionEvents() {
 }
 
 /**
- * Selects the contact option.
+ * Toggles a contact selection, clears the search, and keeps the assigned dropdown open.
  *
  * @param {Event} event - The event that triggered the operation.
  * @param {HTMLElement} option - The selected option element.
@@ -313,7 +316,8 @@ function selectContactOption(event, option) {
 }
 
 /**
- * Toggles the contact.
+ * Adds or removes a contact from the selection and refreshes the contact displays.
+ * Does nothing when the contact ID is unknown.
  *
  * @param {string} contactId - The ID of the contact.
  * @returns {void}
@@ -330,7 +334,8 @@ function toggleContact(contactId) {
 }
 
 /**
- * Renders the selected contacts.
+ * Renders the first three selected avatars and a +N button for additional contacts.
+ * Rebuilds and initially hides the additional-contacts dropdown.
  *
  * @returns {void}
  */
@@ -345,7 +350,7 @@ export function renderSelectedContacts() {
 }
 
 /**
- * Renders the selected avatar.
+ * Appends a selected contact avatar with the contact name as its tooltip.
  *
  * @param {Object} contact - The contact to process.
  * @returns {void}
@@ -359,7 +364,7 @@ function renderSelectedAvatar(contact) {
 }
 
 /**
- * Renders the hidden contacts.
+ * Appends the +N button, populates the additional-contacts dropdown, and binds its toggle.
  *
  * @param {Object[]} hiddenContacts - The contacts displayed in the additional-contacts dropdown.
  * @returns {void}
@@ -377,7 +382,7 @@ function renderHiddenContacts(hiddenContacts) {
 }
 
 /**
- * Renders the hidden contact.
+ * Appends a contact avatar and name to the additional-contacts dropdown.
  *
  * @param {Object} contact - The contact to process.
  * @returns {void}

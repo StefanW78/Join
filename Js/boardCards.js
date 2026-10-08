@@ -38,6 +38,7 @@ function getTaskCardContentTemplate(task) {
  * Creates the assigned-contact and priority markup for a task card footer.
  *
  * @param {Object} task - The task whose footer should be rendered.
+ * @param {Object[]} contacts - The current contacts used to enrich assigned-contact references.
  * @returns {string} The generated HTML markup for the task card footer.
  */
 function getTaskCardFooterTemplate(task, contacts) {
@@ -55,7 +56,7 @@ function getTaskCardFooterTemplate(task, contacts) {
  * Returns the CSS class associated with a task category.
  *
  * @param {string} category - The task category.
- * @returns {string} The CSS class used to style the category tag.
+ * @returns {string} The category tag class, defaulting to the user-story style.
  */
 function getCategoryClass(category) {
   if (category === "Technical Task") {
@@ -73,7 +74,7 @@ function getCategoryClass(category) {
  * Returns the CSS class associated with a task priority.
  *
  * @param {string} priority - The task priority.
- * @returns {string} The CSS class used to style the priority indicator.
+ * @returns {string} The priority class, defaulting to medium for unknown values.
  */
 function getPriorityClass(priority) {
   const classes = {
@@ -161,7 +162,8 @@ export function getAvatarColor(index) {
 /**
  * Enriches all assigned-contact references with the available board contact data.
  *
- * @param {Object[]} assignedContacts - The assigned-contact references to enrich.
+ * @param {Object[]} [assignedContacts=[]] - The assigned-contact references to enrich.
+ * @param {Object[]} [contacts=[]] - The available board contacts to match against.
  * @returns {Object[]} The enriched assigned contacts.
  */
 export function enrichAssignedContacts(assignedContacts = [], contacts = []) {
@@ -174,6 +176,7 @@ export function enrichAssignedContacts(assignedContacts = [], contacts = []) {
  * Enriches a single assigned-contact reference with matching board contact data.
  *
  * @param {Object} assignedContact - The assigned-contact reference to enrich.
+ * @param {Object[]} contacts - The available board contacts to match against.
  * @returns {Object} The enriched contact, or the original reference when no match is found.
  */
 function enrichAssignedContact(assignedContact, contacts) {
@@ -211,7 +214,7 @@ function matchesAssignedContact(contact, assignedContact) {
  * Returns the SVG icon associated with a task priority.
  *
  * @param {string} priority - The task priority.
- * @returns {string} The SVG markup for the matching priority icon.
+ * @returns {string} The matching SVG markup, defaulting to the medium-priority icon.
  */
 function getPriorityIcon(priority) {
   if (priority === "urgent") return getUrgentPriorityIcon();
