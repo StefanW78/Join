@@ -1,0 +1,409 @@
+@media (max-width: 1300px) {
+  .add-task-page .body-div {
+    width: 100%;
+    min-height: 100vh;
+    height: 100dvh;
+    overflow: hidden;
+  }
+
+  .add-task-page .sidebar-wraper {
+    width: 100%;
+    height: 100%;
+    flex-direction: column;
+  }
+
+  .add-task-page .sidebar {
+    order: 1;
+    width: 100%;
+    height: 80px;
+    min-height: 80px;
+    flex: 0 0 80px;
+    overflow: hidden;
+  }
+
+  .add-task-page .header-and-content-div {
+    width: 100%;
+    flex: 1;
+    min-height: 0;
+    overflow: hidden;
+  }
+
+  .add-task-page .header-div {
+    width: 100%;
+    height: 96px;
+    min-height: 96px;
+    padding: 20px 16px;
+  }
+
+  .add-task-page .main-container {
+    width: 100%;
+    max-width: none;
+    flex: 1;
+    min-height: 0;
+    padding: 32px 16px 32px;
+    margin: 0;
+    overflow-y: auto;
+    overflow-x: hidden;
+  }
+
+  .addTaskContent {
+    width: 100%;
+    max-width: none;
+  }
+
+  .addTaskTitle {
+    font-size: 47px;
+    margin-bottom: 40px;
+  }
+
+  .taskForm {
+    width: 100%;
+    min-height: auto;
+  }
+
+  .formGrid {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+    width: 100%;
+  }
+
+  .formColumn {
+    width: 100%;
+    gap: 24px;
+  }
+
+  .formDivider {
+    display: none;
+  }
+
+  .formGroup {
+    width: 100%;
+  }
+
+  .formGroup input,
+  .formGroup textarea,
+  .dropdownButton {
+    width: 100%;
+    max-width: none;
+  }
+
+  .priorityButtons {
+    width: 100%;
+    display: flex;
+    gap: 12px;
+  }
+
+  .priorityBtn {
+    flex: 1 1 0;
+    min-width: 0;
+  }
+
+  .taskFooter {
+    width: 100%;
+    margin-top: 32px;
+    padding-bottom: 16px;
+    display: flex;
+    flex-direction: column-reverse;
+    gap: 20px;
+  }
+
+  .taskActions {
+    width: 100%;
+    display: flex;
+    justify-content: flex-end;
+    gap: 12px;
+  }
+  .add-task-page .main-container {
+    width: 100%;
+    max-width: none;
+    padding: 32px 16px 110px 16px;
+    margin-top: 0;
+    overflow-y: auto;
+  }
+
+  .addTaskContent {
+    width: 100%;
+    max-width: none;
+  }
+
+  .addTaskTitle {
+    font-size: 47px;
+    margin-bottom: 40px;
+  }
+
+  .taskForm {
+    width: 100%;
+    min-height: auto;
+  }
+
+  .formGrid {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+    width: 100%;
+  }
+
+  .formColumn {
+    width: 100%;
+    gap: 24px;
+  }
+
+  .formDivider {
+    display: none;
+  }
+
+  .formGroup {
+    width: 100%;
+  }
+
+  .formGroup input,
+  .formGroup textarea,
+  .dropdownButton {
+    width: 100%;
+    max-width: none;
+  }
+
+  .priorityButtons {
+    width: 100%;
+    display: flex;
+    gap: 12px;
+  }
+
+  .priorityBtn {
+    flex: 1;
+    min-width: 0;
+  }
+
+  .taskFooter {
+    width: 100%;
+    margin-top: 32px;
+    padding-bottom: 16px;
+
+    display: flex;
+    flex-direction: column-reverse;
+    gap: 20px;
+  }
+
+  .taskActions {
+    width: 100%;
+    display: flex;
+    justify-content: flex-end;
+    gap: 12px;
+  }
+
+  .add-task-page .sidebar-logo-div {
+    display: none !important;
+  }
+
+  .sidebar-links {
+    flex-direction: row;
+    height: 100%;
+    justify-content: space-around;
+  }
+
+  footer a {
+    display: none !important;
+    padding: 8px 60px;
+    width: 100%;
+    color: #cdcdcd;
+  }
+}
+
+@media (max-width: 600px) {
+  .add-task-page .main-container {
+    padding: 32px 16px 110px;
+  }
+
+  .addTaskTitle {
+    font-size: 47px;
+    margin-bottom: 32px;
+  }
+
+  .priorityButtons {
+    gap: 8px;
+  }
+
+  .priorityBtn {
+    height: 48px;
+    padding: 0 8px;
+    font-size: 16px;
+  }
+
+  .priorityBtn img {
+    width: 18px;
+    height: 18px;
+  }
+
+  .taskActions {
+    justify-content: flex-end;
+  }
+
+  .clearBtn,
+  .createTaskBtn {
+    height: 54px;
+    padding: 0 16px;
+    font-size: 16px;
+  }
+}
+
+@media (max-width: 428px) {
+  .main-container {
+    padding: 32px 16px 110px 16px;
+  }
+
+  .addTaskTitle {
+    font-size: 48px;
+    margin-bottom: 32px;
+  }
+
+  .formGroup label {
+    font-size: 20px;
+  }
+
+  .priorityButtons {
+    gap: 8px;
+  }
+
+  .priorityBtn {
+    height: 41px;
+    padding: 0 8px;
+    font-size: 16px;
+  }
+
+  .taskActions {
+    gap: 10px;
+  }
+
+  .clearBtn,
+  .createTaskBtn {
+    height: 52px;
+    padding: 0 16px;
+    font-size: 16px;
+  }
+}
+
+@media (max-width: 380px) {
+  .addTaskTitle {
+    font-size: 40px;
+  }
+
+  .priorityBtn {
+    font-size: 14px;
+  }
+
+  .clearBtn,
+  .createTaskBtn {
+    padding: 0 12px;
+  }
+}
+
+@media (max-width: 350px) {
+  .main-container {
+    padding: 24px 12px 110px 12px;
+  }
+
+  .addTaskTitle {
+    font-size: 40px;
+    margin-bottom: 24px;
+  }
+
+  .formGroup label {
+    font-size: 18px;
+  }
+
+  .formGroup input,
+  .formGroup textarea,
+  .formGroup select {
+    font-size: 16px;
+    padding: 10px 12px;
+  }
+
+  .priorityButtons {
+    gap: 6px;
+  }
+
+  .priorityBtn {
+    height: 40px;
+    padding: 0 6px;
+    font-size: 14px;
+    gap: 4px;
+  }
+
+  .urgentBtn img,
+  .mediumBtn img,
+  .lowBtn img {
+    width: 14px;
+    height: 14px;
+  }
+
+  .taskActions {
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+
+  .clearBtn,
+  .createTaskBtn {
+    flex: 1 1 100%;
+    width: 100%;
+    height: 48px;
+    font-size: 16px;
+    padding: 0 12px;
+  }
+}
+
+@media (min-width: 1024px) and (max-width: 1300px) {
+  .add-task-page .hidden-on-desktop {
+    display: flex !important;
+  }
+
+  .add-task-page .dropdown-menu .help-switch.hidden-on-desktop {
+    display: flex !important;
+  }
+
+  .add-task-page .sidebar-wraper {
+    flex-direction: column;
+    flex: 1;
+  }
+  .add-task-page .sidebar {
+    order: 1;
+    width: 100%;
+    height: 80px;
+  }
+
+  .add-task-page .sidebar-logo-div {
+    display: none !important;
+  }
+  .add-task-page .links-and-footer-div footer {
+    display: none;
+  }
+
+  .add-task-page .sidebar-links {
+    flex-direction: row;
+    height: 100%;
+    justify-content: space-around;
+  }
+
+  .add-task-page .sidebar-links a {
+    padding: 0;
+    width: 120px;
+    justify-content: center;
+    flex-direction: column;
+    border-radius: 20px;
+  }
+
+  .add-task-page .header-img {
+    display: flex;
+  }
+  .add-task-page .header-title {
+    display: none !important;
+  }
+
+  .add-task-page .dropdown-menu {
+    top: 277px;
+  }
+
+  .add-task-page .help {
+    display: none;
+  }
+}

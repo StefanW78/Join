@@ -1,0 +1,1021 @@
+{
+  "board": [
+    {
+      "avatars": [
+        {
+          "cardColor": "av-orange",
+          "initials": "AN",
+          "name": "Anton Mayer",
+          "overlayColor": "orange"
+        },
+        {
+          "cardColor": "av-purple",
+          "initials": "EM",
+          "name": "Emmanuel Mauer",
+          "overlayColor": "purple"
+        },
+        {
+          "cardColor": "av-teal",
+          "initials": "MB",
+          "name": "Marcel Bauer",
+          "overlayColor": "green"
+        }
+      ],
+      "completedSubtasks": 2,
+      "description": "Define CSS naming conventions and structure...",
+      "dueDate": "10/05/2023",
+      "id": 0,
+      "overlayTagClass": "technical-task",
+      "priorityClass": "prio-urgent",
+      "priorityText": "Urgent",
+      "progress": 100,
+      "subtasks": [
+        {
+          "checked": true,
+          "text": "Define naming conventions"
+        },
+        {
+          "checked": true,
+          "text": "Setup folder structure"
+        }
+      ],
+      "tag": "Technical Task",
+      "tagClass": "tag-teal",
+      "title": "CSS Architecture Planning",
+      "totalSubtasks": 2
+    },
+    {
+      "avatars": [
+        {
+          "cardColor": "av-orange",
+          "initials": "AN",
+          "name": "Anton Mayer",
+          "overlayColor": "orange"
+        },
+        {
+          "cardColor": "av-purple",
+          "initials": "EM",
+          "name": "Emmanuel Mauer",
+          "overlayColor": "purple"
+        }
+      ],
+      "completedSubtasks": 1,
+      "description": "Design and implement the login page layout...",
+      "dueDate": "15/06/2023",
+      "id": 1,
+      "overlayTagClass": "user-story",
+      "priorityClass": "prio-medium",
+      "priorityText": "Medium",
+      "progress": 50,
+      "subtasks": [
+        {
+          "checked": true,
+          "text": "Design mockup"
+        },
+        {
+          "checked": false,
+          "text": "Implement HTML/CSS"
+        }
+      ],
+      "tag": "User Story",
+      "tagClass": "tag-blue",
+      "title": "Login Page Design",
+      "totalSubtasks": 2
+    },
+    {
+      "avatars": [
+        {
+          "cardColor": "av-teal",
+          "initials": "MB",
+          "name": "Marcel Bauer",
+          "overlayColor": "green"
+        }
+      ],
+      "completedSubtasks": 0,
+      "description": "Plan and create the initial database schema...",
+      "dueDate": "20/07/2023",
+      "id": 2,
+      "overlayTagClass": "technical-task",
+      "priorityClass": "prio-low",
+      "priorityText": "Low",
+      "progress": 0,
+      "subtasks": [
+        {
+          "checked": false,
+          "text": "Define entities"
+        },
+        {
+          "checked": false,
+          "text": "Create ER diagram"
+        },
+        {
+          "checked": false,
+          "text": "Review with team"
+        }
+      ],
+      "tag": "Technical Task",
+      "tagClass": "tag-teal",
+      "title": "Database Schema Design",
+      "totalSubtasks": 3
+    }
+  ],
+  "cards": [
+    {
+      "avatars": [
+        {
+          "cardColor": "av-orange",
+          "initials": "AN",
+          "name": "Anton Mayer",
+          "overlayColor": "orange"
+        },
+        {
+          "cardColor": "av-purple",
+          "initials": "EM",
+          "name": "Emmanuel Mauer",
+          "overlayColor": "purple"
+        },
+        {
+          "cardColor": "av-teal",
+          "initials": "MB",
+          "name": "Marcel Bauer",
+          "overlayColor": "green"
+        }
+      ],
+      "completedSubtasks": 2,
+      "description": "Define CSS naming conventions and structure...",
+      "dueDate": "10/05/2023",
+      "id": 0,
+      "overlayTagClass": "technical-task",
+      "priorityClass": "prio-urgent",
+      "priorityText": "Urgent",
+      "progress": 100,
+      "subtasks": [
+        {
+          "checked": true,
+          "text": "Define naming conventions"
+        },
+        {
+          "checked": true,
+          "text": "Setup folder structure"
+        }
+      ],
+      "tag": "Technical Task",
+      "tagClass": "tag-teal",
+      "title": "CSS Architecture Planning",
+      "totalSubtasks": 2
+    },
+    null,
+    {
+      "avatars": [
+        {
+          "cardColor": "av-teal",
+          "initials": "MB",
+          "name": "Marcel Bauer",
+          "overlayColor": "green"
+        }
+      ],
+      "completedSubtasks": 0,
+      "description": "Plan and create the initial database schema...",
+      "dueDate": "20/07/2023",
+      "id": 2,
+      "overlayTagClass": "technical-task",
+      "priorityClass": "prio-low",
+      "priorityText": "Low",
+      "progress": 0,
+      "subtasks": [
+        {
+          "checked": false,
+          "text": "Define entities"
+        },
+        {
+          "checked": false,
+          "text": "Create ER diagram"
+        },
+        {
+          "checked": false,
+          "text": "Review with team"
+        }
+      ],
+      "tag": "Technical Task",
+      "tagClass": "tag-teal",
+      "title": "Database Schema Design",
+      "totalSubtasks": 3
+    },
+    {
+      "completedSubtasks": 0,
+      "description": "Beschreibung folgt.",
+      "dueDate": "7.5.2026",
+      "id": 3,
+      "overlayTagClass": "technical-task",
+      "priorityClass": "prio-low",
+      "priorityText": "Low",
+      "progress": 0,
+      "tag": "Technical Task",
+      "tagClass": "tag-teal",
+      "title": "Neue Card",
+      "totalSubtasks": 0
+    }
+  ],
+  "contacts": {
+    "-Oqj4s31V4kvJe8Pi7s9": {
+      "checked": false,
+      "color": "rgba(255, 122, 0, 1)",
+      "email": "Dname.Gchulz@hotmail.com",
+      "initials": "DG",
+      "name": "Dname Gchulz",
+      "phone": "49 176 12335638"
+    },
+    "-Oqj4s3ZGbQoQM5GxVyC": {
+      "checked": false,
+      "color": "rgba(110, 82, 255, 1)",
+      "email": "David.Jalls@hotmail.com",
+      "initials": "DJ",
+      "name": "David Jalls",
+      "phone": "49 176 12545278"
+    },
+    "-Oqj4s44o5f2Bm0UwUni": {
+      "checked": false,
+      "color": "rgba(110, 82, 255, 1)",
+      "email": "Norman.Kollak@hotmail.com",
+      "initials": "NK",
+      "name": "Norman Kollak",
+      "phone": "49 176 12355278"
+    },
+    "-Oqj4s4f1gDI8vJPK3Dt": {
+      "checked": false,
+      "color": "rgba(255, 122, 0, 1)",
+      "email": "Alexander.Olle@hotmail.com",
+      "initials": "AO",
+      "name": "Alexander Olle",
+      "phone": "49 176 25375678"
+    },
+    "-Oqj4s6dcXIYUV_Yhrrc": {
+      "checked": false,
+      "color": "rgba(255, 122, 0, 1)",
+      "email": "Kalle.Donma@hotmail.com",
+      "initials": "KD",
+      "name": "Kalle Donma",
+      "phone": "49 176 25375678"
+    },
+    "-OvekdkBRGdAmyB_KADy": {
+      "checked": false,
+      "color": "rgba(110, 82, 255, 1)",
+      "email": "pepeone@freenet.de",
+      "initials": "SW",
+      "name": "Stefan Weidner",
+      "phone": "+4915123456987"
+    },
+    "-OzGdoK9K2rBPwHr_0TD": {
+      "checked": false,
+      "color": "rgba(255, 199, 1, 1)",
+      "email": "Testlower@hotmail.com",
+      "initials": "DL",
+      "name": "Dennis Lower",
+      "phone": "+4984849847"
+    },
+    "-OzGdyRDpnKdunYSDN0R": {
+      "checked": false,
+      "color": "rgba(0, 190, 232, 1)",
+      "email": "Robert.Schulzer@hotmail.com",
+      "initials": "RS",
+      "name": "Robert Schlzer",
+      "phone": "+4986487764"
+    },
+    "-OzjxJY6Z1XL56x59Qaq": {
+      "checked": false,
+      "color": "rgba(255, 94, 179, 1)",
+      "email": "Dennis.utlerz@hotmail.com",
+      "initials": "DU",
+      "name": "Dennis Utlerz",
+      "phone": "+498387983"
+    },
+    "-P3QzenkjMwpsHiF-G1H": {
+      "checked": false,
+      "color": "rgba(255, 199, 1, 1)",
+      "email": "hallo.test@abc.de",
+      "initials": "HT",
+      "name": "hallo test",
+      "phone": "123456789"
+    }
+  },
+  "tasks": {
+    "-Ot8LjQsUq-uin7paUgB": {
+      "assignedTo": [
+        {
+          "checked": false,
+          "color": "rgba(110, 82, 255, 1)",
+          "email": "David.Jalls@hotmail.com",
+          "id": "-Oqj4s3ZGbQoQM5GxVyC",
+          "initials": "DJ",
+          "name": "David Jalls",
+          "phone": "49 176 12545278"
+        },
+        {
+          "checked": false,
+          "color": "rgba(110, 82, 255, 1)",
+          "email": "Norman.Kollak@hotmail.com",
+          "id": "-Oqj4s44o5f2Bm0UwUni",
+          "initials": "NK",
+          "name": "Norman Kollak",
+          "phone": "49 176 12355278"
+        },
+        {
+          "color": "#fc71ff",
+          "email": "christian@gmx.de",
+          "id": "-OuNfUFGaCKpObHHmG1b",
+          "initials": "C",
+          "name": "christian"
+        },
+        {
+          "color": "#6e52ff",
+          "email": "test@.de.de",
+          "id": "-OvEwF96qzeSN-DT4ds0",
+          "initials": "T",
+          "name": "Testkunde"
+        },
+        {
+          "color": "#1fd7c1",
+          "email": "smeier@gmx.de",
+          "id": "-OvEwWO1TdCDKuZ8LEmN",
+          "initials": "SM",
+          "name": "Stefan Meier"
+        }
+      ],
+      "category": "Technical Task",
+      "createdAt": 1779347158782,
+      "createdBy": "9s7P2UB08Mat5GZEZOxNlu443Db2",
+      "description": "Define CSS naming conventions and structures",
+      "dueDate": "14/07/2027",
+      "dueDateISO": "2027-07-14",
+      "priority": "medium",
+      "status": "awaitFeedback",
+      "subtasks": [
+        {
+          "done": true,
+          "title": "mal sehen wie es weiter geht"
+        }
+      ],
+      "title": "CSS Architecture Planning"
+    },
+    "-OvExS9jxk1pd9YXdgMa": {
+      "assignedTo": [
+        {
+          "color": "#ff7a00",
+          "email": "pepeone@gmx.de",
+          "id": "-OvKkNotXdFOJtEWoslD",
+          "initials": "CW",
+          "name": "Christian Wolf"
+        },
+        {
+          "color": "#fc71ff",
+          "email": "pepeone@freenet.com",
+          "id": "-OvOlCWYYe4FueMCjdcT",
+          "initials": "AH",
+          "name": "asd hztred"
+        },
+        {
+          "color": "#6e52ff",
+          "email": "guest@example.com",
+          "id": "9s7P2UB08Mat5GZEZOxNlu443Db2",
+          "initials": "GU",
+          "name": "guest user"
+        },
+        {
+          "color": "#fc71ff",
+          "email": "christian@gmx.de",
+          "id": "-OuNfUFGaCKpObHHmG1b",
+          "initials": "C",
+          "name": "christian"
+        },
+        {
+          "color": "#6e52ff",
+          "email": "test@.de.de",
+          "id": "-OvEwF96qzeSN-DT4ds0",
+          "initials": "T",
+          "name": "Testkunde"
+        },
+        {
+          "color": "#9327ff",
+          "email": "test@.com.de",
+          "id": "-OvEy3FGlEfOupVqeJOJ",
+          "initials": "ed",
+          "name": "Edwin Darwin"
+        },
+        {
+          "color": "#ffbb2b",
+          "email": "smeier1@gmx.de",
+          "id": "-OvEy341LRC5V1h9wAA0",
+          "initials": "SM",
+          "name": "Stefan Meier"
+        }
+      ],
+      "category": "Technical Task",
+      "createdAt": 1781605454343,
+      "createdBy": "guest",
+      "description": "Create reusable HTML base templates",
+      "dueDate": "16/12/2026",
+      "dueDateISO": "2026-12-16",
+      "priority": "medium",
+      "status": "done",
+      "subtasks": [
+        {
+          "done": true,
+          "title": "asdf"
+        },
+        {
+          "done": true,
+          "title": "sadf"
+        },
+        {
+          "done": true,
+          "title": "asd"
+        },
+        {
+          "done": true,
+          "title": "asd"
+        },
+        {
+          "done": true,
+          "title": "fsda"
+        },
+        {
+          "done": true,
+          "title": "sdaf"
+        },
+        {
+          "done": true,
+          "title": "sdfa"
+        },
+        {
+          "done": true,
+          "title": "sdfa"
+        },
+        {
+          "done": true,
+          "title": "dsaf"
+        },
+        {
+          "done": true,
+          "title": "asdf"
+        },
+        {
+          "done": true,
+          "title": "dsaf"
+        },
+        {
+          "done": true,
+          "title": "dsf"
+        }
+      ],
+      "title": "HTML Base Template Creation"
+    },
+    "-OvEzAHTQwdV1Uwlim1k": {
+      "assignedTo": [
+        {
+          "color": "#9327ff",
+          "email": "test@test",
+          "id": "-OtcXYY-c3Nh623MxQeC",
+          "initials": "T",
+          "name": "tets"
+        },
+        {
+          "color": "#9327ff",
+          "email": "test@test",
+          "id": "-OtcXYY-c3Nh623MxQeC",
+          "initials": "T",
+          "name": "tets"
+        },
+        {
+          "color": "#fc71ff",
+          "email": "christian@gmx.de",
+          "id": "-OuNfUFGaCKpObHHmG1b",
+          "initials": "C",
+          "name": "christian"
+        },
+        {
+          "color": "#1fd7c1",
+          "email": "alex@test.de",
+          "id": "DvcwhpGR7earTSYidGbPkxaSYTn1",
+          "initials": "A",
+          "name": "Alex"
+        }
+      ],
+      "category": "User Story",
+      "createdAt": 1781605905418,
+      "createdBy": "guest",
+      "description": "Planning new design features",
+      "dueDate": "03/06/2027",
+      "dueDateISO": "2027-06-03",
+      "priority": "low",
+      "status": "awaitFeedback",
+      "subtasks": [
+        {
+          "done": true,
+          "title": "dd"
+        }
+      ],
+      "title": "Create new Recipe Design"
+    },
+    "-OvLp1hivCfd8UGxwbfs": {
+      "assignedTo": [
+        {
+          "color": "#9327ff",
+          "email": "test@test",
+          "id": "-OtcXYY-c3Nh623MxQeC",
+          "initials": "T",
+          "name": "tets"
+        },
+        {
+          "color": "#fc71ff",
+          "email": "christian@gmx.de",
+          "id": "-OuNfUFGaCKpObHHmG1b",
+          "initials": "C",
+          "name": "christian"
+        },
+        {
+          "color": "#9327ff",
+          "email": "test@test",
+          "id": "-OtcXYY-c3Nh623MxQeC",
+          "initials": "T",
+          "name": "tets"
+        }
+      ],
+      "category": "Technical Task",
+      "createdAt": 1781720689418,
+      "createdBy": "-OuNfUFGaCKpObHHmG1b",
+      "description": "Implement daily recipe and portion calculator",
+      "dueDate": "12/04/2027",
+      "dueDateISO": "2027-04-12",
+      "priority": "medium",
+      "status": "inProgress",
+      "subtasks": [
+        {
+          "done": false,
+          "title": "mal sehen wie es weiter geht mal sehen wie es weiter gehtmal sehen wie es weiter geht"
+        },
+        {
+          "done": false,
+          "title": "testtesttesttesttesttest"
+        }
+      ],
+      "title": "Daily Kochwelt Recipe"
+    },
+    "-OvLpjerPi2m47l7ZU-F": {
+      "assignedTo": [
+        {
+          "color": "#9327ff",
+          "email": "test@test",
+          "id": "-OtcXYY-c3Nh623MxQeC",
+          "initials": "T",
+          "name": "tets"
+        },
+        {
+          "color": "#fc71ff",
+          "email": "christian@gmx.de",
+          "id": "-OuNfUFGaCKpObHHmG1b",
+          "initials": "C",
+          "name": "christian"
+        },
+        {
+          "color": "#6e52ff",
+          "email": "test@.de.de",
+          "id": "-OvEwF96qzeSN-DT4ds0",
+          "initials": "T",
+          "name": "Testkunde"
+        },
+        {
+          "color": "#1fd7c1",
+          "email": "smeier@gmx.de",
+          "id": "-OvEwWO1TdCDKuZ8LEmN",
+          "initials": "SM",
+          "name": "Stefan Meier"
+        },
+        {
+          "color": "#9327ff",
+          "email": "test@test",
+          "id": "-OtcXYY-c3Nh623MxQeC",
+          "initials": "T",
+          "name": "tets"
+        }
+      ],
+      "category": "Technical Task",
+      "createdAt": 1781720873573,
+      "createdBy": "-OuNfUFGaCKpObHHmG1b",
+      "description": "Create base logic for a jump n run game.",
+      "dueDate": "12/04/2027",
+      "dueDateISO": "2027-04-12",
+      "priority": "urgent",
+      "status": "done",
+      "subtasks": [
+        {
+          "done": false,
+          "title": "subtask exists"
+        },
+        {
+          "done": false,
+          "title": "huhuhuhuh"
+        },
+        {
+          "done": false,
+          "title": "iijedijijd"
+        },
+        {
+          "done": false,
+          "title": "ijeijde"
+        },
+        {
+          "done": false,
+          "title": "eiduhieuhd"
+        }
+      ],
+      "title": "Next Game"
+    },
+    "-OxUqQQugnNZgnpFkvYB": {
+      "assignedTo": [
+        {
+          "color": "#ff7a00",
+          "email": "pepeone@gmx.de",
+          "id": "-OvKkNotXdFOJtEWoslD",
+          "initials": "CW",
+          "name": "Christian Wolf"
+        },
+        {
+          "color": "#fc71ff",
+          "email": "pepeone@freenet.com",
+          "id": "-OvOlCWYYe4FueMCjdcT",
+          "initials": "AH",
+          "name": "asd hztred"
+        }
+      ],
+      "category": "User Story",
+      "createdAt": 1784019531048,
+      "createdBy": "guest",
+      "description": "Create a contact form and imprint page",
+      "dueDate": "20/02/2027",
+      "dueDateISO": "2027-02-20",
+      "priority": "urgent",
+      "status": "inProgress",
+      "subtasks": [
+        {
+          "done": true,
+          "title": "test"
+        },
+        {
+          "done": true,
+          "title": "test"
+        }
+      ],
+      "title": "Contact Form & Print"
+    },
+    "-OxlK9k8iWFP4MY8upfQ": {
+      "assignedTo": [
+        {
+          "color": "#9327ff",
+          "email": "test@test",
+          "id": "-OtcXYY-c3Nh623MxQeC",
+          "initials": "T",
+          "name": "tets"
+        },
+        {
+          "color": "#fc71ff",
+          "email": "christian@gmx.de",
+          "id": "-OuNfUFGaCKpObHHmG1b",
+          "initials": "C",
+          "name": "christian"
+        },
+        {
+          "color": "#6e52ff",
+          "email": "test@.de.de",
+          "id": "-OvEwF96qzeSN-DT4ds0",
+          "initials": "T",
+          "name": "Testkunde"
+        },
+        {
+          "color": "#9327ff",
+          "email": "test@test.com",
+          "id": "-OxlJ1C3sOaUn53OHPSL",
+          "initials": "TT",
+          "name": "test test"
+        },
+        {
+          "color": "#6e52ff",
+          "email": "guest@example.com",
+          "id": "9s7P2UB08Mat5GZEZOxNlu443Db2",
+          "initials": "GU",
+          "name": "guest user"
+        },
+        {
+          "color": "#1fd7c1",
+          "email": "alex@test.de",
+          "id": "DvcwhpGR7earTSYidGbPkxaSYTn1",
+          "initials": "A",
+          "name": "Alex"
+        },
+        {
+          "color": "#ffbb2b",
+          "email": "pepeone@freenet.de",
+          "id": "riNj3pz0cxeP9wYoA7rFE2QUqbC3",
+          "initials": "S",
+          "name": "Stefan"
+        },
+        {
+          "color": "#fc71ff",
+          "email": "pepeone@freenet.com",
+          "id": "-OvOlCWYYe4FueMCjdcT",
+          "initials": "AH",
+          "name": "asd hztred"
+        },
+        {
+          "color": "#9327ff",
+          "email": "test@.com.de",
+          "id": "-OvEy3FGlEfOupVqeJOJ",
+          "initials": "ed",
+          "name": "Edwin Darwin"
+        },
+        {
+          "color": "#ff7a00",
+          "email": "pepeone@gmx.de",
+          "id": "-OvKkNotXdFOJtEWoslD",
+          "initials": "CW",
+          "name": "Christian Wolf"
+        },
+        {
+          "color": "#1fd7c1",
+          "email": "smeier@gmx.de",
+          "id": "-OvEwWO1TdCDKuZ8LEmN",
+          "initials": "SM",
+          "name": "Stefan Meier"
+        },
+        {
+          "color": "#1fd7c1",
+          "email": "smeier@gmx.de",
+          "id": "-OvEwWO1TdCDKuZ8LEmN",
+          "initials": "SM",
+          "name": "Stefan Meier"
+        }
+      ],
+      "category": "Technical Task",
+      "createdAt": 1784312801671,
+      "createdBy": "-OxlJ1C3sOaUn53OHPSL",
+      "description": "Build start page with recipe recommendation...",
+      "dueDate": "10/10/2027",
+      "dueDateISO": "2027-10-10",
+      "priority": "medium",
+      "status": "inProgress",
+      "subtasks": [
+        {
+          "done": true,
+          "title": "test1"
+        },
+        {
+          "done": false,
+          "title": "test2dddd"
+        }
+      ],
+      "title": "Kochwelt Page & Recipe Recommender"
+    },
+    "-P1so3IOnhzx6Olfl-bk": {
+      "assignedTo": [
+        {
+          "color": "#9327ff",
+          "email": "test@test",
+          "id": "-OtcXYY-c3Nh623MxQeC",
+          "initials": "T",
+          "name": "tets"
+        },
+        {
+          "color": "#9327ff",
+          "email": "test@test",
+          "id": "-OtcXYY-c3Nh623MxQeC",
+          "initials": "T",
+          "name": "tets"
+        },
+        {
+          "color": "#fc71ff",
+          "email": "christian@gmx.de",
+          "id": "-OuNfUFGaCKpObHHmG1b",
+          "initials": "C",
+          "name": "christian"
+        },
+        {
+          "color": "#6e52ff",
+          "email": "test@.de.de",
+          "id": "-OvEwF96qzeSN-DT4ds0",
+          "initials": "T",
+          "name": "Testkunde"
+        },
+        {
+          "color": "#1fd7c1",
+          "email": "smeier@gmx.de",
+          "id": "-OvEwWO1TdCDKuZ8LEmN",
+          "initials": "SM",
+          "name": "Stefan Meier"
+        },
+        {
+          "color": "#9327ff",
+          "email": "test@test",
+          "id": "-OtcXYY-c3Nh623MxQeC",
+          "initials": "T",
+          "name": "tets"
+        },
+        {
+          "color": "#6e52ff",
+          "email": "guest@example.com",
+          "id": "9s7P2UB08Mat5GZEZOxNlu443Db2",
+          "initials": "GU",
+          "name": "guest user"
+        },
+        {
+          "color": "#9327ff",
+          "email": "test@test.com",
+          "id": "-OxlJ1C3sOaUn53OHPSL",
+          "initials": "TT",
+          "name": "test test"
+        },
+        {
+          "color": "#fc71ff",
+          "email": "pepeone@freenet.com",
+          "id": "-OvOlCWYYe4FueMCjdcT",
+          "initials": "AH",
+          "name": "asd hztred"
+        },
+        {
+          "color": "#1fd7c1",
+          "email": "alex@test.de",
+          "id": "DvcwhpGR7earTSYidGbPkxaSYTn1",
+          "initials": "A",
+          "name": "Alex"
+        },
+        {
+          "color": "#ffbb2b",
+          "email": "pepeone@freenet.de",
+          "id": "riNj3pz0cxeP9wYoA7rFE2QUqbC3",
+          "initials": "S",
+          "name": "Stefan"
+        }
+      ],
+      "category": "User Story",
+      "createdAt": 1789807051855,
+      "createdBy": "guest",
+      "description": "Neue Kochseite für Asiatische Küche",
+      "dueDate": "21/11/2027",
+      "dueDateISO": "2027-11-21",
+      "priority": "low",
+      "status": "todo",
+      "subtasks": [
+        {
+          "done": false,
+          "title": "Neue Unterseite"
+        },
+        {
+          "done": false,
+          "title": "Alles neu machen"
+        },
+        {
+          "done": false,
+          "title": "testettestettestettestettestettestettestet"
+        }
+      ],
+      "title": "Eine neue Kochseite"
+    },
+    "-P3LB6mvK-64d8jw2Eo0": {
+      "assignedTo": [
+        {
+          "color": "#9327ff",
+          "email": "test@test",
+          "id": "-OtcXYY-c3Nh623MxQeC",
+          "initials": "T",
+          "name": "tets"
+        },
+        {
+          "color": "#9327ff",
+          "email": "test@test",
+          "id": "-OtcXYY-c3Nh623MxQeC",
+          "initials": "T",
+          "name": "tets"
+        }
+      ],
+      "category": "Technical Task",
+      "createdAt": 1791373638804,
+      "createdBy": "guest",
+      "description": "Kitchen Site",
+      "dueDate": "23/10/2026",
+      "dueDateISO": "2026-10-23",
+      "priority": "low",
+      "status": "todo",
+      "subtasks": [
+        {
+          "done": false,
+          "title": "1. Site implementation"
+        }
+      ],
+      "title": "New Cooking Site"
+    }
+  },
+  "users": {
+    "-OtcXYY-c3Nh623MxQeC": {
+      "color": "#9327ff",
+      "createdAt": 1779870349418,
+      "email": "test@test",
+      "initials": "T",
+      "name": "tets",
+      "password": "test"
+    },
+    "-OtcYVf4j32grReLzVqr": {
+      "color": "#ff7a00",
+      "createdAt": 1779870599797,
+      "email": "test@testt",
+      "initials": "T",
+      "name": "tets",
+      "password": "test"
+    },
+    "-OuNfUFGaCKpObHHmG1b": {
+      "color": "#fc71ff",
+      "createdAt": 1780677997526,
+      "email": "christian@gmx.de",
+      "initials": "C",
+      "name": "christian",
+      "password": "1234567"
+    },
+    "-OvEwF96qzeSN-DT4ds0": {
+      "color": "#6e52ff",
+      "createdAt": 1781605139025,
+      "email": "test@.de.de",
+      "initials": "T",
+      "name": "Testkunde",
+      "password": "asdfasdf"
+    },
+    "-OvEwWO1TdCDKuZ8LEmN": {
+      "color": "#1fd7c1",
+      "createdAt": 1781605209586,
+      "email": "smeier@gmx.de",
+      "initials": "SM",
+      "name": "Stefan Meier",
+      "password": "1234567"
+    },
+    "-OvEy341LRC5V1h9wAA0": {
+      "color": "#ffbb2b",
+      "createdAt": 1781605613470,
+      "email": "smeier1@gmx.de",
+      "initials": "SM",
+      "name": "Stefan Meier",
+      "password": "1234567"
+    },
+    "-OvEy3FGlEfOupVqeJOJ": {
+      "color": "#9327ff",
+      "createdAt": 1781605614537,
+      "email": "test@.com.de",
+      "initials": "ed",
+      "name": "Edwin Darwin",
+      "password": "asdfasdf"
+    },
+    "-OvKkNotXdFOJtEWoslD": {
+      "color": "#ff7a00",
+      "createdAt": 1781702692036,
+      "email": "pepeone@gmx.de",
+      "initials": "CW",
+      "name": "Christian Wolf",
+      "password": "1234567"
+    },
+    "-OvOlCWYYe4FueMCjdcT": {
+      "color": "#fc71ff",
+      "createdAt": 1781770016780,
+      "email": "pepeone@freenet.com",
+      "initials": "AH",
+      "name": "asd hztred",
+      "password": "1234567"
+    },
+    "-OxlJ1C3sOaUn53OHPSL": {
+      "color": "#9327ff",
+      "createdAt": 1784312504801,
+      "email": "test@test.com",
+      "initials": "TT",
+      "name": "test test",
+      "password": "test1234"
+    },
+    "9s7P2UB08Mat5GZEZOxNlu443Db2": {
+      "color": "#6e52ff",
+      "createdAt": 1779345829947,
+      "email": "guest@example.com",
+      "initials": "GU",
+      "name": "guest user",
+      "uid": "9s7P2UB08Mat5GZEZOxNlu443Db2"
+    },
+    "DvcwhpGR7earTSYidGbPkxaSYTn1": {
+      "color": "#1fd7c1",
+      "createdAt": 1779088739017,
+      "email": "alex@test.de",
+      "initials": "A",
+      "name": "Alex",
+      "uid": "DvcwhpGR7earTSYidGbPkxaSYTn1"
+    },
+    "riNj3pz0cxeP9wYoA7rFE2QUqbC3": {
+      "color": "#ffbb2b",
+      "createdAt": 1778172008042,
+      "email": "pepeone@freenet.de",
+      "initials": "S",
+      "name": "Stefan",
+      "uid": "riNj3pz0cxeP9wYoA7rFE2QUqbC3"
+    }
+  }
+}
